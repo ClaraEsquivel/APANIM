@@ -5,7 +5,7 @@
 
 body {
     margin: 0;
-    min-height: 100vh;
+    min-height: 50vh;
     position: relative;
     box-sizing: border-box;
 }
@@ -26,7 +26,7 @@ body{
     display: flex;
     flex-direction: column;
     position: relative;
-    padding: 140px 0; 
+    padding: 100px 0; 
 }
 
 .logo {
@@ -144,7 +144,7 @@ body{
 
 #menu{
     position: absolute;
-    width: 300px;
+    width: 215px;
     margin: -100px 0 0 -50px;
     padding: 50px;
     padding-top: 125px;
@@ -211,11 +211,12 @@ body{
     align-items: center;
     justify-content: center;
     background: #fce4e494;
-    width: 600px;
+    width: 550px;
     height: 500px;
     margin: auto; 
+    margin-bottom: 200px;
     border-radius: 30px;
-    box-shadow: 1px 1px 10px black;
+    box-shadow: 1px 1px 8px rgb(0, 0, 0, 0.2);
     position: static; 
     transform: none; 
 }
@@ -225,13 +226,16 @@ body{
 }
 
 #botao_usuario, #botao_vendedor {
-    padding: 15px 30px;
+    width: 230px;
+    padding: 10px 20px;
     border: none;
+    margin: 10px;
     border-radius: 20px;
     background: #5A0609;
     color: white;
     cursor: pointer;
     font-size: 16px;
+    box-shadow: 1px 1px 8px rgb(0, 0, 0, 0.2);
     transition: all 0.3s ease;
 }
 
@@ -249,11 +253,45 @@ body{
 
 .cadastrar_com .social-icons {
     display: flex;
+    gap: 40px;
     
 }
 
+.cadastrar_com .social-icons img {
+    width: 50px;
+}
+
+.google-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 10px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    color: #420406;
+    background-color: white;
+    border: 1px solid #e0e0e0;
+    width: fit-content;
+    margin: 10px auto;
+}
+
+.google-icon {
+    height: 18px;
+    width: 18px;
+    justify-content: center;
+    align-items: center;
+    display: inline-block;
+    vertical-align: middle;
+}
+.google-btn:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+
 .cadastrar_com img {
-    width: 60px;
+    width: 50px;
 }
 
 .cadastrar_com img:hover {
@@ -268,7 +306,7 @@ body{
 }
 
 .escolha_cadastro img {
-    width: 250px;
+    width: 250px; 
     margin-bottom: 20px;
 }
 
@@ -281,6 +319,12 @@ body{
 .forum img {
     width: 35px;
     margin-bottom: 0; 
+}
+
+.forum img:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: transform 0.2s;
 }
 
 .redes_sociais {
