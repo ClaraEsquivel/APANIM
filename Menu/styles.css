@@ -1,0 +1,108 @@
+body{
+    padding: 0;
+    margin: 0;
+    background: white;
+    font-family: Forum;
+}
+
+body::-webkit-scrollbar{
+    display: none;
+}
+
+body{
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+#menu_sanduiche{
+    display: block;
+    position: relative;
+    top: 50px;
+    left: 50px;
+    z-index: 1;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#menu_sanduiche a{
+    text-decoration: none;
+    color: black;
+}
+
+#menu_sanduiche:hover{
+    color: tomato
+}
+
+#menu_sanduiche input{
+    display: block;
+    width: 40px;
+    height: 32px;
+    position: absolute;
+    top: -7px;
+    left: -5px;
+    cursor: pointer;
+    opacity: 0;
+    z-index: 2;
+    -webkit-touch-callout: none;
+}
+
+#menu_sanduiche span{
+    display: block;
+    width: 33px;
+    height: 4px;
+    margin-bottom: 5px;
+    position: relative;
+    background: #5A0609;
+    border-radius: 3px;
+    z-index: 1;
+    transform-origin: 4px 0;
+    transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0), backgorund 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0), opacity 0.55s ease;
+}
+
+#menu_sanduiche span:first-child{
+    transform-origin: 0% 0%;
+}
+
+#menu_sanduiche span:nth-last-child(2){
+    transform-origin: 0% 100%;
+}
+
+#menu_sanduiche input:checked ~ span{
+    opacity: 1;
+    transform: rotate(45deg) translate(-2px, 1px);
+    background: #5A0609;
+}
+
+#menu_sanduiche input:checked ~ span:nth-last-child(3){
+    opacity: 0;
+    transform: rotate(0deg) scale(0.2, 0.2);
+}
+
+#menu_sanduiche input:checked ~span:nth-last-child(2){
+    transform: rotate(-45deg) translate(0, -1px);
+}
+
+#menu{
+    position: absolute;
+    width: 300px;
+    margin: -100px 0 0 -50px;
+    padding: 50px;
+    padding-top: 125px;
+    background: #ededed;
+    list-style-type: none;
+    -webkit-font-smoothing: antialiased;
+    transform-origin: 0% 0%;
+    transform: translate(-100%, 0);
+    transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
+}
+
+#menu li{
+    padding: 10px 0;
+    font-size: 22px;
+}
+
+#menu_sanduiche input:checked ~ ul{
+    transform: none;
+}
