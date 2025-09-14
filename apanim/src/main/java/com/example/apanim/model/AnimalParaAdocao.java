@@ -7,4 +7,5 @@ import jakarta.persistence.Table;
 @Table(name = "tab_animais_adocao")
 public class AnimalParaAdocao extends Animal {
 
+
 }
