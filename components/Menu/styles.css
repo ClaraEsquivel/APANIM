@@ -3,6 +3,8 @@ body{
     margin: 0;
     background: white;
     font-family: Forum;
+    height: 100vh;
+    box-sizing: border-box;
 }
 
 body::-webkit-scrollbar{
@@ -14,11 +16,17 @@ body{
     scrollbar-width: none;
 }
 
+.central {
+    margin: 0;
+    padding: 0;
+}
+
+
 #menu_sanduiche{
     display: block;
-    position: relative;
-    top: 50px;
-    left: 50px;
+    position:absolute;
+    top: 20px;
+    left: 30px;
     z-index: 1;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -31,8 +39,14 @@ body{
     color: black;
 }
 
+#menu_sanduiche a:hover{
+    text-decoration: none;
+    color: #5A0609;
+    font-weight: bold;
+}
+
 #menu_sanduiche:hover{
-    color: tomato
+    color: #420406
 }
 
 #menu_sanduiche input{
@@ -91,6 +105,7 @@ body{
     padding: 50px;
     padding-top: 125px;
     background: #ededed;
+    border-radius: 30px;
     list-style-type: none;
     -webkit-font-smoothing: antialiased;
     transform-origin: 0% 0%;
@@ -105,4 +120,58 @@ body{
 
 #menu_sanduiche input:checked ~ ul{
     transform: none;
+}
+
+.topo {
+    width: 100vw;         /* Garante que ocupe toda a largura da janela */
+    min-width: 100vw;
+    height: 200px;
+    background: #fce4e4;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0;         /* Remove o padding lateral */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+    margin-top: 0;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+#logo_apanim{
+    display: block;
+    margin: 0 auto;
+    max-height: 280px;
+    max-width: 100%;
+}
+
+.botoes-principais {
+    display: flex;
+    flex-direction: nowrap;
+    align-items: flex-start;
+    margin-top: 40px; /* Espaço para a .topo fixa */
+    gap: 20px;
+}
+
+.botoes-principais button {
+    width: 320px;
+    padding: 16px 0;
+    background: #5A0609;
+    color: #fff;
+    border: none;
+    border-radius: 15px;
+    font-size: 1.1rem;
+    font-family: inherit;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(90,6,9,0.08);
+    transition: background 0.2s, transform 0.2s;
+}
+
+.botoes-principais button:hover {
+    background:#420406;
+    transform: translateY(-2px) scale(1.03);
 }
