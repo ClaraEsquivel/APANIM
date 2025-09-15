@@ -16,12 +16,6 @@ body{
     scrollbar-width: none;
 }
 
-.central {
-    margin: 0;
-    padding: 0;
-}
-
-
 #menu_sanduiche{
     display: block;
     position:absolute;
@@ -100,7 +94,7 @@ body{
 
 #menu{
     position: absolute;
-    width: 300px;
+    width: 215px;
     margin: -100px 0 0 -50px;
     padding: 50px;
     padding-top: 125px;
@@ -123,42 +117,65 @@ body{
 }
 
 .topo {
-    width: 100vw;         /* Garante que ocupe toda a largura da janela */
-    min-width: 100vw;
-    height: 200px;
     background: #fce4e4;
-    color: white;
+    width: 100%;         
+    height: 200px;
+    border-radius: 10px 10px 0 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     display: flex;
-    align-items: center;
     justify-content: center;
-    padding: 0 0;         /* Remove o padding lateral */
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    font-size: 1.3rem;
-    letter-spacing: 1px;
-    margin-top: 0;
+    align-items: center;
+    margin-top: auto;
+    padding: 0 40px;         
     position: relative;
-    top: 0;
-    left: 0;
+    gap: 40px;
+}
+
+.topo .patas_topo{
+    position: relative;
+    width: 250px;
+    justify-content: flex-start;
+    margin-right: 100px;
 }
 
 #logo_apanim{
-    display: block;
+    /* display: block;
     margin: 0 auto;
     max-height: 280px;
-    max-width: 100%;
+    max-width: 100%; */
+
+    height: 170px; 
+    width: auto;
 }
+
+.topo .cat_topo{
+    position: relative;
+    width: 100px;
+    justify-content: flex-start;
+    margin-left: 100px;
+    margin-top: 40px;
+}
+
+.topo .dog_topo{
+    position: relative;
+    width: 100px;
+    justify-content: flex-start;
+    margin-left: 80px;
+    margin-bottom: 40px;
+}
+
 
 .botoes-principais {
     display: flex;
-    flex-direction: nowrap;
-    align-items: flex-start;
+    justify-content:  center;
+    align-items: center;
     margin-top: 40px; /* Espaço para a .topo fixa */
     gap: 20px;
 }
 
 .botoes-principais button {
-    width: 320px;
-    padding: 16px 0;
+    width: 260px;
+    padding: 7px 0;
     background: #5A0609;
     color: #fff;
     border: none;
@@ -174,4 +191,155 @@ body{
 .botoes-principais button:hover {
     background:#420406;
     transform: translateY(-2px) scale(1.03);
+}
+
+
+.lateral_direito {
+    background: #fce4e4;
+    width: 65%;
+    border-radius: 20px 0 0 20px;
+    box-shadow: -2px 0 8px rgba(0,0,0,0.08);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 60px;
+    margin-bottom: 60px;
+    padding:40px;
+    position: relative;
+    float: right;
+    margin-right: 0;              
+    margin-left: auto; 
+}
+
+.linha_lateral {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 80px;
+    margin-bottom: 50px;
+}
+
+.item_lateral {
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 35px 30px 30px 30px; /* Padding bem generoso */
+    width: 280px; /* Bem maior que os 140px originais */
+    margin-bottom: 0;
+}
+
+.item_lateral img {
+    width: 120px; /* Era 90px, agora 120px */
+    height: 120px; /* Era 90px, agora 120px */
+    object-fit: contain;
+    margin-bottom: 12px; /* Aumentei um pouco */
+    border-radius: 8px; /* Aumentei um pouco */
+    box-shadow: 0 2px 8px rgba(90,6,9,0.08);
+    background: #fafafa;
+}
+
+.info_lateral {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 6px; /* Aumentei um pouco */
+}
+
+.info_lateral span {
+    font-size: 1.3rem; /* Era 0.98rem, agora maior */
+    color: #5A0609;
+    text-align: center;
+    margin-bottom: 3px; /* Aumentei um pouco */
+    font-family: inherit;
+}
+
+.base {
+    background: #fce4e4;
+    width: 100%;
+    height: 200px;
+    border-radius: 10px 10px 0 0;
+    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center; /* Distribui os itens */
+    align-items: center;
+    margin-top: auto;
+    padding: 0 40px; /* Espaço lateral */
+    position: relative; /* Para manter o contexto, se necessário */
+    gap: 40px;
+}
+
+.base .logo {
+    position: static;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 0;
+    width: auto;
+}
+
+.base .logo img {
+    width: 100px;
+    height: auto;
+}
+
+.redes_sociais {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: static;
+    top: 20px;
+    left: 20px;
+}
+
+.redes_sociais img {
+    width: 25px;
+}
+
+.redes_sociais img:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: transform 0.2s;
+}
+
+.links_uteis {
+    display: flex;
+    flex-direction: row;
+    gap: 75px;
+    position: static;
+    padding: 0;
+    align-items: flex-start;
+    padding: 30px;
+    justify-content: center;
+}
+
+.links_uteis span {
+    margin-right: 15px;
+}
+
+.links_uteis span:hover {
+    text-decoration: underline;
+    cursor: pointer;
+    color: #5A0609;
+}
+
+.links_uteis .titulo {
+    font-family: forum, sans-serif;
+    color: #5A0609;
+    font-weight: bold;
+    font-size: 17px;
+}
+
+.forum {
+    position: static;
+    right: 20px;
+    top: 20px;
+}
+
+.forum img {
+    width: 35px;
+    margin-bottom: 0;
 }

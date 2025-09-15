@@ -6,39 +6,201 @@
     <title>APANIM</title>
     <link rel="stylesheet" href="/APANIM-front-end/components/Menu/styles.css">
 </head>
-<body>
-    <div class="central">
 
+<body>
+
+    <header>
         <div class="topo">
-            <img src="/APANIM-front-end/assets/images/APANIM_logo_sem_fundo.png" id="logo_apanim">
+            <img src="../../assets/images/Paws.svg" class="patas_topo" alt="Patas">
+            <img src="../../assets/images/APANIM_logo.svg" id="logo_apanim" alt="Logo APANIM">
+            <img src="../../assets/images/cat.svg" class="cat_topo" alt="Gato">
+            <img src="../../assets/images/dog.svg" class="dog_topo" alt="Cachorro">
         </div>
-        
+
         <nav role="navigation">
             <div id="menu_sanduiche">
-                <input type="checkbox">
+                <input type="checkbox" id="menu_toggle">
                 <span></span>
                 <span></span>
                 <span></span>
                 <ul id="menu">
-                    <a href=""><li>Cadastro</li></a>
-                    <a href=""><li>Login</li></a>
-                    <a href=""><li>Perfil</li></a>
-                    <a href=""><li>Animais para Adoção</li></a>
-                    <a href=""><li>Animais para Compra</li></a>
-                    <a href=""><li>Animais Perdidos</li></a>
-                    <a href=""><li>Serviços</li></a>
+                    <li><a href="">Cadastro</a></li>
+                    <li><a href="">Login</a></li>
+                    <li><a href="">Meu Perfil</a></li>
+                    <li><a href="">Animais para Adoção</a></li>
+                    <li><a href="">Animais para Compra</a></li>
+                    <li><a href="">Animais Perdidos</a></li>
+                    <li><a href="">Serviços</a></li>
                 </ul>
             </div>
         </nav>
 
-        <div class="botoes-principais" >
-            <button id="quero_comprar">Quero Comprar um Animal</button>
-            <button id="quero_adotar">Quero Adotar um Animal</button>
-            <button id="divulgar_animal_perdido">Divulgação de Animais Perdidos</button>
-            <button id="servicos">Serviços</button>
+    </header>
+
+    <main class="central">
+        <section class="conteudo_principal">
+            <div class="botoes-principais">
+                <button id="quero_comprar">Quero Comprar um Animal</button>
+                <button id="quero_adotar">Quero Adotar um Animal</button>
+                <button id="divulgar_animal_perdido">Divulgação de Animais Perdidos</button>
+                <button id="servicos">Serviços</button>
+            </div>
+        </section>
+
+        <aside class="lateral_direito">
+
+            <div class="linha_lateral">
+
+                <div class="item_lateral">
+                    <img src="../../assets/images/dog_sentado.svg" id="animal_1" alt="Marley">
+                    <div class="info_lateral">
+                        <span>Marley</span>
+                        <span>Macho</span>
+                        <span>5 anos</span>
+                        <span>Vira-lata</span>
+                        <span>Salvador-BA</span>
+                    </div>
+                </div>
+
+                <div class="item_lateral">
+                    <img src="../../assets/images/dog_sentado.svg" id="animal_2" alt="Bob">
+                    <div class="info_lateral">
+                        <span>Bob</span>
+                        <span>Macho</span>
+                        <span>5 meses</span>
+                        <span>Vira-lata</span>
+                        <span>Salvador-BA</span>
+                    </div>
+                </div>
+
+                <div class="item_lateral">
+                    <img src="../../assets/images/dog_sentado.svg" id="animal_3" alt="Luna">
+                    <div class="info_lateral">
+                        <span>Luna</span>
+                        <span>Fêmea</span>
+                        <span>1 ano</span>
+                        <span>Vira-lata</span>
+                        <span>Salvador-BA</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="linha_lateral">
+                
+                <div class="item_lateral">
+                    <img src="../../assets/images/gato.svg" id="animal_4" alt="Minerva">
+                    <div class="info_lateral">
+                        <span>Minerva</span>
+                        <span>Fêmea</span>
+                        <span>2 anos</span>
+                        <span>Vira-lata</span>
+                        <span>Salvador-BA</span>
+                    </div>
+                </div>
+
+                <div class="item_lateral">
+                    <img src="../../assets/images/gato.svg" id="animal_5" alt="Raposa">
+                    <div class="info_lateral">
+                        <span>Raposa</span>
+                        <span>Fêmea</span>
+                        <span>3 anos</span>
+                        <span>Vira-lata</span>
+                        <span>Salvador-BA</span>
+                    </div>
+                </div>
+
+                <div class="item_lateral">
+                    <img src="../../assets/images/gato.svg" id="animal_6" alt="Robson">
+                    <div class="info_lateral">
+                        <span>Robson</span>
+                        <span>Macho</span>
+                        <span>9 anos</span>
+                        <span>Vira-lata</span>
+                        <span>Salvador-BA</span>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="linha_lateral">
+                
+                <div class="item_lateral">
+                    <img src="../../assets/images/gato.svg" id="animal_7" alt="Fred">
+                    <div class="info_lateral">
+                        <span>Fred</span>
+                        <span>Macho</span>
+                        <span>2 meses</span>
+                        <span>Vira-lata</span>
+                        <span>Salvador-BA</span>
+                    </div>
+                </div>
+
+                <div class="item_lateral">
+                    <img src="../../assets/images/dog_sentado.svg" id="animal_8" alt="Rex">
+                    <div class="info_lateral">
+                        <span>Rex</span>
+                        <span>Macho</span>
+                        <span>8 anos</span>
+                        <span>Vira-lata</span>
+                        <span>Salvador-BA</span>
+                    </div>
+                </div>
+
+                <div class="item_lateral">
+                    <img src="../../assets/images/dog_sentado.svg" id="animal_9" alt="Flor">
+                    <div class="info_lateral">
+                        <span>Flor</span>
+                        <span>Fêmea</span>
+                        <span>2 anos</span>
+                        <span>Vira-lata</span>
+                        <span>Salvador-BA</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </aside>
+
+    </main>
+
+    <footer class="base">
+        <div class="redes_sociais">
+            <img src="../../assets/images/instagram.svg" alt="Instagram"/>
+            <img src="../../assets/images/email.svg" alt="Email"/>
         </div>
 
-    </div>
-    
+        <nav class="links_uteis" aria-label="Links úteis">
+            <div>
+                <span class="titulo">Adote</span><br>
+                <span>Seja responsável</span><br>
+                <span>Pesquisar por pets</span>
+            </div>
+            <div>
+                <span class="titulo">Colabore</span><br>
+                <span>Seja uma empresa parceira</span>
+            </div>
+            <div>
+                <span class="titulo">Divulgue um animal</span><br>
+                <span>Cadastrar animal</span>
+            </div>
+            <div>
+                <span class="titulo">Sobre o APANIM</span><br>
+                <span>APANIM</span>
+            </div>
+            <div>
+                <span class="titulo">Meu perfil</span><br>
+                <span>Cadastrar-se</span><br>
+                <span>Minha página de usuário</span>
+            </div>
+        </nav>
+
+        <div class="forum">
+            <img src="../../assets/images/forum.svg" alt="Fórum"/>
+        </div>
+
+        <div class="logo">
+            <img src="../../assets/images/APANIM_logo.svg" alt="Logo APANIM"/>
+        </div>
+    </footer>
 </body>
 </html>
