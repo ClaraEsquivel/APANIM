@@ -29,6 +29,74 @@ body{
     padding: 100px 0; 
 }
 
+.patas1, .patas2, .patas3 {
+    position: absolute;
+    z-index: 1;
+}
+
+.patas1 {
+    position: absolute;
+    left: 100px;
+    top: 150px;
+    z-index: 0;
+}
+
+.patas2 {
+    position: absolute;
+    left: 200px;
+    top: 300px;
+    z-index: 0;
+}
+
+.patas3 {
+    position: absolute;
+    left: 150px;
+    top: 450px;
+    z-index: 0;
+}
+
+.patas4 {
+    position: absolute;
+    right: 100px;
+    top: 150px;
+    z-index: 0;
+}
+
+.patas5 {
+    position: absolute;
+    right: 200px;
+    top: 300px;
+    z-index: 0;
+}
+
+.patas6 {
+    position: absolute;
+    right: 150px;
+    top: 450px;
+    z-index: 0;
+}
+
+.patas1 img,
+.patas2 img,
+.patas3 img,
+.patas4 img,
+.patas5 img,
+.patas6 img {
+    width: 40px; 
+    height: auto;
+    opacity: 0.2;
+    transition: transform 0.3s ease;
+}
+
+.patas1 img:hover,
+.patas2 img:hover,
+.patas3 img:hover, 
+.patas4 img:hover,
+.patas5 img:hover, 
+.patas6 img:hover {
+    transform: scale(4.1);
+}
+
 .logo {
     width: 100px;
     display: flex;
@@ -288,7 +356,10 @@ body{
     display: inline-block;
     vertical-align: middle;
 }
-.google-btn:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+.google-btn:hover { 
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08); 
+    transform: scale(1.1);
+}
 
 .cadastrar_com img {
     width: 50px;
