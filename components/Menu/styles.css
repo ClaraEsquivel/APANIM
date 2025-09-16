@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'forum';
+    src: url(../../assets/images/Forum-Regular.ttf);
+}
+
 /* ===== ÁREA DE CONTEÚDO PRINCIPAL ===== */
 .area_principal {
     flex: 1;
@@ -61,10 +66,6 @@
     box-shadow: 0 4px 15px rgba(90, 6, 9, 0.2);
 }/* Reset e configurações básicas */
 
-@font-face {
-    font-family: 'forum';
-    src: url(../../assets/images/Forum-Regular.ttf);
-}
 
 body{
     margin: 0;
@@ -195,20 +196,17 @@ body{
 #menu_sanduiche input:checked ~ ul{
     transform: none;
 }
+
 /* ===== HEADER ===== */
 .topo {
     background: #fce4e4;
     width: 100%;         
-    height: 200px;
-    border-radius: 10px 10px 0 0;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    height: 150px;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: auto;
-    padding: 0 40px;         
+    margin-top: auto;       
     position: relative;
-    gap: 40px;
 }
 
 .topo .patas_topo{
@@ -242,11 +240,9 @@ body{
 
 /* ===== BARRA DE NAVEGAÇÃO DOS BOTÕES ===== */
 .conteudo_principal {
-    background: white;
-    border-radius: 16px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-    border: 1px solid #fce4e4;
-    margin: 1.5rem 2rem;
+    margin: 50px;
+    margin-top: -50px ;
     padding: 1.5rem;
 }
 
@@ -263,14 +259,15 @@ body{
 
 /* ===== LAYOUT PRINCIPAL ===== */
 .central {
-    display: flex;
-    flex: 1;
-    gap: 2rem;
-    padding: 0 2rem 2rem 2rem;
-    max-width: 1400px;
-    margin: 0 auto;
+    background: white;
+    min-height: 100vh;
     width: 100%;
-    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center; 
+    position: relative;
+    padding: 100px 0; 
 }
 
 .botoes-principais button {
@@ -323,14 +320,15 @@ body{
 
 /* ===== SIDEBAR DIREITA ===== */
 .lateral_direito {
-    width: 450px;
+    width: 750px;
     background: linear-gradient(135deg, #fce4e4 0%, #f8d7d7 100%);
-    border-radius: 20px;
+    border-radius: 30px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-    padding: 2rem;
     border: 1px solid #f0c2c2;
     max-height: calc(100vh - 300px);
     overflow-y: auto;
+    margin-bottom: 200px;
+    padding: 25px;
 }
 
 .lateral_direito::-webkit-scrollbar {
@@ -372,7 +370,7 @@ body{
     flex-direction: column;
     align-items: center;
     padding: 1.5rem 1rem;
-    width: 130px;
+    width: 200px;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border: 1px solid #fce4e4;
     position: relative;
@@ -402,12 +400,12 @@ body{
 }
 
 .item_lateral img {
-    width: 80px;
-    height: 80px;
+    width: 120px;
+    height: 100px;
     object-fit: contain;
     margin-bottom: 0.75rem;
     border-radius: 12px;
-    background: linear-gradient(135deg, #fafafa 0%, #f0f0f0 100%);
+    background: linear-gradient(135deg, #e9bebe 0%, #f0f0f0 100%);
     padding: 0.5rem;
     transition: transform 0.3s ease;
 }
@@ -452,19 +450,18 @@ body{
     background: #fce4e4;
     width: 100%;
     height: 200px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
     border-radius: 10px 10px 0 0;
     box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
     display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: auto;
-    padding: 0 40px;
-    position: relative;
-    gap: 40px;
+    justify-content: center; 
+    
 }
 
 .base .logo {
-    position: static;
+    position: absolute;
     bottom: 10px;
     left: 50%;
     transform: translateX(-50%);
@@ -478,12 +475,12 @@ body{
 }
 
 .redes_sociais {
+    position: absolute;
+    top: 20px;
+    left: 20px;
     display: flex;
     flex-direction: column;
     gap: 10px;
-    position: static;
-    top: 20px;
-    left: 20px;
 }
 
 .redes_sociais img {
@@ -497,14 +494,13 @@ body{
 }
 
 .links_uteis {
+    color: black;
     display: flex;
-    flex-direction: row;
-    gap: 75px;
-    position: static;
-    padding: 0;
-    align-items: flex-start;
+    flex-direction: row; 
+    gap: 75px; 
+    justify-content: center; /* Centraliza horizontalmente */
     padding: 30px;
-    justify-content: center;
+    width: 100%;
 }
 
 .links_uteis span {
@@ -525,7 +521,7 @@ body{
 }
 
 .forum {
-    position: static;
+    position: absolute;
     right: 20px;
     top: 20px;
 }
@@ -534,6 +530,13 @@ body{
     width: 35px;
     margin-bottom: 0;
 }
+
+.forum img:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: transform 0.2s;
+}
+
 /* ===== ANIMAÇÕES ===== */
 .item_lateral {
     animation: fadeInUp 0.6s ease-out forwards;
