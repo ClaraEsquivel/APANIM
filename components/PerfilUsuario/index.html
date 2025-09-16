@@ -1,104 +1,199 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil_usuário APANIM</title>
     <link rel="stylesheet" href="./styles.css">
 </head>
+
 <body>
-    <div class="central">
+    <div class="topo">
+        <img src="../../assets/images/Paws.svg" class="patas_topo">
+        <img src="../../assets/images/APANIM_logo.svg" id="logo_apanim">
+        <img src="../../assets/images/cat.svg" class="cat_topo">
+        <img src="../../assets/images/dog.svg" class="dog_topo">
+    </div>
 
-        <div class="perfil_usuario">
-            <h2>Meu perfil</h2>
-            <img src="../../assets/images/perfil.svg"/>
+    <nav role="navigation">
+        <div id="menu_sanduiche">
+            <input type="checkbox">
+            <span></span>
+            <span></span>
+            <span></span>
+            <ul id="menu">
+                <a href="../CadastroInicial/index.html">
+                    <li>Cadastro</li>
+                </a>
+                <a href="../CadastroUsuario/index.html">
+                    <li>Login</li>
+                </a>
+                <a href="../PerfilUsuario/index.html">
+                    <li>Perfil</li>
+                </a>
+                <a href="../AdocaoAnimal/index.html">
+                    <li>Animais para Adoção</li>
+                </a>
+                <a href="../VendaAnimal/index.html">
+                    <li>Animais para Compra</li>
+                </a>
+                <a href="../AnimaisPerdidos/index.html">
+                    <li>Animais Perdidos</li>
+                </a>
+                <a href="../CadastroAnimalAdocao/index.html">
+                    <li>Cadastro Animal para Adoção</li>
+                </a>
+                <a href="../CadastroAnimalVenda/index.html">
+                    <li>Cadastro Animal para Venda</li>
+                </a>
+                <a href="../CadastroAnimaisPerdidos/index.html">
+                    <li>Cadastro Animal para Perdido</li>
+                </a>
+                <a href="../PlanosAssinatura/index.html">
+                    <li>Serviços</li>
+                </a>
+            </ul>
         </div>
+    </nav>
 
-        <div class="informacoes_usuario">
-            <span id="nome">Nome: </span>
-            <input type="text" placeholder="Idade: "/>
-            <input type="text" placeholder="Sexo: "/>
-            <input type="text" placeholder="CPF: "/>
-        </div>
+    <div class="patas1">
+        <img src="../../assets/images/pata.svg" alt="pata" />
+    </div>
+    <div class="patas2">
+        <img src="../../assets/images/pata.svg" alt="pata" />
+    </div>
+    <div class="patas3">
+        <img src="../../assets/images/pata.svg" alt="pata" />
+    </div>
+    <div class="patas4">
+        <img src="../../assets/images/pata.svg" alt="pata" />
+    </div>
+    <div class="patas5">
+        <img src="../../assets/images/pata.svg" alt="pata" />
+    </div>
+    <div class="patas6">
+        <img src="../../assets/images/pata.svg" alt="pata" />
+    </div>
+    <div class="patas7">
+        <img src="../../assets/images/pata.svg" alt="pata" />
+    </div>
+    <div class="patas8">
+        <img src="../../assets/images/pata.svg" alt="pata" />
+    </div>
+    <div class="patas9">
+        <img src="../../assets/images/pata.svg" alt="pata" />
+    </div>
+    <div class="patas10">
+        <img src="../../assets/images/pata.svg" alt="pata" />
+    </div>
 
-        <div class="contatos">
-            <input type="text" placeholder="Telefone: "/>
-            <input type="text" placeholder="Telefone 2: "/>
-        </div>
+    <div class="principal">
+        <div class="central">
+            <div class="perfil_usuario">
+                <h2>Meu perfil</h2>
+                <img src="../../assets/images/perfil.svg" />
 
-        <div class="local">
-            <input type="text" placeholder="Bairro: "/>
-            <input type="text" placeholder="CEP: "/>
-        </div>
+                <div class="informacoes_usuario">
+                    <input type="text" placeholder="Nome: Marla Doe Santos Silva" />
+                    <input type="text" placeholder="Idade: 25 anos" />
+                    <input type="text" placeholder="Sexo: F" />
+                    <input type="text" placeholder="CPF: xxx.xxx.xxx-xx" />
+                    <input type="text" placeholder="Telefone: 85 xxxxx xxxx" />
+                    <input type="text" placeholder="Telefone 2: 85 xxxxx xxxx" />
+                    <input type="text" placeholder="Bairro: xxxx" />
+                    <input type="text" placeholder="CEP: xxxxx-xxx" />
+                    <textarea
+                        placeholder="Escreva um pouco sobre você...&#10;Sou uma pessoa carinhosa, responsável e&#10;amo os pets! Gostaria de ajudar animais e dar ajudar donos de pets encontrarem companhia."></textarea>
+                </div>
 
-        <div class="sobre_voce">
-            <span>Sobre você:</span>
-            <textarea placeholder="Escreva um pouco sobre você..."></textarea>
-            <!-- <span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolores totam, rerum eum, neque error non excepturi, nihil est accusantium molestiae mollitia? Voluptatibus vitae incidunt voluptas saepe quod dolor alias possimus!</span> -->
-            <button class="botao_editar">Salvar</button>
-        </div>
-
-        <div class="pins">
-            <img src="../../assets/images/dogs.svg"/>
-        </div>
-
-        <div class="checkbox">
-            <input type="checkbox"/>
-            <span>Deseja colaborar com o nosso site.</span>
-            <input type="checkbox"/> 
-            <span>Aceito os termos e condições.</span>
-        </div>
-
-        <div class="planos">
-            <h3>Nossos planos</h3>
-            <img src="../../assets/images/gato.svg"/>
-            <span>Escolha um plano para ter acesso a mais funcionalidades.</span>
-            <button class="botao_plano">Plano gratuito</button>
-            <button class="botao_plano">Plano premium</button>
-            <button class="botao_plano">Plano empresarial</button>
-        </div>
-
-        <div class="base">
-            <div class="redes_sociais">
-                <img src="../../assets/images/instagram.svg"/>
-                <img src="../../assets/images/email.svg"/>
+                <div>
+                    <button class="botao_editar">Salvar</button>
+                </div>
             </div>
 
-            <div>
-                <span>Adote</span>
-                <span>Seja responsável</span>
-                <span>Pesquisar por pets</span>
+
+            <div class="checkbox">
+                <div class="pins">
+                    <img src="../../assets/images/dogs.svg" />
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="colaborar" />
+                    <label for="colaborar">Deseja colaborar com o nosso site.</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="termos" />
+                    <label for="termos">Aceito os termos e condições.</label>
+                </div>
+                <img src="../../assets/images/dog_run.svg" alt="Cachorro correndo" class="dog-run" />
             </div>
 
-            <div>
-                <span>Colabore</span>
-                <span>Seja uma empresa parceira</span>
-            </div>
-
-            <div>
-                <span>Divulgue um animal</span>
-                <span>Cadastrar animal</span>
-            </div>
-
-            <div>
-                <span>Sobre o APANIM</span>
-                <span>APANIM</span>
-            </div>
-
-            <div>
-                <span>Meu perfil</span>
-                <span>Cadastrar-se</span>
-                <span>Minha página de usuário</span>
-            </div>
-
-            <div class="forum">
-                <img src="../../assets/images/forum.svg"/>
-            </div>
-
-            <div class="logo">
-                <img src="../../assets/images/APANIM_logo.svg"/>
+            <div class="planos">
+                <img src="../../assets/images/gato.svg" alt="Gato" class="cat-icon" />
+                <div class="planos-content">
+                    <h3>Nossos Planos</h3>
+                    <span>Plano Anual</span>
+                    <div class="planos-buttons">
+                        <button class="botao_plano premium">12x R$23,40<small>mês</small></button>
+                        <button class="botao_plano">CONTRATE AGORA</button>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>   
+
+        <div class="rodape">
+            <div class="base">
+                <div class="redes_sociais">
+                    <img src="../../assets/images/instagram.svg" />
+                    <img src="../../assets/images/email.svg" />
+                </div>
+
+                <div class="links_uteis">
+                    <div>
+                        <span class="titulo">Adote</span>
+                        <br>
+                        <a href=""><span>Seja responsável</span></a>
+                        <br>
+                        <a href="../AdocaoAnimal/index.html"><span>Pesquisar por pets</span></a>
+                    </div>
+
+                    <div>
+                        <span class="titulo">Colabore</span>
+                        <br>
+                        <span>Seja uma empresa parceira</span>
+                    </div>
+
+                    <div>
+                        <span class="titulo">Divulgue um animal</span>
+                        <br>
+                        <a href="../CadastroAnimalAdocao/index.html"><span>Cadastrar animal</span></a>
+                    </div>
+
+                    <div>
+                        <span class="titulo">Sobre o APANIM</span>
+                        <br>
+                        <span>APANIM</span>
+                    </div>
+
+                    <div>
+                        <span class="titulo">Meu perfil</span>
+                        <br>
+                        <a href="../CadastroInicial/index.html"><span>Cadastrar-se</span></a>
+                        <br>
+                        <a href="../PerfilUsuario/index.html"><span>Minha página de usuário</span></a>
+                    </div>
+                </div>
+
+                <div class="forum">
+                    <img src="../../assets/images/forum.svg" />
+                </div>
+
+                <div class="logo">
+                    <img src="../../assets/images/APANIM_logo.svg" />
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>
