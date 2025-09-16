@@ -44,12 +44,4 @@ public class AnimalPerdido extends Animal {
         this.contato = contato;
     }
 
-    @Override
-    public String toString() {
-        return "AnimalPerdido{" +
-                "data=" + data +
-                ", localDaUltimaAparicao='" + localDaUltimaAparicao + '\'' +
-                ", contato='" + contato + '\'' +
-                '}';
-    }
 }

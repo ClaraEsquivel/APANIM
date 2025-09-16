@@ -1,36 +1,34 @@
-package com.example.apanim.model;
+package com.example.apanim.dto;
 
 import com.example.apanim.Enum.PlanoAssinatura;
 import com.example.apanim.Enum.TipoUsuario;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.validation.constraints.*;
 
-@Entity
-@Table(name = "tab_usuarios")
-public class UsuarioModel {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(nullable = false)
+public class UsuarioCadastroDTO {
+    @NotBlank(message = "O nome é obrigatório.")
     private String nome;
 
-    @Column(unique = true)
+    @NotBlank(message = "O CPF é obrigatório.")
     private String cpf;
 
-    @Column(unique = true)
     private String cnpj;
 
+    @NotNull
     private Integer idade;
+
+    @NotBlank(message = "O telefone é obrigatório.")
     private String telefone;
 
-    @Column(nullable = false, unique = true)
+    @NotBlank(message = "O e-mail é obrigatório.")
+    @Email(message = "Deve ser um email válido.")
     private String email;
 
-    @Column(nullable = false)
+    @NotBlank(message = "Senha é obrigatório.")
     private String senha;
 
+    @NotBlank(message = "O CEP é obrigatório.")
     private String cep;
 
     private String logradouro;
@@ -44,11 +42,10 @@ public class UsuarioModel {
     @Enumerated(EnumType.STRING)
     private TipoUsuario tipo;
 
-    public UsuarioModel() {
+    public UsuarioCadastroDTO() {
     }
 
-    public UsuarioModel(Long id, String nome, String cpf, String cnpj, Integer idade, String telefone, String email, String senha, String cep, String logradouro, String bairro, PlanoAssinatura planoAssinatura, TipoUsuario tipo) {
-        this.id = id;
+    public UsuarioCadastroDTO(String nome, String cpf, String cnpj, Integer idade, String telefone, String email, String senha, String cep, String logradouro, String bairro, PlanoAssinatura planoAssinatura, TipoUsuario tipo) {
         this.nome = nome;
         this.cpf = cpf;
         this.cnpj = cnpj;
@@ -61,14 +58,6 @@ public class UsuarioModel {
         this.bairro = bairro;
         this.planoAssinatura = planoAssinatura;
         this.tipo = tipo;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getNome() {

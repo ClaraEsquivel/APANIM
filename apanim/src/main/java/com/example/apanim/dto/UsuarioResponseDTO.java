@@ -1,74 +1,41 @@
-package com.example.apanim.model;
+package com.example.apanim.dto;
 
 import com.example.apanim.Enum.PlanoAssinatura;
 import com.example.apanim.Enum.TipoUsuario;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotNull;
 
-@Entity
-@Table(name = "tab_usuarios")
-public class UsuarioModel {
+public class UsuarioResponseDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(nullable = false)
     private String nome;
-
-    @Column(unique = true)
     private String cpf;
-
-    @Column(unique = true)
     private String cnpj;
-
     private Integer idade;
     private String telefone;
-
-    @Column(nullable = false, unique = true)
     private String email;
-
-    @Column(nullable = false)
-    private String senha;
-
     private String cep;
-
     private String logradouro;
-
     private String bairro;
-
-    @Enumerated(EnumType.STRING)
     private PlanoAssinatura planoAssinatura;
-
-    @NotNull
-    @Enumerated(EnumType.STRING)
     private TipoUsuario tipo;
 
-    public UsuarioModel() {
+    public UsuarioResponseDTO() {
     }
 
-    public UsuarioModel(Long id, String nome, String cpf, String cnpj, Integer idade, String telefone, String email, String senha, String cep, String logradouro, String bairro, PlanoAssinatura planoAssinatura, TipoUsuario tipo) {
-        this.id = id;
+    public UsuarioResponseDTO(String nome, String cpf, String cnpj, Integer idade, String telefone, String email, String cep, String logradouro, String bairro, PlanoAssinatura planoAssinatura, TipoUsuario tipo) {
         this.nome = nome;
         this.cpf = cpf;
         this.cnpj = cnpj;
         this.idade = idade;
         this.telefone = telefone;
         this.email = email;
-        this.senha = senha;
         this.cep = cep;
         this.logradouro = logradouro;
         this.bairro = bairro;
         this.planoAssinatura = planoAssinatura;
         this.tipo = tipo;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getNome() {
@@ -117,14 +84,6 @@ public class UsuarioModel {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
     }
 
     public String getCep() {

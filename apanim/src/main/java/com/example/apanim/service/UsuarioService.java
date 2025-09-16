@@ -1,37 +1,94 @@
 package com.example.apanim.service;
 
-import com.example.apanim.exception.CpfJaCadastradoException;
-import com.example.apanim.exception.EmailJaCadastradoException;
+import com.example.apanim.dto.UsuarioCadastroDTO;
+import com.example.apanim.dto.UsuarioResponseDTO;
 import com.example.apanim.model.UsuarioModel;
 import com.example.apanim.repository.UsuarioRepository;
-import jakarta.validation.Valid;
+import jakarta.transaction.Transactional;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 
 @Service
-@Validated
 public class UsuarioService {
     private UsuarioRepository usuarioRepository;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public UsuarioService(UsuarioRepository usuarioRepository) {
+    public UsuarioService(BCryptPasswordEncoder bCryptPasswordEncoder, UsuarioRepository usuarioRepository) {
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.usuarioRepository = usuarioRepository;
     }
 
-    public List<UsuarioModel> listarTodos() {
+    public UsuarioModel salvarUsuario(UsuarioCadastroDTO dto) {
+        usuarioRepository.findByEmail(dto.getEmail())
+                .ifPresent(u -> {
+                    throw new IllegalArgumentException("E-mail já cadastrado.");
+                });
+        usuarioRepository.findByCpf(dto.getCpf())
+                .ifPresent(u -> {
+                    throw new IllegalArgumentException("CPF já cadastrado.");
+                });
 
-        return usuarioRepository.findAll();
+        UsuarioModel usuario = new UsuarioModel();
+        usuario.setNome(dto.getNome());
+        usuario.setCpf(dto.getCpf());
+        usuario.setCnpj(dto.getCnpj());
+        usuario.setIdade(dto.getIdade());
+        usuario.setTelefone(dto.getTelefone());
+        usuario.setEmail(dto.getEmail());
+        usuario.setSenha(bCryptPasswordEncoder.encode(dto.getSenha()));
+        usuario.setCep(dto.getCep());
+        usuario.setLogradouro(dto.getLogradouro());
+        usuario.setBairro(dto.getBairro());
+        usuario.setPlanoAssinatura(dto.getPlanoAssinatura());
+        usuario.setTipo(dto.getTipo());
+
+        return usuarioRepository.save(usuario);
     }
 
-    public UsuarioModel salvar(@Valid UsuarioModel usuarioModel) {
-        if(usuarioRepository.findByEmail(usuarioModel.getEmail()).isPresent()) {
-            throw new EmailJaCadastradoException("Usuário já cadastrado.");
+    public List<UsuarioResponseDTO> listarTodosUsuarios() {
+        return usuarioRepository
+                .findAll()
+                .stream()
+                .map(this::toDTO)
+                .toList();
+    }
+
+    public UsuarioResponseDTO toDTO(UsuarioModel usuario) {
+        return new UsuarioResponseDTO(usuario.getNome(), usuario.getCpf(), usuario.getCnpj(), usuario.getIdade(), usuario.getTelefone(), usuario.getEmail(), usuario.getCep(), usuario.getLogradouro(), usuario.getBairro(), usuario.getPlanoAssinatura(), usuario.getTipo());
+    }
+
+    @Transactional
+    public UsuarioModel atualizar(String email, String cpf, UsuarioCadastroDTO dto) {
+        UsuarioModel usuario = usuarioRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("Usuário não encontrado"));
+
+        if(!usuario.getCpf().equals(cpf)) {
+            throw new IllegalArgumentException("E-mail e CPF não correspondem ao mesmo usuário.");
         }
-        /*else if(usuarioRepository.findByCpf(usuarioModel.getCpf()).isPresent()) {
-            throw new CpfJaCadastradoException("Usuário já cadastrado.");
-        }*/
 
-        return usuarioRepository.save(usuarioModel);
+        usuario.setNome(dto.getNome());
+        usuario.setCpf(dto.getCpf());
+        usuario.setCnpj(dto.getCnpj());
+        usuario.setIdade(dto.getIdade());
+        usuario.setTelefone(dto.getTelefone());
+        usuario.setEmail(dto.getEmail());
+        usuario.setSenha(bCryptPasswordEncoder.encode(dto.getSenha()));
+        usuario.setCep(dto.getCep());
+        usuario.setLogradouro(dto.getLogradouro());
+        usuario.setBairro(dto.getBairro());
+        usuario.setPlanoAssinatura(dto.getPlanoAssinatura());
+        usuario.setTipo(dto.getTipo());
+
+        return usuarioRepository.save(usuario);
     }
+
+    public void excluir(String email) {
+        UsuarioModel usuario = usuarioRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("Usuário não encontrado."));
+        usuarioRepository.delete(usuario);
+    }
+
+
 }

@@ -189,24 +189,4 @@ public abstract class Animal {
         this.resumo = resumo;
     }
 
-    @Override
-    public String toString() {
-        return "Animal{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", idadeEstimativa='" + idadeEstimativa + '\'' +
-                ", raca='" + raca + '\'' +
-                ", porte='" + porte + '\'' +
-                ", sexo=" + sexo +
-                ", especie='" + especie + '\'' +
-                ", condicaoEspecial='" + condicaoEspecial + '\'' +
-                ", logradouro='" + logradouro + '\'' +
-                ", bairro='" + bairro + '\'' +
-                ", cor='" + cor + '\'' +
-                ", vacinado=" + vacinado +
-                ", vermifugado=" + vermifugado +
-                ", castrado=" + castrado +
-                ", resumo='" + resumo + '\'' +
-                '}';
-    }
 }

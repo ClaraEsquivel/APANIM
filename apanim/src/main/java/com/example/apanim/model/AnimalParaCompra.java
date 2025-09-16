@@ -49,12 +49,4 @@ public class AnimalParaCompra extends Animal {
         this.planoAssinatura = planoAssinatura;
     }
 
-    @Override
-    public String toString() {
-        return "AnimalParaCompra{" +
-                "pedigree=" + pedigree +
-                ", valorDoAnimal=" + valorDoAnimal +
-                ", planoAssinatura=" + planoAssinatura +
-                '}';
-    }
 }
