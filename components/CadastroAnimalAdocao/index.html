@@ -230,6 +230,20 @@
                     <textarea class="form-control" id="condicao-especial" name="condicao-especial" rows="3" placeholder="Descreva alguma condição especial de saúde ou comportamento (opcional)"></textarea>
                 </div>
 
+                <!-- Contato -->
+                <div class="form-group">
+                    <label for="contato" class="form-label">Contato:</label>
+
+                    <!-- Campo de Email -->
+                    <input type="email" class="form-control mb-2" id="email-contato" name="email-contato" placeholder="Digite seu e-mail (opcional)">
+
+                    <!-- Campo de Telefone -->
+                    <input type="tel" class="form-control" id="telefone-contato" name="telefone-contato" placeholder="Digite seu telefone com DDD (opcional)" pattern="\(\d{2}\)\s?\d{4,5}-\d{4}" title="Formato esperado: (99) 99999-9999">
+                    
+                    <small class="form-text text-muted">
+                        Você pode informar um e-mail, telefone, ou ambos para contato.
+                    </small>
+
                 <!-- Localização -->
                 <div class="form-group">
                     <label for="localizacao" class="form-label">Localização (Bairro de Salvador):</label>
@@ -510,4 +524,5 @@
         });
     </script>
 </body>
+
 </html>
