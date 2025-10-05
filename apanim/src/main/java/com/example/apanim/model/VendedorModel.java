@@ -1,43 +1,62 @@
-package com.example.apanim.dto;
+package com.example.apanim.model;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.persistence.*;
 
-public class UsuarioCadastroDTO {
-    @NotBlank(message = "O nome é obrigatório.")
+@Entity
+@Table(name = "tab_vendedor")
+public class VendedorModel {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false)
     private String nome;
 
-    @NotBlank(message = "O CPF é obrigatório.")
+    @Column(unique = true)
     private String cpf;
 
-    @NotBlank(message = "O telefone é obrigatório.")
+    @Column(unique = true)
+    private String cnpj;
+
+    private Integer idade;
     private String telefone;
 
-    @NotBlank(message = "O e-mail é obrigatório.")
-    @Email(message = "Deve ser um e-mail válido.")
+    @Column(nullable = false, unique = true)
     private String email;
 
-    @NotBlank(message = "A senha é obrigatório.")
+    @Column(nullable = false)
     private String senha;
 
-    @NotBlank(message = "O CEP é obrigatório.")
     private String cep;
 
     private String logradouro;
+
     private String bairro;
 
-    public UsuarioCadastroDTO() {
+    public VendedorModel() {
     }
 
-    public UsuarioCadastroDTO(String nome, String cpf, String telefone, String email, String senha, String cep, String logradouro, String bairro) {
+    public VendedorModel(Long id, String nome, String cpf, String cnpj, Integer idade, String telefone, String email, String senha, String cep, String logradouro, String bairro) {
+        this.id = id;
         this.nome = nome;
         this.cpf = cpf;
+        this.cnpj = cnpj;
+        this.idade = idade;
         this.telefone = telefone;
         this.email = email;
         this.senha = senha;
         this.cep = cep;
         this.logradouro = logradouro;
         this.bairro = bairro;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -54,6 +73,22 @@ public class UsuarioCadastroDTO {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+
+    public String getCnpj() {
+        return cnpj;
+    }
+
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
+    }
+
+    public Integer getIdade() {
+        return idade;
+    }
+
+    public void setIdade(Integer idade) {
+        this.idade = idade;
     }
 
     public String getTelefone() {

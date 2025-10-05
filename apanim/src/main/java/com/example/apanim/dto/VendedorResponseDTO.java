@@ -1,40 +1,27 @@
 package com.example.apanim.dto;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
+public class VendedorResponseDTO {
 
-public class UsuarioCadastroDTO {
-    @NotBlank(message = "O nome é obrigatório.")
     private String nome;
-
-    @NotBlank(message = "O CPF é obrigatório.")
     private String cpf;
-
-    @NotBlank(message = "O telefone é obrigatório.")
+    private String cnpj;
+    private Integer idade;
     private String telefone;
-
-    @NotBlank(message = "O e-mail é obrigatório.")
-    @Email(message = "Deve ser um e-mail válido.")
     private String email;
-
-    @NotBlank(message = "A senha é obrigatório.")
-    private String senha;
-
-    @NotBlank(message = "O CEP é obrigatório.")
     private String cep;
-
     private String logradouro;
     private String bairro;
 
-    public UsuarioCadastroDTO() {
+    public VendedorResponseDTO() {
     }
 
-    public UsuarioCadastroDTO(String nome, String cpf, String telefone, String email, String senha, String cep, String logradouro, String bairro) {
+    public VendedorResponseDTO(String nome, String cpf, String cnpj, Integer idade, String telefone, String email, String cep, String logradouro, String bairro) {
         this.nome = nome;
         this.cpf = cpf;
+        this.cnpj = cnpj;
+        this.idade = idade;
         this.telefone = telefone;
         this.email = email;
-        this.senha = senha;
         this.cep = cep;
         this.logradouro = logradouro;
         this.bairro = bairro;
@@ -56,6 +43,22 @@ public class UsuarioCadastroDTO {
         this.cpf = cpf;
     }
 
+    public String getCnpj() {
+        return cnpj;
+    }
+
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
+    }
+
+    public Integer getIdade() {
+        return idade;
+    }
+
+    public void setIdade(Integer idade) {
+        this.idade = idade;
+    }
+
     public String getTelefone() {
         return telefone;
     }
@@ -70,14 +73,6 @@ public class UsuarioCadastroDTO {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
     }
 
     public String getCep() {

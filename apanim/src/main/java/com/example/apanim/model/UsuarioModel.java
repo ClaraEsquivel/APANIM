@@ -1,16 +1,13 @@
 package com.example.apanim.model;
 
-import com.example.apanim.Enum.PlanoAssinatura;
-import com.example.apanim.Enum.TipoUsuario;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "tab_usuarios")
+@Table(name = "tab-usuarios")
 public class UsuarioModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue( strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
@@ -19,10 +16,6 @@ public class UsuarioModel {
     @Column(unique = true)
     private String cpf;
 
-    @Column(unique = true)
-    private String cnpj;
-
-    private Integer idade;
     private String telefone;
 
     @Column(nullable = false, unique = true)
@@ -32,35 +25,22 @@ public class UsuarioModel {
     private String senha;
 
     private String cep;
-
     private String logradouro;
-
-    private String bairro;
-
-    @Enumerated(EnumType.STRING)
-    private PlanoAssinatura planoAssinatura;
-
-    @NotNull
-    @Enumerated(EnumType.STRING)
-    private TipoUsuario tipo;
+    private  String bairro;
 
     public UsuarioModel() {
     }
 
-    public UsuarioModel(Long id, String nome, String cpf, String cnpj, Integer idade, String telefone, String email, String senha, String cep, String logradouro, String bairro, PlanoAssinatura planoAssinatura, TipoUsuario tipo) {
+    public UsuarioModel(Long id, String nome, String cpf, String telefone, String email, String senha, String cep, String logradouro, String bairro) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
-        this.cnpj = cnpj;
-        this.idade = idade;
         this.telefone = telefone;
         this.email = email;
         this.senha = senha;
         this.cep = cep;
         this.logradouro = logradouro;
         this.bairro = bairro;
-        this.planoAssinatura = planoAssinatura;
-        this.tipo = tipo;
     }
 
     public Long getId() {
@@ -85,22 +65,6 @@ public class UsuarioModel {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
-    }
-
-    public String getCnpj() {
-        return cnpj;
-    }
-
-    public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
-    }
-
-    public Integer getIdade() {
-        return idade;
-    }
-
-    public void setIdade(Integer idade) {
-        this.idade = idade;
     }
 
     public String getTelefone() {
@@ -149,21 +113,5 @@ public class UsuarioModel {
 
     public void setBairro(String bairro) {
         this.bairro = bairro;
-    }
-
-    public PlanoAssinatura getPlanoAssinatura() {
-        return planoAssinatura;
-    }
-
-    public void setPlanoAssinatura(PlanoAssinatura planoAssinatura) {
-        this.planoAssinatura = planoAssinatura;
-    }
-
-    public TipoUsuario getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(TipoUsuario tipo) {
-        this.tipo = tipo;
     }
 }

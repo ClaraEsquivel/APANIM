@@ -1,37 +1,44 @@
 package com.example.apanim.dto;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.*;
 
-public class UsuarioCadastroDTO {
+public class VendedorCadastroDTO {
     @NotBlank(message = "O nome é obrigatório.")
     private String nome;
 
     @NotBlank(message = "O CPF é obrigatório.")
     private String cpf;
 
+    private String cnpj;
+
+    @NotNull
+    private Integer idade;
+
     @NotBlank(message = "O telefone é obrigatório.")
     private String telefone;
 
     @NotBlank(message = "O e-mail é obrigatório.")
-    @Email(message = "Deve ser um e-mail válido.")
+    @Email(message = "Deve ser um email válido.")
     private String email;
 
-    @NotBlank(message = "A senha é obrigatório.")
+    @NotBlank(message = "Senha é obrigatório.")
     private String senha;
 
     @NotBlank(message = "O CEP é obrigatório.")
     private String cep;
 
     private String logradouro;
+
     private String bairro;
 
-    public UsuarioCadastroDTO() {
+    public VendedorCadastroDTO() {
     }
 
-    public UsuarioCadastroDTO(String nome, String cpf, String telefone, String email, String senha, String cep, String logradouro, String bairro) {
+    public VendedorCadastroDTO(String nome, String cpf, String cnpj, Integer idade, String telefone, String email, String senha, String cep, String logradouro, String bairro) {
         this.nome = nome;
         this.cpf = cpf;
+        this.cnpj = cnpj;
+        this.idade = idade;
         this.telefone = telefone;
         this.email = email;
         this.senha = senha;
@@ -54,6 +61,22 @@ public class UsuarioCadastroDTO {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+
+    public String getCnpj() {
+        return cnpj;
+    }
+
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
+    }
+
+    public Integer getIdade() {
+        return idade;
+    }
+
+    public void setIdade(Integer idade) {
+        this.idade = idade;
     }
 
     public String getTelefone() {

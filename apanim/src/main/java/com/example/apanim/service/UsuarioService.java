@@ -15,17 +15,13 @@ public class UsuarioService {
     private UsuarioRepository usuarioRepository;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public UsuarioService(BCryptPasswordEncoder bCryptPasswordEncoder, UsuarioRepository usuarioRepository) {
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+    public UsuarioService(UsuarioRepository usuarioRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.usuarioRepository = usuarioRepository;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     public UsuarioModel salvarUsuario(UsuarioCadastroDTO dto) {
         usuarioRepository.findByEmail(dto.getEmail())
-                .ifPresent(u -> {
-                    throw new IllegalArgumentException("E-mail já cadastrado.");
-                });
-        usuarioRepository.findByCpf(dto.getCpf())
                 .ifPresent(u -> {
                     throw new IllegalArgumentException("CPF já cadastrado.");
                 });
@@ -33,16 +29,12 @@ public class UsuarioService {
         UsuarioModel usuario = new UsuarioModel();
         usuario.setNome(dto.getNome());
         usuario.setCpf(dto.getCpf());
-        usuario.setCnpj(dto.getCnpj());
-        usuario.setIdade(dto.getIdade());
         usuario.setTelefone(dto.getTelefone());
         usuario.setEmail(dto.getEmail());
         usuario.setSenha(bCryptPasswordEncoder.encode(dto.getSenha()));
         usuario.setCep(dto.getCep());
         usuario.setLogradouro(dto.getLogradouro());
         usuario.setBairro(dto.getBairro());
-        usuario.setPlanoAssinatura(dto.getPlanoAssinatura());
-        usuario.setTipo(dto.getTipo());
 
         return usuarioRepository.save(usuario);
     }
@@ -56,30 +48,22 @@ public class UsuarioService {
     }
 
     public UsuarioResponseDTO toDTO(UsuarioModel usuario) {
-        return new UsuarioResponseDTO(usuario.getNome(), usuario.getCpf(), usuario.getCnpj(), usuario.getIdade(), usuario.getTelefone(), usuario.getEmail(), usuario.getCep(), usuario.getLogradouro(), usuario.getBairro(), usuario.getPlanoAssinatura(), usuario.getTipo());
+        return new UsuarioResponseDTO(usuario.getNome(), usuario.getCpf(), usuario.getTelefone(), usuario.getEmail(), usuario.getSenha(), usuario.getCep(), usuario.getLogradouro(), usuario.getBairro());
     }
 
     @Transactional
-    public UsuarioModel atualizar(String email, String cpf, UsuarioCadastroDTO dto) {
+    public UsuarioModel atualizar(String email, UsuarioCadastroDTO dto) {
         UsuarioModel usuario = usuarioRepository.findByEmail(email)
-                .orElseThrow(() -> new IllegalArgumentException("Usuário não encontrado"));
-
-        if(!usuario.getCpf().equals(cpf)) {
-            throw new IllegalArgumentException("E-mail e CPF não correspondem ao mesmo usuário.");
-        }
+                .orElseThrow(() -> new IllegalArgumentException("Usuário não encontrado."));
 
         usuario.setNome(dto.getNome());
         usuario.setCpf(dto.getCpf());
-        usuario.setCnpj(dto.getCnpj());
-        usuario.setIdade(dto.getIdade());
         usuario.setTelefone(dto.getTelefone());
         usuario.setEmail(dto.getEmail());
         usuario.setSenha(bCryptPasswordEncoder.encode(dto.getSenha()));
         usuario.setCep(dto.getCep());
         usuario.setLogradouro(dto.getLogradouro());
         usuario.setBairro(dto.getBairro());
-        usuario.setPlanoAssinatura(dto.getPlanoAssinatura());
-        usuario.setTipo(dto.getTipo());
 
         return usuarioRepository.save(usuario);
     }

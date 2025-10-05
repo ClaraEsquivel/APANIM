@@ -16,11 +16,9 @@ import java.util.Map;
 @CrossOrigin(origins = "*")
 
 public class UsuarioController {
-
     private UsuarioService usuarioService;
 
     public UsuarioController(UsuarioService usuarioService) {
-
         this.usuarioService = usuarioService;
     }
 
@@ -38,9 +36,9 @@ public class UsuarioController {
     }
 
     @PutMapping("/{email}")
-    public ResponseEntity<Map<Object, String>> atualizar(@PathVariable String email, String cpf,
+    public ResponseEntity<Map<Object, String>> atualizar(@PathVariable String email,
                                                          @Valid @RequestBody UsuarioCadastroDTO dto) {
-        usuarioService.atualizar(email, cpf, dto);
+        usuarioService.atualizar(email, dto);
         return ResponseEntity.ok(Map.of("mensagem", "Usuário atualizado com sucesso."));
     }
 

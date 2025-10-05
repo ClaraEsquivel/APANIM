@@ -1,6 +1,5 @@
 package com.example.apanim.model;
 
-import com.example.apanim.Enum.PlanoAssinatura;
 import com.example.apanim.Enum.Sexo;
 import jakarta.persistence.*;
 
@@ -15,14 +14,10 @@ public class AnimalParaCompra extends Animal {
     @Column(precision = 10, scale = 2)
     private BigDecimal valorDoAnimal;
 
-    @Enumerated(EnumType.STRING)
-    private PlanoAssinatura planoAssinatura;
-
-    public AnimalParaCompra(Long id, String nome, String idadeEstimativa, String raca, String porte, Sexo sexo, String especie, String condicaoEspecial, String logradouro, String bairro, String cor, Boolean vacinado, Boolean vermifugado, Boolean castrado, String resumo, Boolean pedigree, BigDecimal valorDoAnimal, PlanoAssinatura planoAssinatura) {
+    public AnimalParaCompra(Long id, String nome, String idadeEstimativa, String raca, String porte, Sexo sexo, String especie, String condicaoEspecial, String logradouro, String bairro, String cor, Boolean vacinado, Boolean vermifugado, Boolean castrado, String resumo, BigDecimal valorDoAnimal, Boolean pedigree) {
         super(id, nome, idadeEstimativa, raca, porte, sexo, especie, condicaoEspecial, logradouro, bairro, cor, vacinado, vermifugado, castrado, resumo);
-        this.pedigree = pedigree;
         this.valorDoAnimal = valorDoAnimal;
-        this.planoAssinatura = planoAssinatura;
+        this.pedigree = pedigree;
     }
 
     public Boolean getPedigree() {
@@ -40,13 +35,4 @@ public class AnimalParaCompra extends Animal {
     public void setValorDoAnimal(BigDecimal valorDoAnimal) {
         this.valorDoAnimal = valorDoAnimal;
     }
-
-    public PlanoAssinatura getPlanoAssinatura() {
-        return planoAssinatura;
-    }
-
-    public void setPlanoAssinatura(PlanoAssinatura planoAssinatura) {
-        this.planoAssinatura = planoAssinatura;
-    }
-
 }
