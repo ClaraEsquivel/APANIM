@@ -375,7 +375,7 @@ body{
 #menu_sanduiche{
     display: block;
     position:absolute;
-    top: 20px;
+    top: 30px;
     left: 30px;
     z-index: 1;
     -webkit-user-select: none;

@@ -24,7 +24,7 @@ body{
 #menu_sanduiche{
     display: block;
     position:absolute;
-    top: 20px;
+    top: 30px;
     left: 30px;
     z-index: 1;
     -webkit-user-select: none;
@@ -401,7 +401,7 @@ body{
     right: 1rem;
     padding: 0.5rem 1rem;
     border-radius: 25px;
-    font-size: 0.9rem;
+    font-size: 0.rem;
     font-weight: 700;
     color: white;
     background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
@@ -504,8 +504,8 @@ body{
 }
 
 .preco-destaque .valor {
-    font-size: 2rem;
-    font-weight: 800;
+    font-size: 1.1rem;
+    font-weight: 700;
     color: #16a34a;
     text-shadow: 0 2px 4px rgba(22, 163, 74, 0.2);
     position: relative;
