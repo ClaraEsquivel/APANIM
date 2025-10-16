@@ -1,6 +1,8 @@
 package com.example.apanim.model;
 
+import com.example.apanim.Enum.FaixaEtariaAnimal;
 import com.example.apanim.Enum.Sexo;
+import com.example.apanim.Enum.SexoAnimal;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -14,10 +16,10 @@ public class AnimalParaCompra extends Animal {
     @Column(precision = 10, scale = 2)
     private BigDecimal valorDoAnimal;
 
-    public AnimalParaCompra(Long id, String nome, String idadeEstimativa, String raca, String porte, Sexo sexo, String especie, String condicaoEspecial, String logradouro, String bairro, String cor, Boolean vacinado, Boolean vermifugado, Boolean castrado, String resumo, BigDecimal valorDoAnimal, Boolean pedigree) {
-        super(id, nome, idadeEstimativa, raca, porte, sexo, especie, condicaoEspecial, logradouro, bairro, cor, vacinado, vermifugado, castrado, resumo);
-        this.valorDoAnimal = valorDoAnimal;
+    public AnimalParaCompra(Long id, String nome, FaixaEtariaAnimal faixaEtariaAnimal, String raca, String porte, SexoAnimal sexoAnimal, String especie, String condicaoEspecial, String logradouro, String bairro, String cor, Boolean vacinado, Boolean vermifugado, Boolean castrado, String resumo, Boolean pedigree, BigDecimal valorDoAnimal) {
+        super(id, nome, faixaEtariaAnimal, raca, porte, sexoAnimal, especie, condicaoEspecial, logradouro, bairro, cor, vacinado, vermifugado, castrado, resumo);
         this.pedigree = pedigree;
+        this.valorDoAnimal = valorDoAnimal;
     }
 
     public Boolean getPedigree() {

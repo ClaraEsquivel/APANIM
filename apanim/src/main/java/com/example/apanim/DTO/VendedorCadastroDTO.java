@@ -1,50 +1,41 @@
-package com.example.apanim.model;
+package com.example.apanim.dto;
 
-import com.example.apanim.Enum.Sexo;
-import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 
-@Entity
-@Table(name = "tab_vendedor")
-public class VendedorModel {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(nullable = false)
+public class VendedorCadastroDTO {
+    @NotBlank(message = "O nome é obrigatório.")
     private String nome;
 
-    @Enumerated(EnumType.STRING)
-    private Sexo sexo;
-
-    @Column(unique = true)
+    @NotBlank(message = "O CPF é obrigatório.")
     private String cpf;
 
-    @Column(unique = true)
     private String cnpj;
 
+    @NotNull
     private Integer idade;
+
+    @NotBlank(message = "O telefone é obrigatório.")
     private String telefone;
 
-    @Column(nullable = false, unique = true)
+    @NotBlank(message = "O e-mail é obrigatório.")
+    @Email(message = "Deve ser um email válido.")
     private String email;
 
-    @Column(nullable = false)
+    @NotBlank(message = "Senha é obrigatório.")
     private String senha;
 
+    @NotBlank(message = "O CEP é obrigatório.")
     private String cep;
 
     private String logradouro;
 
     private String bairro;
 
-    public VendedorModel() {
+    public VendedorCadastroDTO() {
     }
 
-    public VendedorModel(Long id, String nome, Sexo sexo, String cpf, String cnpj, Integer idade, String telefone, String email, String senha, String cep, String logradouro, String bairro) {
-        this.id = id;
+    public VendedorCadastroDTO(String nome, String cpf, String cnpj, Integer idade, String telefone, String email, String senha, String cep, String logradouro, String bairro) {
         this.nome = nome;
-        this.sexo = sexo;
         this.cpf = cpf;
         this.cnpj = cnpj;
         this.idade = idade;
@@ -56,28 +47,12 @@ public class VendedorModel {
         this.bairro = bairro;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getNome() {
         return nome;
     }
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public Sexo getSexo() {
-        return sexo;
-    }
-
-    public void setSexo(Sexo sexo) {
-        this.sexo = sexo;
     }
 
     public String getCpf() {

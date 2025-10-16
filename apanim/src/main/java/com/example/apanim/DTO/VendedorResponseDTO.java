@@ -1,67 +1,30 @@
-package com.example.apanim.model;
+package com.example.apanim.dto;
 
-import com.example.apanim.Enum.Sexo;
-import jakarta.persistence.*;
+public class VendedorResponseDTO {
 
-@Entity
-@Table(name = "tab_vendedor")
-public class VendedorModel {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(nullable = false)
     private String nome;
-
-    @Enumerated(EnumType.STRING)
-    private Sexo sexo;
-
-    @Column(unique = true)
     private String cpf;
-
-    @Column(unique = true)
     private String cnpj;
-
     private Integer idade;
     private String telefone;
-
-    @Column(nullable = false, unique = true)
     private String email;
-
-    @Column(nullable = false)
-    private String senha;
-
     private String cep;
-
     private String logradouro;
-
     private String bairro;
 
-    public VendedorModel() {
+    public VendedorResponseDTO() {
     }
 
-    public VendedorModel(Long id, String nome, Sexo sexo, String cpf, String cnpj, Integer idade, String telefone, String email, String senha, String cep, String logradouro, String bairro) {
-        this.id = id;
+    public VendedorResponseDTO(String nome, String cpf, String cnpj, Integer idade, String telefone, String email, String cep, String logradouro, String bairro) {
         this.nome = nome;
-        this.sexo = sexo;
         this.cpf = cpf;
         this.cnpj = cnpj;
         this.idade = idade;
         this.telefone = telefone;
         this.email = email;
-        this.senha = senha;
         this.cep = cep;
         this.logradouro = logradouro;
         this.bairro = bairro;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getNome() {
@@ -70,14 +33,6 @@ public class VendedorModel {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public Sexo getSexo() {
-        return sexo;
-    }
-
-    public void setSexo(Sexo sexo) {
-        this.sexo = sexo;
     }
 
     public String getCpf() {
@@ -118,14 +73,6 @@ public class VendedorModel {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
     }
 
     public String getCep() {

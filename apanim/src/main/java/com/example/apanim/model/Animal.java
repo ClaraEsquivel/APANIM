@@ -1,6 +1,8 @@
 package com.example.apanim.model;
 
+import com.example.apanim.Enum.FaixaEtariaAnimal;
 import com.example.apanim.Enum.Sexo;
+import com.example.apanim.Enum.SexoAnimal;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -17,14 +19,14 @@ public abstract class Animal {
     @NotBlank
     private String nome;
 
-    private String idadeEstimativa;
+    private FaixaEtariaAnimal faixaEtariaAnimal;
 
     private String raca;
 
     private String porte;
 
     @Enumerated(EnumType.STRING)
-    private Sexo sexo;
+    private SexoAnimal sexoAnimal;
 
     private String especie;
 
@@ -51,13 +53,13 @@ public abstract class Animal {
     public Animal() {
     }
 
-    public Animal(Long id, String nome, String idadeEstimativa, String raca, String porte, Sexo sexo, String especie, String condicaoEspecial, String logradouro, String bairro, String cor, Boolean vacinado, Boolean vermifugado, Boolean castrado, String resumo) {
+    public Animal(Long id, String nome, FaixaEtariaAnimal faixaEtariaAnimal, String raca, String porte, SexoAnimal sexoAnimal, String especie, String condicaoEspecial, String logradouro, String bairro, String cor, Boolean vacinado, Boolean vermifugado, Boolean castrado, String resumo) {
         this.id = id;
         this.nome = nome;
-        this.idadeEstimativa = idadeEstimativa;
+        this.faixaEtariaAnimal = faixaEtariaAnimal;
         this.raca = raca;
         this.porte = porte;
-        this.sexo = sexo;
+        this.sexoAnimal = sexoAnimal;
         this.especie = especie;
         this.condicaoEspecial = condicaoEspecial;
         this.logradouro = logradouro;
@@ -77,20 +79,20 @@ public abstract class Animal {
         this.id = id;
     }
 
-    public String getNome() {
+    public @NotBlank String getNome() {
         return nome;
     }
 
-    public void setNome(String nome) {
+    public void setNome(@NotBlank String nome) {
         this.nome = nome;
     }
 
-    public String getIdadeEstimativa() {
-        return idadeEstimativa;
+    public FaixaEtariaAnimal getFaixaEtariaAnimal() {
+        return faixaEtariaAnimal;
     }
 
-    public void setIdadeEstimativa(String idadeEstimativa) {
-        this.idadeEstimativa = idadeEstimativa;
+    public void setFaixaEtariaAnimal(FaixaEtariaAnimal faixaEtariaAnimal) {
+        this.faixaEtariaAnimal = faixaEtariaAnimal;
     }
 
     public String getRaca() {
@@ -109,12 +111,12 @@ public abstract class Animal {
         this.porte = porte;
     }
 
-    public Sexo getSexo() {
-        return sexo;
+    public SexoAnimal getSexoAnimal() {
+        return sexoAnimal;
     }
 
-    public void setSexo(Sexo sexo) {
-        this.sexo = sexo;
+    public void setSexoAnimal(SexoAnimal sexoAnimal) {
+        this.sexoAnimal = sexoAnimal;
     }
 
     public String getEspecie() {
@@ -157,27 +159,27 @@ public abstract class Animal {
         this.cor = cor;
     }
 
-    public Boolean getVacinado() {
+    public @NotNull Boolean getVacinado() {
         return vacinado;
     }
 
-    public void setVacinado(Boolean vacinado) {
+    public void setVacinado(@NotNull Boolean vacinado) {
         this.vacinado = vacinado;
     }
 
-    public Boolean getVermifugado() {
+    public @NotNull Boolean getVermifugado() {
         return vermifugado;
     }
 
-    public void setVermifugado(Boolean vermifugado) {
+    public void setVermifugado(@NotNull Boolean vermifugado) {
         this.vermifugado = vermifugado;
     }
 
-    public Boolean getCastrado() {
+    public @NotNull Boolean getCastrado() {
         return castrado;
     }
 
-    public void setCastrado(Boolean castrado) {
+    public void setCastrado(@NotNull Boolean castrado) {
         this.castrado = castrado;
     }
 
@@ -188,5 +190,4 @@ public abstract class Animal {
     public void setResumo(String resumo) {
         this.resumo = resumo;
     }
-
 }

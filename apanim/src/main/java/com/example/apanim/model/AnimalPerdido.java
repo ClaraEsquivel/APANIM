@@ -1,6 +1,8 @@
 package com.example.apanim.model;
 
+import com.example.apanim.Enum.FaixaEtariaAnimal;
 import com.example.apanim.Enum.Sexo;
+import com.example.apanim.Enum.SexoAnimal;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import java.time.LocalDate;
@@ -13,8 +15,8 @@ public class AnimalPerdido extends Animal {
     private String localDaUltimaAparicao;
     private String contato;
 
-    public AnimalPerdido(Long id, String nome, String idadeEstimativa, String raca, String porte, Sexo sexo, String especie, String condicaoEspecial, String logradouro, String bairro, String cor, Boolean vacinado, Boolean vermifugado, Boolean castrado, String resumo, LocalDate data, String localDaUltimaAparicao, String contato) {
-        super(id, nome, idadeEstimativa, raca, porte, sexo, especie, condicaoEspecial, logradouro, bairro, cor, vacinado, vermifugado, castrado, resumo);
+    public AnimalPerdido(Long id, String nome, FaixaEtariaAnimal faixaEtariaAnimal, String raca, String porte, SexoAnimal sexoAnimal, String especie, String condicaoEspecial, String logradouro, String bairro, String cor, Boolean vacinado, Boolean vermifugado, Boolean castrado, String resumo, LocalDate data, String localDaUltimaAparicao, String contato) {
+        super(id, nome, faixaEtariaAnimal, raca, porte, sexoAnimal, especie, condicaoEspecial, logradouro, bairro, cor, vacinado, vermifugado, castrado, resumo);
         this.data = data;
         this.localDaUltimaAparicao = localDaUltimaAparicao;
         this.contato = contato;
