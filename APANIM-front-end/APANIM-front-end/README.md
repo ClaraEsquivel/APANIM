@@ -1,2 +1,0 @@
-# APANIM
-Projeto de TCC
