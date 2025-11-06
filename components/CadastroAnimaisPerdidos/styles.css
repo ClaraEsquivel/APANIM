@@ -1,0 +1,542 @@
+@font-face {
+    font-family: 'forum';
+    src: url(../../assets/images/Forum-Regular.ttf);
+}
+
+body{
+    margin: 0;
+    height: 50%;
+    position: relative;
+    box-sizing: border-box;
+}
+
+body::-webkit-scrollbar{
+    display: none;
+}
+
+body{
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* ===== MENU SANDUÍCHE ===== */
+#menu_sanduiche{
+    display: block;
+    position:absolute;
+    top: 30px;
+    left: 30px;
+    z-index: 1;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#menu_sanduiche a{
+    text-decoration: none;
+    color: black;
+}
+
+#menu_sanduiche a:hover{
+    text-decoration: none;
+    color: #5A0609;
+    font-weight: bold;
+}
+
+#menu_sanduiche:hover{
+    color: #420406
+}
+
+#menu_sanduiche input{
+    display: block;
+    width: 40px;
+    height: 32px;
+    position: absolute;
+    top: -7px;
+    left: -5px;
+    cursor: pointer;
+    opacity: 0;
+    z-index: 2;
+    -webkit-touch-callout: none;
+}
+
+#menu_sanduiche span{
+    display: block;
+    width: 33px;
+    height: 4px;
+    margin-bottom: 5px;
+    position: relative;
+    background: #5A0609;
+    border-radius: 3px;
+    z-index: 1;
+    transform-origin: 4px 0;
+    transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0), backgorund 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0), opacity 0.55s ease;
+}
+
+#menu_sanduiche span:first-child{
+    transform-origin: 0% 0%;
+}
+
+#menu_sanduiche span:nth-last-child(2){
+    transform-origin: 0% 100%;
+}
+
+#menu_sanduiche input:checked ~ span{
+    opacity: 1;
+    transform: rotate(45deg) translate(-2px, 1px);
+    background: #5A0609;
+}
+
+#menu_sanduiche input:checked ~ span:nth-last-child(3){
+    opacity: 0;
+    transform: rotate(0deg) scale(0.2, 0.2);
+}
+
+#menu_sanduiche input:checked ~span:nth-last-child(2){
+    transform: rotate(-45deg) translate(0, -1px);
+}
+
+#menu{
+    position: absolute;
+    width: 150px;
+    margin: -100px 0 0 -50px;
+    padding: 50px;
+    padding-top: 125px;
+    background: #ededed;
+    border-radius: 30px;
+    list-style-type: none;
+    -webkit-font-smoothing: antialiased;
+    transform-origin: 0% 0%;
+    transform: translate(-100%, 0);
+    transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
+}
+
+#menu li{
+    padding: 5px 0;
+    font-size: 18px;
+}
+
+#menu_sanduiche input:checked ~ ul{
+    transform: none;
+}
+
+.topo {
+    background: #fce4e4;
+    width: 100%;         
+    height: 200px;
+    border-radius: 10px 10px 0 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: auto;
+    padding: 0 40px;         
+    position: relative;
+    gap: 40px;
+}
+
+.topo .patas_topo{
+    position: relative;
+    width: 250px;
+    justify-content: flex-start;
+    margin-right: 100px;
+}
+
+#logo_apanim{
+    height: 170px; 
+    width: auto;
+}
+
+.topo .cat_topo{
+    position: relative;
+    width: 100px;
+    justify-content: flex-start;
+    margin-left: 100px;
+    margin-top: 40px;
+}
+
+.topo .dog_topo{
+    position: relative;
+    width: 100px;
+    justify-content: flex-start;
+    margin-left: 80px;
+    margin-bottom: 40px;
+}
+
+.central {
+    background: white;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center; 
+    position: relative;
+    padding: 100px 0; 
+}
+
+.patas1, .patas2, .patas3, .patas4, .patas5, .patas6 {
+    position: absolute;
+    z-index: 1;
+}
+
+.patas1 {
+    position: absolute;
+    left: 100px;
+    top: 150px;
+    z-index: 0;
+}
+
+.patas2 {
+    position: absolute;
+    left: 200px;
+    top: 300px;
+    z-index: 0;
+}
+
+.patas3 {
+    position: absolute;
+    left: 150px;
+    top: 450px;
+    z-index: 0;
+}
+
+.patas4 {
+    position: absolute;
+    right: 100px;
+    top: 150px;
+    z-index: 0;
+}
+
+.patas5 {
+    position: absolute;
+    right: 200px;
+    top: 300px;
+    z-index: 0;
+}
+
+.patas6 {
+    position: absolute;
+    right: 150px;
+    top: 450px;
+    z-index: 0;
+}
+
+.patas1 img,
+.patas2 img,
+.patas3 img,
+.patas4 img,
+.patas5 img,
+.patas6 img {
+    width: 40px; 
+    height: auto;
+    opacity: 0.2;
+    transition: transform 0.3s ease;
+}
+
+.patas1 img:hover,
+.patas2 img:hover,
+.patas3 img:hover, 
+.patas4 img:hover,
+.patas5 img:hover, 
+.patas6 img:hover {
+    transform: scale(4.1);
+}
+
+.container {
+    background-color: #fce4e4;
+    padding: 40px;
+    margin-bottom: 150px; 
+    margin-top: -50px;
+    border-radius: 20px;
+    width: 600px;
+    max-width: 90%;
+    text-align: left;
+    box-shadow: 1px 1px 8px rgb(0, 0, 0, 0.2);
+    z-index: 2;
+    position: relative;
+}
+
+.container h2 {
+    color: #5a2a2a;
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 24px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    display: block;
+    color: #5a2a2a;
+    margin-bottom: 8px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    background-color: #b27575;
+    color: #fff;
+    font-size: 14px;
+    box-shadow: 1px 1px 8px rgb(0, 0, 0, 0.2);
+    box-sizing: border-box;
+}
+
+.form-control:focus {
+    outline: none;
+    background-color: #a66666;
+    box-shadow: 0 0 10px rgba(90, 6, 9, 0.3);
+}
+
+.form-control::placeholder {
+    color: #fff;
+    opacity: 0.8;
+}
+
+select.form-control {
+    cursor: pointer;
+}
+
+select.form-control option {
+    background-color: #fff;
+    color: #5a2a2a;
+}
+
+textarea.form-control {
+    resize: vertical;
+    min-height: 60px;
+}
+
+.form-check-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-check {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.form-check-input {
+    margin: 0 8px 0 0;
+    width: auto;
+    padding: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+.form-check-input[type="radio"],
+.form-check-input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+}
+
+.form-check-label {
+    color: #5a2a2a;
+    margin: 0;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.form-text {
+    color: #5a2a2a;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+#contador-caracteres {
+    font-weight: bold;
+}
+
+.botao_cadastrar {
+    background-color: #3d0909;
+    color: #fff;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 20px auto 30px;
+    display: block;
+    box-shadow: 1px 1px 8px rgb(0, 0, 0, 0.2);
+    transition: all 0.2s ease;
+}
+
+.botao_cadastrar:hover {
+    background-color: #2a0606;
+    transform: scale(1.05);
+}
+
+.central .container img {
+    width: 180px;
+    margin: 30px auto 0;
+    display: block;
+}
+
+#vacinas-grupo {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+#vacinas-grupo .form-check-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+        padding: 30px 20px;
+    }
+    
+    .topo .patas_topo,
+    .topo .cat_topo,
+    .topo .dog_topo {
+        display: none;
+    }
+    
+    .patas1, .patas2, .patas3, 
+    .patas4, .patas5, .patas6 {
+        display: none;
+    }
+    
+    #vacinas-grupo .form-check-group {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Estilo para o campo de upload de imagem */
+#imagem-animal.form-control {
+    background-color: #b27575;
+    color: #fff;
+    font-size: 14px;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* Container da imagem de preview */
+#preview-container {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Imagem de preview */
+#preview-imagem {
+    display: none;
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: 10px;
+    border: 2px solid #a66666;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+/* Efeito hover na imagem */
+#preview-imagem:hover {
+    transform: scale(1.05);
+}
+
+
+.base {
+    background: #fce4e4;
+    width: 100%;
+    height: 200px;
+    border-radius: 10px 10px 0 0;
+    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: auto;
+    padding: 0 40px;
+    position: relative;
+    gap: 40px;
+}
+
+.base .logo {
+    position: static;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 0;
+    width: auto;
+}
+
+.base .logo img {
+    width: 100px;
+    height: auto;
+}
+
+.redes_sociais {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: static;
+    top: 20px;
+    left: 20px;
+}
+
+.redes_sociais img {
+    width: 25px;
+}
+
+.redes_sociais img:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: transform 0.2s;
+}
+
+.links_uteis {
+    display: flex;
+    flex-direction: row;
+    gap: 75px;
+    position: static;
+    padding: 0;
+    align-items: flex-start;
+    padding: 30px;
+    justify-content: center;
+}
+
+.links_uteis span {
+    margin-right: 15px;
+}
+
+.links_uteis span:hover {
+    text-decoration: underline;
+    cursor: pointer;
+    color: #8e090d;
+}
+
+.links_uteis .titulo {
+    font-family: forum, sans-serif;
+    color: #8e090d;
+    font-weight: bold;
+    font-size: 17px;
+}
+
+.forum {
+    position: static;
+    right: 20px;
+    top: 20px;
+}
+
+.forum img {
+    width: 35px;
+    margin-bottom: 0;
+}
