@@ -3,22 +3,27 @@
     src: url(../../assets/images/Forum-Regular.ttf);
 }
 
-body{
+* {
     margin: 0;
-    height: 50%;
-    position: relative;
+    padding: 0;
     box-sizing: border-box;
 }
 
-body::-webkit-scrollbar{
+body {
+    margin: 0;
+    min-height: 100vh;
+    position: relative;
+    font-family: 'forum';
+}
+
+body::-webkit-scrollbar {
     display: none;
 }
 
-body{
+body {
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
-
 
 /* ===== MENU SANDUÍCHE ===== */
 #menu_sanduiche{
@@ -121,6 +126,8 @@ body{
     transform: none;
 }
 
+/* ===== HEADER (TOPO) ===== */
+
 .topo {
     background: #fce4e4;
     width: 100%;         
@@ -130,8 +137,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: auto;
-    padding: 0 40px;         
+    margin-top: auto;        
     position: relative;
     gap: 40px;
 }
@@ -164,6 +170,8 @@ body{
     margin-bottom: 40px;
 }
 
+/* ===== CENTRAL ===== */
+
 .central {
     background: white;
     min-height: 100vh;
@@ -174,74 +182,6 @@ body{
     justify-content: center; 
     position: relative;
     padding: 100px 0; 
-}
-
-.patas1, .patas2, .patas3, .patas4, .patas5, .patas6 {
-    position: absolute;
-    z-index: 1;
-}
-
-.patas1 {
-    position: absolute;
-    left: 100px;
-    top: 150px;
-    z-index: 0;
-}
-
-.patas2 {
-    position: absolute;
-    left: 200px;
-    top: 300px;
-    z-index: 0;
-}
-
-.patas3 {
-    position: absolute;
-    left: 150px;
-    top: 450px;
-    z-index: 0;
-}
-
-.patas4 {
-    position: absolute;
-    right: 100px;
-    top: 150px;
-    z-index: 0;
-}
-
-.patas5 {
-    position: absolute;
-    right: 200px;
-    top: 300px;
-    z-index: 0;
-}
-
-.patas6 {
-    position: absolute;
-    right: 150px;
-    top: 450px;
-    z-index: 0;
-}
-
-.patas1 img,
-.patas2 img,
-.patas3 img,
-.patas4 img,
-.patas5 img,
-.patas6 img {
-    width: 40px; 
-    height: auto;
-    opacity: 0.2;
-    transition: transform 0.3s ease;
-}
-
-.patas1 img:hover,
-.patas2 img:hover,
-.patas3 img:hover, 
-.patas4 img:hover,
-.patas5 img:hover, 
-.patas6 img:hover {
-    transform: scale(4.1);
 }
 
 .container {
@@ -358,6 +298,66 @@ textarea.form-control {
     font-weight: bold;
 }
 
+/* ===== PATAS DECORATIVAS ===== */
+.patas1, .patas2, .patas3, .patas4, .patas5, .patas6 , 
+.patas7 , .patas8 , .patas9 , .patas10, .patas11, 
+.patas12, .patas13, .patas14, .patas15, .patas16,
+.patas17, .patas18, .patas19, .patas20, .patas21,
+.patas22, .patas23, .patas24 {
+    position: absolute;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.patas1 { left: 100px; top: 150px; }
+.patas2 { left: 200px; top: 300px; }
+.patas3 { left: 150px; top: 450px; }
+.patas4 { right: 100px; top: 150px; }
+.patas5 { right: 200px; top: 300px; }
+.patas6 { right: 150px; top: 450px; }
+.patas7 { left: 100px; top: 580px; }
+.patas8 { left: 200px; top: 700px; }
+.patas9 { left: 150px; top: 850px; }
+.patas10 { right: 100px; top: 580px; }
+.patas11 { right: 200px; top: 700px; }
+.patas12 { right: 150px; top: 850px; }
+.patas13 { left: 100px; top: 1080px; }
+.patas14 { left: 200px; top: 1200px; }
+.patas15 { left: 150px; top: 1150px; }
+.patas16 { right: 100px; top: 1080px; }
+.patas17 { right: 200px; top: 1200px; }
+.patas18 { right: 150px; top: 1150px; }
+.patas19 { left: 100px; top: 1080px; }
+.patas20 { left: 200px; top: 1200px; }
+.patas21 { left: 150px; top: 1150px; }
+.patas22 { right: 100px; top: 1080px; }
+.patas23 { right: 200px; top: 1200px; }
+.patas24 { right: 150px; top: 1150px; }
+
+.patas1 img, .patas2 img, .patas3 img,
+.patas4 img, .patas5 img, .patas6 img,
+.patas7 img, .patas8 img, .patas9 img,
+.patas10 img, .patas11 img, .patas12 img,
+.patas13 img, .patas14 img, .patas15 img,
+.patas16 img, .patas17 img, .patas18 img,
+.patas19 img, .patas20 img, .patas21 img,
+.patas22 img, .patas23 img, .patas24 img{
+    width: 40px;
+    height: auto;
+    opacity: 0.2;
+    transition: transform 0.3s ease;
+}
+
+.patas1 img:hover, .patas2 img:hover, .patas3 img:hover,
+.patas4 img:hover, .patas5 img:hover, .patas6 img:hover,
+.patas7 img:hover,.patas8 img:hover,.patas9 img:hover,
+.patas10 img:hover,.patas11 img:hover,.patas12 img:hover {
+    transform: scale(1.5);
+    opacity: 0.4;
+}
+
+/* ===== BOTÃO ===== */
+
 .botao_cadastrar {
     background-color: #3d0909;
     color: #fff;
@@ -454,6 +454,7 @@ textarea.form-control {
     transform: scale(1.05);
 }
 
+/* ===== FOOTER (BASE) ===== */
 
 .base {
     background: #fce4e4;
