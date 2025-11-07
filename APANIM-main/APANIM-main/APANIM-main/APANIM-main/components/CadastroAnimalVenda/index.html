@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro Animal para Venda</title>
+    <meta name="description" content="Cadastre cães e gatos para venda em Salvador-BA.">
+    <meta name="keywords" content="venda, animais, cães, gatos, pets">
+    <meta name="author" content="Seu Site de Adoção">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Cadastro Animal para Venda">
+    <meta property="og:description" content="Cadastre cães e gatos para venda em Salvador-BA">
+    <meta property="og:url" content="https://seusite.com/venda">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Cadastro Animal para Venda">
+    <meta property="twitter:description" content="Cadastre um animal para venda em Salvador-BA">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    
+    <!-- ⭐ ORDEM IMPORTANTE: Header primeiro, depois menu -->
+    <link rel="stylesheet" href="../../assets/css/header-unificado.css">
+    <link rel="stylesheet" href="../../assets/css/menu-styles.css">
+    <link rel="stylesheet" href="../../assets/css/footer-unificado.css"> 
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Preload de fontes importantes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+
+<body>
+    <header>
+        <div class="topo">
+            <img src="../../assets/images/Paws.svg" class="patas_topo" alt="Patas">
+            <img src="../../assets/images/APANIM_logo.svg" id="logo_apanim" alt="Logo APANIM">
+            <img src="../../assets/images/cat.svg" class="cat_topo" alt="Gato">
+            <img src="../../assets/images/dog.svg" class="dog_topo" alt="Cachorro">
+        </div>
+
+        <nav role="navigation"></nav>
+    </header>
+
+    <div class="central">
+        <div class="patas1">
+            <img src="../../assets/images/pata.svg" alt="pata"/>
+        </div>
+        <div class="patas2">
+            <img src="../../assets/images/pata.svg" alt="pata"/>
+        </div>
+        <div class="patas3">
+            <img src="../../assets/images/pata.svg" alt="pata"/>
+        </div>
+        <div class="patas4">
+            <img src="../../assets/images/pata.svg" alt="pata"/>
+        </div>
+        <div class="patas5">
+            <img src="../../assets/images/pata.svg" alt="pata"/>
+        </div>
+        <div class="patas6">
+            <img src="../../assets/images/pata.svg" alt="pata"/>
+        </div>
+
+        <div class="container">
+            <h2>Cadastro de Animal para Venda</h2>
+            
+            <form id="cadastro-animal" method="post" action="#" novalidate>
+                <!-- Nome do Animal -->
+                <div class="form-group">
+                    <label for="nome-animal" class="form-label">Nome do Animal:</label>
+                    <input type="text" class="form-control" id="nome-animal" name="nome" placeholder="Ex: Max, Luna" required>
+                </div>
+
+                <!-- Idade -->
+                <div class="form-group">
+                    <label for="idade-animal" class="form-label">Idade:</label>
+                    <input type="text" class="form-control" id="idade-animal" name="idade" placeholder="Ex: 2 anos, 6 meses" required>
+                </div>
+
+                <!-- Raça -->
+                <div class="form-group">
+                    <label for="raca-animal" class="form-label">Raça:</label>
+                    <input type="text" class="form-control" id="raca-animal" name="raca" placeholder="Ex: Labrador, SRD (Sem Raça Definida)" required>
+                </div>
+
+                <!-- Porte -->
+                <div class="form-group">
+                    <label for="porte-animal" class="form-label">Porte:</label>
+                    <select class="form-control" id="porte-animal" name="porte" required>
+                        <option value="">Selecione o porte</option>
+                        <option value="pequeno">Pequeno</option>
+                        <option value="medio">Médio</option>
+                        <option value="grande">Grande</option>
+                    </select>
+                </div>
+
+                <!-- Sexo -->
+                <div class="form-group">
+                    <label class="form-label">Sexo:</label>
+                    <div class="form-check-group">
+                        <div class="form-check">
+                            <input type="radio" class="form-check-input" id="sexo-macho" name="sexo" value="macho" required>
+                            <label class="form-check-label" for="sexo-macho">Macho</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="radio" class="form-check-input" id="sexo-femea" name="sexo" value="femea" required>
+                            <label class="form-check-label" for="sexo-femea">Fêmea</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Espécie -->
+                <div class="form-group">
+                    <label class="form-label">Espécie:</label>
+                    <div class="form-check-group">
+                        <div class="form-check">
+                            <input type="radio" class="form-check-input" id="especie-cachorro" name="especie" value="cachorro" required>
+                            <label class="form-check-label" for="especie-cachorro">Cachorro</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="radio" class="form-check-input" id="especie-gato" name="especie" value="gato" required>
+                            <label class="form-check-label" for="especie-gato">Gato</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cor -->
+                <div class="form-group">
+                    <label for="cor-animal" class="form-label">Cor:</label>
+                    <input type="text" class="form-control" id="cor-animal" name="cor" placeholder="Ex: Preto, Branco, Caramelo, Tigrado" required>
+                </div>
+
+                <!-- Valor do Animal -->
+                <div class="form-group">
+                    <label for="valor-animal" class="form-label">Valor do Animal (R$):</label>
+                    <input type="number" class="form-control" id="valor-animal" name="valor" placeholder="Ex: 500.00" min="0" step="0.01" required>
+                </div>
+
+                <!-- Vacinado -->
+                <div class="form-group">
+                    <label class="form-label">Vacinado:</label>
+                    <div class="form-check-group">
+                        <div class="form-check">
+                            <input type="radio" class="form-check-input" id="vacinado-sim" name="vacinado" value="sim" required>
+                            <label class="form-check-label" for="vacinado-sim">Sim</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="radio" class="form-check-input" id="vacinado-nao" name="vacinado" value="nao" required>
+                            <label class="form-check-label" for="vacinado-nao">Não</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vacinas Aplicadas (mostra apenas se vacinado = sim) -->
+                <div class="form-group" id="vacinas-grupo" style="display: none;">
+                    <label class="form-label">Vacinas aplicadas:</label>
+                    <div class="form-check-group">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="vacina-v8" name="vacinas[]" value="v8">
+                            <label class="form-check-label" for="vacina-v8">V8 (Óctupla)</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="vacina-v10" name="vacinas[]" value="v10">
+                            <label class="form-check-label" for="vacina-v10">V10 (Décupla)</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="vacina-raiva" name="vacinas[]" value="raiva">
+                            <label class="form-check-label" for="vacina-raiva">Antirrábica</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="vacina-triplice" name="vacinas[]" value="triplice">
+                            <label class="form-check-label" for="vacina-triplice">Tríplice Felina</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="vacina-leucemia" name="vacinas[]" value="leucemia">
+                            <label class="form-check-label" for="vacina-leucemia">Leucemia Felina</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Castrado -->
+                <div class="form-group">
+                    <label class="form-label">Castrado:</label>
+                    <div class="form-check-group">
+                        <div class="form-check">
+                            <input type="radio" class="form-check-input" id="castrado-sim" name="castrado" value="sim" required>
+                            <label class="form-check-label" for="castrado-sim">Sim</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="radio" class="form-check-input" id="castrado-nao" name="castrado" value="nao" required>
+                            <label class="form-check-label" for="castrado-nao">Não</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Vermifugado -->
+                <div class="form-group">
+                    <label class="form-label">Vermifugado:</label>
+                    <div class="form-check-group">
+                        <div class="form-check">
+                            <input type="radio" class="form-check-input" id="vermicida-sim" name="vermifugado" value="sim" required>
+                            <label class="form-check-label" for="vermicida-sim">Sim</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="radio" class="form-check-input" id="vermicida-nao" name="vermifugado" value="nao" required>
+                            <label class="form-check-label" for="vermicida-nao">Não</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Condição Especial -->
+                <div class="form-group">
+                    <label for="condicao-especial" class="form-label">Condição Especial:</label>
+                    <textarea class="form-control" id="condicao-especial" name="condicao-especial" rows="3" placeholder="Descreva alguma condição especial de saúde ou comportamento (opcional)"></textarea>
+                </div>
+
+                <!-- Contato -->
+                <div class="form-group">
+                    <label for="contato" class="form-label">Contato:</label>
+
+                    <!-- Campo de Email -->
+                    <input type="email" class="form-control mb-2" id="email-contato" name="email-contato" placeholder="Digite seu e-mail (opcional)">
+
+                    <!-- Campo de Telefone -->
+                    <input type="tel" class="form-control" id="telefone-contato" name="telefone-contato" placeholder="Digite seu telefone com DDD (opcional)" pattern="\(\d{2}\)\s?\d{4,5}-\d{4}" title="Formato esperado: (99) 99999-9999">
+                    
+                    <small class="form-text text-muted">
+                        Você pode informar um e-mail, telefone, ou ambos para contato.
+                    </small>
+
+                <!-- Localização -->
+                <div class="form-group">
+                    <label for="localizacao" class="form-label">Localização (Bairro de Salvador):</label>
+                    <select class="form-control" id="localizacao" name="localizacao" required>
+                            <option value="">Selecione o bairro</option>
+                            <option value="acupe">Acupe</option>
+                            <option value="aeroporto">Aeroporto</option>
+                            <option value="aguas_claras">Águas Claras</option>
+                            <option value="alto_da_terezinha">Alto da Terezinha</option>
+                            <option value="alto_das_pombas">Alto das Pombas</option>
+                            <option value="alto_do_cabrito">Alto do Cabrito</option>
+                            <option value="alto_do_coqueirinho">Alto do Coqueirinho</option>
+                            <option value="amaralina">Amaralina</option>
+                            <option value="areia_branca">Areia Branca</option>
+                            <option value="arenoso">Arenoso</option>
+                            <option value="arraial_do_retiro">Arraial do Retiro</option>
+                            <option value="bairro_da_paz">Bairro da Paz</option>
+                            <option value="baixa_de_quintas">Baixa de Quintas</option>
+                            <option value="barbalho">Barbalho</option>
+                            <option value="barra">Barra</option>
+                            <option value="barreiras">Barreiras</option>
+                            <option value="barris">Barris</option>
+                            <option value="beiru_tancredo_neves">Beiru / Tancredo Neves</option>
+                            <option value="boa_viagem">Boa Viagem</option>
+                            <option value="boa_vista_de_brotas">Boa Vista de Brotas</option>
+                            <option value="boa_vista_de_sao_caetano">Boa Vista de São Caetano</option>
+                            <option value="boca_da_mata">Boca da Mata</option>
+                            <option value="boca_do_rio">Boca do Rio</option>
+                            <option value="bom_jua">Bom Juá</option>
+                            <option value="bonfim">Bonfim</option>
+                            <option value="brotas">Brotas</option>
+                            <option value="cabula">Cabula</option>
+                            <option value="cabula_vi">Cabula VI</option>
+                            <option value="caixa_dagua">Caixa D'Água</option>
+                            <option value="cajazeiras_ii">Cajazeiras II</option>
+                            <option value="cajazeiras_iv">Cajazeiras IV</option>
+                            <option value="cajazeiras_v">Cajazeiras V</option>
+                            <option value="cajazeiras_vi">Cajazeiras VI</option>
+                            <option value="cajazeiras_vii">Cajazeiras VII</option>
+                            <option value="cajazeiras_viii">Cajazeiras VIII</option>
+                            <option value="cajazeiras_x">Cajazeiras X</option>
+                            <option value="cajazeiras_xi">Cajazeiras XI</option>
+                            <option value="calabar">Calabar</option>
+                            <option value="calabetão">Calabetão</option>
+                            <option value="calçada">Calçada</option>
+                            <option value="caminho_das_arvores">Caminho das Árvores</option>
+                            <option value="caminho_de_areia">Caminho de Areia</option>
+                            <option value="campinas_de_piraja">Campinas de Pirajá</option>
+                            <option value="canabrava">Canabrava</option>
+                            <option value="candeal">Candeal</option>
+                            <option value="canela">Canela</option>
+                            <option value="capelinha">Capelinha</option>
+                            <option value="cassange">Cassange</option>
+                            <option value="castelo_branco">Castelo Branco</option>
+                            <option value="centro">Centro</option>
+                            <option value="centro_administrativo_da_bahia">Centro Administrativo da Bahia (CAB)</option>
+                            <option value="centro_historico">Centro Histórico</option>
+                            <option value="chame_chame">Chame‑Chame</option>
+                            <option value="chapada_do_rio_vermelho">Chapada do Rio Vermelho</option>
+                            <option value="cidade_nova">Cidade Nova</option>
+                            <option value="colinas_de_periperi">Colinas de Periperi</option>
+                            <option value="comercio">Comércio</option>
+                            <option value="cosme_de_farias">Cosme de Farias</option>
+                            <option value="costa_azul">Costa Azul</option>
+                            <option value="coutos">Coutos</option>
+                            <option value="curuzu">Curuzu</option>
+                            <option value="dois_de_julho">Dois de Julho</option>
+                            <option value="dom_avelar">Dom Avelar</option>
+                            <option value="doron">Doron</option>
+                            <option value="engenho_velho_da_federacao">Engenho Velho da Federação</option>
+                            <option value="engenho_velho_de_brotas">Engenho Velho de Brotas</option>
+                            <option value="engomadeira">Engomadeira</option>
+                            <option value="fazenda_coutos">Fazenda Coutos</option>
+                            <option value="fazenda_grande_do_retiro">Fazenda Grande do Retiro</option>
+                            <option value="fazenda_grande_i">Fazenda Grande I</option>
+                            <option value="fazenda_grande_ii">Fazenda Grande II</option>
+                            <option value="fazenda_grande_iii">Fazenda Grande III</option>
+                            <option value="fazenda_grande_iv">Fazenda Grande IV</option>
+                            <option value="federacao">Federação</option>
+                            <option value="garcia">Garcia</option>
+                            <option value="graca">Graça</option>
+                            <option value="granjas_rurais_presidente_vargas">Granjas Rurais Presidente Vargas</option>
+                            <option value="horto_florestal">Horto Florestal</option>
+                            <option value="iapi">IAPI</option>
+                            <option value="ilha_amarela">Ilha Amarela</option>
+                            <option value="ilha_de_bom_jesus_dos_passos">Ilha de Bom Jesus dos Passos</option>
+                            <option value="ilha_dos_frades_ilha_de_santo_antonio">Ilha dos Frades / Ilha de Santo Antônio</option>
+                            <option value="ilha_de_mare">Ilha de Maré</option>
+                            <option value="imbuí">Imbuí</option>
+                            <option value="itacaranha">Itacaranha</option>
+                            <option value="itaigara">Itaigara</option>
+                            <option value="itapua">Itapuã</option>
+                            <option value="itinga">Itinga</option>
+                            <option value="jaguaripe_i">Jaguaripe I</option>
+                            <option value="jardim_armação">Jardim Armação</option>
+                            <option value="jardim_cajazeiras">Jardim Cajazeiras</option>
+                            <option value="jardim_das_margaridas">Jardim das Margaridas</option>
+                            <option value="jardim_nova_esperanca">Jardim Nova Esperança</option>
+                            <option value="jardim_santo_inacio">Jardim Santo Inácio</option>
+                            <option value="lapinha">Lapinha</option>
+                            <option value="liberdade">Liberdade</option>
+                            <option value="lobato">Lobato</option>
+                            <option value="luiz_anselmo">Luiz Anselmo</option>
+                            <option value="macaúbas">Macaúbas</option>
+                            <option value="mangueira">Mangueira</option>
+                            <option value="marechal_rondon">Marechal Rondon</option>
+                            <option value="mares">Mares</option>
+                            <option value="massaranduba">Massaranduba</option>
+                            <option value="mata_escura">Mata Escura</option>
+                            <option value="matatu">Matatu</option>
+                            <option value="mirantes_de_periperi">Mirantes de Periperi</option>
+                            <option value="monte_serrat">Monte Serrat</option>
+                            <option value="moradas_da_lagoa">Moradas da Lagoa</option>
+                            <option value="mussurunga">Mussurunga</option>
+                            <option value="narandiba">Narandiba</option>
+                            <option value="nazare">Nazaré</option>
+                            <option value="nordeste_de_amaralina">Nordeste de Amaralina</option>
+                            <option value="nova_brasilia">Nova Brasília</option>
+                            <option value="nova_constituinte">Nova Constituinte</option>
+                            <option value="nova_esperanca">Nova Esperança</option>
+                            <option value="nova_sussuarana">Nova Sussuarana</option>
+                            <option value="novo_horizonte">Novo Horizonte</option>
+                            <option value="novo_marotinho">Novo Marotinho</option>
+                            <option value="ondina">Ondina</option>
+                            <option value="palestina">Palestina</option>
+                            <option value="paripe">Paripe</option>
+                            <option value="patamares">Patamares</option>
+                            <option value="pau_da_lima">Pau da Lima</option>
+                            <option value="pau_miudo">Pau Miúdo</option>
+                            <option value="periperi">Periperi</option>
+                            <option value="pernambues">Pernambués</option>
+                            <option value="pero_vaz">Pero Vaz</option>
+                            <option value="piata">Piatã</option>
+                            <option value="piraja">Pirajá</option>
+                            <option value="pituaçu">Pituaçu</option>
+                            <option value="pituba">Pituba</option>
+                            <option value="plataforma">Plataforma</option>
+                            <option value="porto_seco_piraja">Porto Seco Pirajá</option>
+                            <option value="praia_grande">Praia Grande</option>
+                            <option value="resgate">Resgate</option>
+                            <option value="retiro">Retiro</option>
+                            <option value="ribeira">Ribeira</option>
+                            <option value="rio_sena">Rio Sena</option>
+                            <option value="rio_vermelho">Rio Vermelho</option>
+                            <option value="roma">Roma</option>
+                            <option value="saboeiro">Saboeiro</option>
+                            <option value="santa_cruz">Santa Cruz</option>
+                            <option value="santa_luzia">Santa Luzia</option>
+                            <option value="santa_monica">Santa Mônica</option>
+                            <option value="santo_agostinho">Santo Agostinho</option>
+                            <option value="santo_antonio">Santo Antônio</option>
+                            <option value="sao_caetano">São Caetano</option>
+                            <option value="sao_cristovao">São Cristóvão</option>
+                            <option value="sao_goncalo">São Gonçalo</option>
+                            <option value="sao_joao_do_cabrito">São João do Cabrito</option>
+                            <option value="sao_marcos">São Marcos</option>
+                            <option value="sao_rafael">São Rafael</option>
+                            <option value="sao_tome">São Tomé</option>
+                            <option value="saramandaia">Saramandaia</option>
+                            <option value="saude">Saúde</option>
+                            <option value="sete_de_abril">Sete de Abril</option>
+                            <option value="stella_maris">Stella Maris</option>
+                            <option value="stiep">STIEP</option>
+                            <option value="sussuarana">Sussuarana</option>
+                            <option value="tororo">Tororó</option>
+                            <option value="trobogy">Trobogy</option>
+                            <option value="uruguai">Uruguai</option>
+                            <option value="vale_das_pedrinhas">Vale das Pedrinhas</option>
+                            <option value="vale_dos_lagos">Vale dos Lagos</option>
+                            <option value="valeria">Valéria</option>
+                            <option value="vila_canaria">Vila Canária</option>
+                            <option value="vila_laura">Vila Laura</option>
+                            <option value="vila_ruy_barbosa_jardim_cruzeiro">Vila Ruy Barbosa / Jardim Cruzeiro</option>
+                            <option value="vitoria">Vitória</option>
+                            <option value="vista_alegre">Vista Alegre</option>
+                    </select>
+                </div>
+
+                <!-- Upload de Imagem do Animal -->
+                <div class="form-group">
+                    <label for="imagem-animal" class="form-label">Foto do Animal:</label>
+                    <input type="file" class="form-control" id="imagem-animal" name="imagem-animal" accept="image/*" required>
+                    
+                    <div id="preview-container">
+                        <img id="preview-imagem" src="#" alt="Pré-visualização da imagem">
+                    </div>
+                </div>
+
+
+                <!-- Resumo -->
+                <div class="form-group">
+                    <label for="resumo-animal" class="form-label">Resumo (até 100 caracteres):</label>
+                    <textarea class="form-control" id="resumo-animal" name="resumo" rows="3" placeholder="Breve descrição do animal..." maxlength="100" required></textarea>
+                    <small class="form-text">Caracteres restantes: <span id="contador-caracteres">100</span></small>
+                </div>
+
+                <button type="submit" class="botao_cadastrar">Cadastrar Animal</button>
+            </form>
+
+            <img src="../../assets/images/dog_and_cat.svg" alt="Cachorro e gato"/>
+        </div>
+    </div>
+
+      <!-- Footer -->
+    <footer class="base">
+        <div class="redes_sociais">
+            <img src="../../assets/images/instagram.svg" alt="Siga-nos no Instagram"/>
+            <img src="../../assets/images/email.svg" alt="Entre em contato por email"/>
+        </div>
+
+        <nav class="links_uteis" aria-label="Links úteis">
+            <div>
+                <span class="titulo">Encontre um novo pet</span><br>
+                <a href="../AdocaoAnimal/index.html"><span>Adote</span><br></a>
+                <a href="../CompraAnimal/index.html"><span>Compre</span></a>
+            </div>
+            <div>
+                <span class="titulo">Colabore</span><br>
+                <a href="../Parceria/index.html"><span>Seja uma empresa parceira</span></a>
+            </div>
+            <div>
+                <span class="titulo">Divulgue um animal</span><br>
+                <a href="../CadastroAnimalAdocao/index.html"><span>Cadastrar animal para adoção</span><br></a>
+                <a href="../CadastroAnimalVenda/index.html"><span>Cadastrar animal para venda</span><br></a>
+                <a href="../CadastroAnimaisPerdidos/index.html"><span>Cadastrar animal perdido</span><br></a>
+            </div>
+            <div>
+                <span class="titulo">Encontre um animal</span><br>
+                <a href="../AnimaisPerdidos/index.html"><span>Animais perdidos</span><br></a>
+            </div>
+            <div>
+                <span class="titulo">Sobre o APANIM</span><br>
+                <span>APANIM</span>
+            </div>
+            <div>
+                <span class="titulo">Meu perfil</span><br>
+                <a href="../CadastroInicial/index.html"><span>Cadastrar-se</span><br></a>
+                <a href="../PerfilUsuario/index.html"><span>Minha página de usuário</span><br></a>
+                <a href="../PerfilVendedor/index.html"><span>Minha página de vendedor</span><br></a>
+            </div>
+        </nav>
+
+        <div class="forum">
+            <img src="../../assets/images/forum.svg" alt="Acesse nosso fórum"/>
+        </div>
+
+
+    </footer>
+
+
+    <script src="script.js"></script>
+    <!-- ⭐ SCRIPT DO MENU UNIFICADO -->
+    <script src="../../assets/js/menu-unificado.js"></script>
+</body>
+
+</html>
