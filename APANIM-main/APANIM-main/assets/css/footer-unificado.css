@@ -1,0 +1,93 @@
+@font-face {
+    font-family: 'Forum';
+    src: url(../../assets/images/Forum-Regular.ttf) format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+ /* ===== FOOTER ===== */
+        .base {
+            background: #fce4e4;
+            width: 100%;
+            min-height: 150px; /* MUDANÇA: de height para min-height */
+            position: relative; /* MUDANÇA: de absolute para relative */
+            margin-top: 4rem;
+            left: 0;
+            border-radius: 10px 10px 0 0;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: center;
+            padding: 20px 0; /* ADICIONE esta linha */
+}
+ 
+        .redes_sociais {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .redes_sociais img {
+            width: 25px;
+        }
+
+        .redes_sociais img:hover {
+            cursor: pointer;
+            transform: scale(1.1);
+            transition: transform 0.2s;
+        }
+
+        .links_uteis {
+            color: black;
+            display: flex;
+            flex-direction: row; 
+            gap: 75px; 
+            justify-content: center;
+            padding: 30px;
+            width: 100%;
+        }
+
+        .links_uteis span {
+            margin-right: 15px;
+        }
+
+        .links_uteis span:hover {
+            cursor: pointer;
+            color: #5A0609;
+        }
+
+        .links_uteis .titulo {
+            font-family: forum, sans-serif;
+            color: #5A0609;
+            font-weight: bold;
+            font-size: 17px;
+        }
+
+        .links_uteis a{
+            color: #000000;
+            text-decoration: none;
+        }
+
+        .links_uteis a:hover {
+            color: #000000; 
+            text-decoration: underline; 
+        }
+
+        .forum {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+        }
+
+        .forum img {
+            width: 35px;
+            margin-bottom: 0;
+        }
+
+        .forum img:hover {
+            cursor: pointer;
+            transform: scale(1.1);
+            transition: transform 0.2s;
+        }
