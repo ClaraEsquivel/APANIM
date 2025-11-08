@@ -5,7 +5,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tab_animais_adocao")
-public class AnimalParaAdocao extends Animal {
+public class AnimalParaAdocao extends AnimalModel {
 
 
 }

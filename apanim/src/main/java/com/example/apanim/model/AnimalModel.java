@@ -1,57 +1,58 @@
-package com.example.apanim.DTO;
+package com.example.apanim.model;
 
 import com.example.apanim.Enum.FaixaEtariaAnimal;
 import com.example.apanim.Enum.SexoAnimal;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
-public class AnimalCadastroDTO {
+@Entity
+@Table(name = "tab_animais")
+@Inheritance(strategy = InheritanceType.JOINED)
+public class AnimalModel {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "O nome é obrigatório.")
+    @NotBlank
     private String nome;
 
-    @NotBlank(message = "A Faixa Etária é obrigatório.")
     private FaixaEtariaAnimal faixaEtariaAnimal;
 
-    @NotBlank(message = "A raça é obrigatório.")
     private String raca;
 
-    @NotBlank(message = "O porte é obrigatório.")
     private String porte;
 
-    @NotBlank(message = "O sexo é obrigatório.")
+    @Enumerated(EnumType.STRING)
     private SexoAnimal sexoAnimal;
 
-    @NotBlank(message = "A espécie é obrigatório.")
     private String especie;
 
-    @NotBlank
     private String condicaoEspecial;
 
     private String logradouro;
 
-    @NotBlank(message = "O bairro é obrigatório.")
     private String bairro;
 
-    @NotBlank
     private String cor;
 
-    @NotBlank
-    private boolean vacinado;
+    @NotNull
+    private Boolean vacinado;
 
-    @NotBlank
-    private boolean vermifugado;
+    @NotNull
+    private Boolean vermifugado;
 
-    @NotBlank
-    private boolean castrado;
+    @NotNull
+    private Boolean castrado;
 
+    @Lob
     private String resumo;
 
-    public AnimalCadastroDTO() {
+    public AnimalModel() {
     }
 
-    public AnimalCadastroDTO(Long id, String nome, FaixaEtariaAnimal faixaEtariaAnimal, String raca, String porte, SexoAnimal sexoAnimal, String especie, String condicaoEspecial, String logradouro, String bairro, String cor, boolean vacinado, boolean vermifugado, boolean castrado, String resumo) {
+    public AnimalModel(Long id, String nome, FaixaEtariaAnimal faixaEtariaAnimal, String raca, String porte, SexoAnimal sexoAnimal, String especie, String condicaoEspecial, String logradouro, String bairro, String cor, Boolean vacinado, Boolean vermifugado, Boolean castrado, String resumo) {
         this.id = id;
         this.nome = nome;
         this.faixaEtariaAnimal = faixaEtariaAnimal;
@@ -77,11 +78,11 @@ public class AnimalCadastroDTO {
         this.id = id;
     }
 
-    public String getNome() {
+    public @NotBlank String getNome() {
         return nome;
     }
 
-    public void setNome(String nome) {
+    public void setNome(@NotBlank String nome) {
         this.nome = nome;
     }
 
@@ -157,27 +158,27 @@ public class AnimalCadastroDTO {
         this.cor = cor;
     }
 
-    public boolean isVacinado() {
+    public @NotNull Boolean getVacinado() {
         return vacinado;
     }
 
-    public void setVacinado(boolean vacinado) {
+    public void setVacinado(@NotNull Boolean vacinado) {
         this.vacinado = vacinado;
     }
 
-    public boolean isVermifugado() {
+    public @NotNull Boolean getVermifugado() {
         return vermifugado;
     }
 
-    public void setVermifugado(boolean vermifugado) {
+    public void setVermifugado(@NotNull Boolean vermifugado) {
         this.vermifugado = vermifugado;
     }
 
-    public boolean isCastrado() {
+    public @NotNull Boolean getCastrado() {
         return castrado;
     }
 
-    public void setCastrado(boolean castrado) {
+    public void setCastrado(@NotNull Boolean castrado) {
         this.castrado = castrado;
     }
 

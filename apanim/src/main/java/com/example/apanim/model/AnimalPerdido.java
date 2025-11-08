@@ -1,7 +1,6 @@
 package com.example.apanim.model;
 
 import com.example.apanim.Enum.FaixaEtariaAnimal;
-import com.example.apanim.Enum.Sexo;
 import com.example.apanim.Enum.SexoAnimal;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -9,7 +8,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "tab_animais_perdidos")
-public class AnimalPerdido extends Animal {
+public class AnimalPerdido extends AnimalModel {
 
     private LocalDate data;
     private String localDaUltimaAparicao;

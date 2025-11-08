@@ -1,58 +1,28 @@
-package com.example.apanim.DTO;
+package com.example.apanim.dto;
 
 import com.example.apanim.Enum.FaixaEtariaAnimal;
 import com.example.apanim.Enum.SexoAnimal;
-import jakarta.validation.constraints.NotBlank;
 
-public class AnimalCadastroDTO {
-
-    private Long id;
-
-    @NotBlank(message = "O nome é obrigatório.")
+public class AnimalResponseDTO {
     private String nome;
-
-    @NotBlank(message = "A Faixa Etária é obrigatório.")
     private FaixaEtariaAnimal faixaEtariaAnimal;
-
-    @NotBlank(message = "A raça é obrigatório.")
     private String raca;
-
-    @NotBlank(message = "O porte é obrigatório.")
     private String porte;
-
-    @NotBlank(message = "O sexo é obrigatório.")
     private SexoAnimal sexoAnimal;
-
-    @NotBlank(message = "A espécie é obrigatório.")
     private String especie;
-
-    @NotBlank
     private String condicaoEspecial;
-
     private String logradouro;
-
-    @NotBlank(message = "O bairro é obrigatório.")
     private String bairro;
-
-    @NotBlank
     private String cor;
-
-    @NotBlank
     private boolean vacinado;
-
-    @NotBlank
     private boolean vermifugado;
-
-    @NotBlank
     private boolean castrado;
-
     private String resumo;
 
-    public AnimalCadastroDTO() {
+    public AnimalResponseDTO() {
     }
 
-    public AnimalCadastroDTO(Long id, String nome, FaixaEtariaAnimal faixaEtariaAnimal, String raca, String porte, SexoAnimal sexoAnimal, String especie, String condicaoEspecial, String logradouro, String bairro, String cor, boolean vacinado, boolean vermifugado, boolean castrado, String resumo) {
-        this.id = id;
+    public AnimalResponseDTO(String nome, FaixaEtariaAnimal faixaEtariaAnimal, String raca, String porte, SexoAnimal sexoAnimal, String especie, String condicaoEspecial, String logradouro, String bairro, String cor, boolean vacinado, boolean vermifugado, boolean castrado, String resumo) {
         this.nome = nome;
         this.faixaEtariaAnimal = faixaEtariaAnimal;
         this.raca = raca;
@@ -67,14 +37,6 @@ public class AnimalCadastroDTO {
         this.vermifugado = vermifugado;
         this.castrado = castrado;
         this.resumo = resumo;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getNome() {

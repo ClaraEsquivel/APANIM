@@ -1,7 +1,6 @@
 package com.example.apanim.model;
 
 import com.example.apanim.Enum.FaixaEtariaAnimal;
-import com.example.apanim.Enum.Sexo;
 import com.example.apanim.Enum.SexoAnimal;
 import jakarta.persistence.*;
 
@@ -9,7 +8,7 @@ import java.math.BigDecimal;
 
 @Entity
 @Table(name = "tab_animais_compra")
-public class AnimalParaCompra extends Animal {
+public class AnimalParaCompra extends AnimalModel {
 
     private Boolean pedigree;
 

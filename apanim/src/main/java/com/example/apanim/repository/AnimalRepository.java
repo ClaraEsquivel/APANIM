@@ -1,7 +1,7 @@
 package com.example.apanim.repository;
 
-import com.example.apanim.model.Animal;
+import com.example.apanim.model.AnimalModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface AnimalRepository extends JpaRepository<Animal, Long> {
+public interface AnimalRepository extends JpaRepository<AnimalModel, Long> {
 }
