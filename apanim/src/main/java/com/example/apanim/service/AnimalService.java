@@ -1,79 +1,130 @@
 package com.example.apanim.service;
 
 import com.example.apanim.DTO.AnimalCadastroDTO;
+import com.example.apanim.DTO.AnimalResponseDTO;
+import com.example.apanim.DTO.UsuarioCadastroDTO;
+import com.example.apanim.DTO.UsuarioResponseDTO;
 import com.example.apanim.model.AnimalModel;
+import com.example.apanim.model.UsuarioModel;
 import com.example.apanim.repository.AnimalRepository;
+import com.example.apanim.repository.UsuarioRepository;
+
+import jakarta.transaction.Transactional;
+
 import org.springframework.stereotype.Service;
-import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-@Validated
 public class AnimalService {
-    private AnimalRepository animalRepository;
+    private final AnimalRepository animalRepository;
+    private final UsuarioRepository usuarioRepository;
 
-    public AnimalService(AnimalRepository animalRepository) {
-
+    public AnimalService(AnimalRepository animalRepository, UsuarioRepository usuarioRepository) {
         this.animalRepository = animalRepository;
+        this.usuarioRepository = usuarioRepository;
     }
 
-    public AnimalModel salvar(AnimalCadastroDTO dto) {
-        Long animalId = dto.getId();
+    public AnimalModel salvarAnimalModel(AnimalCadastroDTO dto, Long usuarioId) {
+        animalRepository.findByNomeAndUsuarioId(dto.getNome(), usuarioId)
+            .ifPresent(u ->{
+                throw new IllegalArgumentException("Você já cadastrou um animal com este nome.");
+            });
 
-        if (animalId != null) {
-            Optional<AnimalModel> animalExistente = animalRepository.findById(animalId);
+        UsuarioModel dono = usuarioRepository.findById(usuarioId)
+                .orElseThrow(() -> new IllegalArgumentException("Usuário não encontrado."));
+        
+        AnimalModel animalModel = new AnimalModel();
+        animalModel.setNome(dto.getNome());
+        animalModel.setFaixaEtariaAnimal(dto.getFaixaEtariaAnimal());
+        animalModel.setRaca(dto.getRaca());
+        animalModel.setPorte(dto.getPorte());
+        animalModel.setSexoAnimal(dto.getSexoAnimal());
+        animalModel.setEspecie(dto.getEspecie());
+        animalModel.setCondicaoEspecial(dto.getCondicaoEspecial());
+        animalModel.setLogradouro(dto.getLogradouro());
+        animalModel.setBairro(dto.getBairro());
+        animalModel.setCor(dto.getCor());
+        animalModel.setVacinado(dto.isVacinado());
+        animalModel.setVermifugado(dto.isVermifugado());
+        animalModel.setCastrado(dto.isCastrado());
+        animalModel.setResumo(dto.getResumo());
 
-            if (animalExistente.isPresent()) {
-                AnimalModel animal = animalExistente.get();
+        animalModel.setUsuario(dono);
 
-                animal.setNome(dto.getNome());
-                animal.setFaixaEtariaAnimal(dto.getFaixaEtariaAnimal());
-                animal.setRaca(dto.getRaca());
-                animal.setPorte(dto.getPorte());
-                animal.setSexoAnimal(dto.getSexoAnimal());
-                animal.setEspecie(dto.getEspecie());
-                animal.setCondicaoEspecial(dto.getCondicaoEspecial());
-                animal.setLogradouro(dto.getLogradouro());
-                animal.setBairro(dto.getBairro());
-                animal.setCor(dto.getCor());
-                animal.setVacinado(dto.isVacinado());
-                animal.setVermifugado(dto.isVermifugado());
-                animal.setCastrado(dto.isCastrado());
-                animal.setResumo(dto.getResumo());
+        return animalRepository.save(animalModel);
+    }
 
-                return animalRepository.save(animal);
-            } else {
-                throw new IllegalArgumentException("Animal não encontrado para o ID fornecido: " + animalId);
-            }
+    public List<AnimalResponseDTO> listarTodosAnimais() {
+        return animalRepository
+                .findAll()
+                .stream()
+                .map(this::toDTO)
+                .toList();
+    }
 
+    public AnimalResponseDTO toDTO(AnimalModel animalModel) {
+        return new AnimalResponseDTO(
+            animalModel.getId(),
+            animalModel.getNome(), 
+            animalModel.getFaixaEtariaAnimal(), 
+            animalModel.getRaca(), 
+            animalModel.getPorte(), 
+            animalModel.getSexoAnimal(), 
+            animalModel.getEspecie(), 
+            animalModel.getCondicaoEspecial(),  
+            animalModel.getLogradouro(), 
+            animalModel.getBairro(), 
+            animalModel.getCor(), 
+            animalModel.getVacinado(), 
+            animalModel.getVermifugado(), 
+            animalModel.getCastrado(), 
+            animalModel.getResumo(),
+            animalModel.getUsuario().getId());
+    }
+
+    @Transactional
+    public AnimalModel atualizar(Long id, AnimalCadastroDTO dto) {
+        AnimalModel animalModel = animalRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Animal não encontrado."));
+
+        if (!animalModel.getNome().equals(dto.getNome())) {
+        animalRepository.findByNomeAndUsuarioId(dto.getNome(), dto.getUsuarioId())
+            .ifPresent(u -> {
+                throw new IllegalArgumentException("Você já cadastrou um animal com este novo nome.");
+            });
         }
 
-        AnimalModel novoAnimal = new AnimalModel();
+        if (!animalModel.getNome().equals(dto.getNome())) {
+        animalRepository.findByNomeAndUsuarioId(dto.getNome(), dto.getUsuarioId())
+            .ifPresent(u -> {
+                throw new IllegalArgumentException("Você já cadastrou um animal com este novo nome.");
+            });
+        }
 
-        novoAnimal.setNome(dto.getNome());
-        novoAnimal.setFaixaEtariaAnimal(dto.getFaixaEtariaAnimal());
-        novoAnimal.setRaca(dto.getRaca());
-        novoAnimal.setPorte(dto.getPorte());
-        novoAnimal.setSexoAnimal(dto.getSexoAnimal());
-        novoAnimal.setEspecie(dto.getEspecie());
-        novoAnimal.setCondicaoEspecial(dto.getCondicaoEspecial());
-        novoAnimal.setLogradouro(dto.getLogradouro());
-        novoAnimal.setBairro(dto.getBairro());
-        novoAnimal.setCor(dto.getCor());
-        novoAnimal.setVacinado(dto.isVacinado());
-        novoAnimal.setVermifugado(dto.isVermifugado());
-        novoAnimal.setCastrado(dto.isCastrado());
-        novoAnimal.setResumo(dto.getResumo());
+        animalModel.setNome(dto.getNome());
+        animalModel.setFaixaEtariaAnimal(dto.getFaixaEtariaAnimal());
+        animalModel.setRaca(dto.getRaca());
+        animalModel.setPorte(dto.getPorte());
+        animalModel.setSexoAnimal(dto.getSexoAnimal());
+        animalModel.setEspecie(dto.getEspecie());
+        animalModel.setCondicaoEspecial(dto.getCondicaoEspecial());
+        animalModel.setLogradouro(dto.getLogradouro());
+        animalModel.setBairro(dto.getBairro());
+        animalModel.setCor(dto.getCor());
+        animalModel.setVacinado(dto.isVacinado());
+        animalModel.setVermifugado(dto.isVermifugado());
+        animalModel.setCastrado(dto.isCastrado());
+        animalModel.setResumo(dto.getResumo());
 
-        return animalRepository.save(novoAnimal);
+        return animalRepository.save(animalModel);
     }
 
-
-    public List<AnimalModel> listarTodos(){
-
-        return animalRepository.findAll();
+    public void excluir(Long id) {
+        AnimalModel animalModel = animalRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Animal não encontrado."));
+        animalRepository.delete(animalModel);
     }
 
 }

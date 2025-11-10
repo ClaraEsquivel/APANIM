@@ -5,9 +5,13 @@ import com.example.apanim.Enum.SexoAnimal;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
-@Table(name = "tab_animais")
+@Table(name = "tab-animais")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class AnimalModel {
 
@@ -18,6 +22,7 @@ public class AnimalModel {
     @NotBlank
     private String nome;
 
+    @Enumerated(EnumType.STRING)
     private FaixaEtariaAnimal faixaEtariaAnimal;
 
     private String raca;
@@ -49,6 +54,10 @@ public class AnimalModel {
     @Lob
     private String resumo;
 
+    @ManyToOne(fetch = FetchType.LAZY) // (Opcional, mas bom para performance)
+    @JoinColumn(name = "usuario_id", nullable = false)
+    private UsuarioModel usuario;
+
     public AnimalModel() {
     }
 
@@ -70,123 +79,4 @@ public class AnimalModel {
         this.resumo = resumo;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public @NotBlank String getNome() {
-        return nome;
-    }
-
-    public void setNome(@NotBlank String nome) {
-        this.nome = nome;
-    }
-
-    public FaixaEtariaAnimal getFaixaEtariaAnimal() {
-        return faixaEtariaAnimal;
-    }
-
-    public void setFaixaEtariaAnimal(FaixaEtariaAnimal faixaEtariaAnimal) {
-        this.faixaEtariaAnimal = faixaEtariaAnimal;
-    }
-
-    public String getRaca() {
-        return raca;
-    }
-
-    public void setRaca(String raca) {
-        this.raca = raca;
-    }
-
-    public String getPorte() {
-        return porte;
-    }
-
-    public void setPorte(String porte) {
-        this.porte = porte;
-    }
-
-    public SexoAnimal getSexoAnimal() {
-        return sexoAnimal;
-    }
-
-    public void setSexoAnimal(SexoAnimal sexoAnimal) {
-        this.sexoAnimal = sexoAnimal;
-    }
-
-    public String getEspecie() {
-        return especie;
-    }
-
-    public void setEspecie(String especie) {
-        this.especie = especie;
-    }
-
-    public String getCondicaoEspecial() {
-        return condicaoEspecial;
-    }
-
-    public void setCondicaoEspecial(String condicaoEspecial) {
-        this.condicaoEspecial = condicaoEspecial;
-    }
-
-    public String getLogradouro() {
-        return logradouro;
-    }
-
-    public void setLogradouro(String logradouro) {
-        this.logradouro = logradouro;
-    }
-
-    public String getBairro() {
-        return bairro;
-    }
-
-    public void setBairro(String bairro) {
-        this.bairro = bairro;
-    }
-
-    public String getCor() {
-        return cor;
-    }
-
-    public void setCor(String cor) {
-        this.cor = cor;
-    }
-
-    public @NotNull Boolean getVacinado() {
-        return vacinado;
-    }
-
-    public void setVacinado(@NotNull Boolean vacinado) {
-        this.vacinado = vacinado;
-    }
-
-    public @NotNull Boolean getVermifugado() {
-        return vermifugado;
-    }
-
-    public void setVermifugado(@NotNull Boolean vermifugado) {
-        this.vermifugado = vermifugado;
-    }
-
-    public @NotNull Boolean getCastrado() {
-        return castrado;
-    }
-
-    public void setCastrado(@NotNull Boolean castrado) {
-        this.castrado = castrado;
-    }
-
-    public String getResumo() {
-        return resumo;
-    }
-
-    public void setResumo(String resumo) {
-        this.resumo = resumo;
-    }
 }

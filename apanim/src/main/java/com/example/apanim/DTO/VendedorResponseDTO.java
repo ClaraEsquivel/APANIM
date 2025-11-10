@@ -1,4 +1,4 @@
-package com.example.apanim.dto;
+package com.example.apanim.DTO;
 
 public class VendedorResponseDTO {
 

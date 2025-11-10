@@ -1,7 +1,7 @@
 package com.example.apanim.controller;
 
-import com.example.apanim.dto.VendedorCadastroDTO;
-import com.example.apanim.dto.VendedorResponseDTO;
+import com.example.apanim.DTO.VendedorCadastroDTO;
+import com.example.apanim.DTO.VendedorResponseDTO;
 import com.example.apanim.service.VendedorService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;

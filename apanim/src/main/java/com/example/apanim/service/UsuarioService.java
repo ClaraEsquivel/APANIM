@@ -1,7 +1,7 @@
 package com.example.apanim.service;
 
-import com.example.apanim.dto.UsuarioCadastroDTO;
-import com.example.apanim.dto.UsuarioResponseDTO;
+import com.example.apanim.DTO.UsuarioCadastroDTO;
+import com.example.apanim.DTO.UsuarioResponseDTO;
 import com.example.apanim.model.UsuarioModel;
 import com.example.apanim.repository.UsuarioRepository;
 import jakarta.transaction.Transactional;

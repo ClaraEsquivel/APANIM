@@ -1,7 +1,7 @@
 package com.example.apanim.controller;
 
-import com.example.apanim.dto.UsuarioCadastroDTO;
-import com.example.apanim.dto.UsuarioResponseDTO;
+import com.example.apanim.DTO.UsuarioCadastroDTO;
+import com.example.apanim.DTO.UsuarioResponseDTO;
 import com.example.apanim.service.UsuarioService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;

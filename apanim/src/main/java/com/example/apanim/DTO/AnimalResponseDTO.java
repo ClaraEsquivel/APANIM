@@ -1,9 +1,14 @@
-package com.example.apanim.dto;
+package com.example.apanim.DTO;
 
 import com.example.apanim.Enum.FaixaEtariaAnimal;
 import com.example.apanim.Enum.SexoAnimal;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class AnimalResponseDTO {
+    private Long id;
     private String nome;
     private FaixaEtariaAnimal faixaEtariaAnimal;
     private String raca;
@@ -18,11 +23,13 @@ public class AnimalResponseDTO {
     private boolean vermifugado;
     private boolean castrado;
     private String resumo;
+    private Long usuarioId;
 
     public AnimalResponseDTO() {
     }
 
-    public AnimalResponseDTO(String nome, FaixaEtariaAnimal faixaEtariaAnimal, String raca, String porte, SexoAnimal sexoAnimal, String especie, String condicaoEspecial, String logradouro, String bairro, String cor, boolean vacinado, boolean vermifugado, boolean castrado, String resumo) {
+    public AnimalResponseDTO(Long id, String nome, FaixaEtariaAnimal faixaEtariaAnimal, String raca, String porte, SexoAnimal sexoAnimal, String especie, String condicaoEspecial, String logradouro, String bairro, String cor, boolean vacinado, boolean vermifugado, boolean castrado, String resumo, Long usuarioId) {
+        this.id = id;
         this.nome = nome;
         this.faixaEtariaAnimal = faixaEtariaAnimal;
         this.raca = raca;
@@ -37,117 +44,7 @@ public class AnimalResponseDTO {
         this.vermifugado = vermifugado;
         this.castrado = castrado;
         this.resumo = resumo;
+        this.usuarioId = usuarioId;
     }
 
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public FaixaEtariaAnimal getFaixaEtariaAnimal() {
-        return faixaEtariaAnimal;
-    }
-
-    public void setFaixaEtariaAnimal(FaixaEtariaAnimal faixaEtariaAnimal) {
-        this.faixaEtariaAnimal = faixaEtariaAnimal;
-    }
-
-    public String getRaca() {
-        return raca;
-    }
-
-    public void setRaca(String raca) {
-        this.raca = raca;
-    }
-
-    public String getPorte() {
-        return porte;
-    }
-
-    public void setPorte(String porte) {
-        this.porte = porte;
-    }
-
-    public SexoAnimal getSexoAnimal() {
-        return sexoAnimal;
-    }
-
-    public void setSexoAnimal(SexoAnimal sexoAnimal) {
-        this.sexoAnimal = sexoAnimal;
-    }
-
-    public String getEspecie() {
-        return especie;
-    }
-
-    public void setEspecie(String especie) {
-        this.especie = especie;
-    }
-
-    public String getCondicaoEspecial() {
-        return condicaoEspecial;
-    }
-
-    public void setCondicaoEspecial(String condicaoEspecial) {
-        this.condicaoEspecial = condicaoEspecial;
-    }
-
-    public String getLogradouro() {
-        return logradouro;
-    }
-
-    public void setLogradouro(String logradouro) {
-        this.logradouro = logradouro;
-    }
-
-    public String getBairro() {
-        return bairro;
-    }
-
-    public void setBairro(String bairro) {
-        this.bairro = bairro;
-    }
-
-    public String getCor() {
-        return cor;
-    }
-
-    public void setCor(String cor) {
-        this.cor = cor;
-    }
-
-    public boolean isVacinado() {
-        return vacinado;
-    }
-
-    public void setVacinado(boolean vacinado) {
-        this.vacinado = vacinado;
-    }
-
-    public boolean isVermifugado() {
-        return vermifugado;
-    }
-
-    public void setVermifugado(boolean vermifugado) {
-        this.vermifugado = vermifugado;
-    }
-
-    public boolean isCastrado() {
-        return castrado;
-    }
-
-    public void setCastrado(boolean castrado) {
-        this.castrado = castrado;
-    }
-
-    public String getResumo() {
-        return resumo;
-    }
-
-    public void setResumo(String resumo) {
-        this.resumo = resumo;
-    }
 }
