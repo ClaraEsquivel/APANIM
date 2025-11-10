@@ -3,12 +3,247 @@ document.addEventListener('DOMContentLoaded', function() {
     inicializarPagina();
 });
 
+// ===== HELPER: VERIFICAR SE WINDOW.STORAGE ESTÁ DISPONÍVEL =====
+function storageDisponivel() {
+    return typeof window.storage !== 'undefined' && 
+           typeof window.storage.get === 'function';
+}
+
 // ===== INICIALIZAÇÃO DA PÁGINA =====
-function inicializarPagina() {
+async function inicializarPagina() {
+    await carregarAnimaisCadastrados();
     configurarFiltros();
     configurarBotoes();
-    configurarBotoesContato();
     atualizarContador();
+}
+
+// ===== CARREGAR ANIMAIS DO ARMAZENAMENTO =====
+async function carregarAnimaisCadastrados() {
+    const grid = document.getElementById('grid-animais');
+    
+    // Mostrar mensagem de carregamento
+    grid.innerHTML = '<div class="loading"><div class="spinner"></div></div>';
+    
+    try {
+        let animais = [];
+        
+        if (storageDisponivel()) {
+            // Tentar usar window.storage
+            try {
+                const resultado = await window.storage.get('animais_perdidos', true);
+                if (resultado && resultado.value) {
+                    animais = JSON.parse(resultado.value);
+                }
+            } catch (error) {
+                console.log('Erro ao carregar do window.storage:', error);
+            }
+        } else {
+            // Fallback: usar localStorage
+            console.log('Usando localStorage como fallback');
+            try {
+                const dados = localStorage.getItem('animais_perdidos');
+                if (dados) {
+                    animais = JSON.parse(dados);
+                }
+            } catch (error) {
+                console.log('Erro ao carregar do localStorage:', error);
+            }
+        }
+        
+        if (animais.length > 0) {
+            grid.innerHTML = ''; // Limpar loading
+            adicionarAnimaisNaGrid(animais);
+            console.log(`✅ ${animais.length} animais carregados`);
+        } else {
+            console.log('ℹ️ Nenhum animal cadastrado ainda');
+            mostrarMensagemVazia(0);
+        }
+        
+    } catch (error) {
+        console.error('❌ Erro ao carregar animais:', error);
+        mostrarMensagemVazia(0);
+    }
+}
+
+// ===== ADICIONAR ANIMAIS NA GRID =====
+function adicionarAnimaisNaGrid(animais) {
+    const grid = document.getElementById('grid-animais');
+    
+    animais.forEach(animal => {
+        const cardHtml = criarCardAnimal(animal);
+        grid.insertAdjacentHTML('beforeend', cardHtml);
+    });
+    
+    // Reconfigurar botões de contato após adicionar novos cards
+    configurarBotoesContato();
+}
+
+// ===== CRIAR HTML DO CARD =====
+function criarCardAnimal(animal) {
+    // Calcular período de desaparecimento
+    const periodo = calcularPeriodo(animal.dataDesaparecimento);
+    
+    // Verificar se é urgente (menos de 7 dias)
+    const diasDesaparecido = calcularDiasDesaparecido(animal.dataDesaparecimento);
+    const isUrgente = diasDesaparecido <= 7;
+    
+    // Formatar vacinas
+    const vacinasTexto = animal.vacinas && animal.vacinas.length > 0 
+        ? `Sim (${formatarVacinas(animal.vacinas)})` 
+        : (animal.vacinado === 'sim' ? 'Sim' : 'Não');
+    
+    // Badge de tipo
+    const badgeTipo = animal.especie === 'cachorro' 
+        ? '<span class="badge-tipo badge-cachorro">🐕 Cachorro</span>'
+        : '<span class="badge-tipo badge-gato">🐱 Gato</span>';
+    
+    // Badge urgente
+    const badgeUrgente = isUrgente 
+        ? '<span class="badge-urgente">URGENTE</span>' 
+        : '';
+    
+    // Imagem
+    const imagemSrc = animal.imagem || '../../assets/images/dog_sentado.svg';
+    
+    // Formatar data
+    const dataFormatada = formatarData(animal.dataDesaparecimento);
+    
+    // Nome do bairro formatado
+    const bairroFormatado = formatarBairro(animal.localizacao);
+    
+    return `
+        <article class="card-animal" 
+                 data-animal-id="${animal.id}" 
+                 data-tipo="${animal.especie}" 
+                 data-sexo="${animal.sexo}"
+                 data-porte="${animal.porte}"
+                 data-cor="${animal.cor}"
+                 data-bairro="${animal.localizacao}"
+                 data-periodo="${periodo}">
+            <div class="card-imagem">
+                <img src="${imagemSrc}" 
+                     alt="${animal.nome} - ${animal.especie} ${animal.raca} perdido" 
+                     class="imagem-animal"
+                     loading="lazy"
+                     width="200"
+                     height="200"
+                     onerror="this.src='../../assets/images/dog_sentado.svg'">
+                ${badgeTipo}
+                ${badgeUrgente}
+            </div>
+            <div class="card-info">
+                <h3 class="nome-animal">${animal.nome}</h3>
+                <dl class="detalhes-animal">
+                    <dt>Espécie:</dt>
+                    <dd><span class="icone-info">🐾</span> ${animal.especie === 'cachorro' ? 'Cachorro' : 'Gato'}</dd>
+                    
+                    <dt>Raça:</dt>
+                    <dd><span class="icone-info">${animal.especie === 'cachorro' ? '🐕' : '🐱'}</span> ${animal.raca}</dd>
+                    
+                    <dt>Sexo:</dt>
+                    <dd class="sexo" data-sexo="${animal.sexo}"><span class="icone-info">${animal.sexo === 'macho' ? '♂' : '♀'}</span> ${animal.sexo === 'macho' ? 'Macho' : 'Fêmea'}</dd>
+                    
+                    <dt>Idade:</dt>
+                    <dd><span class="icone-info">🎂</span> ${animal.idade}</dd>
+                    
+                    <dt>Porte:</dt>
+                    <dd><span class="icone-info">📏</span> ${capitalize(animal.porte)}</dd>
+                    
+                    <dt>Cor:</dt>
+                    <dd><span class="icone-info">🎨</span> ${animal.cor}</dd>
+                    
+                    <dt>Vacinado:</dt>
+                    <dd><span class="icone-info">💉</span> ${vacinasTexto}</dd>
+                    
+                    <dt>Castrado:</dt>
+                    <dd><span class="icone-info">✂️</span> ${animal.castrado === 'sim' ? 'Sim' : 'Não'}</dd>
+                    
+                    <dt>Vermifugado:</dt>
+                    <dd><span class="icone-info">💊</span> ${animal.vermifugado === 'sim' ? 'Sim' : 'Não'}</dd>
+                    
+                    <dt>Condição Especial:</dt>
+                    <dd><span class="icone-info">⚕️</span> ${animal.condicaoEspecial}</dd>
+                    
+                    <dt>Data do Desaparecimento:</dt>
+                    <dd><span class="icone-info">📅</span> ${dataFormatada}</dd>
+                    
+                    <dt>Última Aparição:</dt>
+                    <dd><span class="icone-info">📍</span> ${bairroFormatado}, Salvador-BA</dd>
+                </dl>
+                
+                <div class="resumo">
+                    <p><strong>Resumo:</strong> ${animal.resumo}</p>
+                </div>
+                
+                <div class="contato-info">
+                    <p><strong>Contato:</strong></p>
+                    ${animal.emailContato ? `<p>📧 ${animal.emailContato}</p>` : ''}
+                    ${animal.telefoneContato ? `<p>📱 ${animal.telefoneContato}</p>` : ''}
+                </div>
+                
+                <button class="btn-contato" 
+                        type="button"
+                        data-animal-id="${animal.id}"
+                        aria-label="Entrar em contato sobre ${animal.nome}">
+                     📞 Vi este Animal
+                </button>
+            </div>
+        </article>
+    `;
+}
+
+// ===== FUNÇÕES AUXILIARES =====
+function calcularPeriodo(dataDesaparecimento) {
+    if (!dataDesaparecimento) return 'todos';
+    
+    const dias = calcularDiasDesaparecido(dataDesaparecimento);
+    
+    if (dias <= 7) return 'ultima-semana';
+    if (dias <= 30) return 'ultimo-mes';
+    if (dias <= 90) return 'ultimos-3-meses';
+    return 'mais-de-3-meses';
+}
+
+function calcularDiasDesaparecido(dataDesaparecimento) {
+    if (!dataDesaparecimento) return 0;
+    
+    const data = new Date(dataDesaparecimento);
+    const hoje = new Date();
+    const diff = hoje - data;
+    return Math.floor(diff / (1000 * 60 * 60 * 24));
+}
+
+function formatarData(dataString) {
+    if (!dataString) return 'Não informado';
+    
+    const data = new Date(dataString + 'T00:00:00');
+    return data.toLocaleDateString('pt-BR');
+}
+
+function formatarBairro(bairro) {
+    if (!bairro) return 'Não informado';
+    
+    return bairro
+        .split('_')
+        .map(palavra => palavra.charAt(0).toUpperCase() + palavra.slice(1))
+        .join(' ');
+}
+
+function formatarVacinas(vacinas) {
+    const nomes = {
+        'v8': 'V8',
+        'v10': 'V10',
+        'raiva': 'Antirrábica',
+        'triplice': 'Tríplice Felina',
+        'leucemia': 'Leucemia Felina'
+    };
+    
+    return vacinas.map(v => nomes[v] || v).join(', ');
+}
+
+function capitalize(texto) {
+    if (!texto) return '';
+    return texto.charAt(0).toUpperCase() + texto.slice(1);
 }
 
 // ===== CONFIGURAÇÃO DOS FILTROS =====
@@ -21,7 +256,6 @@ function configurarFiltros() {
             aplicarFiltros();
         });
 
-        // Adiciona listeners para os selects
         const selects = form.querySelectorAll('.select-filtro');
         selects.forEach(select => {
             select.addEventListener('change', aplicarFiltros);
@@ -43,7 +277,6 @@ function aplicarFiltros() {
     const tipoAnimal = document.getElementById('tipo_animal').value;
     const sexo = document.getElementById('sexo').value;
     const porte = document.getElementById('porte').value;
-    const cor = document.getElementById('cor').value;
     const bairro = document.getElementById('bairro').value;
     const periodo = document.getElementById('periodo').value;
 
@@ -54,43 +287,31 @@ function aplicarFiltros() {
         const cardTipo = card.getAttribute('data-tipo');
         const cardSexo = card.getAttribute('data-sexo');
         const cardPorte = card.getAttribute('data-porte');
-        const cardCor = card.getAttribute('data-cor');
         const cardBairro = card.getAttribute('data-bairro');
         const cardPeriodo = card.getAttribute('data-periodo');
 
         let mostrar = true;
 
-        // Filtro tipo de animal
         if (tipoAnimal !== 'todos' && cardTipo !== tipoAnimal) {
             mostrar = false;
         }
 
-        // Filtro sexo
         if (sexo !== 'todos' && cardSexo !== sexo) {
             mostrar = false;
         }
 
-        // Filtro porte
         if (porte !== 'todos' && cardPorte !== porte) {
             mostrar = false;
         }
 
-        // Filtro cor
-        if (cor !== 'todas' && cardCor !== cor) {
-            mostrar = false;
-        }
-
-        // Filtro bairro
         if (bairro !== 'todos' && cardBairro !== bairro) {
             mostrar = false;
         }
 
-        // Filtro período
         if (periodo !== 'todos' && cardPeriodo !== periodo) {
             mostrar = false;
         }
 
-        // Mostrar ou ocultar card
         if (mostrar) {
             card.style.display = 'block';
             animaisVisiveis++;
@@ -99,13 +320,8 @@ function aplicarFiltros() {
         }
     });
 
-    // Atualizar contador
     atualizarContador(animaisVisiveis);
-
-    // Mostrar mensagem vazia se não houver resultados
     mostrarMensagemVazia(animaisVisiveis);
-
-    // Anunciar mudanças para leitores de tela
     anunciarResultados(animaisVisiveis);
 }
 
@@ -116,19 +332,13 @@ function limparFiltros() {
     if (form) {
         form.reset();
         
-        // Mostrar todos os cards
         const cards = document.querySelectorAll('.card-animal');
         cards.forEach(card => {
             card.style.display = 'block';
         });
 
-        // Atualizar contador
         atualizarContador(cards.length);
-
-        // Ocultar mensagem vazia
         mostrarMensagemVazia(cards.length);
-
-        // Anunciar para leitores de tela
         anunciarResultados(cards.length, true);
     }
 }
@@ -139,7 +349,6 @@ function atualizarContador(quantidade) {
     
     if (contador) {
         if (quantidade === undefined) {
-            // Contar cards visíveis
             const cardsVisiveis = document.querySelectorAll('.card-animal:not([style*="display: none"])');
             quantidade = cardsVisiveis.length;
         }
@@ -181,7 +390,6 @@ function anunciarResultados(quantidade, foiLimpo = false) {
             contador.setAttribute('aria-live', 'polite');
         }
         
-        // Forçar atualização para leitores de tela
         setTimeout(() => {
             contador.setAttribute('aria-live', 'polite');
         }, 100);
@@ -204,264 +412,46 @@ function configurarBotoesContato() {
 
 // ===== ABRIR CONTATO =====
 function abrirContato(animalId, nomeAnimal) {
-    // Obter informações de contato do card
     const card = document.querySelector(`[data-animal-id="${animalId}"]`);
     
     if (card) {
         const contatoInfo = card.querySelector('.contato-info');
-        const emailElement = contatoInfo.querySelectorAll('p')[1];
-        const telefoneElement = contatoInfo.querySelectorAll('p')[2];
+        const paragrafos = contatoInfo.querySelectorAll('p');
         
-        const email = emailElement ? emailElement.textContent.replace('📧 ', '') : '';
-        const telefone = telefoneElement ? telefoneElement.textContent.replace('📱 ', '') : '';
+        let email = '';
+        let telefone = '';
+        
+        paragrafos.forEach(p => {
+            const texto = p.textContent;
+            if (texto.includes('📧')) {
+                email = texto.replace('📧 ', '').trim();
+            }
+            if (texto.includes('📱')) {
+                telefone = texto.replace('📱 ', '').trim();
+            }
+        });
 
-        // Mostrar modal ou redirecionar
         mostrarModalContato(nomeAnimal, email, telefone);
     }
 }
 
 // ===== MOSTRAR MODAL DE CONTATO =====
 function mostrarModalContato(nomeAnimal, email, telefone) {
-    // Criar mensagem personalizada
     const mensagem = `Você está prestes a entrar em contato sobre ${nomeAnimal}.\n\n` +
-                    `Email: ${email}\n` +
-                    `Telefone: ${telefone}\n\n` +
-                    `Deseja abrir seu aplicativo de email?`;
+                    (email ? `Email: ${email}\n` : '') +
+                    (telefone ? `Telefone: ${telefone}\n` : '') +
+                    `\nDeseja abrir seu aplicativo de email?`;
 
     if (confirm(mensagem)) {
-        // Criar link mailto
         const assunto = encodeURIComponent(`Vi o animal perdido: ${nomeAnimal}`);
         const corpo = encodeURIComponent(`Olá,\n\nEu vi o animal ${nomeAnimal} que está perdido.\n\nGostaria de fornecer informações sobre o paradeiro.\n\nAguardo retorno.`);
         
-        window.location.href = `mailto:${email}?subject=${assunto}&body=${corpo}`;
-    }
-}
-
-// ===== FUNÇÃO AUXILIAR: FORMATAR TELEFONE =====
-function formatarTelefone(telefone) {
-    // Remove caracteres não numéricos
-    const numeroLimpo = telefone.replace(/\D/g, '');
-    
-    // Formata: (XX) XXXXX-XXXX
-    if (numeroLimpo.length === 11) {
-        return `(${numeroLimpo.substring(0, 2)}) ${numeroLimpo.substring(2, 7)}-${numeroLimpo.substring(7)}`;
-    }
-    
-    return telefone;
-}
-
-// ===== ANIMAÇÃO DE SCROLL SUAVE =====
-function scrollSuave(elemento) {
-    if (elemento) {
-        elemento.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-        });
-    }
-}
-
-// ===== SALVAR ESTADO DOS FILTROS (LOCAL STORAGE) =====
-function salvarFiltros() {
-    const filtros = {
-        tipo_animal: document.getElementById('tipo_animal').value,
-        sexo: document.getElementById('sexo').value,
-        porte: document.getElementById('porte').value,
-        cor: document.getElementById('cor').value,
-        bairro: document.getElementById('bairro').value,
-        periodo: document.getElementById('periodo').value
-    };
-
-    // Usando variável em memória ao invés de localStorage
-    window.filtrosSalvos = filtros;
-}
-
-// ===== CARREGAR ESTADO DOS FILTROS =====
-function carregarFiltros() {
-    const filtros = window.filtrosSalvos;
-
-    if (filtros) {
-        document.getElementById('tipo_animal').value = filtros.tipo_animal || 'todos';
-        document.getElementById('sexo').value = filtros.sexo || 'todos';
-        document.getElementById('porte').value = filtros.porte || 'todos';
-        document.getElementById('cor').value = filtros.cor || 'todas';
-        document.getElementById('bairro').value = filtros.bairro || 'todos';
-        document.getElementById('periodo').value = filtros.periodo || 'todos';
-
-        aplicarFiltros();
-    }
-}
-
-// ===== ESTATÍSTICAS DOS ANIMAIS PERDIDOS =====
-function obterEstatisticas() {
-    const cards = document.querySelectorAll('.card-animal');
-    const stats = {
-        total: cards.length,
-        cachorros: 0,
-        gatos: 0,
-        machos: 0,
-        femeas: 0,
-        urgentes: 0,
-        porBairro: {}
-    };
-
-    cards.forEach(card => {
-        const tipo = card.getAttribute('data-tipo');
-        const sexo = card.getAttribute('data-sexo');
-        const bairro = card.getAttribute('data-bairro');
-        const temBadgeUrgente = card.querySelector('.badge-urgente') !== null;
-
-        if (tipo === 'cachorro') stats.cachorros++;
-        if (tipo === 'gato') stats.gatos++;
-        if (sexo === 'macho') stats.machos++;
-        if (sexo === 'femea') stats.femeas++;
-        if (temBadgeUrgente) stats.urgentes++;
-
-        if (bairro) {
-            stats.porBairro[bairro] = (stats.porBairro[bairro] || 0) + 1;
+        if (email) {
+            window.location.href = `mailto:${email}?subject=${assunto}&body=${corpo}`;
         }
-    });
-
-    return stats;
-}
-
-// ===== EXPORTAR DADOS (para uso futuro) =====
-function exportarDados() {
-    const cards = document.querySelectorAll('.card-animal');
-    const dados = [];
-
-    cards.forEach(card => {
-        const animal = {
-            nome: card.querySelector('.nome-animal').textContent,
-            tipo: card.getAttribute('data-tipo'),
-            sexo: card.getAttribute('data-sexo'),
-            porte: card.getAttribute('data-porte'),
-            cor: card.getAttribute('data-cor'),
-            bairro: card.getAttribute('data-bairro'),
-            periodo: card.getAttribute('data-periodo')
-        };
-
-        dados.push(animal);
-    });
-
-    console.log('Dados dos animais perdidos:', dados);
-    return dados;
-}
-
-// ===== BUSCA POR TEXTO (funcionalidade adicional) =====
-function buscarPorTexto(texto) {
-    const textoBusca = texto.toLowerCase().trim();
-    const cards = document.querySelectorAll('.card-animal');
-    let animaisVisiveis = 0;
-
-    if (!textoBusca) {
-        // Se não houver texto, mostrar todos
-        cards.forEach(card => {
-            card.style.display = 'block';
-            animaisVisiveis++;
-        });
-    } else {
-        cards.forEach(card => {
-            const nomeAnimal = card.querySelector('.nome-animal').textContent.toLowerCase();
-            const detalhes = card.querySelector('.detalhes-animal').textContent.toLowerCase();
-            const resumo = card.querySelector('.resumo').textContent.toLowerCase();
-
-            const contem = nomeAnimal.includes(textoBusca) || 
-                          detalhes.includes(textoBusca) || 
-                          resumo.includes(textoBusca);
-
-            if (contem) {
-                card.style.display = 'block';
-                animaisVisiveis++;
-            } else {
-                card.style.display = 'none';
-            }
-        });
     }
-
-    atualizarContador(animaisVisiveis);
-    mostrarMensagemVazia(animaisVisiveis);
 }
 
-// ===== VALIDAÇÃO DE FORMULÁRIO DE CONTATO =====
-function validarEmail(email) {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(email);
-}
-
-function validarTelefone(telefone) {
-    const numeroLimpo = telefone.replace(/\D/g, '');
-    return numeroLimpo.length === 10 || numeroLimpo.length === 11;
-}
-
-// ===== ORDENAÇÃO DE RESULTADOS =====
-function ordenarPorData() {
-    const grid = document.getElementById('grid-animais');
-    const cards = Array.from(document.querySelectorAll('.card-animal'));
-
-    cards.sort((a, b) => {
-        const dataA = a.querySelector('[data-animal-id]').getAttribute('data-periodo');
-        const dataB = b.querySelector('[data-animal-id]').getAttribute('data-periodo');
-        
-        const ordem = {
-            'ultima-semana': 1,
-            'ultimo-mes': 2,
-            'ultimos-3-meses': 3,
-            'mais-de-3-meses': 4
-        };
-
-        return (ordem[dataA] || 999) - (ordem[dataB] || 999);
-    });
-
-    // Reordenar no DOM
-    cards.forEach(card => grid.appendChild(card));
-}
-
-// ===== DETECÇÃO DE NAVEGADOR E DISPOSITIVO =====
-function detectarDispositivo() {
-    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    const isTablet = /iPad|Android/i.test(navigator.userAgent) && window.innerWidth >= 768;
-    
-    return {
-        isMobile: isMobile && !isTablet,
-        isTablet: isTablet,
-        isDesktop: !isMobile
-    };
-}
-
-// ===== LOG DE ATIVIDADES (para debug) =====
-function logAtividade(acao, detalhes = {}) {
-    const timestamp = new Date().toISOString();
-    console.log(`[${timestamp}] ${acao}`, detalhes);
-}
-
-// ===== INICIALIZAR TOOLTIPS (se necessário) =====
-function inicializarTooltips() {
-    const elementos = document.querySelectorAll('[data-tooltip]');
-    
-    elementos.forEach(elemento => {
-        elemento.addEventListener('mouseenter', function() {
-            const texto = this.getAttribute('data-tooltip');
-            mostrarTooltip(this, texto);
-        });
-
-        elemento.addEventListener('mouseleave', function() {
-            ocultarTooltip();
-        });
-    });
-}
-
-// ===== PERFORMANCE: LAZY LOADING DE IMAGENS =====
-if ('IntersectionObserver' in window) {
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                img.src = img.dataset.src;
-                img.classList.remove('lazy');
-                observer.unobserve(img);
-            }
-        });
-    });
-
-}// Observar imagens lazy
-    
+// ===== LOG PARA DEBUG =====
+console.log('✅ Script de listagem carregado');
+console.log('📦 window.storage disponível?', storageDisponivel());
