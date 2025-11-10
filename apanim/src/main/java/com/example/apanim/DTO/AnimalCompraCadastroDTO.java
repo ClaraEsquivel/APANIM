@@ -1,7 +1,12 @@
 package com.example.apanim.DTO;
 
+import java.math.BigDecimal;
+
 import com.example.apanim.Enum.FaixaEtariaAnimal;
 import com.example.apanim.Enum.SexoAnimal;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Lob;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -9,17 +14,17 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class AnimalCadastroDTO {
-
+public class AnimalCompraCadastroDTO {
+    
     private Long id;
 
     @NotBlank(message = "O nome é obrigatório.")
     private String nome;
 
-    @NotNull(message = "A Faixa Etária é obrigatório.")
+    @NotNull(message = "A faixa etária é obrigatória.")
     private FaixaEtariaAnimal faixaEtariaAnimal;
 
-    @NotBlank(message = "A raça é obrigatório.")
+    @NotBlank(message = "A raça é obrigatória.")
     private String raca;
 
     @NotBlank(message = "O porte é obrigatório.")
@@ -28,7 +33,7 @@ public class AnimalCadastroDTO {
     @NotNull(message = "O sexo é obrigatório.")
     private SexoAnimal sexoAnimal;
 
-    @NotBlank(message = "A espécie é obrigatório.")
+    @NotBlank(message = "A espécie é obrigatória.")
     private String especie;
 
     @NotBlank
@@ -43,23 +48,32 @@ public class AnimalCadastroDTO {
     private String cor;
 
     @NotNull
-    private boolean vacinado;
-
-    @NotNull
-    private boolean vermifugado;
-
-    @NotNull
-    private boolean castrado;
+    private Boolean vacinado;
     
+    @NotNull
+    private Boolean vermifugado;
+    
+    @NotNull
+    private Boolean castrado;
+
+    @Lob
     private String resumo;
 
-    @NotNull 
-    private Long usuarioId;
+    @NotNull
+    private Long vendedorId;
 
-    public AnimalCadastroDTO() {
+    private Boolean pedigree;
+
+    @Column(precision = 10, scale = 2)
+    private BigDecimal valorDoAnimal;
+
+    public AnimalCompraCadastroDTO() {
     }
 
-    public AnimalCadastroDTO(Long id, String nome, FaixaEtariaAnimal faixaEtariaAnimal, String raca, String porte, SexoAnimal sexoAnimal, String especie, String condicaoEspecial, String logradouro, String bairro, String cor, boolean vacinado, boolean vermifugado, boolean castrado, String resumo) {
+    public AnimalCompraCadastroDTO(Long id, String nome, FaixaEtariaAnimal faixaEtariaAnimal, String raca, String porte,
+            SexoAnimal sexoAnimal, String especie, String condicaoEspecial, String logradouro, String bairro,
+            String cor, Boolean vacinado, Boolean vermifugado, Boolean castrado, String resumo, Boolean pedigree,
+            BigDecimal valorDoAnimal) {
         this.id = id;
         this.nome = nome;
         this.faixaEtariaAnimal = faixaEtariaAnimal;
@@ -75,6 +89,9 @@ public class AnimalCadastroDTO {
         this.vermifugado = vermifugado;
         this.castrado = castrado;
         this.resumo = resumo;
+        this.pedigree = pedigree;
+        this.valorDoAnimal = valorDoAnimal;
     }
 
+    
 }

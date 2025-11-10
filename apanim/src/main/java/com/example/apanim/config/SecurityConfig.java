@@ -3,7 +3,6 @@ package com.example.apanim.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -32,10 +31,10 @@ public class SecurityConfig {
             // 3. Define as regras de autorização
             .authorizeHttpRequests(authorize -> authorize
                 // Permite TODAS as requisições (GET, POST, PUT, DELETE) para /animais e /usuarios
-                .requestMatchers(HttpMethod.POST, "/animais/**", "/usuarios/**", "/vendedor/**").permitAll()
-                .requestMatchers(HttpMethod.GET, "/animais/**", "/usuarios/**", "/vendedor/**").permitAll()
-                .requestMatchers(HttpMethod.PUT, "/animais/**", "/usuarios/**", "/vendedor/**").permitAll()
-                .requestMatchers(HttpMethod.DELETE, "/animais/**", "/usuarios/**", "/vendedor/**").permitAll()
+                .requestMatchers(HttpMethod.POST, "/animais/**", "/usuarios/**", "/animalCompra/**", "/vendedor/**").permitAll()
+                .requestMatchers(HttpMethod.GET, "/animais/**", "/usuarios/**", "/animalCompra/**", "/vendedor/**").permitAll()
+                .requestMatchers(HttpMethod.PUT, "/animais/**", "/usuarios/**", "/animalCompra/**", "/vendedor/**").permitAll()
+                .requestMatchers(HttpMethod.DELETE, "/animais/**", "/usuarios/**", "/animalCompra/**", "/vendedor/**").permitAll()
                 
                 // Habilita o console do H2 (se você estiver usando)
                 .requestMatchers("/h2-console/**").permitAll()

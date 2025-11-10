@@ -1,11 +1,9 @@
 package com.example.apanim.controller;
 
-import com.example.apanim.model.AnimalModel;
 import com.example.apanim.service.AnimalService;
 import com.example.apanim.DTO.AnimalCadastroDTO;
 import com.example.apanim.DTO.AnimalResponseDTO;
-import com.example.apanim.DTO.UsuarioCadastroDTO;
-import com.example.apanim.DTO.UsuarioResponseDTO;
+
 
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;

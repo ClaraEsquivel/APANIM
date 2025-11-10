@@ -2,8 +2,6 @@ package com.example.apanim.service;
 
 import com.example.apanim.DTO.AnimalCadastroDTO;
 import com.example.apanim.DTO.AnimalResponseDTO;
-import com.example.apanim.DTO.UsuarioCadastroDTO;
-import com.example.apanim.DTO.UsuarioResponseDTO;
 import com.example.apanim.model.AnimalModel;
 import com.example.apanim.model.UsuarioModel;
 import com.example.apanim.repository.AnimalRepository;
@@ -14,7 +12,6 @@ import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class AnimalService {
