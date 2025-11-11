@@ -23,6 +23,12 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     
+    <!-- ⭐ ORDEM IMPORTANTE: Header primeiro, depois menu -->
+    <link rel="stylesheet" href="../../assets/css/header-unificado.css">
+    <link rel="stylesheet" href="../../assets/css/menu-styles.css">
+    <link rel="stylesheet" href="../../assets/css/footer-unificado.css"> 
+
+
     <!-- CSS -->
     <link rel="stylesheet" href="styles.css">
     
@@ -40,27 +46,7 @@
             <img src="../../assets/images/dog.svg" class="dog_topo" alt="Cachorro">
         </div>
 
-        <nav role="navigation">
-            <div id="menu_sanduiche">
-                <input type="checkbox" id="menu_toggle">
-                <span></span>
-                <span></span>
-                <span></span>
-                <ul id="menu">
-                    <li><a href="../Menu/index.html">Menu Inicial</a></li>
-                    <li><a href="../CadastroInicial/index.html">Cadastro</a></li>
-                    <li><a href="../CadastroUsuario/index.html">Login</a></li>
-                    <li><a href="../PerfilUsuario/index.html">Meu Perfil</a></li>
-                    <li><a href="../AdocaoAnimal/index.html">Animais para Adoção</a></li>
-                    <li><a href="../CompraAnimal/index.html">‣ Animais para Compra</a></li>
-                    <li><a href="../AnimaisPerdidos/index.html">Animais Perdidos</a></li>
-                    <li><a href="../CadastroAnimalAdocao/index.html">Cadastrar Animal para Adoção</a></li>
-                    <li><a href="../CadastroAnimalVenda/index.html">Cadastrar Animal para Venda</a></li>
-                    <li><a href="../CadastroAnimaisPerdidos/index.html">Cadastrar Animal Perdido</a></li>
-                    <li><a href="">Serviços</a></li>
-                </ul>
-            </div>
-        </nav>
+        <nav role="navigation"></nav>
 
     </header>
 
@@ -338,501 +324,7 @@
             
             <!-- Grid de Animais -->
             <div class="grid-animais" id="grid-animais" role="region" aria-live="polite" aria-label="Resultados da busca">
-                
-                <!-- Card Animal 1 - Marley -->
-                <article class="card-animal" 
-                         data-animal-id="1" 
-                         data-tipo="cachorro" 
-                         data-idade="adulto" 
-                         data-sexo="macho"
-                         data-porte="medio"
-                         data-bairro="barra"
-                         data-valor="1500">
-                    <div class="card-imagem">
-                        <img src="../../assets/images/dog_sentado.svg" 
-                             alt="Marley - Cachorro Labrador disponível para compra" 
-                             class="imagem-animal"
-                             loading="lazy"
-                             width="200"
-                             height="200">
-                        <span class="badge-tipo badge-cachorro">🐕 Cachorro</span>
-                        <span class="badge-preco">R$ 1.500</span>
-                    </div>
-                    <div class="card-info">
-                        <h3 class="nome-animal">Marley</h3>
-                        <dl class="detalhes-animal">
-                            <dt class="sr-only">Sexo:</dt>
-                            <dd class="sexo" data-sexo="macho">
-                                <span class="icone-info" aria-hidden="true">♂</span>
-                                Macho
-                            </dd>
-                            <dt class="sr-only">Idade:</dt>
-                            <dd class="idade">
-                                <span class="icone-info" aria-hidden="true">🎂</span>
-                                2 anos
-                            </dd>
-                            <dt class="sr-only">Raça:</dt>
-                            <dd class="raca">
-                                <span class="icone-info" aria-hidden="true">🐾</span>
-                                Labrador
-                            </dd>
-                            <dt class="sr-only">Localização:</dt>
-                            <dd class="localizacao">
-                                <span class="icone-info" aria-hidden="true">📍</span>
-                                Barra, Salvador-BA
-                            </dd>
-                        </dl>
-                        <div class="preco-destaque">
-                            <span class="valor">R$ 1.500,00</span>
-                        </div>
-                        <button class="btn-interessado" 
-                                type="button"
-                                data-animal-id="1"
-                                aria-label="Comprar Marley">
-                             💳 Comprar Agora
-                        </button>
-                    </div>
-                </article>
-
-                <!-- Card Animal 2 - Bob -->
-                <article class="card-animal" 
-                         data-animal-id="2" 
-                         data-tipo="cachorro" 
-                         data-idade="filhote" 
-                         data-sexo="macho"
-                         data-porte="pequeno"
-                         data-bairro="rio_vermelho"
-                         data-valor="800">
-                    <div class="card-imagem">
-                        <img src="../../assets/images/dog_sentado.svg" 
-                             alt="Bob - Cachorro Poodle filhote disponível para compra" 
-                             class="imagem-animal"
-                             loading="lazy"
-                             width="200"
-                             height="200">
-                        <span class="badge-tipo badge-cachorro">🐕 Cachorro</span>
-                        <span class="badge-preco">R$ 800</span>
-                    </div>
-                    <div class="card-info">
-                        <h3 class="nome-animal">Bob</h3>
-                        <dl class="detalhes-animal">
-                            <dt class="sr-only">Sexo:</dt>
-                            <dd class="sexo" data-sexo="macho">
-                                <span class="icone-info" aria-hidden="true">♂</span>
-                                Macho
-                            </dd>
-                            <dt class="sr-only">Idade:</dt>
-                            <dd class="idade">
-                                <span class="icone-info" aria-hidden="true">🍼</span>
-                                5 meses
-                            </dd>
-                            <dt class="sr-only">Raça:</dt>
-                            <dd class="raca">
-                                <span class="icone-info" aria-hidden="true">🐾</span>
-                                Poodle
-                            </dd>
-                            <dt class="sr-only">Localização:</dt>
-                            <dd class="localizacao">
-                                <span class="icone-info" aria-hidden="true">📍</span>
-                                Rio Vermelho, Salvador-BA
-                            </dd>
-                        </dl>
-                        <div class="preco-destaque">
-                            <span class="valor">R$ 800,00</span>
-                        </div>
-                        <button class="btn-interessado" 
-                                type="button"
-                                data-animal-id="2"
-                                aria-label="Comprar Bob">
-                             💳 Comprar Agora
-                        </button>
-                    </div>
-                </article>
-
-                                <!-- Card Animal 3 - Luna -->
-                <article class="card-animal" 
-                        data-animal-id="3" 
-                        data-tipo="cachorro" 
-                        data-idade="adulto" 
-                        data-sexo="femea"
-                        data-porte="medio"
-                        data-bairro="pituba"
-                        data-valor="700">
-                    <div class="card-imagem">
-                        <img src="../../assets/images/dog_sentado.svg" 
-                            alt="Luna - Cachorra vira-lata jovem disponível para compra" 
-                            class="imagem-animal"
-                            loading="lazy"
-                            width="200"
-                            height="200">
-                        <span class="badge-tipo badge-cachorro">🐕 Cachorro</span>
-                        <span class="badge-preco">R$ 700</span>
-                    </div>
-                    <div class="card-info">
-                        <h3 class="nome-animal">Luna</h3>
-                        <dl class="detalhes-animal">
-                            <dt class="sr-only">Sexo:</dt>
-                            <dd class="sexo" data-sexo="femea">
-                                <span class="icone-info" aria-hidden="true">♀</span>
-                                Fêmea
-                            </dd>
-                            <dt class="sr-only">Idade:</dt>
-                            <dd class="idade">
-                                <span class="icone-info" aria-hidden="true">🐾</span>
-                                1 ano
-                            </dd>
-                            <dt class="sr-only">Raça:</dt>
-                            <dd class="raca">
-                                <span class="icone-info" aria-hidden="true">🐾</span>
-                                Rottweiler
-                            </dd>
-                            <dt class="sr-only">Localização:</dt>
-                            <dd class="localizacao">
-                                <span class="icone-info" aria-hidden="true">📍</span>
-                                Pituba, Salvador-BA
-                            </dd>
-                        </dl>
-                        <div class="preco-destaque">
-                            <span class="valor">R$ 700,00</span>
-                        </div>
-                        <button class="btn-interessado" 
-                                type="button"
-                                data-animal-id="3"
-                                aria-label="Comprar Luna">
-                            💳 Comprar Agora
-                        </button>
-                    </div>
-                </article>
-
-                <!-- Card Animal 4 - Minerva -->
-                <article class="card-animal" 
-                        data-animal-id="4" 
-                        data-tipo="gato" 
-                        data-idade="adulto" 
-                        data-sexo="femea"
-                        data-porte="pequeno"
-                        data-bairro="ondina"
-                        data-valor="650">
-                    <div class="card-imagem">
-                        <img src="../../assets/images/gato.svg" 
-                            alt="Minerva - Gata vira-lata jovem disponível para compra" 
-                            class="imagem-animal"
-                            loading="lazy"
-                            width="200"
-                            height="200">
-                        <span class="badge-tipo badge-gato">🐱 Gato</span>
-                        <span class="badge-preco">R$ 2650</span>
-                    </div>
-                    <div class="card-info">
-                        <h3 class="nome-animal">Minerva</h3>
-                        <dl class="detalhes-animal">
-                            <dt class="sr-only">Sexo:</dt>
-                            <dd class="sexo" data-sexo="femea">
-                                <span class="icone-info" aria-hidden="true">♀</span>
-                                Fêmea
-                            </dd>
-                            <dt class="sr-only">Idade:</dt>
-                            <dd class="idade">
-                                <span class="icone-info" aria-hidden="true">🐾</span>
-                                1 ano
-                            </dd>
-                            <dt class="sr-only">Raça:</dt>
-                            <dd class="raca">
-                                <span class="icone-info" aria-hidden="true">🐾</span>
-                                Maine Coon
-                            </dd>
-                            <dt class="sr-only">Localização:</dt>
-                            <dd class="localizacao">
-                                <span class="icone-info" aria-hidden="true">📍</span>
-                                Ondina, Salvador-BA
-                            </dd>
-                        </dl>
-                        <div class="preco-destaque">
-                            <span class="valor">R$ 2650,00</span>
-                        </div>
-                        <button class="btn-interessado" 
-                                type="button"
-                                data-animal-id="4"
-                                aria-label="Comprar Minerva">
-                            💳 Comprar Agora
-                        </button>
-                    </div>
-                </article>
-
-                <!-- Card Animal 5 - Raposa -->
-                <article class="card-animal" 
-                        data-animal-id="5" 
-                        data-tipo="gato" 
-                        data-idade="adulto" 
-                        data-sexo="femea"
-                        data-porte="pequeno"
-                        data-bairro="federacao"
-                        data-valor="600">
-                    <div class="card-imagem">
-                        <img src="../../assets/images/gato.svg" 
-                            alt="Raposa - Gata vira-lata adulta disponível para compra" 
-                            class="imagem-animal"
-                            loading="lazy"
-                            width="200"
-                            height="200">
-                        <span class="badge-tipo badge-gato">🐱 Gato</span>
-                        <span class="badge-preco">R$ 2600</span>
-                    </div>
-                    <div class="card-info">
-                        <h3 class="nome-animal">Raposa</h3>
-                        <dl class="detalhes-animal">
-                            <dt class="sr-only">Sexo:</dt>
-                            <dd class="sexo" data-sexo="femea">
-                                <span class="icone-info" aria-hidden="true">♀</span>
-                                Fêmea
-                            </dd>
-                            <dt class="sr-only">Idade:</dt>
-                            <dd class="idade">
-                                <span class="icone-info" aria-hidden="true">🐾</span>
-                                3 meses
-                            </dd>
-                            <dt class="sr-only">Raça:</dt>
-                            <dd class="raca">
-                                <span class="icone-info" aria-hidden="true">🐾</span>
-                                Sphynx
-                            </dd>
-                            <dt class="sr-only">Localização:</dt>
-                            <dd class="localizacao">
-                                <span class="icone-info" aria-hidden="true">📍</span>
-                                Federação, Salvador-BA
-                            </dd>
-                        </dl>
-                        <div class="preco-destaque">
-                            <span class="valor">R$ 2600,00</span>
-                        </div>
-                        <button class="btn-interessado" 
-                                type="button"
-                                data-animal-id="5"
-                                aria-label="Comprar Raposa">
-                            💳 Comprar Agora
-                        </button>
-                    </div>
-                </article>
-
-                <!-- Card Animal 6 - Robson -->
-                <article class="card-animal" 
-                        data-animal-id="6" 
-                        data-tipo="gato" 
-                        data-idade="idoso" 
-                        data-sexo="macho"
-                        data-porte="pequeno"
-                        data-bairro="graca"
-                        data-valor="400">
-                    <div class="card-imagem">
-                        <img src="../../assets/images/gato.svg" 
-                            alt="Robson - Gato vira-lata idoso disponível para compra" 
-                            class="imagem-animal"
-                            loading="lazy"
-                            width="200"
-                            height="200">
-                        <span class="badge-tipo badge-gato">🐱 Gato</span>
-                        <span class="badge-preco">R$ 4000</span>
-                    </div>
-                    <div class="card-info">
-                        <h3 class="nome-animal">Robson</h3>
-                        <dl class="detalhes-animal">
-                            <dt class="sr-only">Sexo:</dt>
-                            <dd class="sexo" data-sexo="macho">
-                                <span class="icone-info" aria-hidden="true">♂</span>
-                                Macho
-                            </dd>
-                            <dt class="sr-only">Idade:</dt>
-                            <dd class="idade">
-                                <span class="icone-info" aria-hidden="true">🎂</span>
-                                9 meses
-                            </dd>
-                            <dt class="sr-only">Raça:</dt>
-                            <dd class="raca">
-                                <span class="icone-info" aria-hidden="true">🐾</span>
-                                Persa
-                            </dd>
-                            <dt class="sr-only">Localização:</dt>
-                            <dd class="localizacao">
-                                <span class="icone-info" aria-hidden="true">📍</span>
-                                Graça, Salvador-BA
-                            </dd>
-                        </dl>
-                        <div class="preco-destaque">
-                            <span class="valor">R$ 4000,00</span>
-                        </div>
-                        <button class="btn-interessado" 
-                                type="button"
-                                data-animal-id="6"
-                                aria-label="Comprar Robson">
-                            💳 Comprar Agora
-                        </button>
-                    </div>
-                </article>
-
-                <!-- Card Animal 7 - Fred -->
-                <article class="card-animal" 
-                        data-animal-id="7" 
-                        data-tipo="gato" 
-                        data-idade="filhote" 
-                        data-sexo="macho"
-                        data-porte="pequeno"
-                        data-bairro="centro_historico"
-                        data-valor="500">
-                    <div class="card-imagem">
-                        <img src="../../assets/images/gato.svg" 
-                            alt="Fred - Gato vira-lata filhote disponível para compra" 
-                            class="imagem-animal"
-                            loading="lazy"
-                            width="200"
-                            height="200">
-                        <span class="badge-tipo badge-gato">🐱 Gato</span>
-                        <span class="badge-preco">R$ 2500</span>
-                    </div>
-                    <div class="card-info">
-                        <h3 class="nome-animal">Fred</h3>
-                        <dl class="detalhes-animal">
-                            <dt class="sr-only">Sexo:</dt>
-                            <dd class="sexo" data-sexo="macho">
-                                <span class="icone-info" aria-hidden="true">♂</span>
-                                Macho
-                            </dd>
-                            <dt class="sr-only">Idade:</dt>
-                            <dd class="idade">
-                                <span class="icone-info" aria-hidden="true">🍼</span>
-                                2 meses
-                            </dd>
-                            <dt class="sr-only">Raça:</dt>
-                            <dd class="raca">
-                                <span class="icone-info" aria-hidden="true">🐾</span>
-                                Ragdoll
-                            </dd>
-                            <dt class="sr-only">Localização:</dt>
-                            <dd class="localizacao">
-                                <span class="icone-info" aria-hidden="true">📍</span>
-                                Centro Histórico, Salvador-BA
-                            </dd>
-                        </dl>
-                        <div class="preco-destaque">
-                            <span class="valor">R$ 2500,00</span>
-                        </div>
-                        <button class="btn-interessado" 
-                                type="button"
-                                data-animal-id="7"
-                                aria-label="Comprar Fred">
-                            💳 Comprar Agora
-                        </button>
-                    </div>
-                </article>
-
-                <!-- Card Animal 8 - Rex -->
-                <article class="card-animal" 
-                        data-animal-id="8" 
-                        data-tipo="cachorro" 
-                        data-idade="idoso" 
-                        data-sexo="macho"
-                        data-porte="grande"
-                        data-bairro="boca_do_rio"
-                        data-valor="850">
-                    <div class="card-imagem">
-                        <img src="../../assets/images/dog_sentado.svg" 
-                            alt="Rex - Cachorro vira-lata idoso disponível para compra" 
-                            class="imagem-animal"
-                            loading="lazy"
-                            width="200"
-                            height="200">
-                        <span class="badge-tipo badge-cachorro">🐕 Cachorro</span>
-                        <span class="badge-preco">R$ 850</span>
-                    </div>
-                    <div class="card-info">
-                        <h3 class="nome-animal">Rex</h3>
-                        <dl class="detalhes-animal">
-                            <dt class="sr-only">Sexo:</dt>
-                            <dd class="sexo" data-sexo="macho">
-                                <span class="icone-info" aria-hidden="true">♂</span>
-                                Macho
-                            </dd>
-                            <dt class="sr-only">Idade:</dt>
-                            <dd class="idade">
-                                <span class="icone-info" aria-hidden="true">🎂</span>
-                                3 anos
-                            </dd>
-                            <dt class="sr-only">Raça:</dt>
-                            <dd class="raca">
-                                <span class="icone-info" aria-hidden="true">🐾</span>
-                                Dálmata
-                            </dd>
-                            <dt class="sr-only">Localização:</dt>
-                            <dd class="localizacao">
-                                <span class="icone-info" aria-hidden="true">📍</span>
-                                Boca do Rio, Salvador-BA
-                            </dd>
-                        </dl>
-                        <div class="preco-destaque">
-                            <span class="valor">R$ 850,00</span>
-                        </div>
-                        <button class="btn-interessado" 
-                                type="button"
-                                data-animal-id="8"
-                                aria-label="Comprar Rex">
-                            💳 Comprar Agora
-                        </button>
-                    </div>
-                </article>
-
-                <!-- Card Animal 9 - Flor -->
-                <article class="card-animal" 
-                        data-animal-id="9" 
-                        data-tipo="cachorro" 
-                        data-idade="adulto" 
-                        data-sexo="femea"
-                        data-porte="medio"
-                        data-bairro="itapua"
-                        data-valor="700">
-                    <div class="card-imagem">
-                        <img src="../../assets/images/dog_sentado.svg" 
-                            alt="Flor - Cachorra vira-lata jovem disponível para compra" 
-                            class="imagem-animal"
-                            loading="lazy"
-                            width="200"
-                            height="200">
-                        <span class="badge-tipo badge-cachorro">🐕 Cachorro</span>
-                        <span class="badge-preco">R$ 1800</span>
-                    </div>
-                    <div class="card-info">
-                        <h3 class="nome-animal">Flor</h3>
-                        <dl class="detalhes-animal">
-                            <dt class="sr-only">Sexo:</dt>
-                            <dd class="sexo" data-sexo="femea">
-                                <span class="icone-info" aria-hidden="true">♀</span>
-                                Fêmea
-                            </dd>
-                            <dt class="sr-only">Idade:</dt>
-                            <dd class="idade">
-                                <span class="icone-info" aria-hidden="true">🐾</span>
-                                2 anos
-                            </dd>
-                            <dt class="sr-only">Raça:</dt>
-                            <dd class="raca">
-                                <span class="icone-info" aria-hidden="true">🐾</span>
-                                Golden
-                            </dd>
-                            <dt class="sr-only">Localização:</dt>
-                            <dd class="localizacao">
-                                <span class="icone-info" aria-hidden="true">📍</span>
-                                Itapuã, Salvador-BA
-                            </dd>
-                        </dl>
-                        <div class="preco-destaque">
-                            <span class="valor">R$ 1800,00</span>
-                        </div>
-                        <button class="btn-interessado" 
-                                type="button"
-                                data-animal-id="9"
-                                aria-label="Comprar Flor">
-                            💳 Comprar Agora
-                        </button>
-                    </div>
-                </article>
+            <!-- Os animais cadastrados aparecerão aqui dinamicamente -->
             </div>
 
             <!-- Mensagem quando não há resultados -->
@@ -847,25 +339,32 @@
         </section>
     </main>
 
+     <!-- Footer -->
     <footer class="base">
         <div class="redes_sociais">
-            <img src="../../assets/images/instagram.svg" alt="Instagram"/>
-            <img src="../../assets/images/email.svg" alt="Email"/>
+            <img src="../../assets/images/instagram.svg" alt="Siga-nos no Instagram"/>
+            <img src="../../assets/images/email.svg" alt="Entre em contato por email"/>
         </div>
 
         <nav class="links_uteis" aria-label="Links úteis">
             <div>
-                <span class="titulo">Adote</span><br>
-                <span>Seja responsável</span><br>
-                <span>Pesquisar por pets</span>
+                <span class="titulo">Encontre um novo pet</span><br>
+                <a href="../AdocaoAnimal/index.html"><span>Adote</span><br></a>
+                <a href="../CompraAnimal/index.html"><span>Compre</span></a>
             </div>
             <div>
                 <span class="titulo">Colabore</span><br>
-                <span>Seja uma empresa parceira</span>
+                <a href="../Parceria/index.html"><span>Seja uma empresa parceira</span></a>
             </div>
             <div>
                 <span class="titulo">Divulgue um animal</span><br>
-                <span>Cadastrar animal</span>
+                <a href="../CadastroAnimalAdocao/index.html"><span>Cadastrar animal para adoção</span><br></a>
+                <a href="../CadastroAnimalVenda/index.html"><span>Cadastrar animal para venda</span><br></a>
+                <a href="../CadastroAnimaisPerdidos/index.html"><span>Cadastrar animal perdido</span><br></a>
+            </div>
+            <div>
+                <span class="titulo">Encontre um animal</span><br>
+                <a href="../AnimaisPerdidos/index.html"><span>Animais perdidos</span><br></a>
             </div>
             <div>
                 <span class="titulo">Sobre o APANIM</span><br>
@@ -873,19 +372,20 @@
             </div>
             <div>
                 <span class="titulo">Meu perfil</span><br>
-                <span>Cadastrar-se</span><br>
-                <span>Minha página de usuário</span>
+                <a href="../CadastroInicial/index.html"><span>Cadastrar-se</span><br></a>
+                <a href="../PerfilUsuario/index.html"><span>Minha página de usuário</span><br></a>
+                <a href="../PerfilVendedor/index.html"><span>Minha página de vendedor</span><br></a>
             </div>
         </nav>
 
         <div class="forum">
-            <img src="../../assets/images/forum.svg" alt="Fórum"/>
+            <img src="../../assets/images/forum.svg" alt="Acesse nosso fórum"/>
         </div>
-        
-        <div class="logo">
-            <img src="../../assets/images/APANIM_logo.svg" alt="Logo APANIM"/>
-        </div> 
     </footer>
+
+    <script src="script.js"></script>
+     <!-- ⭐ SCRIPT DO MENU UNIFICADO -->
+    <script src="../../assets/js/menu-unificado.js"></script>
     
 </body>
 </html>
