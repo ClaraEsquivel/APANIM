@@ -1,8 +1,3 @@
-@font-face {
-    font-family: 'forum';
-    src: url(../../assets/images/Forum-Regular.ttf);
-}
-
 * {
     margin: 0;
     padding: 0;
@@ -16,16 +11,23 @@ body {
 }
 
 body::-webkit-scrollbar {
-    display: none;
+    width: 10px;
 }
 
-body {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+body::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+body::-webkit-scrollbar-thumb {
+    background: #5A0609;
+    border-radius: 5px;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background: #420406;
 }
 
 /* ===== CENTRAL ===== */
-
 .central {
     background: white;
     min-height: 100vh;
@@ -40,7 +42,8 @@ body {
 .container {
     background-color: #fce4e4;
     padding: 40px;
-    margin-top: 50px;
+    margin-top: 100px;
+    margin-bottom: 50px;
     border-radius: 20px;
     width: 600px;
     max-width: 90%;
@@ -61,22 +64,9 @@ body {
     margin-bottom: 20px;
 }
 
-.form-group .form-control-email{
-    width: 100%;
-    padding: 12px;
-    border: none;
-    border-radius: 10px;
-    background-color: #b27575;
-    color: #fff;
-    font-size: 14px;
-    box-shadow: 1px 1px 8px rgb(0, 0, 0, 0.2);
-    box-sizing: border-box;
-    margin-bottom: 20px;
-}
-
 .form-label {
     display: block;
-    color: #5a2a2a;
+    color: #5A0609;
     margin-bottom: 8px;
     font-weight: bold;
     font-size: 14px;
@@ -111,7 +101,7 @@ select.form-control {
 
 select.form-control option {
     background-color: #fff;
-    color: #5a2a2a;
+    color: #5A0609;
 }
 
 textarea.form-control {
@@ -147,14 +137,14 @@ textarea.form-control {
 }
 
 .form-check-label {
-    color: #5a2a2a;
+    color: #5A0609;
     margin: 0;
     cursor: pointer;
     font-size: 14px;
 }
 
 .form-text {
-    color: #5a2a2a;
+    color: #5A0609;
     font-size: 12px;
     margin-top: 5px;
 }
@@ -174,30 +164,30 @@ textarea.form-control {
     pointer-events: none;
 }
 
-.patas1 { left: 100px; top: 150px; }
+.patas1 { left: 90px; top: 150px; }
 .patas2 { left: 200px; top: 300px; }
-.patas3 { left: 150px; top: 450px; }
-.patas4 { right: 100px; top: 150px; }
+.patas3 { left: 90px; top: 450px; }
+.patas4 { right: 90px; top: 150px; }
 .patas5 { right: 200px; top: 300px; }
-.patas6 { right: 150px; top: 450px; }
-.patas7 { left: 100px; top: 580px; }
-.patas8 { left: 200px; top: 700px; }
-.patas9 { left: 150px; top: 850px; }
-.patas10 { right: 100px; top: 580px; }
-.patas11 { right: 200px; top: 700px; }
-.patas12 { right: 150px; top: 850px; }
-.patas13 { left: 100px; top: 1080px; }
-.patas14 { left: 200px; top: 1200px; }
-.patas15 { left: 150px; top: 1150px; }
-.patas16 { right: 100px; top: 1080px; }
-.patas17 { right: 200px; top: 1200px; }
-.patas18 { right: 150px; top: 1150px; }
-.patas19 { left: 100px; top: 1080px; }
-.patas20 { left: 200px; top: 1200px; }
-.patas21 { left: 150px; top: 1150px; }
-.patas22 { right: 100px; top: 1080px; }
-.patas23 { right: 200px; top: 1200px; }
-.patas24 { right: 150px; top: 1150px; }
+.patas6 { right: 90px; top: 450px; }
+.patas7 { left: 200px; top: 580px; }
+.patas8 { left: 90px; top: 700px; }
+.patas9 { left: 200px; top: 850px; }
+.patas10 { right: 200px; top: 580px; }
+.patas11 { right: 90px; top: 700px; }
+.patas12 { right: 200px; top: 850px; }
+.patas13 { left: 90px; top: 1000px; }
+.patas14 { left: 90px; top: 1300px; }
+.patas15 { left: 200px; top: 1150px; }
+.patas16 { right: 90px; top: 1000px; }
+.patas17 { right: 90px; top: 1300px; }
+.patas18 { right: 200px; top: 1150px; }
+.patas19 { left: 90px; top: 1650px; }
+.patas20 { left: 200px; top: 1800px; }
+.patas21 { left: 200px; top: 1480px; }
+.patas22 { right: 90px; top: 1650px; }
+.patas23 { right: 200px; top: 1800px; }
+.patas24 { right: 200px; top: 1480px; }
 
 .patas1 img, .patas2 img, .patas3 img,
 .patas4 img, .patas5 img, .patas6 img,
@@ -207,10 +197,10 @@ textarea.form-control {
 .patas16 img, .patas17 img, .patas18 img,
 .patas19 img, .patas20 img, .patas21 img,
 .patas22 img, .patas23 img, .patas24 img{
-    width: 40px;
+    width: 70px;
     height: auto;
-    opacity: 0.2;
-    transition: transform 0.3s ease;
+    opacity: 0.3;
+    transition: transform 0.5s ease;
 }
 
 .patas1 img:hover, .patas2 img:hover, .patas3 img:hover,

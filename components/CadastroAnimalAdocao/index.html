@@ -275,14 +275,17 @@
                     <label for="contato" class="form-label">Contato:</label>
 
                     <!-- Campo de Email -->
-                    <input type="email" class="form-control-email" id="email-contato" name="email-contato" placeholder="Digite seu e-mail (opcional)">
+                    <input type="email" class="form-control" id="email-contato" name="email-contato" placeholder="Digite seu e-mail (opcional)">
+                </div>
 
+                <div class="form-group">
                     <!-- Campo de Telefone -->
                     <input type="tel" class="form-control" id="telefone-contato" name="telefone-contato" placeholder="Digite seu telefone com DDD (opcional)" pattern="\(\d{2}\)\s?\d{4,5}-\d{4}" title="Formato esperado: (99) 99999-9999">
                     
                     <small class="form-text text-muted">
                         Você pode informar um e-mail, telefone, ou ambos para contato.
                     </small>
+                </div>
 
                 <!-- Localização -->
                 <div class="form-group">
@@ -530,48 +533,9 @@
 
     </footer>
 
+    <script src="script.js"></script>
     <!-- ⭐ SCRIPT DO MENU UNIFICADO -->
-    <script src="../../assets/js/menu-unificado.js">
-        // Mostrar/ocultar grupo de vacinas baseado na seleção de vacinado
-        const vacinadoInputs = document.querySelectorAll('input[name="vacinado"]');
-        const vacinasGrupo = document.getElementById('vacinas-grupo');
-        
-        vacinadoInputs.forEach(input => {
-            input.addEventListener('change', function() {
-                if (this.value === 'sim') {
-                    vacinasGrupo.style.display = 'block';
-                } else {
-                    vacinasGrupo.style.display = 'none';
-                    // Desmarcar todas as vacinas quando "não" é selecionado
-                    const checkboxes = vacinasGrupo.querySelectorAll('input[type="checkbox"]');
-                    checkboxes.forEach(checkbox => checkbox.checked = false);
-                }
-            });
-        });
-
-        // Contador de caracteres para o resumo
-        const resumoTextarea = document.getElementById('resumo-animal');
-        const contadorCaracteres = document.getElementById('contador-caracteres');
-        
-        resumoTextarea.addEventListener('input', function() {
-            const caracteresRestantes = 100 - this.value.length;
-            contadorCaracteres.textContent = caracteresRestantes;
-            
-            if (caracteresRestantes < 10) {
-                contadorCaracteres.style.color = 'red';
-            } else {
-                contadorCaracteres.style.color = '';
-            }
-        });
-
-        // Validação do formulário
-        document.getElementById('cadastro-animal').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Aqui você pode adicionar a lógica de envio do formulário
-            alert('Formulário submetido! (Implementar envio real)');
-        });
-    </script>
+    <script src="../../assets/js/menu-unificado.js"></script>
 </body>
 
 </html>
