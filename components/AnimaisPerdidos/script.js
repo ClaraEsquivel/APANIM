@@ -22,7 +22,7 @@ async function carregarAnimaisCadastrados() {
     const grid = document.getElementById('grid-animais');
     
     // Mostrar mensagem de carregamento
-    grid.innerHTML = '<div class="loading"><div class="spinner"></div></div>';
+    grid.innerHTML = '<div class="loading"><div class="spinner"></div><p>Carregando animais...</p></div>';
     
     try {
         let animais = [];
