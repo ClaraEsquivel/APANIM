@@ -5,39 +5,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro Inicial - APANIM</title>
+
+      <!-- ⭐ ORDEM IMPORTANTE: Header primeiro, depois menu -->
+    <link rel="stylesheet" href="../../assets/css/header-unificado.css">
+    <link rel="stylesheet" href="../../assets/css/menu-styles.css">
+    <link rel="stylesheet" href="../../assets/css/footer-unificado.css"> 
+
     <link rel="stylesheet" href="./styles.css">
 </head>
 
 <body>
 
-    <div class="topo">
-        <img src="../../assets/images/Paws.svg" class="patas_topo">
-        <img src="../../assets/images/APANIM_logo.svg" id="logo_apanim">
-        <img src="../../assets/images/cat.svg" class="cat_topo">
-        <img src="../../assets/images/dog.svg" class="dog_topo">
-    </div>
-
-    <nav role="navigation">
-        <div id="menu_sanduiche">
-            <input type="checkbox" id="menu_toggle">
-            <span></span>
-            <span></span>
-            <span></span>
-            <ul id="menu">
-                <li><a href="../Menu/index.html">Menu Inicial</a>
-                 <li><a href="../CadastroInicial/index.html">Cadastro</a></li>
-                    <li><a href="../CadastroUsuario/index.html">Login</a></li>
-                    <li><a href="../PerfilUsuario/index.html">Meu Perfil</a></li>
-                    <li><a href="../AdocaoAnimal/index.html">Animais para Adoção</a></li>
-                    <li><a href="../CompraAnimal/index.html">Animais para Compra</a></li>
-                    <li><a href="..//AnimaisPerdidos/index.html">Animais Perdidos</a></li>
-                    <li><a href="../CadastroAnimalAdocao/index.html">Cadastro Animal para Adoção</a></li>
-                    <li><a href="../CadastroAnimalVenda/index.html">Cadastro Animal para Venda</a></li>
-                    <li><a href="../CadastroAnimaisPerdidos/index.html">Cadastro Animal Perdido</a></li>
-                    <li><a href="">Serviços</a></li>
-            </ul>
+    <header>
+        <div class="topo">
+            <img src="../../assets/images/Paws.svg" class="patas_topo" alt="Patas">
+            <img src="../../assets/images/APANIM_logo.svg" id="logo_apanim" alt="Logo APANIM">
+            <img src="../../assets/images/cat.svg" class="cat_topo" alt="Gato">
+            <img src="../../assets/images/dog.svg" class="dog_topo" alt="Cachorro">
         </div>
-    </nav>
+
+        <nav role="navigation"></nav>
+    </header>
 
 
     <div class="central">
@@ -59,8 +47,9 @@
         <div class="patas6">
             <img src="../../assets/images/pata.svg" alt="pata" />
         </div>
-        <div class="escolha_cadastro">
-            <div class="cadastrar_com">
+
+        <div class="container">
+            <div class="cadastrar">
                 <div class="social-icons">
                     <a id="googleSign" class="google-btn" role="button">
                         <img class="google-icon" src="../../assets/images/google.svg" data-src="data:image/svg+xml;utf8,
@@ -85,58 +74,53 @@
     </div>
 
 
-    <div class="base">
+        <!-- Footer -->
+    <footer class="base">
         <div class="redes_sociais">
-            <img src="../../assets/images/instagram.svg" />
-            <img src="../../assets/images/email.svg" />
+            <img src="../../assets/images/instagram.svg" alt="Siga-nos no Instagram"/>
+            <img src="../../assets/images/email.svg" alt="Entre em contato por email"/>
         </div>
 
-        <div class="links_uteis">
-
+        <nav class="links_uteis" aria-label="Links úteis">
             <div>
-                <span class="titulo">Adote</span>
-                <br>
-                <a href=""><span>Seja responsável</span></a>
-                <br>
-                <a href="../AdocaoAnimal/index.html"><span>Pesquisar por pets</span></a>
+                <span class="titulo">Encontre um novo pet</span><br>
+                <a href="../AdocaoAnimal/index.html"><span>Adote</span><br></a>
+                <a href="../CompraAnimal/index.html"><span>Compre</span></a>
             </div>
-
             <div>
-                <span class="titulo">Colabore</span>
-                <br>
-                <span>Seja uma empresa parceira</span>
+                <span class="titulo">Colabore</span><br>
+                <a href="../Parceria/index.html"><span>Seja uma empresa parceira</span></a>
             </div>
-
             <div>
-                <span class="titulo">Divulgue um animal</span>
-                <br>
-                <a href="../CadastroAnimalAdocao/index.html"><span>Cadastrar animal</span></a>
+                <span class="titulo">Divulgue um animal</span><br>
+                <a href="../CadastroAnimalAdocao/index.html"><span>Cadastrar animal para adoção</span><br></a>
+                <a href="../CadastroAnimalVenda/index.html"><span>Cadastrar animal para venda</span><br></a>
+                <a href="../CadastroAnimaisPerdidos/index.html"><span>Cadastrar animal perdido</span><br></a>
             </div>
-
             <div>
-                <span class="titulo">Sobre o APANIM</span>
-                <br>
+                <span class="titulo">Encontre um animal</span><br>
+                <a href="../AnimaisPerdidos/index.html"><span>Animais perdidos</span><br></a>
+            </div>
+            <div>
+                <span class="titulo">Sobre o APANIM</span><br>
                 <span>APANIM</span>
             </div>
-
             <div>
-                <span class="titulo">Meu perfil</span>
-                <br>
-                <a href="../CadastroInicial/index.html"><span>Cadastrar-se</span></a>
-                <br>
-                <a href="../PerfilUsuario/index.html"><span>Minha página de usuário</span></a>
+                <span class="titulo">Meu perfil</span><br>
+                <a href="../CadastroInicial/index.html"><span>Cadastrar-se</span><br></a>
+                <a href="../PerfilUsuario/index.html"><span>Minha página de usuário</span><br></a>
+                <a href="../PerfilVendedor/index.html"><span>Minha página de vendedor</span><br></a>
             </div>
-        </div>
+        </nav>
 
         <div class="forum">
-            <img src="../../assets/images/forum.svg" />
+            <img src="../../assets/images/forum.svg" alt="Acesse nosso fórum"/>
         </div>
 
-        <div class="logo">
-            <img src="../../assets/images/APANIM_logo.svg" />
-        </div>
-    </div>
-    </div>
+    </footer>
+
+     <!-- ⭐ SCRIPT DO MENU UNIFICADO -->
+    <script src="../../assets/js/menu-unificado.js"></script>
 
     <script src="google-oauth.js"></script>
 </body>
