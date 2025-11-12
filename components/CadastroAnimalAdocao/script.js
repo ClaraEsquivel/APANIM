@@ -137,6 +137,7 @@ function validarFormulario() {
     const vacinado = document.querySelector('input[name="vacinado"]:checked');
     const castrado = document.querySelector('input[name="castrado"]:checked');
     const vermifugado = document.querySelector('input[name="vermifugado"]:checked');
+    const localizacao = document.getElementById('localizacao').value;
     const imagem = document.getElementById('imagem-animal').files[0];
     const resumo = document.getElementById('resumo-animal').value.trim();
     const emailContato = document.getElementById('email-contato').value.trim();
@@ -193,6 +194,11 @@ function validarFormulario() {
         return false;
     }
 
+    if (!localizacao) {
+        alert('Por favor, selecione a localização.');
+        return false;
+    }
+
     if (!imagem) {
         alert('Por favor, selecione uma foto do animal.');
         return false;
@@ -211,3 +217,184 @@ function validarFormulario() {
 
     return true;
 }
+
+// ===== SALVAR ANIMAL =====
+async function salvarAnimal() {
+    const botao = document.querySelector('.botao_cadastrar');
+    const textoOriginal = botao.textContent;
+    
+    try {
+        botao.textContent = 'Salvando...';
+        botao.disabled = true;
+
+        const animal = await coletarDadosFormulario();
+        
+        console.log('🐾 Animal coletado:', animal);
+        
+        let animais = [];
+        
+        if (storageDisponivel()) {
+            try {
+                const resultado = await window.storage.get('animais_adocao', true);
+                if (resultado && resultado.value) {
+                    animais = JSON.parse(resultado.value);
+                    console.log('📦 Animais existentes no storage:', animais.length);
+                }
+            } catch (error) {
+                console.log('ℹ️ Primeira vez usando window.storage ou chave não existe');
+            }
+            
+            animais.push(animal);
+            
+            await window.storage.set('animais_adocao', JSON.stringify(animais), true);
+            console.log('✅ Salvo no window.storage (shared)');
+            
+        } else {
+            console.log('⚠️ window.storage não disponível, usando localStorage');
+            
+            try {
+                const dados = localStorage.getItem('animais_adocao');
+                if (dados) {
+                    animais = JSON.parse(dados);
+                }
+            } catch (error) {
+                console.log('ℹ️ Primeira vez usando localStorage');
+            }
+            
+            animais.push(animal);
+            localStorage.setItem('animais_adocao', JSON.stringify(animais));
+            console.log('✅ Salvo no localStorage');
+        }
+        
+        console.log('✅ Total de animais salvos:', animais.length);
+        
+        alert('Animal cadastrado com sucesso! ✅\n\nO animal foi adicionado à lista de animais para adoção.');
+        
+        document.getElementById('cadastro-animal').reset();
+        document.getElementById('preview-imagem').style.display = 'none';
+        document.getElementById('vacinas-grupo').style.display = 'none';
+        document.getElementById('contador-caracteres').textContent = '100';
+        
+        botao.textContent = textoOriginal;
+        botao.disabled = false;
+        
+        if (confirm('Deseja visualizar a lista de animais para adoção?')) {
+            window.location.href = '../AdocaoAnimal/index.html';
+        }
+        
+    } catch (error) {
+        console.error('❌ Erro ao salvar animal:', error);
+        alert('Erro ao cadastrar animal: ' + error.message + '\n\nPor favor, tente novamente.');
+        
+        botao.textContent = textoOriginal;
+        botao.disabled = false;
+    }
+}
+
+// ===== COLETAR DADOS DO FORMULÁRIO =====
+async function coletarDadosFormulario() {
+    const id = Date.now().toString();
+    
+    const nome = document.getElementById('nome-animal').value.trim();
+    const idade = document.getElementById('idade-animal').value.trim();
+    const raca = document.getElementById('raca-animal').value.trim();
+    const porte = document.getElementById('porte-animal').value;
+    const sexo = document.querySelector('input[name="sexo"]:checked').value;
+    const especie = document.querySelector('input[name="especie"]:checked').value;
+    const cor = document.getElementById('cor-animal').value.trim();
+    
+    const vacinado = document.querySelector('input[name="vacinado"]:checked').value;
+    const castrado = document.querySelector('input[name="castrado"]:checked').value;
+    const vermifugado = document.querySelector('input[name="vermifugado"]:checked').value;
+    
+    const vacinas = [];
+    if (vacinado === 'sim') {
+        const checkboxes = document.querySelectorAll('input[name="vacinas[]"]:checked');
+        checkboxes.forEach(cb => vacinas.push(cb.value));
+    }
+    
+    const condicaoEspecial = document.getElementById('condicao-especial').value.trim() || 'Nenhuma';
+    const localizacao = document.getElementById('localizacao').value;
+    const emailContato = document.getElementById('email-contato').value.trim();
+    const telefoneContato = document.getElementById('telefone-contato').value.trim();
+    const resumo = document.getElementById('resumo-animal').value.trim();
+    
+    const imagemFile = document.getElementById('imagem-animal').files[0];
+    const imagem = await converterImagemParaBase64(imagemFile);
+    
+    return {
+        id: id,
+        nome: nome,
+        idade: idade,
+        raca: raca,
+        porte: porte,
+        sexo: sexo,
+        especie: especie,
+        cor: cor,
+        vacinado: vacinado,
+        vacinas: vacinas,
+        castrado: castrado,
+        vermifugado: vermifugado,
+        condicaoEspecial: condicaoEspecial,
+        localizacao: localizacao,
+        emailContato: emailContato,
+        telefoneContato: telefoneContato,
+        resumo: resumo,
+        imagem: imagem,
+        dataCadastro: new Date().toISOString()
+    };
+}
+
+// ===== CONVERTER IMAGEM PARA BASE64 =====
+function converterImagemParaBase64(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        
+        reader.onload = function(e) {
+            resolve(e.target.result);
+        };
+        
+        reader.onerror = function(error) {
+            reject(error);
+        };
+        
+        reader.readAsDataURL(file);
+    });
+}
+
+// ===== LOG PARA DEBUG =====
+console.log('✅ Script de cadastro de adoção carregado');
+console.log('📦 window.storage disponível?', storageDisponivel());
+
+// ===== FUNÇÃO DE DEBUG =====
+window.testarStorage = async function() {
+    console.log('🔍 Testando storage...');
+    
+    if (storageDisponivel()) {
+        try {
+            const resultado = await window.storage.get('animais_adocao', true);
+            console.log('📦 Resultado do storage:', resultado);
+            
+            if (resultado && resultado.value) {
+                const animais = JSON.parse(resultado.value);
+                console.log('🐾 Total de animais:', animais.length);
+                console.log('🐾 Animais:', animais);
+            } else {
+                console.log('⚠️ Nenhum dado encontrado');
+            }
+        } catch (error) {
+            console.error('❌ Erro ao buscar:', error);
+        }
+    } else {
+        console.log('⚠️ window.storage não disponível, verificando localStorage...');
+        const dados = localStorage.getItem('animais_adocao');
+        if (dados) {
+            const animais = JSON.parse(dados);
+            console.log('📦 localStorage:', animais);
+        } else {
+            console.log('⚠️ Nenhum dado no localStorage');
+        }
+    }
+}
+
+console.log('💡 Execute window.testarStorage() no console para verificar os dados');
