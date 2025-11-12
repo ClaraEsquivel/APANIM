@@ -287,12 +287,16 @@ function configurarFiltros() {
             aplicarFiltros();
         });
 
-        const selects = form.querySelectorAll('.select-filtro');
-        selects.forEach(select => {
-            select.addEventListener('change', aplicarFiltros);
-        });
+        // ❌ REMOVIDO: Event listeners de 'change' nos selects
+        // const selects = form.querySelectorAll('.select-filtro');
+        // selects.forEach(select => {
+        //     select.addEventListener('change', aplicarFiltros);
+        // });
+        
+        // ✅ AGORA: Os filtros só são aplicados ao clicar no botão "Aplicar Filtros"
     }
 }
+
 
 // ===== CONFIGURAÇÃO DOS BOTÕES =====
 function configurarBotoes() {
