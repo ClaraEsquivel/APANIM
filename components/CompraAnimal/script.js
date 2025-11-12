@@ -91,21 +91,21 @@ function criarCardAnimal(animal) {
         ? `Sim (${formatarVacinas(animal.vacinas)})` 
         : (animal.vacinado === 'sim' ? 'Sim' : 'Não');
     
-        // Badge de tipo
+    // Badge de tipo
     const badgeTipo = animal.especie === 'cachorro' 
         ? '<span class="badge-tipo badge-cachorro">🐕 Cachorro</span>'
         : '<span class="badge-tipo badge-gato">🐱 Gato</span>';
     
-    //valor
+    // Valor
     const valorFormatado = formatarValor(animal.valor);
 
-    //Badge preço
+    // Badge preço
     const badgePreco = `<span class="badge-preco">${valorFormatado}</span>`;
      
-    //Imagem
+    // Imagem
     const imagemSrc = animal.imagem || '../../assets/images/dog_sentado.svg';
     
-    //Nome bairro formatado
+    // Nome bairro formatado
     const bairroFormatado = formatarBairro(animal.localizacao);
     
     return `
@@ -166,8 +166,18 @@ function criarCardAnimal(animal) {
                     <dd><span class="icone-info">📍</span> ${bairroFormatado}, Salvador-BA</dd>
                 </dl>
                 
+                <div class="resumo">
+                    <p><strong>Resumo:</strong> ${animal.resumo || 'Informações não disponíveis'}</p>
+                </div>
+                
                 <div class="preco-destaque">
                     <p class="valor">${valorFormatado}</p>
+                </div>
+                
+                <div class="contato-info">
+                    <p><strong>Contato:</strong></p>
+                    ${animal.emailContato ? `<p>📧 ${animal.emailContato}</p>` : ''}
+                    ${animal.telefoneContato ? `<p>📱 ${animal.telefoneContato}</p>` : ''}
                 </div>
                 
                 <button class="btn-interessado" 
@@ -508,3 +518,46 @@ window.testarStorageListagem = async function() {
 }
 
 console.log('💡 Execute window.testarStorageListagem() no console para verificar os dados');
+
+// ===== CSS ADICIONAL PARA RESUMO E CONTATO =====
+// Adicione ao styles.css:
+/*
+.resumo {
+    background: #fce4e4;
+    border-left: 4px solid #a66666;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+}
+
+.resumo p {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #000000;
+}
+
+.resumo strong {
+    color: #a66666;
+}
+
+.contato-info {
+    background: #f0f9ff;
+    border-left: 4px solid #3b82f6;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+}
+
+.contato-info p {
+    margin: 0.25rem 0;
+    font-size: 0.9rem;
+    color: #1e3a8a;
+}
+
+.contato-info p:first-child {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #1e40af;
+}
+*/
