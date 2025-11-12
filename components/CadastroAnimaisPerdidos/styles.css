@@ -1,15 +1,17 @@
-* {
+/* ============= PADRÃO EM TODOS OS STYLES ============ */
+*{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-body{
-    margin: 0;
-    height: 50%;
-    position: relative;
-    box-sizing: border-box;
-}
 
+body{
+   
+    margin: 0;
+    height: 100vh;
+    position: relative;
+}
+ /* Barra de Rolagem lateral */
 body::-webkit-scrollbar {
     width: 10px;
 }
@@ -26,9 +28,9 @@ body::-webkit-scrollbar-thumb {
 body::-webkit-scrollbar-thumb:hover {
     background: #420406;
 }
+/* ============================================================ */
 
 /* ===== CENTRAL ===== */
-
 .central {
     background: white;
     min-height: 100vh;
