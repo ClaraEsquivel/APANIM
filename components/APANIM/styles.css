@@ -42,6 +42,16 @@ body::-webkit-scrollbar-thumb:hover {
     z-index: 1;
 }
 
+/* Garantir que o header e menu fiquem acima do hero */
+header {
+    position: relative;
+    z-index: 100;
+}
+
+nav {
+    z-index: 101;
+}
+
 .hero::before {
     content: '';
     background: url(../../assets/images/patas_1.svg) no-repeat center center;
@@ -85,12 +95,15 @@ body::-webkit-scrollbar-thumb:hover {
     margin-bottom: 1.5rem;
     font-weight: 700;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    font-family: 'Libre Baskerville', Georgia, serif;
 }
 
 .hero p {
     font-size: 1.3rem;
     margin-bottom: 2rem;
     opacity: 0.95;
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-weight: 400;
 }
 
 .hero-stats {
@@ -110,11 +123,13 @@ body::-webkit-scrollbar-thumb:hover {
     font-weight: bold;
     display: block;
     color: #fce4e4;
+    font-family: 'Libre Baskerville', Georgia, serif;
 }
 
 .stat-label {
     font-size: 1rem;
     opacity: 0.9;
+    font-family: 'Libre Baskerville', Georgia, serif;
 }
 
 /* Main Content */
@@ -137,6 +152,8 @@ body::-webkit-scrollbar-thumb:hover {
     margin-bottom: 1rem;
     position: relative;
     padding-bottom: 1rem;
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-weight: 700;
 }
 
 .section-title::after {
