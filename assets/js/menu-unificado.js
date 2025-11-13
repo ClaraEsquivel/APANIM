@@ -17,6 +17,7 @@ function criarMenuSanduiche() {
                         <span class="close-line2"></span>
                     </label>
                 </div>
+                <li><a href="../APANIM/index.html">APANIM - Quem somos nós?</a></li>
                 <li><a href="../Menu/index.html">Página Inicial</a></li>
                 <li><a href="../CadastroInicial/index.html">Cadastro</a></li>
                 <li><a href="../CadastroUsuario/index.html">Login</a></li>
@@ -27,8 +28,8 @@ function criarMenuSanduiche() {
                 <li><a href="../CadastroAnimalAdocao/index.html">Cadastro Animal para Adoção</a></li>
                 <li><a href="../CadastroAnimalVenda/index.html">Cadastro Animal para Venda</a></li>
                 <li><a href="../CadastroAnimaisPerdidos/index.html">Cadastro Animal Perdido</a></li>
-                <li><a href="../Serviços/index.html">Serviços</a></li>
                 <li><a href="../Parceria/index.html">Parcerias</a></li>
+                <li><a href="../Serviços/index.html">Serviços</a></li>
             </ul>
         </div>
     `;
