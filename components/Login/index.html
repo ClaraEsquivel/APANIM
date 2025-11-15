@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro Animal para Adoção</title>
+    <meta name="description" content="Cadastre cães e gatos para adoção em Salvador-BA.">
+    <meta name="keywords" content="adoção, animais, cães, gatos, pets">
+    <meta name="author" content="Seu Site de Adoção">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Cadastro Animal para Adoção">
+    <meta property="og:description" content="Cadastre cães e gatos para adoção em Salvador-BA">
+    <meta property="og:url" content="https://seusite.com/adocao">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Cadastro Animal para Adoção">
+    <meta property="twitter:description" content="Cadastre um animal para adoção">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+    <!-- ⭐ ORDEM IMPORTANTE: Header primeiro, depois menu -->
+    <link rel="stylesheet" href="../../assets/css/header-unificado.css">
+    <link rel="stylesheet" href="../../assets/css/menu-styles.css">
+    <link rel="stylesheet" href="../../assets/css/footer-unificado.css"> 
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Preload de fontes importantes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="topo">
+            <img src="../../assets/images/Paws.svg" class="patas_topo" alt="Patas">
+            <img src="../../assets/images/APANIM_logo.svg" id="logo_apanim" alt="Logo APANIM">
+            <img src="../../assets/images/cat.svg" class="cat_topo" alt="Gato">
+            <img src="../../assets/images/dog.svg" class="dog_topo" alt="Cachorro">
+        </div>
+
+        <nav role="navigation"></nav>
+    </header>
+
+    <!-- Conteúdo Central -->
+    <div class="central">
+        <!-- Patas decorativas com animação -->
+        <div class="patas1 pata-animate">
+            <img src="../../assets/images/pata.svg" alt="pata" />
+        </div>
+        <div class="patas2 pata-animate">
+            <img src="../../assets/images/pata.svg" alt="pata" />
+        </div>
+        <div class="patas3 pata-animate">
+            <img src="../../assets/images/pata.svg" alt="pata" />
+        </div>
+        <div class="patas4 pata-animate">
+            <img src="../../assets/images/pata.svg" alt="pata" />
+        </div>
+        <div class="patas5 pata-animate">
+            <img src="../../assets/images/pata.svg" alt="pata" />
+        </div>
+        <div class="patas6 pata-animate">
+            <img src="../../assets/images/pata.svg" alt="pata" />
+        </div>
+
+        <!-- Container principal -->
+        <div class="container">
+            <div class="welcome-section">
+                <div class="logo-circle"><img src="../../assets/images/perfil.svg" alt="perfil"></div>
+                <h1 class="welcome-title">Bem-vindo de Volta!</h1>
+                <p class="welcome-subtitle">Faça login para continuar ajudando os animais</p>
+            </div>
+
+            <!-- Seção de login com Google -->
+            <div class="login-google">
+                <button id="googleSign" class="google-btn" role="button" aria-label="Login com Google">
+                    <svg class="google-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 533.5 544.3">
+                        <path fill="#5a0609" d="M533.5 278.4c0-18.5-1.5-36.3-4.4-53.6H272v101.5h146.5c-6.3 34-25.2 62.8-53.8 82l87 67c50.8-46.9 81.8-116 81.8-196z"/>
+                        <path fill="#5a0609" d="M272 544.3c72.6 0 133.6-24 178-65.2l-87-67c-24.1 16.2-55 25.8-91 25.8-69.8 0-129-47.1-150.1-110.5l-89.6 69.2C69.9 483 163.1 544.3 272 544.3z"/>
+                        <path fill="#5a0609" d="M121.9 326.4c-11.6-34.8-11.6-72.5 0-107.3L32.3 149.9c-41.3 81.8-41.3 179.4 0 261.2l89.6-69.2z"/>
+                        <path fill="#5a0609" d="M272 107.7c39.5 0 75 13.6 103 40.3l77.3-77.3C405 24 344 0 272 0 163.1 0 69.9 61.3 32.3 149.9l89.6 69.2C143 154.8 202.2 107.7 272 107.7z"/>
+                    </svg>
+                    <span>Entrar com Google</span>
+                </button>
+            </div>
+
+            <div class="divider">
+                <span>ou entre com seu email</span>
+            </div>
+
+            <!-- Formulário de Login -->
+            <form id="login-form" class="login-form">
+                <div class="form-group">
+                    <label for="email">
+                        <span class="label-icon">📧</span>
+                        Email
+                    </label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        placeholder="seu@email.com"
+                        required
+                        autocomplete="email"
+                    >
+                    <span class="error-message" id="email-error"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">
+                        <span class="label-icon">🔒</span>
+                        Senha
+                    </label>
+                    <div class="password-input-wrapper">
+                        <input 
+                            type="password" 
+                            id="password" 
+                            name="password" 
+                            placeholder="••••••••"
+                            required
+                            autocomplete="current-password"
+                        >
+                        <button type="button" class="toggle-password" aria-label="Mostrar senha">
+                            <span class="eye-icon">👁️</span>
+                        </button>
+                    </div>
+                    <span class="error-message" id="password-error"></span>
+                </div>
+
+                <div class="form-options">
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="remember-me" name="remember-me">
+                        <span class="checkmark"></span>
+                        <span class="checkbox-label">Lembrar de mim</span>
+                    </label>
+                    <a href="#" class="forgot-password" id="forgot-password-link">Esqueceu a senha?</a>
+                </div>
+
+                <button type="submit" class="btn-login" id="btn-login">
+                    <span class="btn-text">Entrar</span>
+                    <span class="btn-icon">→</span>
+                </button>
+            </form>
+
+            <!-- Link para cadastro -->
+            <div class="signup-link">
+                <p>Ainda não tem uma conta? <a href="../CadastroInicial/index.html">Cadastre-se aqui</a></p>
+            </div>
+
+            <!-- Informações de segurança -->
+            <div class="security-info">
+                <div class="security-icon">🔐</div>
+                <p>Seus dados estão seguros conosco</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Esqueci a Senha -->
+    <div id="forgot-password-modal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Fechar">&times;</button>
+            <h2>Recuperar Senha</h2>
+            <p>Digite seu email e enviaremos instruções para redefinir sua senha.</p>
+            
+            <form id="forgot-password-form">
+                <div class="form-group">
+                    <label for="reset-email">Email</label>
+                    <input 
+                        type="email" 
+                        id="reset-email" 
+                        name="reset-email" 
+                        placeholder="seu@email.com"
+                        required
+                    >
+                </div>
+                <button type="submit" class="btn-reset">
+                    Enviar Link de Recuperação
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="base">
+        <div class="redes_sociais">
+            <a href="#" aria-label="Instagram">
+                <img src="../../assets/images/instagram.svg" alt="Siga-nos no Instagram"/>
+            </a>
+            <a href="mailto:apanim.amor.protecao@gmail.com" aria-label="Email">
+                <img src="../../assets/images/email.svg" alt="Entre em contato por email"/>
+            </a>
+        </div>
+
+        <nav class="links_uteis" aria-label="Links úteis">
+            <div>
+                <span class="titulo">Encontre um novo pet</span><br>
+                <a href="../AdocaoAnimal/index.html"><span>Adote</span><br></a>
+                <a href="../CompraAnimal/index.html"><span>Compre</span></a>
+            </div>
+            <div>
+                <span class="titulo">Colabore</span><br>
+                <a href="../Parceria/index.html"><span>Seja uma empresa parceira</span></a>
+            </div>
+            <div>
+                <span class="titulo">Divulgue um animal</span><br>
+                <a href="../CadastroAnimalAdocao/index.html"><span>Cadastrar animal para adoção</span><br></a>
+                <a href="../CadastroAnimalVenda/index.html"><span>Cadastrar animal para venda</span><br></a>
+                <a href="../CadastroAnimaisPerdidos/index.html"><span>Cadastrar animal perdido</span><br></a>
+            </div>
+            <div>
+                <span class="titulo">Encontre um animal</span><br>
+                <a href="../AnimaisPerdidos/index.html"><span>Animais perdidos</span><br></a>
+            </div>
+            <div>
+                <span class="titulo">Sobre o APANIM</span><br>
+                <span>APANIM</span>
+            </div>
+            <div>
+                <span class="titulo">Meu perfil</span><br>
+                <a href="../CadastroInicial/index.html"><span>Cadastrar-se</span><br></a>
+                <a href="../PerfilUsuario/index.html"><span>Minha página de usuário</span><br></a>
+                <a href="../PerfilVendedor/index.html"><span>Minha página de vendedor</span><br></a>
+            </div>
+        </nav>
+
+        <div class="forum">
+            <a href="#" aria-label="Fórum">
+                <img src="../../assets/images/forum.svg" alt="Acesse nosso fórum"/>
+            </a>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../../assets/js/menu-unificado.js"></script>
+    <script src="../CadastroInicial/google-oauth.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
