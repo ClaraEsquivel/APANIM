@@ -233,7 +233,7 @@ html::-webkit-scrollbar-thumb:hover, body::-webkit-scrollbar-thumb:hover, .centr
     content: '';
     flex: 1;
     height: 1px;
-    background: linear-gradient(to right, transparent, #ddd, transparent);
+    background: linear-gradient(to right, transparent, #5A0609, transparent);
 }
 
 .divider span {
@@ -339,7 +339,7 @@ html::-webkit-scrollbar-thumb:hover, body::-webkit-scrollbar-thumb:hover, .centr
     text-align: center;
     margin-top: 2rem;
     padding-top: 2rem;
-    border-top: 1px solid #eee;
+    border-top: 1px solid #5A0609;
 }
 
 .login-link p {
