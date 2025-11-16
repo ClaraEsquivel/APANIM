@@ -1,5 +1,7 @@
 package com.example.apanim.DTO;
 
+import org.hibernate.validator.constraints.URL;
+
 import com.example.apanim.Enum.FaixaEtariaAnimal;
 import com.example.apanim.Enum.SexoAnimal;
 import jakarta.validation.constraints.NotBlank;
@@ -9,7 +11,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class AnimalCadastroDTO {
+public abstract class AnimalCadastroDTO {
 
     private Long id;
 
@@ -34,8 +36,6 @@ public class AnimalCadastroDTO {
     @NotBlank
     private String condicaoEspecial;
 
-    private String logradouro;
-
     @NotBlank(message = "O bairro é obrigatório.")
     private String bairro;
 
@@ -53,13 +53,25 @@ public class AnimalCadastroDTO {
     
     private String resumo;
 
+    @URL
+    @NotBlank
+    private String fotoUrl;
+
     @NotNull 
     private Long usuarioId;
 
     public AnimalCadastroDTO() {
     }
 
-    public AnimalCadastroDTO(Long id, String nome, FaixaEtariaAnimal faixaEtariaAnimal, String raca, String porte, SexoAnimal sexoAnimal, String especie, String condicaoEspecial, String logradouro, String bairro, String cor, boolean vacinado, boolean vermifugado, boolean castrado, String resumo) {
+    public AnimalCadastroDTO(Long id, @NotBlank(message = "O nome é obrigatório.") String nome,
+            @NotNull(message = "A Faixa Etária é obrigatório.") FaixaEtariaAnimal faixaEtariaAnimal,
+            @NotBlank(message = "A raça é obrigatório.") String raca,
+            @NotBlank(message = "O porte é obrigatório.") String porte,
+            @NotNull(message = "O sexo é obrigatório.") SexoAnimal sexoAnimal,
+            @NotBlank(message = "A espécie é obrigatório.") String especie, @NotBlank String condicaoEspecial,
+            @NotBlank(message = "O bairro é obrigatório.") String bairro, @NotBlank String cor,
+            @NotNull boolean vacinado, @NotNull boolean vermifugado, @NotNull boolean castrado, String resumo,
+            @URL @NotBlank String fotoUrl, @NotNull Long usuarioId) {
         this.id = id;
         this.nome = nome;
         this.faixaEtariaAnimal = faixaEtariaAnimal;
@@ -68,13 +80,15 @@ public class AnimalCadastroDTO {
         this.sexoAnimal = sexoAnimal;
         this.especie = especie;
         this.condicaoEspecial = condicaoEspecial;
-        this.logradouro = logradouro;
         this.bairro = bairro;
         this.cor = cor;
         this.vacinado = vacinado;
         this.vermifugado = vermifugado;
         this.castrado = castrado;
         this.resumo = resumo;
+        this.fotoUrl = fotoUrl;
+        this.usuarioId = usuarioId;
     }
 
+    
 }

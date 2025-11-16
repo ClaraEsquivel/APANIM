@@ -1,5 +1,6 @@
 package com.example.apanim.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -23,6 +24,7 @@ public class AnimalCompraService {
          this.vendedorRepository = vendedorRepository;
     }
 
+    @SuppressWarnings("null")
     public AnimalCompra salvarAnimalCompra(AnimalCompraCadastroDTO dto, Long vendedorId) {
         animalCompraRepository.findByNomeAndVendedorId(dto.getNome(), vendedorId)
             .ifPresent(animal -> {
@@ -44,19 +46,33 @@ public class AnimalCompraService {
         animalCompra.setBairro(dto.getBairro());
         animalCompra.setCor(dto.getCor());
         animalCompra.setVacinado(dto.getVacinado());
+
+        if (Boolean.TRUE.equals(dto.getVacinado())) {
+
+            if (dto.getVacinas() == null || dto.getVacinas().isEmpty()) {
+               
+                throw new IllegalArgumentException("Se o animal é vacinado, a lista de vacinas não pode ser vazia.");
+            }
+            animalCompra.setVacinas(dto.getVacinas());
+
+        } else {
+            animalCompra.setVacinas(new ArrayList<>()); 
+        }
+
         animalCompra.setVermifugado(dto.getVermifugado());
         animalCompra.setCastrado(dto.getCastrado());
         animalCompra.setResumo(dto.getResumo());
         animalCompra.setVendedor(vendedor);
         animalCompra.setPedigree(dto.getPedigree());
         animalCompra.setValorDoAnimal(dto.getValorDoAnimal());
+        animalCompra.setFotoUrl(dto.getFotoUrl());
 
         return animalCompraRepository.save(animalCompra);
     }
 
     public List<AnimalCompraResponseDTO> listarAnimaisCompra() {
         return animalCompraRepository
-            .findAll()
+            .findAllWithVendedor()
             .stream()
             .map(this::toDTO)
             .toList();
@@ -76,16 +92,21 @@ public class AnimalCompraService {
             animalCompra.getBairro(),
             animalCompra.getCor(),
             animalCompra.getVacinado(),
+            animalCompra.getVacinas(),
             animalCompra.getVermifugado(),
             animalCompra.getCastrado(),
             animalCompra.getResumo(),
             animalCompra.getVendedor().getId(),
             animalCompra.getPedigree(),
-            animalCompra.getValorDoAnimal()
+            animalCompra.getValorDoAnimal(),
+            animalCompra.getFotoUrl(),
+            animalCompra.getVendedor().getEmail(),
+            animalCompra.getVendedor().getTelefones()
         );
     }
 
     @Transactional
+    @SuppressWarnings("null")
     public AnimalCompra atualizarAnimalCompra(Long id, AnimalCompraCadastroDTO dto) {
         AnimalCompra animalCompra = animalCompraRepository.findById(id)
             .orElseThrow(() -> new IllegalArgumentException("Animal não encontrado"));
@@ -115,11 +136,25 @@ public class AnimalCompraService {
         animalCompra.setBairro(dto.getBairro());
         animalCompra.setCor(dto.getCor());
         animalCompra.setVacinado(dto.getVacinado());
+
+        if (Boolean.TRUE.equals(dto.getVacinado())) {
+
+            if (dto.getVacinas() == null || dto.getVacinas().isEmpty()) {
+               
+                throw new IllegalArgumentException("Se o animal é vacinado, a lista de vacinas não pode ser vazia.");
+            }
+            animalCompra.setVacinas(dto.getVacinas());
+
+        } else {
+            animalCompra.setVacinas(new ArrayList<>()); 
+        }
+
         animalCompra.setVermifugado(dto.getVermifugado());
         animalCompra.setCastrado(dto.getCastrado());
         animalCompra.setResumo(dto.getResumo());
         animalCompra.setPedigree(dto.getPedigree());
         animalCompra.setValorDoAnimal(dto.getValorDoAnimal());
+        animalCompra.setFotoUrl(dto.getFotoUrl());
 
         return animalCompraRepository.save(animalCompra);
     }
@@ -127,7 +162,10 @@ public class AnimalCompraService {
     public void excluirAnimalCompra(long id) {
         AnimalCompra animalCompra = animalCompraRepository.findById(id)
             .orElseThrow(() -> new IllegalArgumentException("Animal não encontrado."));
-        animalCompraRepository.delete(animalCompra);
+        
+        if (animalCompra != null) {
+            animalCompraRepository.delete(animalCompra);
+        }
     }
 
 }

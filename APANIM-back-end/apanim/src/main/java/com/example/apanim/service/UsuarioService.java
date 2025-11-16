@@ -23,17 +23,22 @@ public class UsuarioService {
     public UsuarioModel salvarUsuario(UsuarioCadastroDTO dto) {
         usuarioRepository.findByEmail(dto.getEmail())
                 .ifPresent(u -> {
-                    throw new IllegalArgumentException("CPF já cadastrado.");
+                    throw new IllegalArgumentException("E-mail já cadastrado.");
                 });
 
         UsuarioModel usuario = new UsuarioModel();
         usuario.setNome(dto.getNome());
+        usuario.setSexo(dto.getSexo());
         usuario.setCpf(dto.getCpf());
-        usuario.setTelefone(dto.getTelefone());
+
+        if (dto.getTelefones() == null || dto.getTelefones().isEmpty()) {
+            throw new IllegalArgumentException("A lista de telefones não pode ser nula ou vazia.");
+        }
+        usuario.setTelefones(dto.getTelefones());
+
         usuario.setEmail(dto.getEmail());
         usuario.setSenha(bCryptPasswordEncoder.encode(dto.getSenha()));
         usuario.setCep(dto.getCep());
-        usuario.setLogradouro(dto.getLogradouro());
         usuario.setBairro(dto.getBairro());
 
         return usuarioRepository.save(usuario);
@@ -48,7 +53,16 @@ public class UsuarioService {
     }
 
     public UsuarioResponseDTO toDTO(UsuarioModel usuario) {
-        return new UsuarioResponseDTO(usuario.getNome(), usuario.getCpf(), usuario.getTelefone(), usuario.getEmail(), usuario.getSenha(), usuario.getCep(), usuario.getLogradouro(), usuario.getBairro());
+        return new UsuarioResponseDTO(
+            usuario.getId(),
+            usuario.getNome(),
+            usuario.getSexo(),
+            usuario.getCpf(),
+            usuario.getTelefones(),
+            usuario.getEmail(),
+            usuario.getCep(),
+            usuario.getBairro()
+        );
     }
 
     @Transactional
@@ -57,12 +71,17 @@ public class UsuarioService {
                 .orElseThrow(() -> new IllegalArgumentException("Usuário não encontrado."));
 
         usuario.setNome(dto.getNome());
+        usuario.setSexo(dto.getSexo());
         usuario.setCpf(dto.getCpf());
-        usuario.setTelefone(dto.getTelefone());
+
+        if (dto.getTelefones() == null || dto.getTelefones().isEmpty()) {
+            throw new IllegalArgumentException("A lista de telefones não pode ser nula ou vazia.");
+        }
+        usuario.setTelefones(dto.getTelefones());
+        
         usuario.setEmail(dto.getEmail());
         usuario.setSenha(bCryptPasswordEncoder.encode(dto.getSenha()));
         usuario.setCep(dto.getCep());
-        usuario.setLogradouro(dto.getLogradouro());
         usuario.setBairro(dto.getBairro());
 
         return usuarioRepository.save(usuario);
@@ -71,7 +90,10 @@ public class UsuarioService {
     public void excluir(String email) {
         UsuarioModel usuario = usuarioRepository.findByEmail(email)
                 .orElseThrow(() -> new IllegalArgumentException("Usuário não encontrado."));
-        usuarioRepository.delete(usuario);
+        
+        if (usuario != null) {
+            usuarioRepository.delete(usuario);
+        }
     }
 
 

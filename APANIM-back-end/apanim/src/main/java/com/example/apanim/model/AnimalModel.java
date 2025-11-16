@@ -8,10 +8,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Entity
-@Table(name = "tab-animais")
-@Inheritance(strategy = InheritanceType.JOINED)
-public class AnimalModel {
+@MappedSuperclass
+public abstract class AnimalModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,7 +28,6 @@ public class AnimalModel {
 
     private String especie;
     private String condicaoEspecial;
-    private String logradouro;
     private String bairro;
     private String cor;
     private Boolean vacinado;
@@ -40,6 +37,9 @@ public class AnimalModel {
     @Lob
     private String resumo;
 
+    @Column(length = 1024)
+    private String fotoUrl;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "usuario_id", nullable = false)
     private UsuarioModel usuario;
@@ -47,7 +47,9 @@ public class AnimalModel {
     public AnimalModel() {
     }
 
-    public AnimalModel(Long id, String nome, FaixaEtariaAnimal faixaEtariaAnimal, String raca, String porte, SexoAnimal sexoAnimal, String especie, String condicaoEspecial, String logradouro, String bairro, String cor, Boolean vacinado, Boolean vermifugado, Boolean castrado, String resumo) {
+    public AnimalModel(Long id, String nome, FaixaEtariaAnimal faixaEtariaAnimal, String raca, String porte,
+            SexoAnimal sexoAnimal, String especie, String condicaoEspecial, String bairro, String cor, Boolean vacinado,
+            Boolean vermifugado, Boolean castrado, String resumo, String fotoUrl, UsuarioModel usuario) {
         this.id = id;
         this.nome = nome;
         this.faixaEtariaAnimal = faixaEtariaAnimal;
@@ -56,13 +58,15 @@ public class AnimalModel {
         this.sexoAnimal = sexoAnimal;
         this.especie = especie;
         this.condicaoEspecial = condicaoEspecial;
-        this.logradouro = logradouro;
         this.bairro = bairro;
         this.cor = cor;
         this.vacinado = vacinado;
         this.vermifugado = vermifugado;
         this.castrado = castrado;
         this.resumo = resumo;
+        this.fotoUrl = fotoUrl;
+        this.usuario = usuario;
     }
 
+   
 }

@@ -1,6 +1,9 @@
 package com.example.apanim.DTO;
 
 import java.math.BigDecimal;
+import java.util.List;
+
+import org.hibernate.validator.constraints.URL;
 
 import com.example.apanim.Enum.FaixaEtariaAnimal;
 import com.example.apanim.Enum.SexoAnimal;
@@ -50,6 +53,8 @@ public class AnimalCompraCadastroDTO {
     @NotNull
     private Boolean vacinado;
     
+    private List<String> vacinas;
+
     @NotNull
     private Boolean vermifugado;
     
@@ -67,13 +72,23 @@ public class AnimalCompraCadastroDTO {
     @Column(precision = 10, scale = 2)
     private BigDecimal valorDoAnimal;
 
+    @URL
+    @NotBlank
+    private String fotoUrl;
+
     public AnimalCompraCadastroDTO() {
     }
 
-    public AnimalCompraCadastroDTO(Long id, String nome, FaixaEtariaAnimal faixaEtariaAnimal, String raca, String porte,
-            SexoAnimal sexoAnimal, String especie, String condicaoEspecial, String logradouro, String bairro,
-            String cor, Boolean vacinado, Boolean vermifugado, Boolean castrado, String resumo, Boolean pedigree,
-            BigDecimal valorDoAnimal) {
+    public AnimalCompraCadastroDTO(Long id, @NotBlank(message = "O nome é obrigatório.") String nome,
+            @NotNull(message = "A faixa etária é obrigatória.") FaixaEtariaAnimal faixaEtariaAnimal,
+            @NotBlank(message = "A raça é obrigatória.") String raca,
+            @NotBlank(message = "O porte é obrigatório.") String porte,
+            @NotNull(message = "O sexo é obrigatório.") SexoAnimal sexoAnimal,
+            @NotBlank(message = "A espécie é obrigatória.") String especie, @NotBlank String condicaoEspecial,
+            String logradouro, @NotBlank(message = "O bairro é obrigatório.") String bairro, @NotBlank String cor,
+            @NotNull Boolean vacinado, List<String> vacinas, @NotNull Boolean vermifugado, @NotNull Boolean castrado,
+            String resumo, @NotNull Long vendedorId, Boolean pedigree, BigDecimal valorDoAnimal,
+            @URL @NotBlank String fotoUrl) {
         this.id = id;
         this.nome = nome;
         this.faixaEtariaAnimal = faixaEtariaAnimal;
@@ -86,11 +101,14 @@ public class AnimalCompraCadastroDTO {
         this.bairro = bairro;
         this.cor = cor;
         this.vacinado = vacinado;
+        this.vacinas = vacinas;
         this.vermifugado = vermifugado;
         this.castrado = castrado;
         this.resumo = resumo;
+        this.vendedorId = vendedorId;
         this.pedigree = pedigree;
         this.valorDoAnimal = valorDoAnimal;
+        this.fotoUrl = fotoUrl;
     }
 
     

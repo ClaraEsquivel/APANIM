@@ -1,10 +1,16 @@
 package com.example.apanim.model;
 
+import java.util.List;
+
 import com.example.apanim.Enum.Sexo;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
-@Table(name = "tab-vendedor")
+@Table(name = "tab_vendedor")
 public class VendedorModel {
 
     @Id
@@ -24,7 +30,12 @@ public class VendedorModel {
     private String cnpj;
 
     private Integer idade;
-    private String telefone;
+    
+    @ElementCollection
+    @CollectionTable(name = "tab_vendedor_telefones",
+                    joinColumns = @JoinColumn(name = "vendedor_id"))
+    @Column(name = "telefone")
+    private List<String> telefones;
 
     @Column(nullable = false, unique = true)
     private String email;
@@ -41,14 +52,15 @@ public class VendedorModel {
     public VendedorModel() {
     }
 
-    public VendedorModel(Long id, String nome, Sexo sexo, String cpf, String cnpj, Integer idade, String telefone, String email, String senha, String cep, String logradouro, String bairro) {
+    public VendedorModel(Long id, String nome, Sexo sexo, String cpf, String cnpj, Integer idade,
+            List<String> telefones, String email, String senha, String cep, String logradouro, String bairro) {
         this.id = id;
         this.nome = nome;
         this.sexo = sexo;
         this.cpf = cpf;
         this.cnpj = cnpj;
         this.idade = idade;
-        this.telefone = telefone;
+        this.telefones = telefones;
         this.email = email;
         this.senha = senha;
         this.cep = cep;
@@ -56,99 +68,4 @@ public class VendedorModel {
         this.bairro = bairro;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public Sexo getSexo() {
-        return sexo;
-    }
-
-    public void setSexo(Sexo sexo) {
-        this.sexo = sexo;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public String getCnpj() {
-        return cnpj;
-    }
-
-    public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
-    }
-
-    public Integer getIdade() {
-        return idade;
-    }
-
-    public void setIdade(Integer idade) {
-        this.idade = idade;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
-    public String getCep() {
-        return cep;
-    }
-
-    public void setCep(String cep) {
-        this.cep = cep;
-    }
-
-    public String getLogradouro() {
-        return logradouro;
-    }
-
-    public void setLogradouro(String logradouro) {
-        this.logradouro = logradouro;
-    }
-
-    public String getBairro() {
-        return bairro;
-    }
-
-    public void setBairro(String bairro) {
-        this.bairro = bairro;
-    }
 }

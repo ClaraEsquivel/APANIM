@@ -35,7 +35,12 @@ public class VendedorService {
         vendedor.setCpf(dto.getCpf());
         vendedor.setCnpj(dto.getCnpj());
         vendedor.setIdade(dto.getIdade());
-        vendedor.setTelefone(dto.getTelefone());
+
+        if (dto.getTelefones() == null || dto.getTelefones().isEmpty()) {
+            throw new IllegalArgumentException("A lista de telefones não pode ser nula ou vazia.");
+        }
+        vendedor.setTelefones(dto.getTelefones());
+
         vendedor.setEmail(dto.getEmail());
         vendedor.setSenha(bCryptPasswordEncoder.encode(dto.getSenha()));
         vendedor.setCep(dto.getCep());
@@ -54,7 +59,17 @@ public class VendedorService {
     }
 
     public VendedorResponseDTO toDTO(VendedorModel vendedor) {
-        return new VendedorResponseDTO(vendedor.getNome(), vendedor.getCpf(), vendedor.getCnpj(), vendedor.getIdade(), vendedor.getTelefone(), vendedor.getEmail(), vendedor.getCep(), vendedor.getLogradouro(), vendedor.getBairro());
+        return new VendedorResponseDTO(
+            vendedor.getId(),
+            vendedor.getNome(), 
+            vendedor.getCpf(), 
+            vendedor.getCnpj(), 
+            vendedor.getIdade(), 
+            vendedor.getTelefones(), 
+            vendedor.getEmail(), 
+            vendedor.getCep(), 
+            vendedor.getLogradouro(), 
+            vendedor.getBairro());
     }
 
     @Transactional
@@ -70,7 +85,12 @@ public class VendedorService {
         vendedor.setCpf(dto.getCpf());
         vendedor.setCnpj(dto.getCnpj());
         vendedor.setIdade(dto.getIdade());
-        vendedor.setTelefone(dto.getTelefone());
+        
+        if (dto.getTelefones() == null || dto.getTelefones().isEmpty()) {
+            throw new IllegalArgumentException("A lista de telefones não pode ser nula ou vazia.");
+        }
+        vendedor.setTelefones(dto.getTelefones());
+
         vendedor.setEmail(dto.getEmail());
         vendedor.setSenha(bCryptPasswordEncoder.encode(dto.getSenha()));
         vendedor.setCep(dto.getCep());
@@ -83,7 +103,10 @@ public class VendedorService {
     public void excluir(String email) {
         VendedorModel vendedor = vendedorRepository.findByEmail(email)
                 .orElseThrow(() -> new IllegalArgumentException("Usuário não encontrado."));
-        vendedorRepository.delete(vendedor);
+        
+        if (vendedor != null) {
+            vendedorRepository.delete(vendedor);
+        }
     }
 
 }
