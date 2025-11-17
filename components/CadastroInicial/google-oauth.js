@@ -80,20 +80,20 @@ function showToast(message, type = 'info', duration = 3000) {
 
     const toast = document.createElement('div');
     toast.className = `toast ${type}`;
-    
+
     const icons = {
         success: '✓',
         error: '✕',
         info: 'ℹ'
     };
-    
+
     toast.innerHTML = `
         <span style="font-size: 1.5rem;">${icons[type] || icons.info}</span>
         <span style="font-weight: 500;">${message}</span>
     `;
-    
+
     document.body.appendChild(toast);
-    
+
     setTimeout(() => {
         toast.style.animation = 'slideInRight 0.5s ease reverse';
         setTimeout(() => toast.remove(), 500);
@@ -105,14 +105,14 @@ function showToast(message, type = 'info', duration = 3000) {
  */
 function toggleLoading(show) {
     let spinner = document.querySelector('.loading-spinner');
-    
+
     if (!spinner) {
         spinner = document.createElement('div');
         spinner.className = 'loading-spinner';
         spinner.innerHTML = '<div class="spinner"></div>';
         document.body.appendChild(spinner);
     }
-    
+
     if (show) {
         spinner.classList.add('active');
         document.body.style.overflow = 'hidden';
@@ -145,18 +145,18 @@ function toggleButton(button, disabled) {
 async function startGoogleOAuth() {
     try {
         console.log('🔐 Iniciando fluxo OAuth...');
-        
+
         // Gera code_verifier e code_challenge
         const codeVerifier = generateRandomString(128);
         const codeChallenge = await generateCodeChallenge(codeVerifier);
-        
+
         // Gera state para segurança
         const state = generateRandomString(32);
-        
+
         // Salva dados temporariamente
         tempStorage.set('code_verifier', codeVerifier);
         tempStorage.set('oauth_state', state);
-        
+
         // Constrói URL de autorização
         const params = new URLSearchParams({
             client_id: CONFIG.CLIENT_ID,
@@ -170,27 +170,27 @@ async function startGoogleOAuth() {
             state: state,
             prompt: 'select_account' // Permite escolher conta
         });
-        
+
         const authUrl = `${CONFIG.AUTH_ENDPOINT}?${params.toString()}`;
-        
+
         console.log('✅ URL de autorização gerada');
-        
+
         // Abre popup (melhor UX que redirect)
         const width = 600;
         const height = 700;
         const left = (screen.width - width) / 2;
         const top = (screen.height - height) / 2;
-        
+
         const popup = window.open(
             authUrl,
             'google_oauth_popup',
             `width=${width},height=${height},top=${top},left=${left},scrollbars=yes`
         );
-        
+
         if (!popup || popup.closed) {
             throw new Error('Popup bloqueado. Por favor, permita popups para este site.');
         }
-        
+
         // Monitora o popup
         const popupCheckInterval = setInterval(() => {
             if (popup.closed) {
@@ -199,10 +199,10 @@ async function startGoogleOAuth() {
                 console.log('❌ Popup fechado pelo usuário');
             }
         }, 500);
-        
+
         // Listener para o callback do OAuth
         window.addEventListener('message', handleOAuthCallback);
-        
+
     } catch (error) {
         console.error('❌ Erro ao iniciar OAuth:', error);
         showToast(error.message || 'Erro ao conectar com o Google', 'error');
@@ -216,18 +216,18 @@ async function startGoogleOAuth() {
 async function handleOAuthCallback(event) {
     // Verifica origem do evento por segurança
     if (event.origin !== window.location.origin) return;
-    
+
     const { code, state, error } = event.data;
-    
+
     if (error) {
         console.error('❌ Erro no OAuth:', error);
         showToast('Erro na autenticação: ' + error, 'error');
         toggleLoading(false);
         return;
     }
-    
+
     if (!code || !state) return;
-    
+
     // Verifica state
     const savedState = tempStorage.get('oauth_state');
     if (state !== savedState) {
@@ -236,22 +236,22 @@ async function handleOAuthCallback(event) {
         toggleLoading(false);
         return;
     }
-    
+
     try {
         toggleLoading(true);
         console.log('🔄 Trocando code por token...');
-        
+
         // Troca o code pelo access token
         const codeVerifier = tempStorage.get('code_verifier');
         const tokenData = await exchangeCodeForToken(code, codeVerifier);
-        
+
         console.log('✅ Token obtido com sucesso');
-        
+
         // Obtém informações do usuário
         const userInfo = await getUserInfo(tokenData.access_token);
-        
+
         console.log('✅ Informações do usuário obtidas');
-        
+
         // Salva dados do usuário
         window.currentUser = {
             id: userInfo.sub,
@@ -263,30 +263,52 @@ async function handleOAuthCallback(event) {
             loggedIn: true,
             loginTime: new Date().toISOString()
         };
-        
+
         // Limpa dados temporários
         tempStorage.clear();
-        
+
         // Dispara evento de login
         const loginEvent = new CustomEvent('userLoggedIn', {
             detail: window.currentUser
         });
         document.dispatchEvent(loginEvent);
-        
+
         // Feedback visual
         showToast(`Bem-vindo, ${userInfo.name}! 🎉`, 'success');
-        
+
         // Redireciona após 1.5 segundos
         setTimeout(() => {
             window.location.href = '../PerfilUsuario/index.html';
         }, 1500);
-        
+
     } catch (error) {
         console.error('❌ Erro ao processar callback:', error);
         showToast('Erro ao processar autenticação', 'error');
     } finally {
         toggleLoading(false);
     }
+
+    const userInfo = await getUserInfo(tokenData.access_token);
+
+    // ✅ SALVA COM SimpleAuth
+    SimpleAuth.login({
+        nome: userInfo.name,
+        email: userInfo.email,
+        foto: userInfo.picture,
+        loginType: 'google'
+    });
+
+    // Redireciona
+    setTimeout(() => {
+        window.location.href = '../PerfilUsuario/index.html';
+    }, 1000);
+
+    const btnLogout = document.getElementById('btn-logout');
+
+    btnLogout.addEventListener('click', () => {
+        SimpleAuth.logout();
+        window.location.href = '../CadastroInicial/index.html';
+    });
 }
 
 /**
@@ -300,7 +322,7 @@ async function exchangeCodeForToken(code, codeVerifier) {
         grant_type: 'authorization_code',
         redirect_uri: CONFIG.REDIRECT_URI
     });
-    
+
     const response = await fetch(CONFIG.TOKEN_ENDPOINT, {
         method: 'POST',
         headers: {
@@ -308,12 +330,12 @@ async function exchangeCodeForToken(code, codeVerifier) {
         },
         body: params.toString()
     });
-    
+
     if (!response.ok) {
         const error = await response.json();
         throw new Error(error.error_description || 'Erro ao obter token');
     }
-    
+
     return await response.json();
 }
 
@@ -326,11 +348,11 @@ async function getUserInfo(accessToken) {
             'Authorization': `Bearer ${accessToken}`
         }
     });
-    
+
     if (!response.ok) {
         throw new Error('Erro ao obter informações do usuário');
     }
-    
+
     return await response.json();
 }
 
@@ -351,12 +373,12 @@ function checkActiveSession() {
 function logout() {
     window.currentUser = null;
     tempStorage.clear();
-    
+
     const logoutEvent = new CustomEvent('userLoggedOut');
     document.dispatchEvent(logoutEvent);
-    
+
     showToast('Logout realizado com sucesso! 👋', 'info');
-    
+
     setTimeout(() => {
         window.location.href = '../CadastroInicial/index.html';
     }, 1000);
@@ -366,7 +388,7 @@ function logout() {
 
 document.addEventListener('DOMContentLoaded', () => {
     console.log('🐾 APANIM - Sistema de autenticação iniciado');
-    
+
     // Verifica se há sessão ativa
     if (checkActiveSession()) {
         showToast('Você já está logado!', 'info');
@@ -375,18 +397,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 1500);
         return;
     }
-    
+
     // Configura o botão de login do Google
     const googleButton = document.getElementById('googleSign');
-    
+
     if (googleButton) {
         googleButton.addEventListener('click', async (e) => {
             e.preventDefault();
-            
+
             // Desabilita botão temporariamente
             toggleButton(googleButton, true);
             toggleLoading(true);
-            
+
             try {
                 await startGoogleOAuth();
             } catch (error) {
@@ -399,17 +421,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 }, 2000);
             }
         });
-        
+
         console.log('✅ Botão de login configurado');
     }
-    
+
     // Animação no botão
     if (googleButton) {
-        googleButton.addEventListener('mouseenter', function() {
+        googleButton.addEventListener('mouseenter', function () {
             this.style.transform = 'translateY(-3px) scale(1.02)';
         });
-        
-        googleButton.addEventListener('mouseleave', function() {
+
+        googleButton.addEventListener('mouseleave', function () {
             this.style.transform = 'translateY(0) scale(1)';
         });
     }
@@ -422,7 +444,7 @@ if (window.location.pathname.includes('oauth2callback')) {
     const code = params.get('code');
     const state = params.get('state');
     const error = params.get('error');
-    
+
     // Envia mensagem para a janela pai
     if (window.opener) {
         window.opener.postMessage({ code, state, error }, window.location.origin);
