@@ -83,9 +83,11 @@ function criarCardAnimal(animal) {
     // Calcular período de desaparecimento
     const periodo = calcularPeriodo(animal.dataDesaparecimento);
     
-    // Verificar se é urgente (menos de 7 dias)
+    // Calcular dias desaparecido
     const diasDesaparecido = calcularDiasDesaparecido(animal.dataDesaparecimento);
-    const isUrgente = diasDesaparecido <= 7;
+    
+    // Criar badge urgente com texto dinâmico
+    const badgeUrgente = criarBadgeUrgente(diasDesaparecido);
     
     // Formatar vacinas
     const vacinasTexto = animal.vacinas && animal.vacinas.length > 0 
@@ -96,11 +98,6 @@ function criarCardAnimal(animal) {
     const badgeTipo = animal.especie === 'cachorro' 
         ? '<span class="badge-tipo badge-cachorro">🐕 Cachorro</span>'
         : '<span class="badge-tipo badge-gato">🐱 Gato</span>';
-    
-    // Badge urgente
-    const badgeUrgente = isUrgente 
-        ? '<span class="badge-urgente">URGENTE</span>' 
-        : '';
     
     // Imagem
     const imagemSrc = animal.imagem || '../../assets/images/dog_sentado.svg';
@@ -119,7 +116,10 @@ function criarCardAnimal(animal) {
                  data-porte="${animal.porte}"
                  data-cor="${animal.cor}"
                  data-bairro="${animal.localizacao}"
-                 data-periodo="${periodo}">
+                 data-periodo="${periodo}"
+                 onclick="abrirPerfil('${animal.id}')"
+                 style="cursor: pointer;"
+                 title="Clique para ver o perfil completo de ${animal.nome}">
             <div class="card-imagem">
                 <img src="${imagemSrc}" 
                      alt="${animal.nome} - ${animal.especie} ${animal.raca} perdido" 
@@ -184,12 +184,32 @@ function criarCardAnimal(animal) {
                 <button class="btn-contato" 
                         type="button"
                         data-animal-id="${animal.id}"
-                        aria-label="Entrar em contato sobre ${animal.nome}">
+                        aria-label="Entrar em contato sobre ${animal.nome}"
+                        onclick="event.stopPropagation(); abrirContato('${animal.id}', '${animal.nome}');">
                      📞 Vi este Animal
                 </button>
             </div>
         </article>
     `;
+}
+
+// ===== ABRIR PERFIL DO ANIMAL =====
+function abrirPerfil(animalId) {
+    window.location.href = `../PerfilAnimal/index.html?id=${animalId}&tipo=perdido`;
+}
+
+// ===== CRIAR BADGE URGENTE COM TEXTO DINÂMICO =====
+function criarBadgeUrgente(diasDesaparecido) {
+    if (diasDesaparecido === 0) {
+        return '<span class="badge-urgente">URGENTE: Perdido hoje!</span>';
+    } else if (diasDesaparecido === 1) {
+        return '<span class="badge-urgente">URGENTE: Perdido há 1 dia</span>';
+    } else if (diasDesaparecido <= 7) {
+        return `<span class="badge-urgente">URGENTE: Perdido há ${diasDesaparecido} dias</span>`;
+    } else {
+        // Não mostra badge para animais perdidos há mais de 7 dias
+        return '';
+    }
 }
 
 // ===== FUNÇÕES AUXILIARES =====
@@ -207,8 +227,10 @@ function calcularPeriodo(dataDesaparecimento) {
 function calcularDiasDesaparecido(dataDesaparecimento) {
     if (!dataDesaparecimento) return 0;
     
-    const data = new Date(dataDesaparecimento);
+    const data = new Date(dataDesaparecimento + 'T00:00:00');
     const hoje = new Date();
+    hoje.setHours(0, 0, 0, 0);
+    
     const diff = hoje - data;
     return Math.floor(diff / (1000 * 60 * 60 * 24));
 }
@@ -255,14 +277,6 @@ function configurarFiltros() {
             e.preventDefault();
             aplicarFiltros();
         });
-
-        // ❌ REMOVIDO: Event listeners de 'change' nos selects
-        // const selects = form.querySelectorAll('.select-filtro');
-        // selects.forEach(select => {
-        //     select.addEventListener('change', aplicarFiltros);
-        // });
-        
-        // ✅ AGORA: Os filtros só são aplicados ao clicar no botão "Aplicar Filtros"
     }
 }
 
@@ -357,8 +371,8 @@ function atualizarContador(quantidade) {
         }
 
         const texto = quantidade === 1 
-            ? '1 animal procurado' 
-            : `${quantidade} animais procurados`;
+            ? '1 animal encontrado' 
+            : `${quantidade} animais encontrados`;
         
         contador.textContent = texto;
     }
@@ -404,7 +418,8 @@ function configurarBotoesContato() {
     const botoesContato = document.querySelectorAll('.btn-contato');
     
     botoesContato.forEach(botao => {
-        botao.addEventListener('click', function() {
+        botao.addEventListener('click', function(e) {
+            e.stopPropagation();
             const animalId = this.getAttribute('data-animal-id');
             const nomeAnimal = this.closest('.card-animal').querySelector('.nome-animal').textContent;
             
@@ -414,47 +429,92 @@ function configurarBotoesContato() {
 }
 
 // ===== ABRIR CONTATO =====
-function abrirContato(animalId, nomeAnimal) {
-    const card = document.querySelector(`[data-animal-id="${animalId}"]`);
-    
-    if (card) {
-        const contatoInfo = card.querySelector('.contato-info');
-        const paragrafos = contatoInfo.querySelectorAll('p');
+async function abrirContato(animalId, nomeAnimal) {
+    try {
+        let animais = [];
         
-        let email = '';
-        let telefone = '';
+        if (storageDisponivel()) {
+            const resultado = await window.storage.get('animais_perdidos', true);
+            if (resultado && resultado.value) {
+                animais = JSON.parse(resultado.value);
+            }
+        } else {
+            const dados = localStorage.getItem('animais_perdidos');
+            if (dados) {
+                animais = JSON.parse(dados);
+            }
+        }
         
-        paragrafos.forEach(p => {
-            const texto = p.textContent;
-            if (texto.includes('📧')) {
-                email = texto.replace('📧 ', '').trim();
-            }
-            if (texto.includes('📱')) {
-                telefone = texto.replace('📱 ', '').trim();
-            }
-        });
-
-        mostrarModalContato(nomeAnimal, email, telefone);
+        const animal = animais.find(a => a.id === animalId);
+        
+        if (animal) {
+        await mostrarModalContato(nomeAnimal, animal.emailContato, animal.telefoneContato);
+        } else {
+            await alertaErro('Erro', 'Erro ao buscar informações do animal. Tente novamente.');
+        }
+    } catch (error) {
+        console.error('Erro ao abrir contato:', error);
+        alert('Erro ao processar sua solicitação. Tente novamente.');
     }
 }
 
 // ===== MOSTRAR MODAL DE CONTATO =====
-function mostrarModalContato(nomeAnimal, email, telefone) {
-    const mensagem = `Você está prestes a entrar em contato sobre ${nomeAnimal}.\n\n` +
-                    (email ? `Email: ${email}\n` : '') +
-                    (telefone ? `Telefone: ${telefone}\n` : '') +
-                    `\nDeseja abrir seu aplicativo de email?`;
-
-    if (confirm(mensagem)) {
-        const assunto = encodeURIComponent(`Vi o animal perdido: ${nomeAnimal}`);
-        const corpo = encodeURIComponent(`Olá,\n\nEu vi o animal ${nomeAnimal} que está perdido.\n\nGostaria de fornecer informações sobre o paradeiro.\n\nAguardo retorno.`);
+async function mostrarModalContato(nomeAnimal, email, telefone) {
+    const confirmado = await confirmarModal(
+        '📞 Informações sobre ' + nomeAnimal,
+        'Você quer entrar em contato sobre <strong>' + nomeAnimal + '</strong> que está perdido(a).<br><br>Deseja abrir seu aplicativo de email?',
+        {
+            email: email || null,
+            telefone: telefone || null
+        }
+    );
+    
+    if (confirmado) {
+        const assunto = encodeURIComponent('Informações sobre: ' + nomeAnimal);
+        const corpo = encodeURIComponent('Olá,\n\nVi o anúncio sobre ' + nomeAnimal + ' perdido(a).\n\nGostaria de fornecer informações sobre o paradeiro.\n\nAguardo retorno.');
         
         if (email) {
-            window.location.href = `mailto:${email}?subject=${assunto}&body=${corpo}`;
+            window.location.href = 'mailto:' + email + '?subject=' + assunto + '&body=' + corpo;
+        } else {
+            await alertaAviso(
+                'Email Indisponível',
+                'Email não disponível. Entre em contato pelo telefone: ' + telefone
+            );
         }
     }
 }
 
 // ===== LOG PARA DEBUG =====
-console.log('✅ Script de listagem carregado');
+console.log('✅ Script de listagem de animais perdidos carregado');
 console.log('📦 window.storage disponível?', storageDisponivel());
+
+// ===== FUNÇÃO DE TESTE =====
+window.testarStoragePerdidos = async function() {
+    console.log('🔍 Testando storage de animais perdidos...');
+    
+    if (storageDisponivel()) {
+        try {
+            const resultado = await window.storage.get('animais_perdidos', true);
+            console.log('📦 Resultado:', resultado);
+            
+            if (resultado && resultado.value) {
+                const animais = JSON.parse(resultado.value);
+                console.log('🐾 Total de animais perdidos:', animais.length);
+                console.log('🐾 Animais:', animais);
+            } else {
+                console.log('⚠️ Nenhum dado encontrado');
+            }
+        } catch (error) {
+            console.error('❌ Erro:', error);
+        }
+    } else {
+        const dados = localStorage.getItem('animais_perdidos');
+        if (dados) {
+            const animais = JSON.parse(dados);
+            console.log('📦 localStorage - Total:', animais.length);
+            console.log('🐾 Animais:', animais);
+        } else {
+            console.log('⚠️ Nenhum dado no localStorage');
+        }
+    }
+}

@@ -607,7 +607,7 @@ body::-webkit-scrollbar-thumb:hover {
 .select-filtro:focus-visible,
 .btn:focus-visible,
 .btn-contato:focus-visible {
-    outline: 3px solid #ef4444;
+     outline: 3px solid #5A0609;
     outline-offset: 2px;
 }
 
@@ -647,3 +647,4 @@ body::-webkit-scrollbar-thumb:hover {
         color: #fff;
     }
 }
+
