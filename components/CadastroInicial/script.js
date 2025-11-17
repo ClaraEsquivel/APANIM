@@ -420,6 +420,8 @@ function monitorPerformance() {
     }
 }
 
+
+
 // ============= INICIALIZAÇÃO =============
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -439,7 +441,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initKeyboardNavigation();
     
     // Detecta modo escuro
-    detectDarkMode();
+    //detectDarkMode();
     
     // Tracking
     trackPageView();
