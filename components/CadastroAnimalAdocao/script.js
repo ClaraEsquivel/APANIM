@@ -14,6 +14,7 @@ function storageDisponivel() {
 function inicializarFormulario() {
     configurarVacinacao();
     configurarPreviewImagem();
+    configurarPreviewMidiasExtras();
     configurarContadorCaracteres();
     configurarMascaraTelefone();
     configurarSubmit();
@@ -35,7 +36,6 @@ function configurarVacinacao() {
         vacinadoNao.addEventListener('change', function() {
             if (this.checked) {
                 vacinasGrupo.style.display = 'none';
-                // Desmarcar todas as vacinas
                 const checkboxes = vacinasGrupo.querySelectorAll('input[type="checkbox"]');
                 checkboxes.forEach(cb => cb.checked = false);
             }
@@ -43,7 +43,7 @@ function configurarVacinacao() {
     }
 }
 
-// ===== PREVIEW DA IMAGEM =====
+// ===== PREVIEW DA IMAGEM PRINCIPAL =====
 function configurarPreviewImagem() {
     const inputImagem = document.getElementById('imagem-animal');
     const previewImagem = document.getElementById('preview-imagem');
@@ -61,6 +61,66 @@ function configurarPreviewImagem() {
                 };
                 
                 reader.readAsDataURL(file);
+            }
+        });
+    }
+}
+
+// ===== PREVIEW DE MÍDIAS EXTRAS (FOTOS E VÍDEOS) =====
+function configurarPreviewMidiasExtras() {
+    const inputMidias = document.getElementById('midias-extras');
+    const previewContainer = document.getElementById('preview-midias-extras');
+
+    if (inputMidias && previewContainer) {
+        inputMidias.addEventListener('change', function(e) {
+            previewContainer.innerHTML = '';
+            const files = Array.from(e.target.files);
+            
+            if (files.length > 0) {
+                previewContainer.style.display = 'grid';
+                
+                files.forEach((file, index) => {
+                    const previewItem = document.createElement('div');
+                    previewItem.className = 'preview-item';
+                    
+                    if (file.type.startsWith('image/')) {
+                        const img = document.createElement('img');
+                        const reader = new FileReader();
+                        
+                        reader.onload = function(event) {
+                            img.src = event.target.result;
+                        };
+                        
+                        reader.readAsDataURL(file);
+                        previewItem.appendChild(img);
+                        
+                    } else if (file.type.startsWith('video/')) {
+                        const video = document.createElement('video');
+                        video.controls = true;
+                        const reader = new FileReader();
+                        
+                        reader.onload = function(event) {
+                            video.src = event.target.result;
+                        };
+                        
+                        reader.readAsDataURL(file);
+                        previewItem.appendChild(video);
+                    }
+                    
+                    const badge = document.createElement('span');
+                    badge.className = 'preview-badge';
+                    badge.textContent = file.type.startsWith('video/') ? '📹 Vídeo' : '📷 Foto';
+                    previewItem.appendChild(badge);
+                    
+                    previewContainer.appendChild(previewItem);
+                });
+                
+                const info = document.createElement('p');
+                info.className = 'preview-info';
+                info.textContent = `${files.length} arquivo(s) selecionado(s)`;
+                previewContainer.appendChild(info);
+            } else {
+                previewContainer.style.display = 'none';
             }
         });
     }
@@ -143,7 +203,6 @@ function validarFormulario() {
     const emailContato = document.getElementById('email-contato').value.trim();
     const telefoneContato = document.getElementById('telefone-contato').value.trim();
 
-    // Validações básicas
     if (!nome) {
         alert('Por favor, informe o nome do animal.');
         return false;
@@ -200,7 +259,7 @@ function validarFormulario() {
     }
 
     if (!imagem) {
-        alert('Por favor, selecione uma foto do animal.');
+        alert('Por favor, selecione uma foto do anúncio.');
         return false;
     }
 
@@ -209,7 +268,6 @@ function validarFormulario() {
         return false;
     }
 
-    // Validar se pelo menos um contato foi fornecido
     if (!emailContato && !telefoneContato) {
         alert('Por favor, informe pelo menos um meio de contato (email ou telefone).');
         return false;
@@ -268,18 +326,28 @@ async function salvarAnimal() {
         
         console.log('✅ Total de animais salvos:', animais.length);
         
-        alert('Animal cadastrado com sucesso! ✅\n\nO animal foi adicionado à lista de animais para adoção.');
+       await alertaSucesso(
+        'Animal Cadastrado! ✅',
+        'O animal foi adicionado à lista de animais para adoção com sucesso.');
         
         document.getElementById('cadastro-animal').reset();
         document.getElementById('preview-imagem').style.display = 'none';
+        document.getElementById('preview-midias-extras').style.display = 'none';
         document.getElementById('vacinas-grupo').style.display = 'none';
         document.getElementById('contador-caracteres').textContent = '100';
         
         botao.textContent = textoOriginal;
         botao.disabled = false;
         
-        if (confirm('Deseja visualizar a lista de animais para adoção?')) {
+        const visualizar = await confirmarModal(
+            'Ver Lista de Animais?',
+            'Deseja visualizar a lista de animais agora?',
+            null
+        );
+
+        if (visualizar) {
             window.location.href = '../AdocaoAnimal/index.html';
+            
         }
         
     } catch (error) {
@@ -319,8 +387,12 @@ async function coletarDadosFormulario() {
     const telefoneContato = document.getElementById('telefone-contato').value.trim();
     const resumo = document.getElementById('resumo-animal').value.trim();
     
+    // Processar imagem principal
     const imagemFile = document.getElementById('imagem-animal').files[0];
     const imagem = await converterImagemParaBase64(imagemFile);
+    
+    // Processar mídias extras (fotos e vídeos para o perfil)
+    const midiasExtras = await processarMidiasExtras();
     
     return {
         id: id,
@@ -341,8 +413,31 @@ async function coletarDadosFormulario() {
         telefoneContato: telefoneContato,
         resumo: resumo,
         imagem: imagem,
+        midiasExtras: midiasExtras,
         dataCadastro: new Date().toISOString()
     };
+}
+
+// ===== PROCESSAR MÍDIAS EXTRAS =====
+async function processarMidiasExtras() {
+    const inputMidias = document.getElementById('midias-extras');
+    const midiasExtras = [];
+    
+    if (inputMidias && inputMidias.files.length > 0) {
+        const files = Array.from(inputMidias.files);
+        
+        for (const file of files) {
+            const mediaBase64 = await converterImagemParaBase64(file);
+            
+            midiasExtras.push({
+                tipo: file.type.startsWith('video/') ? 'video' : 'imagem',
+                src: mediaBase64,
+                nome: file.name
+            });
+        }
+    }
+    
+    return midiasExtras;
 }
 
 // ===== CONVERTER IMAGEM PARA BASE64 =====
