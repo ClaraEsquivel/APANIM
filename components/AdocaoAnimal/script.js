@@ -89,36 +89,17 @@ function criarCardAnimalAdocao(animal) {
             <div class="card-info">
                 <h3 class="nome-animal">${animal.nome}</h3>
                 <dl class="detalhes-animal">
-                    <dt>Espécie:</dt>
-                    <dd><span class="icone-info">🐾</span> ${animal.especie === 'cachorro' ? 'Cachorro' : 'Gato'}</dd>
-                    <dt>Raça:</dt>
-                    <dd><span class="icone-info">${animal.especie === 'cachorro' ? '🐕' : '🐱'}</span> ${animal.raca}</dd>
-                    <dt>Sexo:</dt>
-                    <dd class="sexo" data-sexo="${animal.sexo}"><span class="icone-info">${animal.sexo === 'macho' ? '♂' : '♀'}</span> ${animal.sexo === 'macho' ? 'Macho' : 'Fêmea'}</dd>
+                
                     <dt>Idade:</dt>
                     <dd><span class="icone-info">🎂</span> ${animal.idade}</dd>
-                    <dt>Porte:</dt>
-                    <dd><span class="icone-info">📏</span> ${capitalize(animal.porte)}</dd>
-                    <dt>Vacinado:</dt>
-                    <dd><span class="icone-info">💉</span> ${vacinasTexto}</dd>
-                    <dt>Castrado:</dt>
-                    <dd><span class="icone-info">✂️</span> ${animal.castrado === 'sim' ? 'Sim' : 'Não'}</dd>
-                    <dt>Vermifugado:</dt>
-                    <dd><span class="icone-info">💊</span> ${animal.vermifugado === 'sim' ? 'Sim' : 'Não'}</dd>
+
+                    <dt>Sexo:</dt>
+                    <dd class="sexo" data-sexo="${animal.sexo}"><span class="icone-info">${animal.sexo === 'macho' ? '♂' : '♀'}</span> ${animal.sexo === 'macho' ? 'Macho' : 'Fêmea'}</dd>
+
                     <dt>Localização:</dt>
                     <dd><span class="icone-info">📍</span> ${bairroFormatado}, Salvador-BA</dd>
+
                 </dl>
-
-                <div class="resumo">
-                    <p><strong>Resumo:</strong> ${animal.resumo || 'Informações não disponíveis'}</p>
-                </div>
-
-                <div class="contato-info">
-                    <p><strong>Contato:</strong></p>
-                    ${animal.emailContato ? `<p>📧 ${animal.emailContato}</p>` : ''}
-                    ${animal.telefoneContato ? `<p>📱 ${animal.telefoneContato}</p>` : ''}
-                </div>
-
                 <button class="btn-adotar" type="button" data-animal-id="${animal.id}" aria-label="Manifestar interesse em adotar ${animal.nome}" onclick="event.stopPropagation(); solicitarAdocao('${animal.id}', '${animal.nome}');">
                     🐾 Quero Adotar
                 </button>
