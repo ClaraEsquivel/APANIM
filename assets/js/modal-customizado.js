@@ -242,7 +242,7 @@ function confirmarModal(titulo, mensagem, contato = null) {
     return modalApanim.confirmar({
         titulo: titulo,
         mensagem: mensagem,
-        textoConfirmar: 'Enviar Email',
+        textoConfirmar: 'Sim, gostaria',
         textoCancelar: 'Cancelar',
         contato: contato
     });
@@ -311,5 +311,6 @@ function alertaInfo(titulo, mensagem) {
         textoOk: 'Entendi'
     });
 }
+
 
 console.log('✅ Modal customizado APANIM carregado');
