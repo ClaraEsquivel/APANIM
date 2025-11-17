@@ -78,7 +78,7 @@ function adicionarAnimaisNaGrid(animais) {
         grid.insertAdjacentHTML('beforeend', cardHtml);
     });
     
-    configurarBotoesInteresse();
+    configurarBotoesInteress();
 }
 
 // ===== CRIAR HTML DO CARD =====
@@ -91,9 +91,9 @@ function criarCardAnimal(animal) {
         ? `Sim (${formatarVacinas(animal.vacinas)})` 
         : (animal.vacinado === 'sim' ? 'Sim' : 'Não');
     
-    // Badge de tipo
+    // Badge de tipo (ESQUERDA)
     const badgeTipo = animal.especie === 'cachorro' 
-        ? '<span class="badge-tipo badge-cachorro">🐕 Cachorro</span>'
+        ? '<span class="badge-tipo badge-cachorro">🐕 Gato</span>'
         : '<span class="badge-tipo badge-gato">🐱 Gato</span>';
     
     // Valor
@@ -117,7 +117,10 @@ function criarCardAnimal(animal) {
                  data-idade="${categoriaIdade}"
                  data-cor="${animal.cor}"
                  data-bairro="${animal.localizacao}"
-                 data-valor="${faixaValor}">
+                 data-valor="${faixaValor}"
+                 onclick="abrirPerfil('${animal.id}')"
+                 style="cursor: pointer;"
+                 title="Clique para ver o perfil completo de ${animal.nome}">
             <div class="card-imagem">
                 <img src="${imagemSrc}" 
                      alt="${animal.nome} - ${animal.especie} ${animal.raca} à venda" 
@@ -127,7 +130,7 @@ function criarCardAnimal(animal) {
                      height="200"
                      onerror="this.src='../../assets/images/dog_sentado.svg'">
                 ${badgeTipo}
-                ${badgePreco}
+                ${badgePreco}       
             </div>
             <div class="card-info">
                 <h3 class="nome-animal">${animal.nome}</h3>
@@ -143,43 +146,15 @@ function criarCardAnimal(animal) {
                     
                     <dt>Idade:</dt>
                     <dd><span class="icone-info">🎂</span> ${animal.idade}</dd>
-                    
-                    <dt>Porte:</dt>
-                    <dd><span class="icone-info">📏</span> ${capitalize(animal.porte)}</dd>
-                    
-                    <dt>Cor:</dt>
-                    <dd><span class="icone-info">🎨</span> ${animal.cor}</dd>
-                    
-                    <dt>Vacinado:</dt>
-                    <dd><span class="icone-info">💉</span> ${vacinasTexto}</dd>
-                    
-                    <dt>Castrado:</dt>
-                    <dd><span class="icone-info">✂️</span> ${animal.castrado === 'sim' ? 'Sim' : 'Não'}</dd>
-                    
-                    <dt>Vermifugado:</dt>
-                    <dd><span class="icone-info">💊</span> ${animal.vermifugado === 'sim' ? 'Sim' : 'Não'}</dd>
-                    
-                    <dt>Condição Especial:</dt>
-                    <dd><span class="icone-info">⚕️</span> ${animal.condicaoEspecial}</dd>
-                    
+                     
                     <dt>Localização:</dt>
                     <dd><span class="icone-info">📍</span> ${bairroFormatado}, Salvador-BA</dd>
                 </dl>
                 
-                <div class="resumo">
-                    <p><strong>Resumo:</strong> ${animal.resumo || 'Informações não disponíveis'}</p>
-                </div>
-                
                 <div class="preco-destaque">
                     <p class="valor">${valorFormatado}</p>
                 </div>
-                
-                <div class="contato-info">
-                    <p><strong>Contato:</strong></p>
-                    ${animal.emailContato ? `<p>📧 ${animal.emailContato}</p>` : ''}
-                    ${animal.telefoneContato ? `<p>📱 ${animal.telefoneContato}</p>` : ''}
-                </div>
-                
+               
                 <button class="btn-interessado" 
                         type="button"
                         data-animal-id="${animal.id}"
@@ -189,6 +164,11 @@ function criarCardAnimal(animal) {
             </div>
         </article>
     `;
+}
+
+// ===== ABRIR PERFIL DO ANIMAL =====
+function abrirPerfil(animalId) {
+    window.location.href = `../PerfilAnimal/index.html?id=${animalId}&tipo=venda`;
 }
 
 // ===== FUNÇÕES AUXILIARES =====
@@ -286,17 +266,8 @@ function configurarFiltros() {
             e.preventDefault();
             aplicarFiltros();
         });
-
-        // ❌ REMOVIDO: Event listeners de 'change' nos selects
-        // const selects = form.querySelectorAll('.select-filtro');
-        // selects.forEach(select => {
-        //     select.addEventListener('change', aplicarFiltros);
-        // });
-        
-        // ✅ AGORA: Os filtros só são aplicados ao clicar no botão "Aplicar Filtros"
     }
 }
-
 
 // ===== CONFIGURAÇÃO DOS BOTÕES =====
 function configurarBotoes() {
@@ -420,23 +391,23 @@ function anunciarResultados(quantidade, foiLimpo = false) {
     }
 }
 
-// ===== CONFIGURAR BOTÕES DE INTERESSE =====
-function configurarBotoesInteresse() {
-    const botoesInteresse = document.querySelectorAll('.btn-interessado');
+// ===== CONFIGURAR BOTÕES DE COMPRAR =====
+function configurarBotoesInteress() {
+    const botoesComprar = document.querySelectorAll('.btn-comprar');
     
-    botoesInteresse.forEach(botao => {
-        botao.addEventListener('click', function() {
+    botoesComprar.forEach(botao => {
+        botao.addEventListener('click', function(e) {
+            e.stopPropagation();
             const animalId = this.getAttribute('data-animal-id');
             const nomeAnimal = this.closest('.card-animal').querySelector('.nome-animal').textContent;
-            const valorAnimal = this.closest('.card-animal').querySelector('.preco-destaque .valor').textContent;
             
-            demonstrarInteresse(animalId, nomeAnimal, valorAnimal);
+            demonstrarInteresse(animalId, nomeAnimal);
         });
     });
 }
 
 // ===== DEMONSTRAR INTERESSE =====
-async function demonstrarInteresse(animalId, nomeAnimal, valorAnimal) {
+async function demonstrarInteresse(animalId, nomeAnimal) {
     try {
         let animais = [];
         
@@ -455,9 +426,10 @@ async function demonstrarInteresse(animalId, nomeAnimal, valorAnimal) {
         const animal = animais.find(a => a.id === animalId);
         
         if (animal) {
-            mostrarModalInteresse(nomeAnimal, valorAnimal, animal.emailContato, animal.telefoneContato);
+        const valorFormatado = formatarValor(animal.valor);
+        await mostrarModalCompra(nomeAnimal, valorFormatado, animal.emailContato, animal.telefoneContato);
         } else {
-            alert('Erro ao buscar informações do animal. Tente novamente.');
+            await alertaErro('Erro', 'Erro ao buscar informações do animal. Tente novamente.');
         }
         
     } catch (error) {
@@ -466,22 +438,28 @@ async function demonstrarInteresse(animalId, nomeAnimal, valorAnimal) {
     }
 }
 
-// ===== MOSTRAR MODAL DE INTERESSE =====
-function mostrarModalInteresse(nomeAnimal, valorAnimal, email, telefone) {
-    const mensagem = `Você está interessado em comprar ${nomeAnimal} por ${valorAnimal}.\n\n` +
-                    'Informações de contato do vendedor:\n' +
-                    (email ? `Email: ${email}\n` : '') +
-                    (telefone ? `Telefone: ${telefone}\n` : '') +
-                    `\nDeseja abrir seu aplicativo de email para entrar em contato?`;
-
-    if (confirm(mensagem)) {
-        const assunto = encodeURIComponent(`Interesse em comprar: ${nomeAnimal}`);
-        const corpo = encodeURIComponent(`Olá,\n\nTenho interesse em comprar o(a) ${nomeAnimal} anunciado(a) por ${valorAnimal}.\n\nGostaria de mais informações sobre o animal e as condições de compra.\n\nAguardo retorno.`);
+// ===== MOSTRAR MODAL DE COMPRA =====
+async function mostrarModalCompra(nomeAnimal, valorAnimal, email, telefone) {
+    const confirmado = await confirmarModal(
+        '💰 Comprar ' + nomeAnimal,
+        'Você está interessado em comprar <strong>' + nomeAnimal + '</strong> por <strong>' + valorAnimal + '</strong>.<br><br>Deseja abrir seu aplicativo de email?',
+        {
+            email: email || null,
+            telefone: telefone || null
+        }
+    );
+    
+    if (confirmado) {
+        const assunto = encodeURIComponent('Interesse em comprar: ' + nomeAnimal);
+        const corpo = encodeURIComponent('Olá,\n\nTenho interesse em comprar o(a) ' + nomeAnimal + ' anunciado(a) por ' + valorAnimal + '.\n\nGostaria de mais informações sobre o animal e as condições de compra.\n\nAguardo retorno.');
         
         if (email) {
-            window.location.href = `mailto:${email}?subject=${assunto}&body=${corpo}`;
+            window.location.href = 'mailto:' + email + '?subject=' + assunto + '&body=' + corpo;
         } else {
-            alert('Email de contato não disponível. Por favor, entre em contato pelo telefone: ' + telefone);
+            await alertaAviso(
+                'Email Indisponível',
+                'Email não disponível. Entre em contato pelo telefone: ' + telefone
+            );
         }
     }
 }
@@ -491,8 +469,8 @@ console.log('✅ Script de listagem de compra carregado');
 console.log('📦 window.storage disponível?', storageDisponivel());
 
 // ===== FUNÇÃO DE DEBUG =====
-window.testarStorageListagem = async function() {
-    console.log('🔍 Testando storage na página de listagem...');
+window.testarStorageCompra = async function() {
+    console.log('🔍 Testando storage na página de compra...');
     
     if (storageDisponivel()) {
         try {
@@ -521,47 +499,4 @@ window.testarStorageListagem = async function() {
     }
 }
 
-console.log('💡 Execute window.testarStorageListagem() no console para verificar os dados');
-
-// ===== CSS ADICIONAL PARA RESUMO E CONTATO =====
-// Adicione ao styles.css:
-/*
-.resumo {
-    background: #fce4e4;
-    border-left: 4px solid #a66666;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    border-radius: 8px;
-}
-
-.resumo p {
-    margin: 0;
-    font-size: 0.9rem;
-    line-height: 1.5;
-    color: #000000;
-}
-
-.resumo strong {
-    color: #a66666;
-}
-
-.contato-info {
-    background: #f0f9ff;
-    border-left: 4px solid #3b82f6;
-    padding: 1rem;
-    margin-bottom: 1.5rem;
-    border-radius: 8px;
-}
-
-.contato-info p {
-    margin: 0.25rem 0;
-    font-size: 0.9rem;
-    color: #1e3a8a;
-}
-
-.contato-info p:first-child {
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-    color: #1e40af;
-}
-*/
+console.log('💡 Execute window.testarStorageCompra() no console para verificar os dados');
