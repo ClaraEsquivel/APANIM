@@ -32,5 +32,11 @@ public class AnimalAdocao extends AnimalModel {
         this.vacinas = vacinas;
     }
 
-    
+    public List<String> getVacinas() {
+        return vacinas;
+    }
+
+    public void setVacinas(List<String> vacinas) {
+        this.vacinas = vacinas;
+    }
 }

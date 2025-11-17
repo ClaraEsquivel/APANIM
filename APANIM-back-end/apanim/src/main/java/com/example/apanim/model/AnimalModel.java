@@ -34,7 +34,7 @@ public abstract class AnimalModel {
     private Boolean vermifugado;
     private Boolean castrado;
 
-    @Lob
+    @Column(length = 100)
     private String resumo;
 
     @Column(length = 1024)
@@ -68,5 +68,133 @@ public abstract class AnimalModel {
         this.usuario = usuario;
     }
 
-   
+    // Getters
+    public Long getId() {
+        return id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public FaixaEtariaAnimal getFaixaEtariaAnimal() {
+        return faixaEtariaAnimal;
+    }
+
+    public String getRaca() {
+        return raca;
+    }
+
+    public String getPorte() {
+        return porte;
+    }
+
+    public SexoAnimal getSexoAnimal() {
+        return sexoAnimal;
+    }
+
+    public String getEspecie() {
+        return especie;
+    }
+
+    public String getCondicaoEspecial() {
+        return condicaoEspecial;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public String getCor() {
+        return cor;
+    }
+
+    public Boolean getVacinado() {
+        return vacinado;
+    }
+
+    public Boolean getVermifugado() {
+        return vermifugado;
+    }
+
+    public Boolean getCastrado() {
+        return castrado;
+    }
+
+    public String getResumo() {
+        return resumo;
+    }
+
+    public String getFotoUrl() {
+        return fotoUrl;
+    }
+
+    public UsuarioModel getUsuario() {
+        return usuario;
+    }
+
+    // Setters
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setFaixaEtariaAnimal(FaixaEtariaAnimal faixaEtariaAnimal) {
+        this.faixaEtariaAnimal = faixaEtariaAnimal;
+    }
+
+    public void setRaca(String raca) {
+        this.raca = raca;
+    }
+
+    public void setPorte(String porte) {
+        this.porte = porte;
+    }
+
+    public void setSexoAnimal(SexoAnimal sexoAnimal) {
+        this.sexoAnimal = sexoAnimal;
+    }
+
+    public void setEspecie(String especie) {
+        this.especie = especie;
+    }
+
+    public void setCondicaoEspecial(String condicaoEspecial) {
+        this.condicaoEspecial = condicaoEspecial;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+    public void setCor(String cor) {
+        this.cor = cor;
+    }
+
+    public void setVacinado(Boolean vacinado) {
+        this.vacinado = vacinado;
+    }
+
+    public void setVermifugado(Boolean vermifugado) {
+        this.vermifugado = vermifugado;
+    }
+
+    public void setCastrado(Boolean castrado) {
+        this.castrado = castrado;
+    }
+
+    public void setResumo(String resumo) {
+        this.resumo = resumo;
+    }
+
+    public void setFotoUrl(String fotoUrl) {
+        this.fotoUrl = fotoUrl;
+    }
+
+    public void setUsuario(UsuarioModel usuario) {
+        this.usuario = usuario;
+    }
 }

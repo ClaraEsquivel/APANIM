@@ -12,11 +12,7 @@ import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
 
-@Setter
-@Getter
 @Entity
 @Table(name = "tab_animais_perdidos")
 public class AnimalPerdido extends AnimalModel {
@@ -42,4 +38,19 @@ public class AnimalPerdido extends AnimalModel {
         this.vacinas = vacinas;
     }
 
+    public LocalDate getData() {
+        return data;
+    }
+
+    public void setData(LocalDate data) {
+        this.data = data;
+    }
+
+    public List<String> getVacinas() {
+        return vacinas;
+    }
+
+    public void setVacinas(List<String> vacinas) {
+        this.vacinas = vacinas;
+    }
 }

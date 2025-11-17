@@ -3,18 +3,11 @@ package com.example.apanim.model;
 import com.example.apanim.Enum.FaixaEtariaAnimal;
 import com.example.apanim.Enum.SexoAnimal;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.util.List;
-import jakarta.persistence.ElementCollection;
-import jakarta.persistence.CollectionTable;
-import jakarta.persistence.JoinColumn; 
-import jakarta.persistence.Column;
 
-@Getter
-@Setter
+
 @Entity
 @Table(name = "tab_animais_compra")
 public class AnimalCompra {
@@ -42,6 +35,8 @@ public class AnimalCompra {
     private Boolean vacinado;
     private Boolean vermifugado;
     private Boolean castrado;
+
+    @Column(length = 100)
     private String resumo;
 
     @ElementCollection
@@ -90,5 +85,166 @@ public class AnimalCompra {
         this.valorDoAnimal = valorDoAnimal;
         this.fotoUrl = fotoUrl;
     }
-    
+
+    // Getters
+    public Long getId() {
+        return id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public FaixaEtariaAnimal getFaixaEtariaAnimal() {
+        return faixaEtariaAnimal;
+    }
+
+    public String getRaca() {
+        return raca;
+    }
+
+    public String getPorte() {
+        return porte;
+    }
+
+    public SexoAnimal getSexoAnimal() {
+        return sexoAnimal;
+    }
+
+    public String getEspecie() {
+        return especie;
+    }
+
+    public String getCondicaoEspecial() {
+        return condicaoEspecial;
+    }
+
+    public String getLogradouro() {
+        return logradouro;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public String getCor() {
+        return cor;
+    }
+
+    public Boolean getVacinado() {
+        return vacinado;
+    }
+
+    public Boolean getVermifugado() {
+        return vermifugado;
+    }
+
+    public Boolean getCastrado() {
+        return castrado;
+    }
+
+    public String getResumo() {
+        return resumo;
+    }
+
+    public List<String> getVacinas() {
+        return vacinas;
+    }
+
+    public VendedorModel getVendedor() {
+        return vendedor;
+    }
+
+    public Boolean getPedigree() {
+        return pedigree;
+    }
+
+    public BigDecimal getValorDoAnimal() {
+        return valorDoAnimal;
+    }
+
+    public String getFotoUrl() {
+        return fotoUrl;
+    }
+
+    // Setters
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setFaixaEtariaAnimal(FaixaEtariaAnimal faixaEtariaAnimal) {
+        this.faixaEtariaAnimal = faixaEtariaAnimal;
+    }
+
+    public void setRaca(String raca) {
+        this.raca = raca;
+    }
+
+    public void setPorte(String porte) {
+        this.porte = porte;
+    }
+
+    public void setSexoAnimal(SexoAnimal sexoAnimal) {
+        this.sexoAnimal = sexoAnimal;
+    }
+
+    public void setEspecie(String especie) {
+        this.especie = especie;
+    }
+
+    public void setCondicaoEspecial(String condicaoEspecial) {
+        this.condicaoEspecial = condicaoEspecial;
+    }
+
+    public void setLogradouro(String logradouro) {
+        this.logradouro = logradouro;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+    public void setCor(String cor) {
+        this.cor = cor;
+    }
+
+    public void setVacinado(Boolean vacinado) {
+        this.vacinado = vacinado;
+    }
+
+    public void setVermifugado(Boolean vermifugado) {
+        this.vermifugado = vermifugado;
+    }
+
+    public void setCastrado(Boolean castrado) {
+        this.castrado = castrado;
+    }
+
+    public void setResumo(String resumo) {
+        this.resumo = resumo;
+    }
+
+    public void setVacinas(List<String> vacinas) {
+        this.vacinas = vacinas;
+    }
+
+    public void setVendedor(VendedorModel vendedor) {
+        this.vendedor = vendedor;
+    }
+
+    public void setPedigree(Boolean pedigree) {
+        this.pedigree = pedigree;
+    }
+
+    public void setValorDoAnimal(BigDecimal valorDoAnimal) {
+        this.valorDoAnimal = valorDoAnimal;
+    }
+
+    public void setFotoUrl(String fotoUrl) {
+        this.fotoUrl = fotoUrl;
+    }
 }
