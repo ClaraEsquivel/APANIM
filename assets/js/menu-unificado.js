@@ -42,11 +42,11 @@ function inserirMenu() {
     const nav = document.querySelector('nav[role="navigation"]');
     if (nav) {
         nav.innerHTML = criarMenuSanduiche();
-        
+
         // Adiciona evento para controlar o scroll quando o menu é aberto/fechado
         const menuToggle = document.getElementById('menu_toggle');
         if (menuToggle) {
-            menuToggle.addEventListener('change', function() {
+            menuToggle.addEventListener('change', function () {
                 document.body.classList.toggle('menu-open', this.checked);
             });
         }
