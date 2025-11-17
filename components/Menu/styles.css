@@ -90,10 +90,7 @@ body::-webkit-scrollbar-thumb:hover {
     background: white;
     transform: translateY(-2px);
     box-shadow: 0 4px 15px rgba(90, 6, 9, 0.2);
-}/* Reset e configurações básicas */
-
-
-
+}
 
 /* Classe para screen readers */
 .sr-only {
@@ -108,9 +105,7 @@ body::-webkit-scrollbar-thumb:hover {
     border: 0;
 }
 
-
-
-/* ===== SEÇÃO DE ANIMAIS ===== */
+/* ===== SEÇÃO DE ANIMAIS PARA ADOÇÃO ===== */
 .secao-adocao {
     margin-top: 2rem;
 }
@@ -145,7 +140,7 @@ body::-webkit-scrollbar-thumb:hover {
     gap: 2rem;
 }
 
-/* ===== SEÇÃO DE ANIMAIS COMPRA ===== */
+/* ===== SEÇÃO DE ANIMAIS PARA COMPRA ===== */
 .secao-compra {
     margin-top: -80px;
 }
@@ -159,7 +154,7 @@ body::-webkit-scrollbar-thumb:hover {
     gap: 1rem;
 }
 
-.titulo-resultados-compra{
+.titulo-resultados-compra {
     font-size: 1.8rem;
     font-weight: 600;
     color: #000000;
@@ -168,24 +163,58 @@ body::-webkit-scrollbar-thumb:hover {
 .contador-resultados-compra {
     color: #000000;
     font-size: 1rem;
-    padding: 0.5rem 0.5rem;
+    padding: 0.5rem 1rem;
     background: #fce4e4;
     border-radius: 20px;
     border: 1px solid #5A0609;
 }
 
-.grid-animais {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+/* ===== SEÇÃO DE ANIMAIS PERDIDOS ===== ✅ ADICIONADO */
+.secao-perdidos {
+    margin-top: -80px;
+}
+
+.cabecalho-resultados-perdidos {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.titulo-resultados-perdidos {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #000000;
+}
+
+.contador-resultados-perdidos {
+    color: #000000;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    background: #fee;
+    border-radius: 20px;
+    border: 1px solid #dc2626;
+    animation: pulse-perdido 2s infinite;
+}
+
+@keyframes pulse-perdido {
+    0%, 100% {
+        background: #fee;
+        border-color: #5A0609;
+    }
+    50% {
+        background: #fcc;
+        border-color: #5A0609;
+    }
 }
 
 /* ===== BARRA DE NAVEGAÇÃO DOS BOTÕES ===== */
 .conteudo_principal {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
     border: 1px solid #fce4e4;
-    /* margin: 50px; */
-    margin-top: -50px ;
+    margin-top: -50px;
     padding: 3.5rem;
     border-radius: 30px;
 }
@@ -515,6 +544,20 @@ body::-webkit-scrollbar-thumb:hover {
         gap: 1.5rem;
         text-align: center;
     }
+
+    /* Ajustes dos contadores em mobile */
+    .contador-resultados,
+    .contador-resultados-compra,
+    .contador-resultados-perdidos {
+        font-size: 0.85rem;
+        padding: 0.4rem 0.8rem;
+    }
+
+    .titulo-resultados,
+    .titulo-resultados-compra,
+    .titulo-resultados-perdidos {
+        font-size: 1.5rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -561,6 +604,28 @@ body::-webkit-scrollbar-thumb:hover {
     #logo_apanim {
         height: 100px;
     }
+
+    /* Ajustes extras para contadores em telas muito pequenas */
+    .contador-resultados,
+    .contador-resultados-compra,
+    .contador-resultados-perdidos {
+        font-size: 0.75rem;
+        padding: 0.3rem 0.6rem;
+    }
+
+    .titulo-resultados,
+    .titulo-resultados-compra,
+    .titulo-resultados-perdidos {
+        font-size: 1.3rem;
+    }
+
+    .cabecalho-resultados,
+    .cabecalho-resultados-compra,
+    .cabecalho-resultados-perdidos {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
 }
 
 /* ===== MELHORIAS DE ACESSIBILIDADE ===== */
@@ -580,6 +645,11 @@ body::-webkit-scrollbar-thumb:hover {
     outline-offset: 2px;
 }
 
+.item_lateral:focus-visible {
+    outline: 3px solid #5A0609;
+    outline-offset: 2px;
+}
+
 /* ===== HOVER STATES ADICIONAIS ===== */
 .conteudo_principal:hover {
     box-shadow: 0 6px 30px rgba(0, 0, 0, 0.08);
@@ -590,4 +660,3 @@ body::-webkit-scrollbar-thumb:hover {
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
     transition: box-shadow 0.3s ease;
 }
-
