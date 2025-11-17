@@ -162,6 +162,13 @@ function preencherPerfil(animal, tipo) {
         document.getElementById('det-temperamento').textContent = animal.temperamento;
     }
 
+    // Condição Especial (se houver)
+    if (animal.condicaoEspecial) {
+        document.getElementById('label-condicao-especial').style.display = 'block';
+        document.getElementById('det-condicao-especial').style.display = 'block';
+        document.getElementById('det-condicao-especial').textContent = animal.condicaoEspecial;
+    }
+
     // Descrição completa (se houver)
     if (animal.descricaoCompleta) {
         document.getElementById('card-descricao').style.display = 'block';
