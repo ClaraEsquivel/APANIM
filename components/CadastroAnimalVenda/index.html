@@ -27,7 +27,10 @@
     <link rel="stylesheet" href="../../assets/css/header-unificado.css">
     <link rel="stylesheet" href="../../assets/css/menu-styles.css">
     <link rel="stylesheet" href="../../assets/css/footer-unificado.css"> 
-    
+
+    <!-- Modal Custumizado -->
+    <link rel="stylesheet" href="../../assets/css/modal-customizado.css">
+
     <!-- CSS -->
     <link rel="stylesheet" href="styles.css">
     
@@ -470,12 +473,29 @@
                 </div>
 
                 <!-- Upload de Imagem do Animal -->
+                  <!-- CAMPO MODIFICADO -->
                 <div class="form-group">
-                    <label for="imagem-animal" class="form-label">Foto do Animal:</label>
-                    <input type="file" class="form-control" id="imagem-animal" name="imagem-animal" accept="image/*" required>
-                    
+                    <label class="form-label" for="imagem-animal">Foto do Anúncio do Animal *</label>
+                    <small class="form-text">Esta será a foto principal exibida nos cards da lista</small>
+                    <input type="file" class="form-control" id="imagem-animal" accept="image/*" required>
                     <div id="preview-container">
-                        <img id="preview-imagem" src="#" alt="Pré-visualização da imagem">
+                        <img id="preview-imagem" alt="Preview da imagem" style="display: none;">
+                    </div>
+                </div>
+
+                <!-- NOVO CAMPO: FOTOS E VÍDEOS EXTRAS PARA O PERFIL -->
+                <div class="form-group">
+                    <label class="form-label" for="midias-extras">Fotos e Vídeos para o Perfil do Animal (Opcional)</label>
+                    <small class="form-text">Adicione mais fotos e vídeos que aparecerão no perfil detalhado do animal. Aceita múltiplos arquivos.</small>
+                    <input type="file" 
+                        class="form-control" 
+                        id="midias-extras" 
+                        accept="image/*,video/*" 
+                        multiple>
+                    <small class="form-text">Você pode selecionar várias fotos e vídeos de uma vez (Ctrl+Clique ou Shift+Clique)</small>
+                    
+                    <div id="preview-midias-extras" class="preview-midias-extras" style="display: none;">
+                        <!-- Preview será inserido aqui pelo JavaScript -->
                     </div>
                 </div>
 
@@ -541,9 +561,13 @@
     </footer>
 
 
-    <script src="script.js"></script>
     <!-- ⭐ SCRIPT DO MENU UNIFICADO -->
     <script src="../../assets/js/menu-unificado.js"></script>
+
+     <!-- ✅ Modal Customizado (ANTES do script.js) -->
+    <script src="../../assets/js/modal-customizado.js"></script>
+
+    <script src="script.js"></script>
 </body>
 
 </html>
