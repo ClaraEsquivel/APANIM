@@ -279,8 +279,9 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 .info-box.warning {
-    background: linear-gradient(120deg, #D2691E 0%, #ffffff 100%);
+    background: #ffffff;
     border-color: #ff9800;
+    border: 2px solid #ffcc80;
 }
 
 .info-icon {

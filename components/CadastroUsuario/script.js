@@ -74,7 +74,7 @@ async function buscarCEP(cep) {
             document.getElementById('bairro').value = data.bairro || '';
             document.getElementById('cidade').value = data.localidade || '';
             document.getElementById('estado').value = data.uf || 'BA';
-            
+
             showToast('Endereço encontrado!', 'success');
             document.getElementById('numero').focus();
         } else {
@@ -93,21 +93,21 @@ function showToast(message, type = 'info', duration = 3000) {
 
     const toast = document.createElement('div');
     toast.className = 'toast';
-    
+
     const colors = {
         success: '#4CAF50',
         error: '#f44336',
         info: '#5A0609',
         warning: '#ff9800'
     };
-    
+
     const icons = {
         success: '✓',
         error: '✕',
         info: 'ℹ',
         warning: '⚠'
     };
-    
+
     toast.style.cssText = `
         position: fixed;
         top: 20px;
@@ -125,14 +125,14 @@ function showToast(message, type = 'info', duration = 3000) {
         max-width: 350px;
         font-weight: 500;
     `;
-    
+
     toast.innerHTML = `
         <span style="font-size: 1.5rem;">${icons[type]}</span>
         <span>${message}</span>
     `;
-    
+
     document.body.appendChild(toast);
-    
+
     setTimeout(() => {
         toast.style.animation = 'slideInRight 0.5s ease reverse';
         setTimeout(() => toast.remove(), 500);
@@ -157,7 +157,7 @@ document.head.appendChild(toastStyle);
 // ============= VALIDAÇÃO DE CAMPOS =============
 function validateField(field) {
     if (!field) return true;
-    
+
     const value = field.value ? field.value.trim() : '';
     const errorMsg = field.parentElement.querySelector('.error-message');
     let isValid = true;
@@ -239,7 +239,7 @@ function validateField(field) {
 // ============= VALIDAR ETAPA ATUAL =============
 function validateCurrentStep() {
     const currentFormStep = document.querySelector(`.form-step[data-step="${currentStep}"]`);
-    
+
     // ETAPA 1: Validar objetivos
     if (currentStep === 1) {
         const checkboxes = currentFormStep.querySelectorAll('input[name="objetivo"]:checked');
@@ -254,10 +254,10 @@ function validateCurrentStep() {
     // ETAPA 4: Validar campos específicos de adotantes
     if (currentStep === 4) {
         const camposAdotante = document.getElementById('campos-adotante');
-        
+
         if (selectedObjectives.includes('adotar') && camposAdotante.style.display !== 'none') {
             const radioGroups = ['tipoResidencia', 'telasProtecao', 'outrosAnimais', 'moradoresConcordam'];
-            
+
             for (const groupName of radioGroups) {
                 const checked = currentFormStep.querySelector(`input[name="${groupName}"]:checked`);
                 if (!checked) {
@@ -266,11 +266,11 @@ function validateCurrentStep() {
                 }
             }
         }
-        
+
         // Validar termos
         const termos = document.getElementById('termos');
         const responsabilidade = document.getElementById('responsabilidade');
-        
+
         if (!termos.checked || !responsabilidade.checked) {
             showToast('Você deve aceitar os termos de uso e responsabilidade', 'error');
             return false;
@@ -300,7 +300,7 @@ function validateCurrentStep() {
 function updateProgressBar() {
     const progressBar = document.querySelector('.progress-bar::before') || document.querySelector('.progress-bar');
     const percentage = (currentStep / totalSteps) * 100;
-    
+
     const style = document.createElement('style');
     style.textContent = `.progress-bar::before { width: ${percentage}% !important; }`;
     document.head.appendChild(style);
@@ -310,7 +310,7 @@ function updateStepIndicators() {
     document.querySelectorAll('.step').forEach((step, index) => {
         const stepNum = index + 1;
         step.classList.remove('active', 'completed');
-        
+
         if (stepNum < currentStep) {
             step.classList.add('completed');
         } else if (stepNum === currentStep) {
@@ -323,7 +323,7 @@ function showStep(stepNumber) {
     document.querySelectorAll('.form-step').forEach(step => {
         step.classList.remove('active');
     });
-    
+
     const targetStep = document.querySelector(`.form-step[data-step="${stepNumber}"]`);
     if (targetStep) {
         targetStep.classList.add('active');
@@ -332,21 +332,21 @@ function showStep(stepNumber) {
 
 function nextStep() {
     if (!validateCurrentStep()) return;
-    
+
     saveStepData();
-    
+
     if (currentStep < totalSteps) {
         currentStep++;
         showStep(currentStep);
         updateProgressBar();
         updateStepIndicators();
         updateNavigationButtons();
-        
+
         // Mostrar campos condicionais na etapa 4
         if (currentStep === 4) {
             updateConditionalFields();
         }
-        
+
         window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
         submitForm();
@@ -360,7 +360,7 @@ function prevStep() {
         updateProgressBar();
         updateStepIndicators();
         updateNavigationButtons();
-        
+
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 }
@@ -369,13 +369,13 @@ function updateNavigationButtons() {
     const btnPrev = document.getElementById('btn-prev');
     const btnNext = document.getElementById('btn-next');
     const btnNextText = document.getElementById('btn-next-text');
-    
+
     if (currentStep === 1) {
         btnPrev.style.display = 'none';
     } else {
         btnPrev.style.display = 'flex';
     }
-    
+
     if (currentStep === totalSteps) {
         btnNextText.textContent = 'Finalizar Cadastro';
     } else {
@@ -386,7 +386,7 @@ function updateNavigationButtons() {
 // ============= CAMPOS CONDICIONAIS =============
 function updateConditionalFields() {
     const camposAdotante = document.getElementById('campos-adotante');
-    
+
     if (selectedObjectives.includes('adotar')) {
         camposAdotante.style.display = 'block';
     } else {
@@ -454,16 +454,37 @@ async function submitForm() {
 
         console.log('Cadastro enviado:', formData);
 
-        // Salvar usuário em memória (NÃO usa localStorage)
-        window.currentUser = {
+        // Dentro da função submitForm(), após simular o envio
+        // Dentro da função submitForm(), após "console.log('Cadastro enviado:', formData);"
+        const newUser = {
             id: Date.now().toString(),
-            nome: formData.nome,
-            email: formData.email,
+            nome: formData.nome,                    // ✅ Do formulário
+            email: formData.email,                  // ✅ Do formulário
+            whatsapp: formData.whatsapp || '',      // ✅ Do formulário
+            cidade: formData.cidade || '',          // ✅ Do formulário
+            estado: formData.estado || 'BA',        // ✅ Do formulário
             objetivos: formData.objetivos || selectedObjectives,
-            loggedIn: true,
+            picture: '../../assets/images/perfil.svg',
+            bio: '',
             cadastroCompleto: true,
-            cadastroData: new Date().toISOString()
+            cadastroData: new Date().toISOString(),
+            loggedIn: true,                         // ⚠️ IMPORTANTE
+            stats: {
+                adocoes: 0,
+                doacoes: 0,
+                favoritos: 0
+            },
+            plano: 'gratuito'
         };
+
+        // Usar o AuthSystem para salvar
+        if (window.AuthSystem) {
+            window.AuthSystem.setCurrentUser(newUser);
+        } else {
+            window.currentUser = newUser;
+        }
+
+        console.log('✅ Usuário criado:', newUser);
 
         // Disparar evento de cadastro
         const cadastroEvent = new CustomEvent('userRegistered', {
@@ -483,7 +504,7 @@ async function submitForm() {
     } catch (error) {
         console.error('Erro no cadastro:', error);
         showToast('Erro ao realizar cadastro. Tente novamente.', 'error');
-        
+
         btnNext.classList.remove('loading');
         btnNext.disabled = false;
     }
@@ -492,13 +513,13 @@ async function submitForm() {
 // ============= TOGGLE PASSWORD =============
 function initTogglePassword() {
     const toggleButtons = document.querySelectorAll('.toggle-password');
-    
+
     toggleButtons.forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function () {
             const targetId = this.getAttribute('data-target');
             const input = document.getElementById(targetId);
             const icon = this.querySelector('.eye-icon');
-            
+
             if (input.type === 'password') {
                 input.type = 'text';
                 icon.textContent = '🙈';
@@ -506,7 +527,7 @@ function initTogglePassword() {
                 input.type = 'password';
                 icon.textContent = '👁️';
             }
-            
+
             this.style.transform = 'scale(1.1)';
             setTimeout(() => {
                 this.style.transform = 'scale(1)';
@@ -518,14 +539,14 @@ function initTogglePassword() {
 // ============= VALIDAÇÃO EM TEMPO REAL =============
 function initRealTimeValidation() {
     const inputs = document.querySelectorAll('input, select, textarea');
-    
+
     inputs.forEach(input => {
         input.addEventListener('blur', () => {
             if (input.value || input.hasAttribute('required')) {
                 validateField(input);
             }
         });
-        
+
         input.addEventListener('input', () => {
             if (input.parentElement.classList.contains('error')) {
                 validateField(input);
@@ -556,36 +577,36 @@ function trackEvent(eventName, data = {}) {
 // ============= INICIALIZAÇÃO =============
 document.addEventListener('DOMContentLoaded', () => {
     console.log('🐾 APANIM - Formulário de Cadastro carregado');
-    
+
     // Verificar se já está logado
     if (checkExistingSession()) {
         return;
     }
-    
+
     // Aplicar máscaras
     applyMasks();
-    
+
     // Toggle de senha
     initTogglePassword();
-    
+
     // Validação em tempo real
     initRealTimeValidation();
-    
+
     // Botões de navegação
     const btnNext = document.getElementById('btn-next');
     const btnPrev = document.getElementById('btn-prev');
-    
+
     btnNext.addEventListener('click', nextStep);
     btnPrev.addEventListener('click', prevStep);
-    
+
     // Inicializar estado
     updateProgressBar();
     updateStepIndicators();
     updateNavigationButtons();
-    
+
     // Tracking
     trackEvent('page_view', { page: 'cadastro' });
-    
+
     console.log('✅ Formulário inicializado com sucesso');
 });
 
