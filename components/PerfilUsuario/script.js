@@ -4,36 +4,141 @@
 let currentUser = null;
 let originalBio = '';
 
-// ============= VERIFICAR AUTENTICAÇÃO =============
-function checkAuthentication() {
-    // Verificar se há usuário logado
-    currentUser = window.currentUser || window.AuthSystem?.getCurrentUser();
-    
-    // 🔴 REMOVER DADOS DE EXEMPLO - usar apenas dados reais
-    if (!currentUser || !currentUser.loggedIn) {
-        showToast('Você precisa fazer login', 'warning');
-        setTimeout(() => {
-            window.location.href = '../CadastroInicial/index.html';
-        }, 2000);
-        return false;
-    }
+// ============= CARREGA NOME DO USUÁRIO =============
 
-    // ✅ Garantir que currentUser tenha todos os campos necessários
-    if (!currentUser.stats) {
-        currentUser.stats = {
-            adocoes: 0,
-            doacoes: 0,
-            favoritos: 0
-        };
+document.addEventListener('DOMContentLoaded', () => {
+    // Verifica se está logado
+    if (FakeLogin.isLoggedIn()) {
+        const nome = FakeLogin.getNome();
+        
+        // Preenche no HTML (AJUSTE OS IDs CONFORME SEU HTML)
+        const nomeEl = document.getElementById('nome-usuario') ||
+                      document.querySelector('.user-name') ||
+                      document.querySelector('h1'); // fallback para qualquer h1
+        
+        if (nomeEl) {
+            nomeEl.textContent = nome;
+        }
+        
+        // Se tiver uma mensagem de boas-vindas
+        const welcomeEl = document.querySelector('.welcome-message');
+        if (welcomeEl) {
+            welcomeEl.textContent = `Olá, ${nome}! 🐾`;
+        }
+        
+        console.log('✅ Nome carregado:', nome);
+    } else {
+        // Não está logado, redireciona
+        alert('Faça login primeiro!');
+        window.location.href = '../CadastroInicial/index.html';
+    }
+});
+
+// document.addEventListener('DOMContentLoaded', () => {
+//     // ✅ PEGA O USUÁRIO
+//     const usuario = SimpleAuth.getUser();
+    
+//     if (!usuario) {
+//         // Não está logado
+//         alert('Você precisa fazer cadastro');
+//         window.location.href = '../CadastroUsuario/index.html';
+//         return;
+//     }
+    
+    // ✅ PREENCHE OS DADOS (AJUSTE OS IDs CONFORME SEU HTML)
+    document.getElementById('nome-usuario').textContent = usuario.nome;
+    document.getElementById('email-usuario').textContent = usuario.email;
+    document.getElementById('telefone-usuario').textContent = usuario.telefone;
+    document.getElementById('cpf-usuario').textContent = usuario.cpf;
+    
+    if (usuario.foto) {
+        document.getElementById('foto-perfil').src = usuario.foto;
+    }
+// });
+
+// No arquivo script.js do PerfilUsuario
+// Adicionar no início do arquivo:
+
+function verificarSessao() {
+    // Tenta recuperar do sessionStorage
+    const usuarioStorage = sessionStorage.getItem('usuarioLogado');
+    
+    if (usuarioStorage) {
+        const usuario = JSON.parse(usuarioStorage);
+        window.currentUser = usuario;
+        return true;
     }
     
-    if (!currentUser.plano) {
-        currentUser.plano = 'gratuito';
+    // Se não encontrar, verifica window.currentUser
+    if (window.currentUser && window.currentUser.loggedIn) {
+        return true;
     }
-
-    console.log('✅ Usuário autenticado:', currentUser);
-    return true;
+    
+    return false;
 }
+
+// function carregarDadosUsuario() {
+//     if (!verificarSessao()) {
+//         // Não há sessão ativa
+//         showToast('Você precisa fazer login', 'error');
+//         setTimeout(() => {
+//             window.location.href = '../CadastroInicial/index.html';
+//         }, 2000);
+//         return;
+//     }
+    
+    // // Recupera os dados do usuário
+    // const usuario = window.currentUser || JSON.parse(sessionStorage.getItem('usuarioLogado'));
+    
+    // // Preenche os campos do perfil
+    // document.getElementById('nome-usuario').textContent = usuario.nome || 'Usuário';
+    // document.getElementById('email-usuario').textContent = usuario.email || '';
+    // document.getElementById('telefone-usuario').textContent = usuario.telefone || '';
+    // document.getElementById('cpf-usuario').textContent = usuario.cpf || '';
+    
+    // // Se tiver foto
+    // if (usuario.picture) {
+    //     document.getElementById('foto-perfil').src = usuario.picture;
+    // }
+    
+    // console.log('✅ Dados do usuário carregados com sucesso');
+// }
+
+// Executar quando a página carregar
+document.addEventListener('DOMContentLoaded', () => {
+    carregarDadosUsuario();
+});
+
+// // ============= VERIFICAR AUTENTICAÇÃO =============
+// function checkAuthentication() {
+//     // Verificar se há usuário logado
+//     currentUser = window.currentUser || window.AuthSystem?.getCurrentUser();
+    
+//     // // 🔴 REMOVER DADOS DE EXEMPLO - usar apenas dados reais
+//     // if (!currentUser || !currentUser.loggedIn) {
+//     //     showToast('Você precisa fazer login', 'warning');
+//     //     setTimeout(() => {
+//     //         window.location.href = '../CadastroInicial/index.html';
+//     //     }, 2000);
+//     //     return false;
+//     // }
+
+//     // ✅ Garantir que currentUser tenha todos os campos necessários
+//     if (!currentUser.stats) {
+//         currentUser.stats = {
+//             adocoes: 0,
+//             doacoes: 0,
+//             favoritos: 0
+//         };
+//     }
+    
+//     if (!currentUser.plano) {
+//         currentUser.plano = 'gratuito';
+//     }
+
+//     console.log('✅ Usuário autenticado:', currentUser);
+//     return true;
+// }
 
 // ============= CARREGAR DADOS DO USUÁRIO =============
 function loadUserData() {
@@ -183,45 +288,45 @@ function initCoverUpload() {
     });
 }
 
-// ============= LOGOUT CORRIGIDO =============
-function setupLogoutButtons() {
-    // Botões de logout na página
-    const logoutButtons = document.querySelectorAll('[onclick*="logout"]');
+// // ============= LOGOUT CORRIGIDO =============
+// function setupLogoutButtons() {
+//     // Botões de logout na página
+//     const logoutButtons = document.querySelectorAll('[onclick*="logout"]');
     
-    logoutButtons.forEach(btn => {
-        btn.removeAttribute('onclick');
-        btn.addEventListener('click', (e) => {
-            e.preventDefault();
-            performLogout();
-        });
-    });
-}
+//     logoutButtons.forEach(btn => {
+//         btn.removeAttribute('onclick');
+//         btn.addEventListener('click', (e) => {
+//             e.preventDefault();
+//             performLogout();
+//         });
+//     });
+// }
 
-function performLogout() {
-    showModal(
-        'Sair da Conta',
-        'Tem certeza que deseja sair?',
-        () => {
-            if (window.AuthSystem) {
-                window.AuthSystem.logout();
-            } else if (window.GoogleAuth) {
-                window.GoogleAuth.logout();
-            } else {
-                // Fallback manual
-                window.currentUser = null;
+// function performLogout() {
+//     showModal(
+//         'Sair da Conta',
+//         'Tem certeza que deseja sair?',
+//         () => {
+//             if (window.AuthSystem) {
+//                 window.AuthSystem.logout();
+//             } else if (window.GoogleAuth) {
+//                 window.GoogleAuth.logout();
+//             } else {
+//                 // Fallback manual
+//                 window.currentUser = null;
                 
-                const event = new CustomEvent('userLoggedOut');
-                document.dispatchEvent(event);
+//                 const event = new CustomEvent('userLoggedOut');
+//                 document.dispatchEvent(event);
                 
-                showToast('Logout realizado com sucesso', 'success');
+//                 showToast('Logout realizado com sucesso', 'success');
                 
-                setTimeout(() => {
-                    window.location.href = '../CadastroInicial/index.html';
-                }, 1500);
-            }
-        }
-    );
-}
+//                 setTimeout(() => {
+//                     window.location.href = '../CadastroInicial/index.html';
+//                 }, 1500);
+//             }
+//         }
+//     );
+// }
 
 // ============= NAVEGAÇÃO DE ABAS =============
 function initTabs() {
@@ -300,10 +405,10 @@ function updateCharCount() {
     }
 }
 
-// ============= EDITAR PERFIL =============
-function editProfile() {
-    showToast('Funcionalidade em desenvolvimento 🔨', 'info');
-}
+// // ============= EDITAR PERFIL =============
+// function editProfile() {
+//     showToast('Funcionalidade em desenvolvimento 🔨', 'info');
+// }
 
 // ============= FILTROS DE ANIMAIS =============
 function initAnimalFilters() {
@@ -377,32 +482,32 @@ function selectPlan(planName) {
     );
 }
 
-function processPlanSubscription(planName) {
-    showToast('Processando assinatura... ⏳', 'info');
+// function processPlanSubscription(planName) {
+//     showToast('Processando assinatura... ⏳', 'info');
     
-    setTimeout(() => {
-        if (currentUser) {
-            currentUser.plano = planName;
-            window.currentUser = currentUser;
+//     setTimeout(() => {
+//         if (currentUser) {
+//             currentUser.plano = planName;
+//             window.currentUser = currentUser;
             
-            if (window.AuthSystem) {
-                window.AuthSystem.updateUser({ plano: planName });
-            }
-        }
+//             if (window.AuthSystem) {
+//                 window.AuthSystem.updateUser({ plano: planName });
+//             }
+//         }
         
-        updateCurrentPlan(planName);
-        showToast('Plano atualizado com sucesso! 🎉', 'success');
-        trackEvent('plan_subscribed', { plan: planName });
+//         updateCurrentPlan(planName);
+//         showToast('Plano atualizado com sucesso! 🎉', 'success');
+//         trackEvent('plan_subscribed', { plan: planName });
         
-        const sobreTab = document.querySelector('.tab-btn[data-tab="sobre"]');
-        if (sobreTab) sobreTab.click();
-    }, 2000);
-}
+//         const sobreTab = document.querySelector('.tab-btn[data-tab="sobre"]');
+//         if (sobreTab) sobreTab.click();
+//     }, 2000);
+// }
 
 // ============= CONFIGURAÇÕES =============
-function changePassword() {
-    showToast('Funcionalidade em desenvolvimento 🔨', 'info');
-}
+// function changePassword() {
+//     showToast('Funcionalidade em desenvolvimento 🔨', 'info');
+// }
 
 function downloadData() {
     showToast('Preparando seus dados para download... 📥', 'info');
