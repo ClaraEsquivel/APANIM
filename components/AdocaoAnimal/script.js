@@ -77,11 +77,14 @@ function criarCardAnimalAdocao(animal) {
                  data-porte="${animal.porte}"
                  data-idade="${categoriaIdade}"
                  data-cor="${animal.cor}"
-                 data-bairro="${animal.localizacao}">
+                 data-bairro="${animal.localizacao}"
+                 onclick="abrirPerfil('${animal.id}')"
+                 style="cursor: pointer;"
+                 title="Clique para ver o perfil completo de ${animal.nome}">
             <div class="card-imagem">
                 <img src="${imagemSrc}" alt="${animal.nome} - ${animal.especie} ${animal.raca} para adoção" class="imagem-animal" loading="lazy" width="200" height="200" onerror="this.src='../../assets/images/dog_sentado.svg'">
                 ${badgeTipo}
-                <span class="badge-adocao">Disponível para adoção</span>
+                <span class="badge-adocao">Disponível para Adoção</span>
             </div>
             <div class="card-info">
                 <h3 class="nome-animal">${animal.nome}</h3>
@@ -116,12 +119,17 @@ function criarCardAnimalAdocao(animal) {
                     ${animal.telefoneContato ? `<p>📱 ${animal.telefoneContato}</p>` : ''}
                 </div>
 
-                <button class="btn-adotar" type="button" data-animal-id="${animal.id}" aria-label="Manifestar interesse em adotar ${animal.nome}">
+                <button class="btn-adotar" type="button" data-animal-id="${animal.id}" aria-label="Manifestar interesse em adotar ${animal.nome}" onclick="event.stopPropagation(); solicitarAdocao('${animal.id}', '${animal.nome}');">
                     🐾 Quero Adotar
                 </button>
             </div>
         </article>
     `;
+}
+
+// ===== ABRIR PERFIL DO ANIMAL =====
+function abrirPerfil(animalId) {
+    window.location.href = `../PerfilAnimal/index.html?id=${animalId}&tipo=adocao`;
 }
 
 function calcularCategoriaIdade(idadeTexto) {
@@ -151,7 +159,6 @@ function capitalize(texto) {
     return texto.charAt(0).toUpperCase() + texto.slice(1);
 }
 
-
 // ===== CONFIGURAÇÃO DOS FILTROS =====
 function configurarFiltros() {
     const form = document.getElementById('form-filtros');
@@ -161,17 +168,8 @@ function configurarFiltros() {
             e.preventDefault();
             aplicarFiltros();
         });
-
-        // ❌ REMOVIDO: Event listeners de 'change' nos selects
-        // const selects = form.querySelectorAll('.select-filtro');
-        // selects.forEach(select => {
-        //     select.addEventListener('change', aplicarFiltros);
-        // });
-        
-        // ✅ AGORA: Os filtros só são aplicados ao clicar no botão "Aplicar Filtros"
     }
 }
-
 
 function configurarBotoes() {
     const btnLimpar = document.getElementById('limpar-filtros');
@@ -253,7 +251,8 @@ function anunciarResultados(quantidade, foiLimpo = false) {
 function configurarBotoesAdotar() {
     const botoes = document.querySelectorAll('.btn-adotar');
     botoes.forEach(btn => {
-        btn.addEventListener('click', function() {
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation(); // Evitar que o clique no botão abra o perfil
             const animalId = this.getAttribute('data-animal-id');
             const nome = this.closest('.card-animal').querySelector('.nome-animal').textContent;
             solicitarAdocao(animalId, nome);
@@ -274,33 +273,41 @@ async function solicitarAdocao(animalId, nomeAnimal) {
 
         const animal = animais.find(a => a.id === animalId);
         if (animal) {
-            mostrarModalAdocao(nomeAnimal, animal.emailContato, animal.telefoneContato);
-        } else {
-            alert('Erro ao buscar informações do animal. Tente novamente.');
-        }
+        await mostrarModalAdocao(nomeAnimal, animal.emailContato, animal.telefoneContato);
+    } else {
+        await alertaErro('Erro', 'Erro ao buscar informações do animal. Tente novamente.');
+    }
     } catch (e) {
         console.error('Erro ao solicitar adoção:', e);
         alert('Erro ao processar sua solicitação. Tente novamente.');
     }
 }
 
-function mostrarModalAdocao(nomeAnimal, email, telefone) {
-    const mensagem = `Você demonstrou interesse em adotar ${nomeAnimal}.\n\n` +
-                    'Informações de contato do responsável:\n' +
-                    (email ? `Email: ${email}\n` : '') +
-                    (telefone ? `Telefone: ${telefone}\n` : '') +
-                    '\nDeseja abrir seu aplicativo de email para entrar em contato?';
-
-    if (confirm(mensagem)) {
-        const assunto = encodeURIComponent(`Interesse em adotar: ${nomeAnimal}`);
-        const corpo = encodeURIComponent(`Olá,\n\nTenho interesse em adotar o(a) ${nomeAnimal} anunciado(a).\nGostaria de receber informações sobre procedimentos para adoção e agendar uma visita.\n\nAguardo retorno.`);
+async function mostrarModalAdocao(nomeAnimal, email, telefone) {
+    const confirmado = await confirmarModal(
+        '🐾 Adotar ' + nomeAnimal,
+        'Você demonstrou interesse em adotar <strong>' + nomeAnimal + '</strong>.<br><br>Deseja abrir seu aplicativo de email para entrar em contato?',
+        {
+            email: email || null,
+            telefone: telefone || null
+        }
+    );
+    
+    if (confirmado) {
+        const assunto = encodeURIComponent('Interesse em adotar: ' + nomeAnimal);
+        const corpo = encodeURIComponent('Olá,\n\nTenho interesse em adotar o(a) ' + nomeAnimal + ' anunciado(a).\n\nGostaria de receber informações sobre procedimentos para adoção e agendar uma visita.\n\nAguardo retorno.');
+        
         if (email) {
-            window.location.href = `mailto:${email}?subject=${assunto}&body=${corpo}`;
+            window.location.href = 'mailto:' + email + '?subject=' + assunto + '&body=' + corpo;
         } else {
-            alert('Email de contato não disponível. Por favor, entre em contato pelo telefone: ' + telefone);
+            await alertaAviso(
+                'Email Indisponível',
+                'Email não disponível. Entre em contato pelo telefone: ' + telefone
+            );
         }
     }
 }
+
 
 console.log('✅ Script de adoção carregado');
 console.log('📦 window.storage disponível?', storageDisponivel());
@@ -322,7 +329,3 @@ window.testarStorageAdocao = async function() {
         else console.log('⚠️ Nenhum dado no localStorage');
     }
 }
-
-/*
-Observações de estilo: adicione as classes .badge-adocao, .resumo e .contato-info no CSS de adocao se necessário.
-*/
