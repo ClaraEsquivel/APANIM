@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - APANIM</title>
+    <meta name="description" content="Cadastre-se no APANIM para adotar, doar ou comprar animais em Salvador-BA.">
+    <meta name="keywords" content="cadastro, adoção, animais, cães, gatos, pets">
+    <meta name="author" content="APANIM">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Cadastro - APANIM">
+    <meta property="og:description" content="Cadastre-se no APANIM para ajudar os animais">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+    <!-- CSS Unificado -->
+    <link rel="stylesheet" href="../../assets/css/header-unificado.css">
+    <link rel="stylesheet" href="../../assets/css/menu-styles.css">
+    <link rel="stylesheet" href="../../assets/css/footer-unificado.css"> 
+    
+    <!-- CSS do Cadastro -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Preload de fontes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="topo">
+            <img src="../../assets/images/Paws.svg" class="patas_topo" alt="Patas">
+            <img src="../../assets/images/APANIM_logo.svg" id="logo_apanim" alt="Logo APANIM">
+            <img src="../../assets/images/cat.svg" class="cat_topo" alt="Gato">
+            <img src="../../assets/images/dog.svg" class="dog_topo" alt="Cachorro">
+        </div>
+
+        <nav role="navigation"></nav>
+    </header>
+
+    <!-- Conteúdo Central -->
+    <div class="central">
+        <!-- Patas decorativas animadas -->
+        <div class="patas1 pata-animate">
+            <img src="../../assets/images/pata.svg" alt="pata" />
+        </div>
+        <div class="patas2 pata-animate">
+            <img src="../../assets/images/pata.svg" alt="pata" />
+        </div>
+        <div class="patas3 pata-animate">
+            <img src="../../assets/images/pata.svg" alt="pata" />
+        </div>
+        <div class="patas4 pata-animate">
+            <img src="../../assets/images/pata.svg" alt="pata" />
+        </div>
+        <div class="patas5 pata-animate">
+            <img src="../../assets/images/pata.svg" alt="pata" />
+        </div>
+        <div class="patas6 pata-animate">
+            <img src="../../assets/images/pata.svg" alt="pata" />
+        </div>
+
+        <!-- Container Principal -->
+        <div class="container">
+            <!-- Indicador de Progresso -->
+            <div class="progress-indicator">
+                <div class="progress-bar" id="progress-bar"></div>
+                <div class="step-container">
+                    <div class="step active" data-step="1">
+                        <div class="step-circle">1</div>
+                        <div class="step-label">Empresa</div>
+                    </div>
+                    <div class="step" data-step="2">
+                        <div class="step-circle">2</div>
+                        <div class="step-label">Responsável</div>
+                    </div>
+                    <div class="step" data-step="3">
+                        <div class="step-circle">3</div>
+                        <div class="step-label">Endereço</div>
+                    </div>
+                    <div class="step" data-step="4">
+                        <div class="step-circle">4</div>
+                        <div class="step-label">Documentos</div>
+                    </div>
+                    <div class="step" data-step="5">
+                        <div class="step-circle">5</div>
+                        <div class="step-label">Finalizar</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Welcome Section -->
+            <div class="welcome-section">
+                <div class="logo-circle">
+                    <img src="../../assets/images/perfil.svg" alt="perfil">
+                </div>
+                <h1 class="welcome-title">Cadastro de Vendedor</h1>
+                <p class="welcome-subtitle">Junte-se aos vendedores registrados do APANIM</p>
+            </div>
+
+            <!-- Formulário Multi-etapas -->
+            <form id="cadastro-vendedor-form">
+                <!-- ETAPA 1: Informações da Empresa -->
+                <div class="form-step active" data-step="1">
+                    <h2 class="section-title">Informações da Empresa</h2>
+                    
+                    <div class="info-box">
+                        <span class="info-icon">ℹ️</span>
+                        <p>Preencha os dados completos da sua empresa. Todas as informações serão verificadas.</p>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group full">
+                            <label for="razaoSocial">Razão Social <span class="required">*</span></label>
+                            <input type="text" id="razaoSocial" name="razaoSocial" required placeholder="Digite a razão social da empresa">
+                            <span class="error-message"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group full">
+                            <label for="nomeFantasia">Nome Fantasia <span class="required">*</span></label>
+                            <input type="text" id="nomeFantasia" name="nomeFantasia" required placeholder="Digite o nome fantasia">
+                            <span class="error-message"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group half">
+                            <label for="cnpj">CNPJ <span class="required">*</span></label>
+                            <input type="text" id="cnpj" name="cnpj" required placeholder="00.000.000/0000-00" maxlength="18">
+                            <span class="error-message"></span>
+                        </div>
+
+                        <div class="form-group half">
+                            <label for="inscricaoEstadual">Inscrição Estadual <span class="required">*</span></label>
+                            <input type="text" id="inscricaoEstadual" name="inscricaoEstadual" required placeholder="000.000.000.000">
+                            <span class="error-message"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group half">
+                            <label for="telefoneComercial">Telefone Comercial <span class="required">*</span></label>
+                            <input type="tel" id="telefoneComercial" name="telefoneComercial" required placeholder="(00) 0000-0000">
+                            <span class="error-message"></span>
+                        </div>
+
+                        <div class="form-group half">
+                            <label for="emailComercial">E-mail Comercial <span class="required">*</span></label>
+                            <input type="email" id="emailComercial" name="emailComercial" required placeholder="contato@empresa.com">
+                            <span class="error-message"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ETAPA 2: Responsável Legal -->
+                <div class="form-step" data-step="2">
+                    <h2 class="section-title">Responsável Legal</h2>
+
+                    <div class="info-box">
+                        <span class="info-icon">👤</span>
+                        <p>Dados do responsável legal pela empresa perante o APANIM.</p>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group full">
+                            <label for="nomeResponsavel">Nome Completo <span class="required">*</span></label>
+                            <input type="text" id="nomeResponsavel" name="nomeResponsavel" required placeholder="Digite o nome completo do responsável">
+                            <span class="error-message"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group half">
+                            <label for="cpfResponsavel">CPF <span class="required">*</span></label>
+                            <input type="text" id="cpfResponsavel" name="cpfResponsavel" required placeholder="000.000.000-00" maxlength="14">
+                            <span class="error-message"></span>
+                        </div>
+
+                        <div class="form-group half">
+                            <label for="whatsappResponsavel">Telefone / WhatsApp <span class="required">*</span></label>
+                            <input type="tel" id="whatsappResponsavel" name="whatsappResponsavel" required placeholder="(00) 00000-0000">
+                            <span class="error-message"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group full">
+                            <label for="emailResponsavel">E-mail do Responsável <span class="required">*</span></label>
+                            <input type="email" id="emailResponsavel" name="emailResponsavel" required placeholder="responsavel@email.com">
+                            <span class="error-message"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group half">
+                            <label for="senha">Senha <span class="required">*</span></label>
+                            <div class="password-wrapper">
+                                <input type="password" id="senha" name="senha" required placeholder="Mínimo 6 caracteres">
+                                <button type="button" class="toggle-password" data-target="senha">
+                                    <span class="eye-icon">👁️</span>
+                                </button>
+                            </div>
+                            <span class="error-message"></span>
+                        </div>
+
+                        <div class="form-group half">
+                            <label for="confirmarSenha">Confirmar Senha <span class="required">*</span></label>
+                            <div class="password-wrapper">
+                                <input type="password" id="confirmarSenha" name="confirmarSenha" required placeholder="Digite a senha novamente">
+                                <button type="button" class="toggle-password" data-target="confirmarSenha">
+                                    <span class="eye-icon">👁️</span>
+                                </button>
+                            </div>
+                            <span class="error-message"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ETAPA 3: Endereço Comercial -->
+                <div class="form-step" data-step="3">
+                    <h2 class="section-title">Endereço Comercial Completo</h2>
+
+                    <div class="form-row">
+                        <div class="form-group half">
+                            <label for="cep">CEP <span class="required">*</span></label>
+                            <input type="text" id="cep" name="cep" required placeholder="00000-000" maxlength="9">
+                            <span class="error-message"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group full">
+                            <label for="rua">Rua / Avenida <span class="required">*</span></label>
+                            <input type="text" id="rua" name="rua" required placeholder="Nome da rua">
+                            <span class="error-message"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group half">
+                            <label for="numero">Número <span class="required">*</span></label>
+                            <input type="text" id="numero" name="numero" required placeholder="Número">
+                            <span class="error-message"></span>
+                        </div>
+
+                        <div class="form-group half">
+                            <label for="complemento">Complemento</label>
+                            <input type="text" id="complemento" name="complemento" placeholder="Sala, Andar, etc.">
+                            <span class="error-message"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group half">
+                            <label for="bairro">Bairro <span class="required">*</span></label>
+                            <input type="text" id="bairro" name="bairro" required placeholder="Nome do bairro">
+                            <span class="error-message"></span>
+                        </div>
+
+                        <div class="form-group half">
+                            <label for="cidade">Cidade <span class="required">*</span></label>
+                            <input type="text" id="cidade" name="cidade" required placeholder="Nome da cidade">
+                            <span class="error-message"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group half">
+                            <label for="estado">Estado <span class="required">*</span></label>
+                            <select id="estado" name="estado" required>
+                                <option value="">Selecione</option>
+                                <option value="AC">Acre</option>
+                                <option value="AL">Alagoas</option>
+                                <option value="AP">Amapá</option>
+                                <option value="AM">Amazonas</option>
+                                <option value="BA" selected>Bahia</option>
+                                <option value="CE">Ceará</option>
+                                <option value="DF">Distrito Federal</option>
+                                <option value="ES">Espírito Santo</option>
+                                <option value="GO">Goiás</option>
+                                <option value="MA">Maranhão</option>
+                                <option value="MT">Mato Grosso</option>
+                                <option value="MS">Mato Grosso do Sul</option>
+                                <option value="MG">Minas Gerais</option>
+                                <option value="PA">Pará</option>
+                                <option value="PB">Paraíba</option>
+                                <option value="PR">Paraná</option>
+                                <option value="PE">Pernambuco</option>
+                                <option value="PI">Piauí</option>
+                                <option value="RJ">Rio de Janeiro</option>
+                                <option value="RN">Rio Grande do Norte</option>
+                                <option value="RS">Rio Grande do Sul</option>
+                                <option value="RO">Rondônia</option>
+                                <option value="RR">Roraima</option>
+                                <option value="SC">Santa Catarina</option>
+                                <option value="SP">São Paulo</option>
+                                <option value="SE">Sergipe</option>
+                                <option value="TO">Tocantins</option>
+                            </select>
+                            <span class="error-message"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ETAPA 4: Documentação Obrigatória -->
+                <div class="form-step" data-step="4">
+                    <h2 class="section-title">Documentação Obrigatória</h2>
+
+                    <div class="info-box warning">
+                        <span class="info-icon">⚠️</span>
+                        <p>Todos os documentos são obrigatórios. Formatos aceitos: PDF, JPG, PNG. Tamanho máximo: 5MB por arquivo.</p>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group full">
+                            <label for="licenca">Licença ou Registro do Órgão Competente <span class="required">*</span></label>
+                            <div class="file-upload-wrapper">
+                                <input type="file" id="licenca" name="licenca" required accept=".pdf,.jpg,.jpeg,.png">
+                                <label for="licenca" class="file-upload-label">
+                                    <span class="upload-icon">📄</span>
+                                    <span class="upload-text">Clique para selecionar o arquivo</span>
+                                    <span class="file-name"></span>
+                                </label>
+                            </div>
+                            <small class="file-help">Ex.: Registro CRMV, IBAMA, MAPA (conforme espécie e legislação local)</small>
+                            <span class="error-message"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group full">
+                            <label for="alvara">Alvará de Funcionamento <span class="required">*</span></label>
+                            <div class="file-upload-wrapper">
+                                <input type="file" id="alvara" name="alvara" required accept=".pdf,.jpg,.jpeg,.png">
+                                <label for="alvara" class="file-upload-label">
+                                    <span class="upload-icon">📄</span>
+                                    <span class="upload-text">Clique para selecionar o arquivo</span>
+                                    <span class="file-name"></span>
+                                </label>
+                            </div>
+                            <span class="error-message"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group full">
+                            <label for="comprovanteEndereco">Comprovante de Endereço <span class="required">*</span></label>
+                            <div class="file-upload-wrapper">
+                                <input type="file" id="comprovanteEndereco" name="comprovanteEndereco" required accept=".pdf,.jpg,.jpeg,.png">
+                                <label for="comprovanteEndereco" class="file-upload-label">
+                                    <span class="upload-icon">📄</span>
+                                    <span class="upload-text">Clique para selecionar o arquivo</span>
+                                    <span class="file-name"></span>
+                                </label>
+                            </div>
+                            <small class="file-help">Conta de luz, água, telefone ou documento oficial (máximo 3 meses)</small>
+                            <span class="error-message"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group full">
+                            <label for="contratoSocial">Contrato Social</label>
+                            <div class="file-upload-wrapper">
+                                <input type="file" id="contratoSocial" name="contratoSocial" accept=".pdf,.jpg,.jpeg,.png">
+                                <label for="contratoSocial" class="file-upload-label">
+                                    <span class="upload-icon">📄</span>
+                                    <span class="upload-text">Clique para selecionar o arquivo (opcional)</span>
+                                    <span class="file-name"></span>
+                                </label>
+                            </div>
+                            <small class="file-help">Documento opcional (se aplicável)</small>
+                            <span class="error-message"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ETAPA 5: Termos e Condições -->
+                <div class="form-step" data-step="5">
+                    <h2 class="section-title">Termos e Condições</h2>
+
+                    <div class="info-box">
+                        <span class="info-icon">📋</span>
+                        <p>Leia atentamente e aceite os termos para concluir seu cadastro.</p>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group full">
+                            <label class="checkbox-terms">
+                                <input type="checkbox" id="termos" name="termos" required>
+                                <div class="terms-content">
+                                    <strong>Aceito os termos de uso e políticas de privacidade</strong>
+                                    <small>Li e concordo com os <a href="#" class="link-terms">Termos de Uso</a> e <a href="#" class="link-terms">Política de Privacidade</a> do APANIM</small>
+                                </div>
+                            </label>
+                            <span class="error-message"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group full">
+                            <label class="checkbox-terms">
+                                <input type="checkbox" id="responsabilidadeComercial" name="responsabilidadeComercial" required>
+                                <div class="terms-content">
+                                    <strong>Termo de Responsabilidade Comercial</strong>
+                                    <small>Declaro que todas as informações fornecidas são verdadeiras e que a empresa cumpre com todas as legislações vigentes para comercialização de animais. Assumo total responsabilidade pelas ações comerciais realizadas através da plataforma.</small>
+                                </div>
+                            </label>
+                            <span class="error-message"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group full">
+                            <label class="checkbox-terms">
+                                <input type="checkbox" id="bemestarAnimal" name="bemestarAnimal" required>
+                                <div class="terms-content">
+                                    <strong>Compromisso com o Bem-Estar Animal</strong>
+                                    <small>Comprometo-me a garantir o bem-estar dos animais comercializados, seguindo as normas e legislações específicas, e fornecendo todas as orientações necessárias aos compradores.</small>
+                                </div>
+                            </label>
+                            <span class="error-message"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group full">
+                            <label class="checkbox-terms">
+                                <input type="checkbox" id="autenticidadeDocumentos" name="autenticidadeDocumentos" required>
+                                <div class="terms-content">
+                                    <strong>Autenticidade dos Documentos</strong>
+                                    <small>Declaro que todos os documentos enviados são autênticos e estão em validade. Estou ciente de que a falsificação de documentos pode resultar em medidas legais.</small>
+                                </div>
+                            </label>
+                            <span class="error-message"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navegação -->
+                <div class="form-navigation">
+                    <button type="button" class="btn btn-secondary" id="btn-prev" style="display: none;">
+                        <span>←</span>
+                        <span>Voltar</span>
+                    </button>
+                    <button type="button" class="btn btn-primary" id="btn-next">
+                        <span id="btn-next-text">Próximo</span>
+                        <span>→</span>
+                    </button>
+                </div>
+            </form>
+
+            <!-- Tela de Sucesso -->
+            <div class="success-screen" id="success-screen" style="display: none;">
+                <div class="success-icon">✅</div>
+                <h2>Cadastro Realizado com Sucesso!</h2>
+                <p>Bem-vindo ao APANIM! Seu cadastro está em análise.</p>
+                <p class="success-subtitle">Você receberá um e-mail assim que seu perfil for aprovado. 🐾</p>
+                <button type="button" class="btn btn-primary" onclick="window.location.href='../PerfilVendedor/index.html'">
+                    <span>Ir para Meu Perfil</span>
+                    <span>→</span>
+                </button>
+            </div>
+
+            <!-- Link para Login -->
+            <div class="signup-link">
+                <p>Já tem uma conta? <a href="../Login/index.html">Faça login aqui</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="base">
+        <div class="redes_sociais">
+            <a href="#" aria-label="Instagram">
+                <img src="../../assets/images/instagram.svg" alt="Siga-nos no Instagram"/>
+            </a>
+            <a href="mailto:contato@apanim.com" aria-label="Email">
+                <img src="../../assets/images/email.svg" alt="Entre em contato por email"/>
+            </a>
+        </div>
+
+        <nav class="links_uteis" aria-label="Links úteis">
+            <div>
+                <span class="titulo">Encontre um novo pet</span><br>
+                <a href="../AdocaoAnimal/index.html"><span>Adote</span><br></a>
+                <a href="../CompraAnimal/index.html"><span>Compre</span></a>
+            </div>
+            <div>
+                <span class="titulo">Colabore</span><br>
+                <a href="../Parceria/index.html"><span>Seja uma empresa parceira</span></a>
+            </div>
+            <div>
+                <span class="titulo">Divulgue um animal</span><br>
+                <a href="../CadastroAnimalAdocao/index.html"><span>Cadastrar animal para adoção</span><br></a>
+                <a href="../CadastroAnimalVenda/index.html"><span>Cadastrar animal para venda</span><br></a>
+                <a href="../CadastroAnimaisPerdidos/index.html"><span>Cadastrar animal perdido</span><br></a>
+            </div>
+            <div>
+                <span class="titulo">Encontre um animal</span><br>
+                <a href="../AnimaisPerdidos/index.html"><span>Animais perdidos</span><br></a>
+            </div>
+            <div>
+                <span class="titulo">Sobre o APANIM</span><br>
+                <span>APANIM</span>
+            </div>
+            <div>
+                <span class="titulo">Meu perfil</span><br>
+                <a href="../CadastroInicial/index.html"><span>Cadastrar-se</span><br></a>
+                <a href="../PerfilUsuario/index.html"><span>Minha página de usuário</span><br></a>
+                <a href="../PerfilVendedor/index.html"><span>Minha página de vendedor</span><br></a>
+            </div>
+        </nav>
+
+        <div class="forum">
+            <a href="#" aria-label="Fórum">
+                <img src="../../assets/images/forum.svg" alt="Acesse nosso fórum"/>
+            </a>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../../assets/js/menu-unificado.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
