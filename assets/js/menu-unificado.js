@@ -21,7 +21,6 @@ function criarMenuSanduiche() {
                 <li><a href="../Menu/index.html">Página Inicial</a></li>
                 <li><a href="../CadastroInicial/index.html">Cadastro</a></li>
                 <li><a href="../Login/index.html">Login</a></li>
-                <li><a href="../PerfilUsuario/index.html">Meu Perfil</a></li>
                 <li><a href="../AdocaoAnimal/index.html">Animais para Adoção</a></li>
                 <li><a href="../CompraAnimal/index.html">Animais para Compra</a></li>
                 <li><a href="../AnimaisPerdidos/index.html">Animais Perdidos</a></li>
@@ -30,6 +29,8 @@ function criarMenuSanduiche() {
                 <li><a href="../CadastroAnimaisPerdidos/index.html">Cadastro Animal Perdido</a></li>
                 <li><a href="../Parceria/index.html">Parcerias</a></li>
                 <li><a href="../Serviços/index.html">Serviços</a></li>
+                <li><a href="../PlanosAssinatura/index.html">Planos de Assinatura</a></li>
+                
             </ul>
         </div>
     `;
