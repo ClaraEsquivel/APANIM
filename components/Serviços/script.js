@@ -33,6 +33,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
+
 // Animação de entrada das seções
 const observerOptions = {
     threshold: 0.1,

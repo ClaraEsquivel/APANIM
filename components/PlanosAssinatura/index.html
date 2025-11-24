@@ -3,37 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Planos de assinatura APANIM - Escolha o plano ideal para você">
-    <meta name="keywords" content="planos, assinatura, pets, vendedor, pet shop, criadores">
-    <meta name="author" content="APANIM">
-    <title>APANIM - Planos e Assinaturas</title>
+    <meta name="description" content="Planos de Assinatura APANIM - Escolha o melhor plano para vender seus animais">
+    <title>APANIM - Planos de Assinatura</title>
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="APANIM - Planos e Assinaturas">
-    <meta property="og:description" content="Escolha o plano ideal para você e impulsione seu negócio pet">
-    <meta property="og:url" content="https://apanim.com/planos">
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:title" content="APANIM - Planos e Assinaturas">
-    <meta property="twitter:description" content="Planos para vendedores, pet shops e criadores">
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-
-    <!-- ⭐ ORDEM IMPORTANTE: Header primeiro, depois menu -->
+    <!-- Links CSS -->
     <link rel="stylesheet" href="../../assets/css/header-unificado.css">
     <link rel="stylesheet" href="../../assets/css/menu-styles.css">
     <link rel="stylesheet" href="../../assets/css/footer-unificado.css">
-
-    <!-- CSS da página de planos -->
     <link rel="stylesheet" href="styles.css">
-    
-    <!-- Preload de fontes importantes -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 </head>
 <body>
     <!-- Header -->
@@ -45,478 +22,311 @@
             <img src="../../assets/images/dog.svg" class="dog_topo" alt="Cachorro">
         </div>
 
-        <!-- ⭐ NAVEGAÇÃO UNIFICADA - O JavaScript preencherá automaticamente -->
+        <!-- Navegação Unificada -->
         <nav role="navigation"></nav>
     </header>
 
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <h1>Escolha Seu Plano</h1>
-            <p>Conecte-se com milhares de pessoas apaixonadas por pets e impulsione seu negócio</p>
-            
-            <div class="hero-stats">
-                <div class="stat-item">
-                    <span class="stat-number">50mil+</span>
-                    <span class="stat-label">Usuários Ativos</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">10mil+</span>
-                    <span class="stat-label">Anúncios Publicados</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">98%</span>
-                    <span class="stat-label">Satisfação</span>
-                </div>
-            </div>
+            <h1>Planos de Assinatura</h1>
+            <p>Escolha o plano ideal para impulsionar suas vendas e alcançar mais clientes</p>
         </div>
     </section>
 
     <!-- Main Content -->
     <main class="container">
         
-        <!-- Toggle de Tipo de Plano -->
-        <div class="plan-type-toggle">
-            <button class="toggle-btn active" data-type="vendedor">Vendedor Individual</button>
-            <button class="toggle-btn" data-type="profissional">Pet Shops & Criadores</button>
-            <button class="toggle-btn" data-type="anuncios">Anúncios Premium</button>
-        </div>
-
-        <!-- Planos para Vendedor Individual -->
-        <section class="plans-section" id="vendedor-section">
-            <div class="section-header">
-                <h2 class="section-title">Plano para Vendedores</h2>
-                <p class="section-description">Para vender pets, escolha um dos nossos planos de assinatura abaixo</p>
-            </div>
-
-            <div class="alert-info">
-                <span class="alert-icon">ℹ️</span>
-                <div class="alert-content">
-                    <strong>Importante:</strong> Para se cadastrar como vendedor, você precisa primeiro escolher e assinar um dos planos profissionais abaixo.
+        <!-- Benefícios Gerais -->
+        <section class="beneficios-gerais">
+            <h2 class="section-title">Por que assinar?</h2>
+            <div class="beneficios-grid">
+                <div class="beneficio-card">
+                    <div class="beneficio-icon">🎯</div>
+                    <h3>Maior Visibilidade</h3>
+                    <p>Seus anúncios aparecem em destaque nas buscas e na página inicial</p>
                 </div>
-            </div>
-
-            <div class="free-services">
-                <h3>🌟 Serviços Sempre Gratuitos (Sem Necessidade de Assinatura)</h3>
-                <div class="free-services-grid">
-                    <div class="free-service-item">
-                        <span class="service-icon">❤️</span>
-                        <span>Adoção de animais</span>
-                    </div>
-                    <div class="free-service-item">
-                        <span class="service-icon">🎁</span>
-                        <span>Doação de pets</span>
-                    </div>
-                    <div class="free-service-item">
-                        <span class="service-icon">🔍</span>
-                        <span>Busca e filtros completos</span>
-                    </div>
-                    <div class="free-service-item">
-                        <span class="service-icon">📚</span>
-                        <span>Conteúdo educativo</span>
-                    </div>
-                    <div class="free-service-item">
-                        <span class="service-icon">💬</span>
-                        <span>Chat entre usuários</span>
-                    </div>
-                    <div class="free-service-item">
-                        <span class="service-icon">👤</span>
-                        <span>Perfil personalizado</span>
-                    </div>
-                    <div class="free-service-item">
-                        <span class="service-icon">🏠</span>
-                        <span>Cadastro de animais perdidos</span>
-                    </div>
-                    <div class="free-service-item">
-                        <span class="service-icon">🔔</span>
-                        <span>Alertas de animais encontrados</span>
-                    </div>
+                <div class="beneficio-card">
+                    <div class="beneficio-icon">📊</div>
+                    <h3>Estatísticas Detalhadas</h3>
+                    <p>Acompanhe visualizações, interesse e performance dos seus anúncios</p>
+                </div>
+                <div class="beneficio-card">
+                    <div class="beneficio-icon">⭐</div>
+                    <h3>Selo Verificado</h3>
+                    <p>Ganhe credibilidade com o selo de vendedor verificado</p>
+                </div>
+                <div class="beneficio-card">
+                    <div class="beneficio-icon">🚀</div>
+                    <h3>Suporte Prioritário</h3>
+                    <p>Atendimento rápido e personalizado quando precisar</p>
                 </div>
             </div>
         </section>
 
-        <!-- Planos Profissionais -->
-        <section class="plans-section hidden" id="profissional-section">
-            <div class="section-header">
-                <h2 class="section-title">Planos para Pet Shops e Criadores</h2>
-                <p class="section-description">Soluções completas para profissionais do mercado pet</p>
-            </div>
-
-            <div class="pricing-cards">
+        <!-- Planos Mensais -->
+        <section class="planos-section">
+            <h2 class="section-title">Planos Mensais para Vendedores</h2>
+            <p class="section-subtitle">Ideal para criadores registrados, pet shops e vendedores profissionais</p>
+            
+            <div class="planos-grid">
+                
                 <!-- Plano Básico -->
-                <div class="pricing-card">
-                    <div class="card-icon">🐾</div>
-                    <h3>Plano Básico</h3>
-                    <div class="price">
-                        <span class="currency">R$</span>
-                        <span class="amount">99</span>
-                        <span class="period">/mês</span>
+                <div class="plano-card">
+                    <div class="plano-header">
+                        <h3 class="plano-nome">Básico</h3>
+                        <div class="plano-preco">
+                            <span class="preco-valor">R$ 99</span>
+                            <span class="preco-periodo">/mês</span>
+                        </div>
+                        <p class="plano-descricao">Para quem está começando</p>
                     </div>
-                    <p class="card-subtitle">Ideal para começar</p>
                     
-                    <ul class="features-list">
-                        <li class="feature-item">
-                            <span class="check-icon">✓</span>
-                            <span>Até 10 anúncios simultâneos</span>
-                        </li>
-                        <li class="feature-item">
-                            <span class="check-icon">✓</span>
-                            <span>10 fotos + 2 vídeos por anúncio</span>
-                        </li>
-                        <li class="feature-item">
-                            <span class="check-icon">✓</span>
-                            <span>Perfil profissional personalizado</span>
-                        </li>
-                        <li class="feature-item">
-                            <span class="check-icon">✓</span>
-                            <span>Estatísticas básicas</span>
-                        </li>
-                        <li class="feature-item">
-                            <span class="check-icon">✓</span>
-                            <span>Suporte prioritário</span>
-                        </li>
-                        <li class="feature-item disabled">
-                            <span class="check-icon">✗</span>
-                            <span>Selo verificado</span>
-                        </li>
-                    </ul>
-
-                    <button class="btn-plan">Assinar e Cadastrar como Vendedor</button>
+                    <div class="plano-beneficios">
+                        <ul class="beneficios-lista">
+                            <li>✓ Até 10 anúncios ativos simultâneos</li>
+                            <li>✓ Fotos ilimitadas por anúncio</li>
+                            <li>✓ Suporte por email</li>
+                            <li>✓ Comissão de 8% sobre vendas</li>
+                            <li>✓ Painel de controle básico</li>
+                        </ul>
+                    </div>
+                    
+                    <button class="btn-plano" onclick="selecionarPlano('basico')">Começar Agora</button>
                 </div>
 
                 <!-- Plano Profissional -->
-                <div class="pricing-card featured-card">
-                    <div class="card-badge popular">Mais Popular</div>
-                    <div class="card-icon">⭐</div>
-                    <h3>Plano Profissional</h3>
-                    <div class="price">
-                        <span class="currency">R$</span>
-                        <span class="amount">199</span>
-                        <span class="period">/mês</span>
+                <div class="plano-card plano-destaque">
+                    <div class="plano-badge">Mais Popular</div>
+                    <div class="plano-header">
+                        <h3 class="plano-nome">Profissional</h3>
+                        <div class="plano-preco">
+                            <span class="preco-valor">R$ 199</span>
+                            <span class="preco-periodo">/mês</span>
+                        </div>
+                        <p class="plano-descricao">Para vendedores ativos</p>
                     </div>
-                    <p class="card-subtitle">Para crescer seu negócio</p>
                     
-                    <ul class="features-list">
-                        <li class="feature-item">
-                            <span class="check-icon">✓</span>
-                            <span>Anúncios ilimitados</span>
-                        </li>
-                        <li class="feature-item">
-                            <span class="check-icon">✓</span>
-                            <span>Fotos e vídeos ilimitados</span>
-                        </li>
-                        <li class="feature-item">
-                            <span class="check-icon">✓</span>
-                            <span>Selo "Vendedor Verificado"</span>
-                        </li>
-                        <li class="feature-item">
-                            <span class="check-icon">✓</span>
-                            <span>Destaque nos resultados de busca</span>
-                        </li>
-                        <li class="feature-item">
-                            <span class="check-icon">✓</span>
-                            <span>Estatísticas avançadas e relatórios</span>
-                        </li>
-                        <li class="feature-item">
-                            <span class="check-icon">✓</span>
-                            <span>Suporte prioritário via WhatsApp</span>
-                        </li>
-                        <li class="feature-item">
-                            <span class="check-icon">✓</span>
-                            <span>Destaque em newsletter mensal</span>
-                        </li>
-                    </ul>
-
-                    <button class="btn-plan btn-featured">Assinar e Cadastrar como Vendedor</button>
+                    <div class="plano-beneficios">
+                        <ul class="beneficios-lista">
+                            <li>✓ Anúncios ilimitados</li>
+                            <li>✓ Selo de "Vendedor Verificado" ⭐</li>
+                            <li>✓ Destaque em busca por categoria</li>
+                            <li>✓ Estatísticas de visualizações</li>
+                            <li>✓ Suporte prioritário</li>
+                            <li>✓ Comissão de 8% sobre vendas</li>
+                            <li>✓ Fotos e vídeos ilimitados</li>
+                        </ul>
+                    </div>
+                    
+                    <button class="btn-plano btn-plano-destaque" onclick="selecionarPlano('profissional')">Escolher Profissional</button>
                 </div>
 
                 <!-- Plano Premium -->
-                <div class="pricing-card premium-card">
-                    <div class="card-badge premium">Premium</div>
-                    <div class="card-icon">👑</div>
-                    <h3>Plano Premium</h3>
-                    <div class="price">
-                        <span class="currency">R$</span>
-                        <span class="amount">349</span>
-                        <span class="period">/mês</span>
+                <div class="plano-card">
+                    <div class="plano-header">
+                        <h3 class="plano-nome">Premium</h3>
+                        <div class="plano-preco">
+                            <span class="preco-valor">R$ 349</span>
+                            <span class="preco-periodo">/mês</span>
+                        </div>
+                        <p class="plano-descricao">Para profissionais sérios</p>
                     </div>
-                    <p class="card-subtitle">Máxima visibilidade</p>
                     
-                    <ul class="features-list">
-                        <li class="feature-item">
-                            <span class="check-icon">✓</span>
-                            <span>Todos os recursos do Profissional</span>
-                        </li>
-                        <li class="feature-item">
-                            <span class="check-icon">✓</span>
-                            <span>Destaque permanente na página inicial</span>
-                        </li>
-                        <li class="feature-item">
-                            <span class="check-icon">✓</span>
-                            <span>Topo dos resultados de busca</span>
-                        </li>
-                        <li class="feature-item">
-                            <span class="check-icon">✓</span>
-                            <span>Banner personalizado no perfil</span>
-                        </li>
-                        <li class="feature-item">
-                            <span class="check-icon">✓</span>
-                            <span>Gerente de conta dedicado</span>
-                        </li>
-                        <li class="feature-item">
-                            <span class="check-icon">✓</span>
-                            <span>Campanha em redes sociais incluída</span>
-                        </li>
-                        <li class="feature-item">
-                            <span class="check-icon">✓</span>
-                            <span>Acesso antecipado a novos recursos</span>
-                        </li>
-                    </ul>
-
-                    <button class="btn-plan btn-premium">Assinar e Cadastrar como Vendedor</button>
+                    <div class="plano-beneficios">
+                        <ul class="beneficios-lista">
+                            <li>✓ Todos os benefícios do Profissional</li>
+                            <li>✓ Destaque permanente na página inicial</li>
+                            <li>✓ Vídeos de apresentação premium</li>
+                            <li>✓ Gerenciador de leads integrado</li>
+                            <li>✓ Consultoria trimestral de performance</li>
+                            <li>✓ Comissão de 8% sobre vendas</li>
+                            <li>✓ Badge Premium exclusivo 👑</li>
+                            <li>✓ Prioridade máxima no suporte</li>
+                        </ul>
+                    </div>
+                    
+                    <button class="btn-plano" onclick="selecionarPlano('premium')">Quero o Premium</button>
                 </div>
+
             </div>
         </section>
 
-        <!-- Anúncios Premium -->
-        <section class="plans-section hidden" id="anuncios-section">
-            <div class="section-header">
-                <h2 class="section-title">Impulsione Seus Anúncios</h2>
-                <p class="section-description">Dê destaque aos seus anúncios e venda mais rápido</p>
-            </div>
-
-            <div class="pricing-cards two-columns">
-                <!-- Destaque 7 dias -->
-                <div class="pricing-card boost-card">
-                    <div class="card-icon">🚀</div>
-                    <h3>Destaque 7 Dias</h3>
-                    <div class="price">
-                        <span class="currency">R$</span>
-                        <span class="amount">29,90</span>
-                        <span class="period">/anúncio</span>
+        <!-- Anúncios em Destaque (Boost) -->
+        <section class="boost-section">
+            <h2 class="section-title">Anúncios em Destaque</h2>
+            <p class="section-subtitle">Para vendedores eventuais ou quem quer impulsionar um anúncio específico</p>
+            
+            <div class="boost-grid">
+                
+                <!-- Boost 7 dias -->
+                <div class="boost-card">
+                    <div class="boost-duracao">7 dias</div>
+                    <div class="boost-preco">
+                        <span class="preco-valor">R$ 29,90</span>
                     </div>
-                    <p class="card-subtitle">Impulso rápido</p>
-                    
-                    <ul class="features-list">
-                        <li class="feature-item">
-                            <span class="check-icon">✓</span>
-                            <span>Destaque na página inicial por 7 dias</span>
-                        </li>
-                        <li class="feature-item">
-                            <span class="check-icon">✓</span>
-                            <span>Posição prioritária nos resultados</span>
-                        </li>
-                        <li class="feature-item">
-                            <span class="check-icon">✓</span>
-                            <span>Badge "Destaque" no anúncio</span>
-                        </li>
-                        <li class="feature-item">
-                            <span class="check-icon">✓</span>
-                            <span>Até 15 fotos + 3 vídeos</span>
-                        </li>
-                        <li class="feature-item">
-                            <span class="check-icon">✓</span>
-                            <span>Visualizações 5x maiores</span>
-                        </li>
-                        <li class="feature-item">
-                            <span class="check-icon">✓</span>
-                            <span>Relatório de desempenho</span>
-                        </li>
+                    <ul class="boost-beneficios">
+                        <li>✓ Destaque na categoria específica</li>
+                        <li>✓ Selo "Em destaque" no anúncio</li>
+                        <li>✓ Até 5 fotos</li>
+                        <li>✓ Visibilidade aumentada em 3x</li>
                     </ul>
-
-                    <button class="btn-plan">Impulsionar Agora</button>
+                    <button class="btn-boost" onclick="comprarBoost('7dias')">Impulsionar por 7 dias</button>
                 </div>
 
-                <!-- Destaque 15 dias -->
-                <div class="pricing-card boost-card featured-card">
-                    <div class="card-badge popular">Melhor Valor</div>
-                    <div class="card-icon">🔥</div>
-                    <h3>Destaque 15 Dias</h3>
-                    <div class="price">
-                        <span class="currency">R$</span>
-                        <span class="amount">49,90</span>
-                        <span class="period">/anúncio</span>
+                <!-- Boost 15 dias -->
+                <div class="boost-card boost-recomendado">
+                    <div class="boost-badge">Recomendado</div>
+                    <div class="boost-duracao">15 dias</div>
+                    <div class="boost-preco">
+                        <span class="preco-valor">R$ 49,90</span>
                     </div>
-                    <p class="card-subtitle">Máxima exposição</p>
-                    
-                    <ul class="features-list">
-                        <li class="feature-item">
-                            <span class="check-icon">✓</span>
-                            <span>Destaque na página inicial por 15 dias</span>
-                        </li>
-                        <li class="feature-item">
-                            <span class="check-icon">✓</span>
-                            <span>Topo absoluto dos resultados</span>
-                        </li>
-                        <li class="feature-item">
-                            <span class="check-icon">✓</span>
-                            <span>Badge "Super Destaque" premium</span>
-                        </li>
-                        <li class="feature-item">
-                            <span class="check-icon">✓</span>
-                            <span>Fotos e vídeos ilimitados</span>
-                        </li>
-                        <li class="feature-item">
-                            <span class="check-icon">✓</span>
-                            <span>Visualizações 10x maiores</span>
-                        </li>
-                        <li class="feature-item">
-                            <span class="check-icon">✓</span>
-                            <span>Destaque em newsletter</span>
-                        </li>
-                        <li class="feature-item">
-                            <span class="check-icon">✓</span>
-                            <span>Compartilhamento em redes sociais</span>
-                        </li>
-                        <li class="feature-item">
-                            <span class="check-icon">✓</span>
-                            <span>Relatório detalhado de desempenho</span>
-                        </li>
+                    <ul class="boost-beneficios">
+                        <li>✓ Todos os benefícios anteriores</li>
+                        <li>✓ Prioridade nos resultados de busca</li>
+                        <li>✓ Até 10 fotos + 1 vídeo</li>
+                        <li>✓ Visibilidade aumentada em 5x</li>
                     </ul>
+                    <button class="btn-boost btn-boost-recomendado" onclick="comprarBoost('15dias')">Impulsionar por 15 dias</button>
+                </div>
 
-                    <button class="btn-plan btn-featured">Impulsionar Agora</button>
-                    <p class="savings-text">Economize R$ 9,90 comparado ao plano de 7 dias!</p>
+                <!-- Boost 30 dias -->
+                <div class="boost-card">
+                    <div class="boost-duracao">30 dias</div>
+                    <div class="boost-preco">
+                        <span class="preco-valor">R$ 79,90</span>
+                    </div>
+                    <ul class="boost-beneficios">
+                        <li>✓ Máxima visibilidade</li>
+                        <li>✓ Aparição na página inicial (rodízio)</li>
+                        <li>✓ Fotos e vídeos ilimitados</li>
+                        <li>✓ Ícone premium no anúncio</li>
+                        <li>✓ Visibilidade aumentada em 8x</li>
+                    </ul>
+                    <button class="btn-boost" onclick="comprarBoost('30dias')">Impulsionar por 30 dias</button>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Serviços Gratuitos -->
+        <section class="servicos-gratuitos">
+            <h2 class="section-title">100% Gratuito para Adoção e Resgate</h2>
+            <p class="section-subtitle">Nossa missão é facilitar a adoção responsável e o resgate de animais</p>
+            
+            <div class="gratuitos-grid">
+                <div class="gratuito-item">
+                    <span class="gratuito-icon">❤️</span>
+                    <p>Adoção e doação de animais</p>
+                </div>
+                <div class="gratuito-item">
+                    <span class="gratuito-icon">🔍</span>
+                    <p>Cadastro e busca de animais perdidos</p>
+                </div>
+                <div class="gratuito-item">
+                    <span class="gratuito-icon">👤</span>
+                    <p>Perfil básico para todos</p>
+                </div>
+                <div class="gratuito-item">
+                    <span class="gratuito-icon">💬</span>
+                    <p>Sistema de mensagens diretas</p>
+                </div>
+                <div class="gratuito-item">
+                    <span class="gratuito-icon">🎯</span>
+                    <p>Filtros avançados de busca</p>
+                </div>
+                <div class="gratuito-item">
+                    <span class="gratuito-icon">📚</span>
+                    <p>Conteúdo educativo sobre cuidados</p>
+                </div>
+                <div class="gratuito-item">
+                    <span class="gratuito-icon">🏢</span>
+                    <p>Diretório de ONGs e abrigos</p>
+                </div>
+                <div class="gratuito-item">
+                    <span class="gratuito-icon">✅</span>
+                    <p>Verificação de perfil</p>
                 </div>
             </div>
         </section>
 
         <!-- Comparação de Planos -->
-        <section class="comparison-section">
-            <h2 class="section-title">Compare os Planos para Vendedores</h2>
-            <div class="comparison-table-wrapper">
-                <table class="comparison-table">
+        <section class="comparacao-section">
+            <h2 class="section-title">Compare os Planos</h2>
+            
+            <div class="comparacao-table-wrapper">
+                <table class="comparacao-table">
                     <thead>
                         <tr>
                             <th class="feature-column">Recursos</th>
                             <th>Básico</th>
-                            <th class="featured-column">Profissional</th>
+                            <th class="destaque-column">Profissional</th>
                             <th>Premium</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="feature-column">Preço mensal</td>
-                            <td>R$ 99</td>
-                            <td class="featured-column">R$ 199</td>
-                            <td>R$ 349</td>
-                        </tr>
-                        <tr>
-                            <td class="feature-column">Anúncios simultâneos</td>
-                            <td>10</td>
-                            <td class="featured-column">Ilimitado</td>
-                            <td>Ilimitado</td>
+                            <td class="feature-column">Anúncios ativos</td>
+                            <td>Até 10</td>
+                            <td class="destaque-column">Ilimitados</td>
+                            <td>Ilimitados</td>
                         </tr>
                         <tr>
                             <td class="feature-column">Fotos por anúncio</td>
-                            <td>10</td>
-                            <td class="featured-column">Ilimitado</td>
-                            <td>Ilimitado</td>
+                            <td>Ilimitadas</td>
+                            <td class="destaque-column">Ilimitadas</td>
+                            <td>Ilimitadas</td>
                         </tr>
                         <tr>
-                            <td class="feature-column">Vídeos por anúncio</td>
-                            <td>2</td>
-                            <td class="featured-column">Ilimitado</td>
-                            <td>Ilimitado</td>
+                            <td class="feature-column">Vídeos</td>
+                            <td>—</td>
+                            <td class="destaque-column">✓</td>
+                            <td>✓ Premium</td>
                         </tr>
                         <tr>
-                            <td class="feature-column">Selo verificado</td>
-                            <td>✗</td>
-                            <td class="featured-column">✓</td>
+                            <td class="feature-column">Selo Verificado</td>
+                            <td>—</td>
+                            <td class="destaque-column">✓</td>
                             <td>✓</td>
                         </tr>
                         <tr>
-                            <td class="feature-column">Destaque nos resultados</td>
-                            <td>✗</td>
-                            <td class="featured-column">✓</td>
-                            <td>✓ Permanente</td>
+                            <td class="feature-column">Destaque em busca</td>
+                            <td>—</td>
+                            <td class="destaque-column">Por categoria</td>
+                            <td>Página inicial</td>
                         </tr>
                         <tr>
                             <td class="feature-column">Estatísticas</td>
-                            <td>Básicas</td>
-                            <td class="featured-column">Avançadas</td>
-                            <td>Completas</td>
+                            <td>—</td>
+                            <td class="destaque-column">✓</td>
+                            <td>✓ Avançadas</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-column">Gerenciador de leads</td>
+                            <td>—</td>
+                            <td class="destaque-column">—</td>
+                            <td>✓</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-column">Consultoria</td>
+                            <td>—</td>
+                            <td class="destaque-column">—</td>
+                            <td>✓ Trimestral</td>
                         </tr>
                         <tr>
                             <td class="feature-column">Suporte</td>
-                            <td>Prioritário</td>
-                            <td class="featured-column">WhatsApp</td>
-                            <td>Gerente dedicado</td>
+                            <td>Email</td>
+                            <td class="destaque-column">Prioritário</td>
+                            <td>VIP</td>
                         </tr>
                         <tr>
-                            <td class="feature-column">Campanha em redes sociais</td>
-                            <td>✗</td>
-                            <td class="featured-column">✗</td>
-                            <td>✓</td>
-                        </tr>
-                        <tr>
-                            <td class="feature-column">Banner personalizado</td>
-                            <td>✗</td>
-                            <td class="featured-column">✗</td>
-                            <td>✓</td>
+                            <td class="feature-column">Comissão sobre vendas</td>
+                            <td>8%</td>
+                            <td class="destaque-column">8%</td>
+                            <td>8%</td>
                         </tr>
                     </tbody>
                 </table>
-            </div>
-            <p class="table-note">* Todos os planos incluem cadastro como vendedor na plataforma</p>
-        </section>
-
-        <!-- Parcerias Comerciais -->
-        <section class="partnership-section">
-            <div class="partnership-content">
-                <div class="partnership-text">
-                    <h2>Parcerias Comerciais</h2>
-                    <p>Seja um parceiro comercial do APANIM e receba comissões por vendas realizadas através da plataforma.</p>
-                    
-                    <ul class="partnership-benefits">
-                        <li>
-                            <span class="benefit-icon">💰</span>
-                            <div>
-                                <strong>10% de Comissão</strong>
-                                <p>Receba comissão em todas as vendas de produtos e serviços pet</p>
-                            </div>
-                        </li>
-                        <li>
-                            <span class="benefit-icon">🏪</span>
-                            <div>
-                                <strong>Pet Shops Parceiros</strong>
-                                <p>Integre sua loja e venda diretamente na plataforma</p>
-                            </div>
-                        </li>
-                        <li>
-                            <span class="benefit-icon">📢</span>
-                            <div>
-                                <strong>Publicidade Integrada</strong>
-                                <p>Promova seus produtos e serviços para nossa audiência</p>
-                            </div>
-                        </li>
-                        <li>
-                            <span class="benefit-icon">❤️</span>
-                            <div>
-                                <strong>Campanhas de Adoção</strong>
-                                <p>Patrocine campanhas e fortaleça sua marca</p>
-                            </div>
-                        </li>
-                    </ul>
-
-                    <button class="btn-partnership">Quero Ser Parceiro</button>
-                </div>
-                
-                <div class="partnership-image">
-                    <div class="partnership-stats">
-                        <div class="stat-box">
-                            <span class="stat-value">10%</span>
-                            <span class="stat-label">Comissão</span>
-                        </div>
-                        <div class="stat-box">
-                            <span class="stat-value">100+</span>
-                            <span class="stat-label">Parceiros</span>
-                        </div>
-                        <div class="stat-box">
-                            <span class="stat-value">R$ 50k</span>
-                            <span class="stat-label">Faturamento Médio</span>
-                        </div>
-                    </div>
-                </div>
             </div>
         </section>
 
@@ -524,64 +334,64 @@
         <section class="faq-section">
             <h2 class="section-title">Perguntas Frequentes</h2>
             
-            <div class="faq-grid">
+            <div class="faq-container">
                 <div class="faq-item">
-                    <div class="faq-question">
-                        <span class="faq-icon">❓</span>
-                        <h3>Posso cancelar minha assinatura a qualquer momento?</h3>
-                    </div>
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Como funciona a comissão de 8%?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
                     <div class="faq-answer">
-                        <p>Sim! Você pode cancelar sua assinatura a qualquer momento sem taxa de cancelamento. O acesso aos recursos premium continuará até o final do período já pago.</p>
+                        <p>A comissão de 8% é aplicada apenas sobre vendas concretizadas através da plataforma. Isso significa que você só paga quando realmente vender um animal. O valor é calculado automaticamente no momento da transação.</p>
                     </div>
                 </div>
 
                 <div class="faq-item">
-                    <div class="faq-question">
-                        <span class="faq-icon">❓</span>
-                        <h3>Como funciona o período de teste?</h3>
-                    </div>
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Posso cancelar minha assinatura a qualquer momento?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
                     <div class="faq-answer">
-                        <p>Oferecemos 7 dias de teste gratuito para todos os planos profissionais. Durante esse período, você terá acesso completo a todos os recursos sem precisar informar dados de pagamento.</p>
+                        <p>Sim! Você pode cancelar sua assinatura a qualquer momento sem multas ou taxas adicionais. Seus anúncios permanecerão ativos até o final do período pago.</p>
                     </div>
                 </div>
 
                 <div class="faq-item">
-                    <div class="faq-question">
-                        <span class="faq-icon">❓</span>
-                        <h3>Posso fazer upgrade do meu plano?</h3>
-                    </div>
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Qual a diferença entre assinatura mensal e boost?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
                     <div class="faq-answer">
-                        <p>Sim! Você pode fazer upgrade do seu plano a qualquer momento. A diferença será calculada proporcionalmente e cobrada na próxima fatura.</p>
+                        <p>A assinatura mensal é ideal para vendedores profissionais que mantêm anúncios regularmente. O boost é uma compra única para impulsionar um anúncio específico por um período determinado, perfeito para vendedores eventuais.</p>
                     </div>
                 </div>
 
                 <div class="faq-item">
-                    <div class="faq-question">
-                        <span class="faq-icon">❓</span>
-                        <h3>Quais formas de pagamento são aceitas?</h3>
-                    </div>
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Posso trocar de plano depois?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
                     <div class="faq-answer">
-                        <p>Aceitamos cartões de crédito (Visa, Mastercard, Elo), PIX e boleto bancário. Para assinaturas, recomendamos cartão de crédito para renovação automática.</p>
+                        <p>Claro! Você pode fazer upgrade ou downgrade do seu plano a qualquer momento. No caso de upgrade, a diferença é calculada proporcionalmente. No downgrade, o crédito é aplicado na próxima cobrança.</p>
                     </div>
                 </div>
 
                 <div class="faq-item">
-                    <div class="faq-question">
-                        <span class="faq-icon">❓</span>
-                        <h3>Posso vender animais sem assinatura?</h3>
-                    </div>
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Preciso ser criador registrado para assinar?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
                     <div class="faq-answer">
-                        <p>Não. Para vender animais na plataforma, é necessário escolher um dos nossos planos de assinatura (Básico, Profissional ou Premium). Isso garante segurança, qualidade e responsabilidade em todas as transações. Adoção e doação continuam 100% gratuitas!</p>
+                        <p>Sim, para contratar um plano mensal é necessário ter CNPJ ativo e estar regularizado como criador ou pet shop. Para boost avulso, qualquer usuário verificado pode contratar.</p>
                     </div>
                 </div>
 
                 <div class="faq-item">
-                    <div class="faq-question">
-                        <span class="faq-icon">❓</span>
-                        <h3>Como funciona a comissão de parceria?</h3>
-                    </div>
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Como funciona o destaque na página inicial?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
                     <div class="faq-answer">
-                        <p>Parceiros comerciais recebem 10% de comissão sobre vendas realizadas através de seus links ou indicações. O pagamento é feito mensalmente via transferência bancária.</p>
+                        <p>Os anúncios destacados aparecem em um carrossel rotativo na página inicial, garantindo máxima visibilidade. No plano Premium, você tem aparições garantidas diariamente. No boost de 30 dias, as aparições são distribuídas ao longo do período.</p>
                     </div>
                 </div>
             </div>
@@ -590,30 +400,23 @@
         <!-- CTA Final -->
         <section class="cta-section">
             <div class="cta-content">
-                <h2>Pronto para Começar?</h2>
-                <p>Junte-se a milhares de vendedores que já confiam no APANIM para conectar-se com amantes de pets</p>
+                <h2>Pronto para crescer suas vendas?</h2>
+                <p>Escolha o plano ideal e comece a vender mais hoje mesmo!</p>
                 
                 <div class="cta-buttons">
-                    <button class="btn-cta primary">Criar Conta Grátis</button>
-                    <button class="btn-cta secondary">Falar com Especialista</button>
+                    <a href="#planos-section" class="btn-cta-primary">Ver Planos</a>
+                    <button class="btn-cta-secondary" onclick="abrirContato()">
+                        Falar com Especialista
+                    </button>
                 </div>
 
-                <div class="trust-badges">
-                    <div class="badge">
-                        <span class="badge-icon">🔒</span>
-                        <span>Pagamento Seguro</span>
-                    </div>
-                    <div class="badge">
-                        <span class="badge-icon">✓</span>
-                        <span>Sem Fidelidade</span>
-                    </div>
-                    <div class="badge">
-                        <span class="badge-icon">💬</span>
-                        <span>Suporte 24/7</span>
-                    </div>
+                <div class="email-info">
+                    <p>Dúvidas sobre os planos?</p>
+                    <p class="email-address">apanim.amor.protecao@gmail.com</p>
                 </div>
             </div>
         </section>
+
     </main>
 
     <!-- Footer -->
@@ -645,7 +448,7 @@
             </div>
             <div>
                 <span class="titulo">Sobre o APANIM</span><br>
-                <a href="../APANIM/index.html"><span>APANIM</span></a>
+                <span>APANIM</span>
             </div>
             <div>
                 <span class="titulo">Meu perfil</span><br>
@@ -660,10 +463,9 @@
         </div>
     </footer>
 
-    <!-- ⭐ SCRIPT DO MENU UNIFICADO -->
-    <script src="../../assets/js/menu-unificado.js"></script>
-    
-    <!-- Script da página de planos -->
+    <!-- Scripts -->
+    <script src="../../assets/js/scroll-top.js"></script>
     <script src="script.js"></script>
+    <script src="../../assets/js/menu-unificado.js"></script>
 </body>
 </html>
