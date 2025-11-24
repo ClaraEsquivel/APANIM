@@ -1,17 +1,15 @@
 /* ============= PADRÃO EM TODOS OS STYLES ============ */
-* {
+*{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+body{
     margin: 0;
-    min-height: 100vh;
+    height: 100vh;
     position: relative;
-    background: #fafafa;
-    color: #333;
+    font-family: 'Libre Baskerville', Georgia, serif;
 }
 
 /* Barra de Rolagem lateral */
@@ -45,22 +43,28 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 .hero::before {
-    content: '🐾';
+    content: '';
+    background: url(../../assets/images/patas_1.svg) no-repeat center center;
+    background-size: contain;
     position: absolute;
-    font-size: 20rem;
-    opacity: 0.05;
-    top: -5rem;
-    right: -5rem;
+    width: 200px;
+    height: 200px;
+    opacity: 0.8;
+    top: 1.5rem;
+    right: 1rem;
     animation: float 6s ease-in-out infinite;
 }
 
 .hero::after {
-    content: '❤️';
+    content: '';
+    background: url(../../assets/images/patas_2.svg) no-repeat center center;
+    background-size: contain;
     position: absolute;
-    font-size: 15rem;
-    opacity: 0.05;
-    bottom: -3rem;
-    left: -3rem;
+    width: 200px;
+    height: 200px;
+    opacity: 0.8;
+    bottom: 1rem;
+    left: 1rem;
     animation: float 8s ease-in-out infinite reverse;
 }
 
@@ -81,11 +85,13 @@ body::-webkit-scrollbar-thumb:hover {
     margin-bottom: 1.5rem;
     font-weight: 700;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    font-family: 'Libre Baskerville', Georgia, serif;
 }
 
 .hero p {
     font-size: 1.3rem;
     margin-bottom: 2rem;
+    font-family: 'Libre Baskerville', Georgia, serif;
     opacity: 0.95;
 }
 
