@@ -1,23 +1,21 @@
-@font-face {
+/* @font-face {
     font-family: 'Forum';
     src: url(../../assets/images/Forum-Regular.ttf) format('truetype');
     font-weight: normal;
     font-style: normal;
-}
+} */
 
 /* ===== FOOTER ===== */
 .base {
     background: #fce4e4;
     width: 100%;
-    min-height: 150px;
+    min-height: 300px;
     position: relative;
-    margin-top: 4rem;
     left: 0;
-    border-radius: 10px 10px 0 0;
     box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: center;
-    padding: 20px;
+    padding: 30px;
     box-sizing: border-box;
     z-index: 1;
 }
@@ -50,7 +48,7 @@
     gap: 75px; 
     justify-content: center;
     align-items: flex-start;
-    padding: 30px;
+    padding: 50px;
     width: 100%;
     flex-wrap: wrap;
     z-index: 1;

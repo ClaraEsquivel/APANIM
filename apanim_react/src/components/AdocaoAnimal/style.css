@@ -144,8 +144,8 @@
     transform: translateY(0);
 }
 
-/* ===== SEÇÃO DE ANIMAIS PERDIDOS ===== */
-.secao-perdidos {
+/* ===== SEÇÃO DE ANIMAIS PARA ADOÇÃO ===== */
+.secao-adocao {
     margin-top: 2rem;
 }
 
@@ -194,14 +194,12 @@
     transform: translateY(-8px);
     box-shadow: 0 12px 24px #5A0609;
     border-color: #fce4e4;
-    opacity: 30%;
-    
 }
 
 .card-imagem {
     position: relative;
     height: 280px;
-    background:#fce4e4 ;
+    background: #fce4e4;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -211,7 +209,6 @@
 .imagem-animal {
     max-width: 85%;
     max-height: 85%;
-  
     transition: transform 0.3s ease;
     border-radius: 15px;
 }
@@ -233,7 +230,16 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.badge-urgente {
+.badge-cachorro {
+    background: rgba(49, 130, 206, 0.9);
+}
+
+.badge-gato {
+    background: rgba(213, 63, 140, 0.9);
+}
+
+/* ===== BADGE DISPONÍVEL PARA ADOÇÃO (COR CARAMELO) ===== */
+.badge-adocao {
     position: absolute;
     top: 1rem;
     right: 1rem;
@@ -242,29 +248,21 @@
     font-size: 0.75rem;
     font-weight: 700;
     color: white;
-    background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
-    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4);
+    background: linear-gradient(135deg, #D2691E 0%, #A0522D 100%);
+    box-shadow: 0 4px 12px rgba(210, 105, 30, 0.4);
     backdrop-filter: blur(10px);
-    animation: pulse-urgent 2s infinite;
+    animation: pulse-adocao 2s infinite;
 }
 
-@keyframes pulse-urgent {
+@keyframes pulse-adocao {
     0%, 100% { 
         transform: scale(1);
-        box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4);
+        box-shadow: 0 4px 12px rgba(210, 105, 30, 0.4);
     }
     50% { 
         transform: scale(1.08);
-        box-shadow: 0 6px 16px rgba(220, 38, 38, 0.6);
+        box-shadow: 0 6px 16px rgba(210, 105, 30, 0.6);
     }
-}
-
-.badge-cachorro {
-    background: rgba(49, 130, 206, 0.9);
-}
-
-.badge-gato {
-    background: rgba(213, 63, 140, 0.9);
 }
 
 .card-info {
@@ -363,8 +361,8 @@
     color: #1e40af;
 }
 
-/* ===== BOTÃO DE CONTATO ===== */
-.btn-contato {
+/* ===== BOTÃO QUERO ADOTAR ===== */
+.btn-adotar {
     width: 100%;
     padding: 1rem 1.5rem;
     background: #5A0609;
@@ -375,12 +373,12 @@
     font-size: 1rem;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+    box-shadow: 0 4px 12px rgba(90, 6, 9, 0.3);
     position: relative;
     overflow: hidden;
 }
 
-.btn-contato::before {
+.btn-adotar::before {
     content: '';
     position: absolute;
     top: 0;
@@ -391,21 +389,22 @@
     transition: left 0.6s;
 }
 
-.btn-contato:hover::before {
+.btn-adotar:hover::before {
     left: 100%;
 }
 
-.btn-contato:hover {
+.btn-adotar:hover {
+    background: #420406;
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(220, 38, 38, 0.4);
+    box-shadow: 0 6px 20px rgba(66, 4, 6, 0.4);
 }
 
-.btn-contato:focus {
-    outline: 3px solid #ef4444;
+.btn-adotar:focus {
+    outline: 3px solid #5A0609;
     outline-offset: 2px;
 }
 
-.btn-contato:active {
+.btn-adotar:active {
     transform: translateY(0);
 }
 
@@ -473,8 +472,7 @@
     }
 }
 
-
-
+/* ===== RESPONSIVIDADE ===== */
 @media (max-width: 480px) {
     .container-principal {
         padding: 0.75rem;
@@ -507,12 +505,12 @@
         font-size: 1.4rem;
     }
 
-    .btn-contato {
+    .btn-adotar {
         padding: 0.875rem 1.25rem;
         font-size: 0.95rem;
     }
 
-    .badge-urgente {
+    .badge-adocao {
         font-size: 0.7rem;
         padding: 0.4rem 0.8rem;
     }
@@ -526,37 +524,6 @@
     .contato-info p {
         font-size: 0.85rem;
     }
-
-    .topo {
-        height: 150px;
-        padding: 0 20px;
-        gap: 20px;
-    }
-
-    .topo .patas_topo {
-        width: 50px;
-        margin-right: 20px;
-    }
-
-    #logo_apanim {
-        height: 100px;
-    }
-
-    .topo .cat_topo,
-    .topo .dog_topo {
-        width: 50px;
-        margin-left: 20px;
-    }
-
-    .base {
-        height: auto;
-        padding: 20px;
-        flex-direction: column;
-    }
-
-    .links_uteis {
-        gap: 15px;
-    }
 }
 
 /* ===== MELHORIAS DE ACESSIBILIDADE ===== */
@@ -568,19 +535,17 @@
     }
 }
 
-
-
 /* ===== ESTADOS DE FOCO MELHORADOS ===== */
 .select-filtro:focus-visible,
 .btn:focus-visible,
-.btn-contato:focus-visible {
-     outline: 3px solid #5A0609;
+.btn-adotar:focus-visible {
+    outline: 3px solid #5A0609;
     outline-offset: 2px;
 }
 
 /* ===== HOVER STATES ADICIONAIS ===== */
 .card-animal:hover .nome-animal {
-    color: #dc2626;
+    color: #5A0609;
     transition: color 0.3s ease;
 }
 
@@ -594,7 +559,7 @@
     .secao-filtros,
     .btn,
     .container-botoes,
-    .btn-contato {
+    .btn-adotar {
         display: none;
     }
 
@@ -609,7 +574,7 @@
         display: block;
     }
 
-    .badge-urgente {
+    .badge-adocao {
         background: #000;
         color: #fff;
     }
