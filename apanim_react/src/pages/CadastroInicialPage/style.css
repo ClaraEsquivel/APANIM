@@ -1,0 +1,503 @@
+/* ============= CENTRAL ============= */
+.central {
+    background: white;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center; 
+    position: relative;
+}
+
+/* ============= PATAS DECORATIVAS ============= */
+.patas1, .patas2, .patas3, .patas4, .patas5, .patas6 {
+    position: absolute;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.patas1 { left: 5%; top: 15%; }
+.patas2 { left: 10%; top: 60%; }
+.patas3 { left: 5%; top: 100%; }
+.patas4 { right: 5%; top: 15%; }
+.patas5 { right: 10%; top: 60%; }
+.patas6 { right: 5%; top: 100%; }
+
+.patas1 img, .patas2 img, .patas3 img,
+.patas4 img, .patas5 img, .patas6 img {
+    width: 100px;
+    height: auto;
+    opacity: 0.2;
+    transition: all 0.5s ease;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.pata-animate:hover img {
+    transform: scale(1.3) rotate(15deg);
+    opacity: 0.4;
+}
+
+/* Animação de entrada das patas */
+@keyframes pawFloat {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(5deg); }
+}
+
+.pata-animate img {
+    animation: pawFloat 4s ease-in-out infinite;
+}
+
+.patas1 img { animation-delay: 0s; }
+.patas2 img { animation-delay: 0.5s; }
+.patas3 img { animation-delay: 1s; }
+.patas4 img { animation-delay: 1.5s; }
+.patas5 img { animation-delay: 2s; }
+.patas6 img { animation-delay: 2.5s; }
+
+/* ============= CONTAINER PRINCIPAL ============= */
+.container {
+    background: linear-gradient(100deg, #fce4e4 0%, #ffffff 100%);
+    max-width: 650px;
+    width: 100%;
+    padding: 3rem 2.5rem;
+    margin-top: 50px;
+    border-radius: 30px;
+    box-shadow: 0 20px 60px rgba(90, 6, 9, 0.15);
+    position: relative;
+    z-index: 10;
+    animation: slideUp 0.8s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============= WELCOME SECTION ============= */
+.welcome-section {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.welcome-title {
+    font-size: 2.5rem;
+    color: #5A0609;
+    font-weight: 800;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.5px;
+    animation: fadeIn 1s ease-out;
+}
+
+.welcome-subtitle {
+    font-size: 1.2rem;
+    color: #666;
+    font-weight: 300;
+    animation: fadeIn 1s ease-out 0.2s both;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* ============= BOTÃO GOOGLE ============= */
+.cadastrar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 1.5rem;
+}
+
+.google-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 14px 32px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    background-color: white;
+    border: 2px solid #e0e0e0;
+    color: #333;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+.google-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: #f8f8f8;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.google-btn:hover::before {
+    width: 400px;
+    height: 400px;
+}
+
+.google-btn:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    border-color: #5A0609;
+}
+
+.google-btn:active {
+    transform: translateY(-1px) scale(0.98);
+}
+
+.google-icon {
+    height: 24px;
+    width: 24px;
+    position: relative;
+    z-index: 1;
+}
+
+.google-btn span {
+    position: relative;
+    z-index: 1;
+}
+
+/* ============= DIVIDER ============= */
+.divider {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin: 2rem 0;
+    color: #5A0609;
+    font-size: 0.95rem;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #5A0609, transparent);
+}
+
+.divider span {
+    padding: 0 1.5rem;
+    font-weight: 500;
+}
+
+/* ============= IMAGEM DO CACHORRO ============= */
+.dog-image {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0;
+}
+
+.dog-image img {
+    width: 200px;
+    height: auto;
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.1));
+    animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+/* ============= BOTÕES DE CADASTRO ============= */
+.botoes-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.botoes-container a {
+    text-decoration: none;
+    width: 100%;
+}
+
+.btn-cadastro {
+    width: 100%;
+    padding: 1.5rem 2rem;
+    border: none;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #5A0609 0%, #420406 100%);
+    color: white;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 600;
+    box-shadow: 0 8px 20px rgba(90, 6, 9, 0.3);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-cadastro::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.btn-cadastro:hover::before {
+    left: 100%;
+}
+
+.btn-cadastro:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 12px 30px rgba(90, 6, 9, 0.4);
+}
+
+.btn-cadastro:active {
+    transform: translateY(-2px) scale(0.98);
+}
+
+.btn-icon {
+    font-size: 2rem;
+    display: block;
+}
+
+.btn-text {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.btn-description {
+    font-size: 0.85rem;
+    opacity: 0.9;
+    font-weight: 300;
+}
+
+/* ============= LINK DE LOGIN ============= */
+.login-link {
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid #5A0609;
+}
+
+.login-link p {
+    color: #666;
+    font-size: 0.95rem;
+}
+
+.login-link a {
+    color: #5A0609;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.login-link a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #5A0609;
+    transition: width 0.3s ease;
+}
+
+.login-link a:hover::after {
+    width: 100%;
+}
+
+.login-link a:hover {
+    color: #420406;
+}
+
+/* ============= RESPONSIVE ============= */
+@media (max-width: 768px) {
+    .central {
+        padding: 2rem 1rem;
+    }
+
+    .container {
+        padding: 2rem 1.5rem;
+        border-radius: 20px;
+    }
+
+    .welcome-title {
+        font-size: 2rem;
+    }
+
+    .welcome-subtitle {
+        font-size: 1rem;
+    }
+
+    /* Esconde patas em telas menores */
+    .patas1, .patas2, .patas3, .patas4, .patas5, .patas6 {
+        display: none;
+    }
+
+    .google-btn {
+        padding: 12px 24px;
+        font-size: 0.95rem;
+    }
+
+    .dog-image img {
+        width: 150px;
+    }
+
+    .btn-cadastro {
+        padding: 1.25rem 1.5rem;
+        font-size: 1rem;
+    }
+
+    .btn-icon {
+        font-size: 1.5rem;
+    }
+
+    .links_uteis {
+        flex-direction: column;
+        gap: 20px;
+        left: 20px;
+        top: auto;
+        bottom: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 1.5rem 1rem;
+    }
+
+    .welcome-title {
+        font-size: 1.75rem;
+    }
+
+    .welcome-subtitle {
+        font-size: 0.95rem;
+    }
+
+    .google-btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+        gap: 8px;
+    }
+
+    .google-icon {
+        height: 20px;
+        width: 20px;
+    }
+
+    .dog-image img {
+        width: 120px;
+    }
+
+    .botoes-container {
+        gap: 1rem;
+    }
+
+    .btn-cadastro {
+        padding: 1rem 1.25rem;
+    }
+
+    .btn-text {
+        font-size: 1rem;
+    }
+
+    .btn-description {
+        font-size: 0.8rem;
+    }
+}
+
+/* ============= LOADING SPINNER ============= */
+.loading-spinner {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+}
+
+.loading-spinner.active {
+    display: block;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #5A0609;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* ============= TOAST NOTIFICATIONS ============= */
+.toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: white;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    animation: slideInRight 0.5s ease;
+    max-width: 350px;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.toast.success {
+    border-left: 4px solid #4CAF50;
+}
+
+.toast.error {
+    border-left: 4px solid #f44336;
+}
+
+.toast.info {
+    border-left: 4px solid #5A0609;
+}
