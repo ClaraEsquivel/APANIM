@@ -1,0 +1,492 @@
+// ===== CONFIGURAÇÃO INICIAL =====
+document.addEventListener('DOMContentLoaded', function() {
+    inicializarPagina();
+});
+
+// ===== HELPER: VERIFICAR SE WINDOW.STORAGE ESTÁ DISPONÍVEL =====
+function storageDisponivel() {
+    return typeof window.storage !== 'undefined' && 
+           typeof window.storage.get === 'function';
+}
+
+// ===== INICIALIZAÇÃO DA PÁGINA =====
+async function inicializarPagina() {
+    await carregarAnimaisCadastrados();
+    configurarFiltros();
+    configurarBotoes();
+    atualizarContador();
+}
+
+// ===== CARREGAR ANIMAIS DO ARMAZENAMENTO =====
+async function carregarAnimaisCadastrados() {
+    const grid = document.getElementById('grid-animais');
+    
+    // Mostrar mensagem de carregamento
+    grid.innerHTML = '<div class="loading"><div class="spinner"></div><p>Carregando animais...</p></div>';
+    
+    try {
+        let animais = [];
+        
+        if (storageDisponivel()) {
+            // Tentar usar window.storage
+            try {
+                const resultado = await window.storage.get('animais_perdidos', true);
+                if (resultado && resultado.value) {
+                    animais = JSON.parse(resultado.value);
+                }
+            } catch (error) {
+                console.log('Erro ao carregar do window.storage:', error);
+            }
+        } else {
+            // Fallback: usar localStorage
+            console.log('Usando localStorage como fallback');
+            try {
+                const dados = localStorage.getItem('animais_perdidos');
+                if (dados) {
+                    animais = JSON.parse(dados);
+                }
+            } catch (error) {
+                console.log('Erro ao carregar do localStorage:', error);
+            }
+        }
+        
+        if (animais.length > 0) {
+            grid.innerHTML = ''; // Limpar loading
+            adicionarAnimaisNaGrid(animais);
+            console.log(`✅ ${animais.length} animais carregados`);
+        } else {
+            console.log('ℹ️ Nenhum animal cadastrado ainda');
+            mostrarMensagemVazia(0);
+        }
+        
+    } catch (error) {
+        console.error('❌ Erro ao carregar animais:', error);
+        mostrarMensagemVazia(0);
+    }
+}
+
+// ===== ADICIONAR ANIMAIS NA GRID =====
+function adicionarAnimaisNaGrid(animais) {
+    const grid = document.getElementById('grid-animais');
+    
+    animais.forEach(animal => {
+        const cardHtml = criarCardAnimal(animal);
+        grid.insertAdjacentHTML('beforeend', cardHtml);
+    });
+    
+    // Reconfigurar botões de contato após adicionar novos cards
+    configurarBotoesContato();
+}
+
+// ===== CRIAR HTML DO CARD =====
+function criarCardAnimal(animal) {
+    // Calcular período de desaparecimento
+    const periodo = calcularPeriodo(animal.dataDesaparecimento);
+    
+    // Calcular dias desaparecido
+    const diasDesaparecido = calcularDiasDesaparecido(animal.dataDesaparecimento);
+    
+    // Criar badge urgente com texto dinâmico
+    const badgeUrgente = criarBadgeUrgente(diasDesaparecido);
+    
+    // Formatar vacinas
+    const vacinasTexto = animal.vacinas && animal.vacinas.length > 0 
+        ? `Sim (${formatarVacinas(animal.vacinas)})` 
+        : (animal.vacinado === 'sim' ? 'Sim' : 'Não');
+    
+    // Badge de tipo
+    const badgeTipo = animal.especie === 'cachorro' 
+        ? '<span class="badge-tipo badge-cachorro">🐕 Cachorro</span>'
+        : '<span class="badge-tipo badge-gato">🐱 Gato</span>';
+    
+    // Imagem
+    const imagemSrc = animal.imagem || '../../assets/images/dog_sentado.svg';
+    
+    // Formatar data
+    const dataFormatada = formatarData(animal.dataDesaparecimento);
+    
+    // Nome do bairro formatado
+    const bairroFormatado = formatarBairro(animal.localizacao);
+    
+    return `
+        <article class="card-animal" 
+                 data-animal-id="${animal.id}" 
+                 data-tipo="${animal.especie}" 
+                 data-sexo="${animal.sexo}"
+                 data-porte="${animal.porte}"
+                 data-cor="${animal.cor}"
+                 data-bairro="${animal.localizacao}"
+                 data-periodo="${periodo}"
+                 onclick="abrirPerfil('${animal.id}')"
+                 style="cursor: pointer;"
+                 title="Clique para ver o perfil completo de ${animal.nome}">
+            <div class="card-imagem">
+                <img src="${imagemSrc}" 
+                     alt="${animal.nome} - ${animal.especie} ${animal.raca} perdido" 
+                     class="imagem-animal"
+                     loading="lazy"
+                     width="200"
+                     height="200"
+                     onerror="this.src='../../assets/images/dog_sentado.svg'">
+                ${badgeTipo}
+                ${badgeUrgente}
+            </div>
+            <div class="card-info">
+                <h3 class="nome-animal">${animal.nome}</h3>
+                <dl class="detalhes-animal">
+                    
+                    <dt>Sexo:</dt>
+                    <dd class="sexo" data-sexo="${animal.sexo}"><span class="icone-info">${animal.sexo === 'macho' ? '♂' : '♀'}</span> ${animal.sexo === 'macho' ? 'Macho' : 'Fêmea'}</dd>
+                                     
+                    <dt>Cor:</dt>
+                    <dd><span class="icone-info">🎨</span> ${animal.cor}</dd>
+                    
+                    <dt>Condição Especial:</dt>
+                    <dd><span class="icone-info">⚕️</span> ${animal.condicaoEspecial}</dd>
+                    
+                    <dt>Data do Desaparecimento:</dt>
+                    <dd><span class="icone-info">📅</span> ${dataFormatada}</dd>
+                    
+                    <dt>Última Aparição:</dt>
+                    <dd><span class="icone-info">📍</span> ${bairroFormatado}, Salvador-BA</dd>
+                </dl>
+                
+              
+                
+                <button class="btn-contato" 
+                        type="button"
+                        data-animal-id="${animal.id}"
+                        aria-label="Entrar em contato sobre ${animal.nome}"
+                        onclick="event.stopPropagation(); abrirContato('${animal.id}', '${animal.nome}');">
+                     📞 Vi este Animal
+                </button>
+            </div>
+        </article>
+    `;
+}
+
+// ===== ABRIR PERFIL DO ANIMAL =====
+function abrirPerfil(animalId) {
+    window.location.href = `../PerfilAnimal/index.html?id=${animalId}&tipo=perdido`;
+}
+
+// ===== CRIAR BADGE URGENTE COM TEXTO DINÂMICO =====
+function criarBadgeUrgente(diasDesaparecido) {
+    if (diasDesaparecido === 0) {
+        return '<span class="badge-urgente">URGENTE: Perdido hoje!</span>';
+    } else if (diasDesaparecido === 1) {
+        return '<span class="badge-urgente">URGENTE: Perdido há 1 dia</span>';
+    } else if (diasDesaparecido <= 7) {
+        return `<span class="badge-urgente">URGENTE: Perdido há ${diasDesaparecido} dias</span>`;
+    } else {
+        // Não mostra badge para animais perdidos há mais de 7 dias
+        return '';
+    }
+}
+
+// ===== FUNÇÕES AUXILIARES =====
+function calcularPeriodo(dataDesaparecimento) {
+    if (!dataDesaparecimento) return 'todos';
+    
+    const dias = calcularDiasDesaparecido(dataDesaparecimento);
+    
+    if (dias <= 7) return 'ultima-semana';
+    if (dias <= 30) return 'ultimo-mes';
+    if (dias <= 90) return 'ultimos-3-meses';
+    return 'mais-de-3-meses';
+}
+
+function calcularDiasDesaparecido(dataDesaparecimento) {
+    if (!dataDesaparecimento) return 0;
+    
+    const data = new Date(dataDesaparecimento + 'T00:00:00');
+    const hoje = new Date();
+    hoje.setHours(0, 0, 0, 0);
+    
+    const diff = hoje - data;
+    return Math.floor(diff / (1000 * 60 * 60 * 24));
+}
+
+function formatarData(dataString) {
+    if (!dataString) return 'Não informado';
+    
+    const data = new Date(dataString + 'T00:00:00');
+    return data.toLocaleDateString('pt-BR');
+}
+
+function formatarBairro(bairro) {
+    if (!bairro) return 'Não informado';
+    
+    return bairro
+        .split('_')
+        .map(palavra => palavra.charAt(0).toUpperCase() + palavra.slice(1))
+        .join(' ');
+}
+
+function formatarVacinas(vacinas) {
+    const nomes = {
+        'v8': 'V8',
+        'v10': 'V10',
+        'raiva': 'Antirrábica',
+        'triplice': 'Tríplice Felina',
+        'leucemia': 'Leucemia Felina'
+    };
+    
+    return vacinas.map(v => nomes[v] || v).join(', ');
+}
+
+function capitalize(texto) {
+    if (!texto) return '';
+    return texto.charAt(0).toUpperCase() + texto.slice(1);
+}
+
+// ===== CONFIGURAÇÃO DOS FILTROS =====
+function configurarFiltros() {
+    const form = document.getElementById('form-filtros');
+    
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            aplicarFiltros();
+        });
+    }
+}
+
+// ===== CONFIGURAÇÃO DOS BOTÕES =====
+function configurarBotoes() {
+    const btnLimpar = document.getElementById('limpar-filtros');
+    
+    if (btnLimpar) {
+        btnLimpar.addEventListener('click', limparFiltros);
+    }
+}
+
+// ===== APLICAR FILTROS =====
+function aplicarFiltros() {
+    const tipoAnimal = document.getElementById('tipo_animal').value;
+    const sexo = document.getElementById('sexo').value;
+    const porte = document.getElementById('porte').value;
+    const bairro = document.getElementById('bairro').value;
+    const periodo = document.getElementById('periodo').value;
+
+    const cards = document.querySelectorAll('.card-animal');
+    let animaisVisiveis = 0;
+
+    cards.forEach(card => {
+        const cardTipo = card.getAttribute('data-tipo');
+        const cardSexo = card.getAttribute('data-sexo');
+        const cardPorte = card.getAttribute('data-porte');
+        const cardBairro = card.getAttribute('data-bairro');
+        const cardPeriodo = card.getAttribute('data-periodo');
+
+        let mostrar = true;
+
+        if (tipoAnimal !== 'todos' && cardTipo !== tipoAnimal) {
+            mostrar = false;
+        }
+
+        if (sexo !== 'todos' && cardSexo !== sexo) {
+            mostrar = false;
+        }
+
+        if (porte !== 'todos' && cardPorte !== porte) {
+            mostrar = false;
+        }
+
+        if (bairro !== 'todos' && cardBairro !== bairro) {
+            mostrar = false;
+        }
+
+        if (periodo !== 'todos' && cardPeriodo !== periodo) {
+            mostrar = false;
+        }
+
+        if (mostrar) {
+            card.style.display = 'block';
+            animaisVisiveis++;
+        } else {
+            card.style.display = 'none';
+        }
+    });
+
+    atualizarContador(animaisVisiveis);
+    mostrarMensagemVazia(animaisVisiveis);
+    anunciarResultados(animaisVisiveis);
+}
+
+// ===== LIMPAR FILTROS =====
+function limparFiltros() {
+    const form = document.getElementById('form-filtros');
+    
+    if (form) {
+        form.reset();
+        
+        const cards = document.querySelectorAll('.card-animal');
+        cards.forEach(card => {
+            card.style.display = 'block';
+        });
+
+        atualizarContador(cards.length);
+        mostrarMensagemVazia(cards.length);
+        anunciarResultados(cards.length, true);
+    }
+}
+
+// ===== ATUALIZAR CONTADOR =====
+function atualizarContador(quantidade) {
+    const contador = document.getElementById('contador-resultados');
+    
+    if (contador) {
+        if (quantidade === undefined) {
+            const cardsVisiveis = document.querySelectorAll('.card-animal:not([style*="display: none"])');
+            quantidade = cardsVisiveis.length;
+        }
+
+        const texto = quantidade === 1 
+            ? '1 animal encontrado' 
+            : `${quantidade} animais encontrados`;
+        
+        contador.textContent = texto;
+    }
+}
+
+// ===== MOSTRAR MENSAGEM VAZIA =====
+function mostrarMensagemVazia(quantidade) {
+    const mensagemVazia = document.getElementById('mensagem-vazia');
+    const gridAnimais = document.getElementById('grid-animais');
+
+    if (mensagemVazia) {
+        if (quantidade === 0) {
+            mensagemVazia.style.display = 'block';
+            if (gridAnimais) {
+                gridAnimais.style.display = 'none';
+            }
+        } else {
+            mensagemVazia.style.display = 'none';
+            if (gridAnimais) {
+                gridAnimais.style.display = 'grid';
+            }
+        }
+    }
+}
+
+// ===== ANUNCIAR RESULTADOS (ACESSIBILIDADE) =====
+function anunciarResultados(quantidade, foiLimpo = false) {
+    const contador = document.getElementById('contador-resultados');
+    
+    if (contador) {
+        if (foiLimpo) {
+            contador.setAttribute('aria-live', 'polite');
+        }
+        
+        setTimeout(() => {
+            contador.setAttribute('aria-live', 'polite');
+        }, 100);
+    }
+}
+
+// ===== CONFIGURAR BOTÕES DE CONTATO =====
+function configurarBotoesContato() {
+    const botoesContato = document.querySelectorAll('.btn-contato');
+    
+    botoesContato.forEach(botao => {
+        botao.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const animalId = this.getAttribute('data-animal-id');
+            const nomeAnimal = this.closest('.card-animal').querySelector('.nome-animal').textContent;
+            
+            abrirContato(animalId, nomeAnimal);
+        });
+    });
+}
+
+// ===== ABRIR CONTATO =====
+async function abrirContato(animalId, nomeAnimal) {
+    try {
+        let animais = [];
+        
+        if (storageDisponivel()) {
+            const resultado = await window.storage.get('animais_perdidos', true);
+            if (resultado && resultado.value) {
+                animais = JSON.parse(resultado.value);
+            }
+        } else {
+            const dados = localStorage.getItem('animais_perdidos');
+            if (dados) {
+                animais = JSON.parse(dados);
+            }
+        }
+        
+        const animal = animais.find(a => a.id === animalId);
+        
+        if (animal) {
+        await mostrarModalContato(nomeAnimal, animal.emailContato, animal.telefoneContato);
+        } else {
+            await alertaErro('Erro', 'Erro ao buscar informações do animal. Tente novamente.');
+        }
+    } catch (error) {
+        console.error('Erro ao abrir contato:', error);
+        alert('Erro ao processar sua solicitação. Tente novamente.');
+    }
+}
+
+// ===== MOSTRAR MODAL DE CONTATO =====
+async function mostrarModalContato(nomeAnimal, email, telefone) {
+    const confirmado = await confirmarModal(
+        '📞 Informações sobre ' + nomeAnimal,
+        'Você quer entrar em contato sobre <strong>' + nomeAnimal + '</strong> que está perdido(a).<br><br>Deseja abrir seu aplicativo de email?',
+        {
+            email: email || null,
+            telefone: telefone || null
+        }
+    );
+    
+    if (confirmado) {
+        const assunto = encodeURIComponent('Informações sobre: ' + nomeAnimal);
+        const corpo = encodeURIComponent('Olá,\n\nVi o anúncio sobre ' + nomeAnimal + ' perdido(a).\n\nGostaria de fornecer informações sobre o paradeiro.\n\nAguardo retorno.');
+        
+        if (email) {
+            window.location.href = 'mailto:' + email + '?subject=' + assunto + '&body=' + corpo;
+        } else {
+            await alertaAviso(
+                'Email Indisponível',
+                'Email não disponível. Entre em contato pelo telefone: ' + telefone
+            );
+        }
+    }
+}
+
+// ===== LOG PARA DEBUG =====
+console.log('✅ Script de listagem de animais perdidos carregado');
+console.log('📦 window.storage disponível?', storageDisponivel());
+
+// ===== FUNÇÃO DE TESTE =====
+window.testarStoragePerdidos = async function() {
+    console.log('🔍 Testando storage de animais perdidos...');
+    
+    if (storageDisponivel()) {
+        try {
+            const resultado = await window.storage.get('animais_perdidos', true);
+            console.log('📦 Resultado:', resultado);
+            
+            if (resultado && resultado.value) {
+                const animais = JSON.parse(resultado.value);
+                console.log('🐾 Total de animais perdidos:', animais.length);
+                console.log('🐾 Animais:', animais);
+            } else {
+                console.log('⚠️ Nenhum dado encontrado');
+            }
+        } catch (error) {
+            console.error('❌ Erro:', error);
+        }
+    } else {
+        const dados = localStorage.getItem('animais_perdidos');
+        if (dados) {
+            const animais = JSON.parse(dados);
+            console.log('📦 localStorage - Total:', animais.length);
+            console.log('🐾 Animais:', animais);
+        } else {
+            console.log('⚠️ Nenhum dado no localStorage');
+        }
+    }
+}

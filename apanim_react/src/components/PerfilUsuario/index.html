@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Perfil - APANIM</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - APANIM</title>
+    <meta name="description" content="Cadastre-se no APANIM para adotar, doar ou comprar animais em Salvador-BA.">
+    <meta name="keywords" content="cadastro, adoção, animais, cães, gatos, pets">
+    <meta name="author" content="APANIM">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Cadastro - APANIM">
+    <meta property="og:description" content="Cadastre-se no APANIM para ajudar os animais">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+    <!-- CSS Unificado -->
+    <link rel="stylesheet" href="../../assets/css/header-unificado.css">
+    <link rel="stylesheet" href="../../assets/css/menu-styles.css">
+    <link rel="stylesheet" href="../../assets/css/footer-unificado.css"> 
+    
+    <!-- CSS do Cadastro -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Preload de fontes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="topo">
+            <img src="../../assets/images/Paws.svg" class="patas_topo" alt="Patas">
+            <img src="../../assets/images/APANIM_logo.svg" id="logo_apanim" alt="Logo APANIM">
+            <img src="../../assets/images/cat.svg" class="cat_topo" alt="Gato">
+            <img src="../../assets/images/dog.svg" class="dog_topo" alt="Cachorro">
+        </div>
+
+        <nav role="navigation">
+            <!-- Perfil do usuário no header (será preenchido via JS) -->
+            <div id="user-profile-header" class="user-profile-header" style="display: none;">
+                <img src="../../assets/images/perfil.svg" alt="Foto de perfil" class="user-avatar-small">
+                <div class="user-info-small">
+                    <span class="user-name-small">Nome do Usuário</span>
+                    <span class="user-status">Online</span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Conteúdo Central -->
+    <div class="central">
+        <!-- Patas decorativas animadas -->
+        <div class="patas1 pata-animate">
+            <img src="../../assets/images/pata.svg" alt="pata" />
+        </div>
+        <div class="patas2 pata-animate">
+            <img src="../../assets/images/pata.svg" alt="pata" />
+        </div>
+        <div class="patas3 pata-animate">
+            <img src="../../assets/images/pata.svg" alt="pata" />
+        </div>
+        <div class="patas4 pata-animate">
+            <img src="../../assets/images/pata.svg" alt="pata" />
+        </div>
+        <div class="patas5 pata-animate">
+            <img src="../../assets/images/pata.svg" alt="pata" />
+        </div>
+        <div class="patas6 pata-animate">
+            <img src="../../assets/images/pata.svg" alt="pata" />
+        </div>
+
+        <div class="profile-container">
+            <!-- Header do Perfil -->
+            <div class="profile-header">
+                <div class="profile-cover">
+                    <button class="edit-cover-btn" title="Alterar capa">📷</button>
+                </div>
+                
+                <div class="profile-main-info">
+                    <div class="profile-avatar-container">
+                        <img src="../../assets/images/perfil.svg" alt="Foto de perfil" class="profile-avatar" id="profile-avatar">
+                        <button class="edit-avatar-btn" title="Alterar foto">📷</button>
+                    </div>
+                    
+                    <div class="profile-user-data">
+                        <h1 class="profile-name" id="profile-name">João da Silva</h1>
+                        <p class="profile-email" id="profile-email">joão.silva@gmail.com</p>
+                        <div class="profile-badges">
+                            <span class="badge badge-adotante" id="badge-adotante" style="display: none;">
+                                🏠 Adotante
+                            </span>
+                            <span class="badge badge-doador" id="badge-doador" style="display: none;">
+                                ❤️ Doador
+                            </span>
+                            <span class="badge badge-comprador" id="badge-comprador" style="display: none;">
+                                🛒 Comprador
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-actions">
+                        <button class="btn btn-primary" onclick="editProfile()">
+                            <span>✏️</span>
+                            <span>Editar Perfil</span>
+                        </button>
+                        <button class="btn btn-secondary" href="..//CadastroInicial/index.html">
+                            <span>🚪</span>
+                            <span>Sair</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navegação de Abas -->
+            <div class="profile-tabs">
+                <button class="tab-btn active" data-tab="sobre">
+                    <span>📋</span>
+                    <span>Sobre Mim</span>
+                </button>
+                <button class="tab-btn" data-tab="animais">
+                    <span>🐾</span>
+                    <span>Meus Animais</span>
+                </button>
+                <button class="tab-btn" data-tab="planos">
+                    <span>⭐</span>
+                    <span>Planos</span>
+                </button>
+                <button class="tab-btn" data-tab="configuracoes">
+                    <span>⚙️</span>
+                    <span>Configurações</span>
+                </button>
+            </div>
+
+            <!-- Conteúdo das Abas -->
+            <div class="profile-content">
+                
+                <!-- ABA: SOBRE MIM -->
+                <div class="tab-content active" data-tab="sobre">
+                    <div class="content-grid">
+                        <!-- Card de Biografia -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h2>Sobre Mim</h2>
+                                <button class="btn-icon" onclick="editBio()">✏️</button>
+                            </div>
+                            <div class="card-body">
+                                <textarea id="bio-text" class="bio-textarea" placeholder="Escreva um pouco sobre você, seus interesses e sua relação com os animais..." maxlength="500" disabled></textarea>
+                                <div class="char-count">
+                                    <span id="char-current">0</span>/<span>500</span> caracteres
+                                </div>
+                                <div class="bio-actions" style="display: none;">
+                                    <button class="btn btn-sm btn-primary" onclick="saveBio()">Salvar</button>
+                                    <button class="btn btn-sm btn-secondary" onclick="cancelBio()">Cancelar</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card de Informações Pessoais -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h2>Informações Pessoais</h2>
+                            </div>
+                            <div class="card-body">
+                                <div class="info-list">
+                                    <div class="info-item">
+                                        <span class="info-icon">📧</span>
+                                        <div class="info-content">
+                                            <span class="info-label">Email</span>
+                                            <span class="info-value" id="info-email"></span>
+                                        </div>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-icon">📱</span>
+                                        <div class="info-content">
+                                            <span class="info-label">WhatsApp</span>
+                                            <span class="info-value" id="info-whatsapp">(71) 99999-9999</span>
+                                        </div>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-icon">📍</span>
+                                        <div class="info-content">
+                                            <span class="info-label">Localização</span>
+                                            <span class="info-value" id="info-location">Salvador, BA</span>
+                                        </div>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-icon">📅</span>
+                                        <div class="info-content">
+                                            <span class="info-label">Membro desde</span>
+                                            <span class="info-value" id="info-member-since">Janeiro 2025</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card de Estatísticas -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h2>Minhas Estatísticas</h2>
+                            </div>
+                            <div class="card-body">
+                                <div class="stats-grid">
+                                    <div class="stat-box">
+                                        <span class="stat-icon">🏠</span>
+                                        <span class="stat-number" id="stat-adocoes">0</span>
+                                        <span class="stat-label">Adoções</span>
+                                    </div>
+                                    <div class="stat-box">
+                                        <span class="stat-icon">❤️</span>
+                                        <span class="stat-number" id="stat-doacoes">0</span>
+                                        <span class="stat-label">Doações</span>
+                                    </div>
+                                    <div class="stat-box">
+                                        <span class="stat-icon">⭐</span>
+                                        <span class="stat-number" id="stat-favoritos">0</span>
+                                        <span class="stat-label">Favoritos</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ABA: MEUS ANIMAIS -->
+                <div class="tab-content" data-tab="animais">
+                    <div class="animais-header">
+                        <h2>Meus Animais</h2>
+                        <button class="btn btn-primary" onclick="window.location.href='../CadastroAnimalAdocao/index.html'">
+                            <span>➕</span>
+                            <span>Cadastrar Animal</span>
+                        </button>
+                    </div>
+
+                    <div class="animais-filters">
+                        <button class="filter-btn active" data-filter="todos">Todos</button>
+                        <button class="filter-btn" data-filter="adocao">Para Adoção</button>
+                        <button class="filter-btn" data-filter="adotados">Adotados</button>
+                        <button class="filter-btn" data-filter="favoritos">Favoritos</button>
+                    </div>
+
+                    <div class="animais-grid" id="animais-grid">
+                        <!-- Placeholder quando não há animais -->
+                        <div class="empty-state">
+                            <div class="empty-icon">🐾</div>
+                            <h3>Nenhum animal cadastrado</h3>
+                            <p>Cadastre seu primeiro animal para adoção ou compra</p>
+                            <button class="btn btn-primary" onclick="window.location.href='../CadastroAnimalAdocao/index.html'">
+                                Cadastrar Agora
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ABA: PLANOS -->
+                <div class="tab-content" data-tab="planos">
+                    <div class="planos-header">
+                        <h2>Escolha o Melhor Plano para Você</h2>
+                        <p>Desbloqueie recursos exclusivos e ajude ainda mais os animais</p>
+                    </div>
+
+                    <div class="current-plan-banner" id="current-plan-banner">
+                        <div class="banner-icon">⭐</div>
+                        <div class="banner-content">
+                            <h3>Seu Plano Atual: <span id="current-plan-name">Gratuito</span></h3>
+                            <p>Aproveite todos os recursos do seu plano atual</p>
+                        </div>
+                    </div>
+
+                    <div class="planos-grid">
+                        <!-- Plano Gratuito -->
+                        <div class="plano-card" data-plan="gratuito">
+                            <div class="plano-badge">Atual</div>
+                            <div class="plano-icon">🐾</div>
+                            <h3 class="plano-nome">Gratuito</h3>
+                            <div class="plano-preco">
+                                <span class="preco">R$ 0</span>
+                                <span class="periodo">/mês</span>
+                            </div>
+                            <ul class="plano-features">
+                                <li>✓ Cadastro de até 3 animais</li>
+                                <li>✓ Busca básica de animais</li>
+                                <li>✓ Chat com adotantes</li>
+                                <li>✓ Perfil público</li>
+                                <li>✗ Destaque nos resultados</li>
+                                <li>✗ Análise de compatibilidade</li>
+                                <li>✗ Suporte prioritário</li>
+                            </ul>
+                            <button class="btn btn-secondary" disabled>Plano Atual</button>
+                        </div>
+
+                        <!-- Plano Amigo -->
+                        <div class="plano-card" data-plan="amigo">
+                            <div class="plano-icon">🐶</div>
+                            <h3 class="plano-nome">Amigo</h3>
+                            <div class="plano-preco">
+                                <span class="preco">R$ 19,90</span>
+                                <span class="periodo">/mês</span>
+                            </div>
+                            <ul class="plano-features">
+                                <li>✓ Cadastro de até 10 animais</li>
+                                <li>✓ Busca avançada</li>
+                                <li>✓ Chat ilimitado</li>
+                                <li>✓ Perfil destacado</li>
+                                <li>✓ Destaque moderado</li>
+                                <li>✓ Relatórios mensais</li>
+                                <li>✗ Suporte prioritário</li>
+                            </ul>
+                            <button class="btn btn-primary" onclick="selectPlan('amigo')">Assinar Agora</button>
+                        </div>
+
+                        <!-- Plano Protetor (Destaque) -->
+                        <div class="plano-card plano-destaque" data-plan="protetor">
+                            <div class="plano-badge popular">Mais Popular</div>
+                            <div class="plano-icon">❤️</div>
+                            <h3 class="plano-nome">Protetor</h3>
+                            <div class="plano-preco">
+                                <span class="preco">R$ 39,90</span>
+                                <span class="periodo">/mês</span>
+                            </div>
+                            <ul class="plano-features">
+                                <li>✓ Cadastro ilimitado</li>
+                                <li>✓ Busca premium</li>
+                                <li>✓ Chat prioritário</li>
+                                <li>✓ Perfil premium</li>
+                                <li>✓ Máximo destaque</li>
+                                <li>✓ Análise de compatibilidade IA</li>
+                                <li>✓ Suporte prioritário 24/7</li>
+                            </ul>
+                            <button class="btn btn-primary" onclick="selectPlan('protetor')">Assinar Agora</button>
+                        </div>
+
+                        <!-- Plano ONG -->
+                        <div class="plano-card" data-plan="ong">
+                            <div class="plano-icon">🏢</div>
+                            <h3 class="plano-nome">ONG/Instituição</h3>
+                            <div class="plano-preco">
+                                <span class="preco">R$ 99,90</span>
+                                <span class="periodo">/mês</span>
+                            </div>
+                            <ul class="plano-features">
+                                <li>✓ Tudo do plano Protetor</li>
+                                <li>✓ Múltiplos usuários</li>
+                                <li>✓ Dashboard administrativo</li>
+                                <li>✓ Relatórios avançados</li>
+                                <li>✓ Página institucional</li>
+                                <li>✓ API de integração</li>
+                                <li>✓ Gestor de conta dedicado</li>
+                            </ul>
+                            <button class="btn btn-primary" onclick="selectPlan('ong')">Assinar Agora</button>
+                        </div>
+                    </div>
+
+                    <!-- Benefícios Gerais -->
+                    <div class="beneficios-section">
+                        <h3>Por que assinar um plano premium?</h3>
+                        <div class="beneficios-grid">
+                            <div class="beneficio-item">
+                                <span class="beneficio-icon">🚀</span>
+                                <h4>Mais Visibilidade</h4>
+                                <p>Seus animais aparecem em destaque nas buscas</p>
+                            </div>
+                            <div class="beneficio-item">
+                                <span class="beneficio-icon">🤖</span>
+                                <h4>IA Integrada</h4>
+                                <p>Análise de compatibilidade entre adotante e pet</p>
+                            </div>
+                            <div class="beneficio-item">
+                                <span class="beneficio-icon">📊</span>
+                                <h4>Relatórios</h4>
+                                <p>Acompanhe estatísticas e performance</p>
+                            </div>
+                            <div class="beneficio-item">
+                                <span class="beneficio-icon">💬</span>
+                                <h4>Suporte Premium</h4>
+                                <p>Atendimento prioritário quando precisar</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ABA: CONFIGURAÇÕES -->
+                <div class="tab-content" data-tab="configuracoes">
+                    <div class="settings-grid">
+                        <!-- Privacidade -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h2>Privacidade</h2>
+                            </div>
+                            <div class="card-body">
+                                <div class="setting-item">
+                                    <div class="setting-info">
+                                        <h4>Perfil Público</h4>
+                                        <p>Permite que outros usuários vejam seu perfil</p>
+                                    </div>
+                                    <label class="switch">
+                                        <input type="checkbox" id="public-profile" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                                <div class="setting-item">
+                                    <div class="setting-info">
+                                        <h4>Mostrar Email</h4>
+                                        <p>Exibir seu email no perfil público</p>
+                                    </div>
+                                    <label class="switch">
+                                        <input type="checkbox" id="show-email">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                                <div class="setting-item">
+                                    <div class="setting-info">
+                                        <h4>Mostrar WhatsApp</h4>
+                                        <p>Exibir seu WhatsApp no perfil público</p>
+                                    </div>
+                                    <label class="switch">
+                                        <input type="checkbox" id="show-whatsapp" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Notificações -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h2>Notificações</h2>
+                            </div>
+                            <div class="card-body">
+                                <div class="setting-item">
+                                    <div class="setting-info">
+                                        <h4>Email de Novas Mensagens</h4>
+                                        <p>Receber notificação por email</p>
+                                    </div>
+                                    <label class="switch">
+                                        <input type="checkbox" id="notif-email" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                                <div class="setting-item">
+                                    <div class="setting-info">
+                                        <h4>Notificações Push</h4>
+                                        <p>Receber notificações no navegador</p>
+                                    </div>
+                                    <label class="switch">
+                                        <input type="checkbox" id="notif-push" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                                <div class="setting-item">
+                                    <div class="setting-info">
+                                        <h4>Newsletter</h4>
+                                        <p>Receber novidades e dicas do APANIM</p>
+                                    </div>
+                                    <label class="switch">
+                                        <input type="checkbox" id="notif-newsletter" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Segurança -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h2>Segurança</h2>
+                            </div>
+                            <div class="card-body">
+                                <button class="btn btn-secondary btn-block" onclick="changePassword()">
+                                    <span>🔒</span>
+                                    <span>Alterar Senha</span>
+                                </button>
+                                <button class="btn btn-secondary btn-block" onclick="downloadData()">
+                                    <span>📥</span>
+                                    <span>Baixar Meus Dados</span>
+                                </button>
+                                <button class="btn btn-danger btn-block" onclick="deleteAccount()">
+                                    <span>🗑️</span>
+                                    <span>Excluir Conta</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="base">
+        <div class="redes_sociais">
+            <a href="#" aria-label="Instagram">
+                <img src="../../assets/images/instagram.svg" alt="Siga-nos no Instagram"/>
+            </a>
+            <a href="mailto:apanim.amor.protecao@gmail.com" aria-label="Email">
+                <img src="../../assets/images/email.svg" alt="Entre em contato por email"/>
+            </a>
+        </div>
+
+        <nav class="links_uteis" aria-label="Links úteis">
+            <div>
+                <span class="titulo">Encontre um novo pet</span><br>
+                <a href="../AdocaoAnimal/index.html"><span>Adote</span><br></a>
+                <a href="../CompraAnimal/index.html"><span>Compre</span></a>
+            </div>
+            <div>
+                <span class="titulo">Colabore</span><br>
+                <a href="../Parceria/index.html"><span>Seja uma empresa parceira</span></a>
+            </div>
+            <div>
+                <span class="titulo">Divulgue um animal</span><br>
+                <a href="../CadastroAnimalAdocao/index.html"><span>Cadastrar animal para adoção</span><br></a>
+                <a href="../CadastroAnimalVenda/index.html"><span>Cadastrar animal para venda</span><br></a>
+                <a href="../CadastroAnimaisPerdidos/index.html"><span>Cadastrar animal perdido</span><br></a>
+            </div>
+            <div>
+                <span class="titulo">Encontre um animal</span><br>
+                <a href="../AnimaisPerdidos/index.html"><span>Animais perdidos</span><br></a>
+            </div>
+            <div>
+                <span class="titulo">Sobre o APANIM</span><br>
+                <span>APANIM</span>
+            </div>
+            <div>
+                <span class="titulo">Meu perfil</span><br>
+                <a href="../CadastroInicial/index.html"><span>Cadastrar-se</span><br></a>
+                <a href="../PerfilUsuario/index.html"><span>Minha página de usuário</span><br></a>
+                <a href="../PerfilVendedor/index.html"><span>Minha página de vendedor</span><br></a>
+            </div>
+        </nav>
+
+        <div class="forum">
+            <a href="#" aria-label="Fórum">
+                <img src="../../assets/images/forum.svg" alt="Acesse nosso fórum"/>
+            </a>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../../assets/js/scroll-top.js"></script>
+    <script src="../../assets/js/menu-unificado.js"></script>
+    <!-- <script src="../../assets/js/simple-auth.js"></script> -->
+    <!-- <script src="../../assets/js/auth-system.js"></script> -->
+    <script src="../../assets/js/user-header.js"></script> 
+    <!-- <script src="../CadastroInicial/google-oauth.js"></script>-->
+    <script src="script.js"></script>
+</body>
+
+</html>

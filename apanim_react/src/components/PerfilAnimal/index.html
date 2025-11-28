@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil do Animal - APANIM</title>
+    <meta name="description" content="Perfil detalhado do animal">
+    <meta name="keywords" content="animal, pet, adoção, perfil">
+    <meta name="author" content="APANIM">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Perfil do Animal - APANIM">
+    <meta property="og:description" content="Conheça mais sobre este animal">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- ⭐ ORDEM IMPORTANTE: Header primeiro, depois menu -->
+    <link rel="stylesheet" href="../../assets/css/header-unificado.css">
+    <link rel="stylesheet" href="../../assets/css/menu-styles.css">
+    <link rel="stylesheet" href="../../assets/css/footer-unificado.css">
+
+    <!-- Modal Custumizado -->
+    <link rel="stylesheet" href="../../assets/css/modal-customizado.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Preload de fontes importantes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+
+<body>
+    <header>
+        <div class="topo">
+            <img src="../../assets/images/Paws.svg" class="patas_topo" alt="Patas">
+            <img src="../../assets/images/APANIM_logo.svg" id="logo_apanim" alt="Logo APANIM">
+            <img src="../../assets/images/cat.svg" class="cat_topo" alt="Gato">
+            <img src="../../assets/images/dog.svg" class="dog_topo" alt="Cachorro">
+        </div>
+
+         <!-- ⭐ NAVEGAÇÃO UNIFICADA - O JavaScript preencherá automaticamente -->
+        <nav role="navigation"></nav>
+    </header>
+
+    <!-- Skip to content para acessibilidade -->
+    <a href="#conteudo-principal" class="sr-only">Pular para o conteúdo principal</a>
+    
+    <main class="container-principal" id="conteudo-principal">
+        <!-- Loader -->
+        <div id="loader" class="loader-container">
+            <div class="spinner"></div>
+            <p>Carregando perfil do animal...</p>
+        </div>
+
+        <!-- Mensagem de erro -->
+        <div id="erro-container" class="erro-container" style="display: none;">
+            <div class="erro-conteudo">
+                <h2>❌ Animal não encontrado</h2>
+                <p>Não foi possível carregar as informações deste animal.</p>
+                <button onclick="window.history.back()" class="btn-voltar">⬅️ Voltar</button>
+            </div>
+        </div>
+
+        <!-- Conteúdo do perfil -->
+        <div id="perfil-container" class="perfil-container" style="display: none;">
+            <!-- Botão voltar -->
+            <div class="header-perfil">
+                <button onclick="window.history.back()" class="btn-voltar-topo">⬅️ Voltar</button>
+            </div>
+
+            <!-- Seção principal com imagem e informações básicas -->
+            <section class="secao-principal">
+                <div class="container-imagem-principal">
+                    <img id="imagem-principal" src="" alt="Foto do animal" class="imagem-principal">
+                    <span id="badge-tipo" class="badge-tipo"></span>
+                    <span id="badge-status" class="badge-status"></span>
+                </div>
+
+                <div class="info-basica">
+                    <h1 id="nome-animal" class="nome-animal-perfil"></h1>
+                    
+                    <div class="caracteristicas-rapidas">
+                        <span id="tag-especie" class="tag"></span>
+                        <span id="tag-sexo" class="tag"></span>
+                        <span id="tag-idade" class="tag"></span>
+                        <span id="tag-porte" class="tag"></span>
+                    </div>
+
+                    <div id="preco-container" class="preco-destaque" style="display: none;">
+                        <p class="valor" id="preco-valor"></p>
+                    </div>
+
+                    <p id="resumo-texto" class="resumo-perfil"></p>
+
+                    <!-- Informações de localização e contato -->
+                    <div class="info-destaque">
+                        <div class="info-item">
+                            <span class="icone">📍</span>
+                            <div>
+                                <strong>Localização</strong>
+                                <p id="localizacao-texto"></p>
+                            </div>
+                        </div>
+                        <div class="info-item" id="data-desaparecimento-container" style="display: none;">
+                            <span class="icone">📅</span>
+                            <div>
+                                <strong>Desapareceu há</strong>
+                                <p id="tempo-desaparecimento"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Botão de ação principal -->
+                    <button id="btn-acao-principal" class="btn-acao-principal"></button>
+                </div>
+            </section>
+
+            <!-- Carrossel de fotos e vídeos -->
+            <section id="secao-galeria" class="secao-galeria" style="display: none;">
+                <h2 class="titulo-secao">📸 Galeria de Fotos e Vídeos</h2>
+                
+                <div class="carrossel-container">
+                    <button class="carrossel-btn btn-prev" aria-label="Foto anterior">❮</button>
+                    
+                    <div class="carrossel-wrapper">
+                        <div id="carrossel" class="carrossel">
+                            <!-- As imagens e vídeos serão inseridos aqui pelo JavaScript -->
+                        </div>
+                    </div>
+                    
+                    <button class="carrossel-btn btn-next" aria-label="Próxima foto">❯</button>
+                </div>
+
+                <!-- Indicadores do carrossel -->
+                <div id="carrossel-indicadores" class="carrossel-indicadores">
+                    <!-- Os indicadores serão inseridos aqui pelo JavaScript -->
+                </div>
+            </section>
+
+            <!-- Detalhes completos -->
+            <section class="secao-detalhes">
+                <h2 class="titulo-secao">📋 Informações Detalhadas</h2>
+                
+                <div class="grid-detalhes">
+                    <div class="detalhe-card">
+                        <h3>🐾 Características Físicas</h3>
+                        <dl class="lista-detalhes">
+                            <dt>Espécie:</dt>
+                            <dd id="det-especie"></dd>
+                            
+                            <dt>Raça:</dt>
+                            <dd id="det-raca"></dd>
+                            
+                            <dt>Cor:</dt>
+                            <dd id="det-cor"></dd>
+                            
+                            <dt>Sexo:</dt>
+                            <dd id="det-sexo"></dd>
+                            
+                            <dt>Idade:</dt>
+                            <dd id="det-idade"></dd>
+                            
+                            <dt>Porte:</dt>
+                            <dd id="det-porte"></dd>
+                        </dl>
+                    </div>
+
+                    <div class="detalhe-card">
+                        <h3>💉 Saúde e Cuidados</h3>
+                        <dl class="lista-detalhes">
+                            <dt>Vacinado:</dt>
+                            <dd id="det-vacinado"></dd>
+                            
+                            <dt>Castrado:</dt>
+                            <dd id="det-castrado"></dd>
+                            
+                            <dt>Vermifugado:</dt>
+                            <dd id="det-vermifugado"></dd>
+                            
+                            <dt id="label-temperamento" style="display: none;">Temperamento:</dt>
+                            <dd id="det-temperamento" style="display: none;"></dd>
+
+                            <dt id="label-condicao-especial" style="display: none;">Condição Especial:</dt>
+                            <dd id="det-condicao-especial" style="display: none;"></dd>
+                        </dl>
+                    </div>
+
+                    <div class="detalhe-card" id="card-descricao" style="display: none;">
+                        <h3>📝 Descrição Completa</h3>
+                        <p id="det-descricao" class="descricao-completa"></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Informações de contato -->
+            <section class="secao-contato">
+                <h2 class="titulo-secao">📞 Entre em Contato</h2>
+                
+                <div class="contato-card">
+                    <p class="contato-intro">Para mais informações sobre este animal, entre em contato:</p>
+                    
+                    <div class="contato-detalhes">
+                        <div id="contato-email-container" class="contato-item" style="display: none;">
+                            <span class="icone-contato">📧</span>
+                            <div>
+                                <strong>Email:</strong>
+                                <p id="contato-email"></p>
+                            </div>
+                        </div>
+                        
+                        <div id="contato-telefone-container" class="contato-item" style="display: none;">
+                            <span class="icone-contato">📱</span>
+                            <div>
+                                <strong>Telefone:</strong>
+                                <p id="contato-telefone"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button id="btn-contato-rapido" class="btn-contato-email"></button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+   <!-- Footer -->
+    <footer class="base">
+        <div class="redes_sociais">
+            <img src="../../assets/images/instagram.svg" alt="Siga-nos no Instagram"/>
+            <img src="../../assets/images/email.svg" alt="Entre em contato por email"/>
+        </div>
+
+        <nav class="links_uteis" aria-label="Links úteis">
+            <div>
+                <span class="titulo">Encontre um novo pet</span><br>
+                <a href="../AdocaoAnimal/index.html"><span>Adote</span><br></a>
+                <a href="../CompraAnimal/index.html"><span>Compre</span></a>
+            </div>
+            <div>
+                <span class="titulo">Colabore</span><br>
+                <a href="../Parceria/index.html"><span>Seja uma empresa parceira</span></a>
+            </div>
+            <div>
+                <span class="titulo">Divulgue um animal</span><br>
+                <a href="../CadastroAnimalAdocao/index.html"><span>Cadastrar animal para adoção</span><br></a>
+                <a href="../CadastroAnimalVenda/index.html"><span>Cadastrar animal para venda</span><br></a>
+                <a href="../CadastroAnimaisPerdidos/index.html"><span>Cadastrar animal perdido</span><br></a>
+            </div>
+            <div>
+                <span class="titulo">Encontre um animal</span><br>
+                <a href="../AnimaisPerdidos/index.html"><span>Animais perdidos</span><br></a>
+            </div>
+            <div>
+                <span class="titulo">Sobre o APANIM</span><br>
+                <a href="../APANIM/index.html"><span>APANIM</span></a>
+            </div>
+            <div>
+                <span class="titulo">Meu perfil</span><br>
+                <a href="../CadastroInicial/index.html"><span>Cadastrar-se</span><br></a>
+                <a href="../PerfilUsuario/index.html"><span>Minha página de usuário</span><br></a>
+                <a href="../PerfilVendedor/index.html"><span>Minha página de vendedor</span><br></a>
+            </div>
+        </nav>
+
+        <div class="forum">
+            <img src="../../assets/images/forum.svg" alt="Acesse nosso fórum"/>
+        </div>
+    </footer>
+
+    <script src="../../assets/js/scroll-top.js"></script>
+    <!-- ⭐ SCRIPT DO MENU UNIFICADO -->
+    <script src="../../assets/js/menu-sanduiche.js"></script>
+
+    <!-- ✅ Modal Customizado (ANTES do script.js) -->
+    <script src="../../assets/js/modal-customizado.js"></script>
+
+    <script src="script.js"></script>
+</body>
+</html>
