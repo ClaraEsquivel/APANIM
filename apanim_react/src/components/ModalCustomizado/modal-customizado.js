@@ -1,315 +1,268 @@
 // ===== MODAL CUSTOMIZADO - APANIM =====
 
-// Classe para gerenciar o modal
-class ModalApanim {
-    constructor() {
-        this.backdrop = null;
-        this.container = null;
-        this.resolve = null;
-        this.inicializar();
-    }
-
-    inicializar() {
-        // Criar backdrop
-        this.backdrop = document.createElement('div');
-        this.backdrop.className = 'modal-backdrop';
-        this.backdrop.onclick = () => this.fechar(false);
-        document.body.appendChild(this.backdrop);
-
-        // Criar container
-        this.container = document.createElement('div');
-        this.container.className = 'modal-container';
-        document.body.appendChild(this.container);
-
-        // Listener para ESC
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && this.backdrop.classList.contains('show')) {
-                this.fechar(false);
-            }
-        });
-    }
-
-    /**
-     * Abre um modal de confirmação
-     * @param {Object} options - Opções do modal
-     * @param {string} options.titulo - Título do modal
-     * @param {string} options.mensagem - Mensagem principal
-     * @param {string} options.textoConfirmar - Texto do botão de confirmar
-     * @param {string} options.textoCancelar - Texto do botão de cancelar
-     * @param {string} options.tipo - Tipo do modal (default, success, warning, error, info)
-     * @param {Object} options.contato - Informações de contato {email, telefone}
-     * @returns {Promise<boolean>} - true se confirmado, false se cancelado
-     */
-    confirmar(options) {
-        const {
-            titulo = 'Confirmar',
-            mensagem = '',
-            textoConfirmar = 'Confirmar',
-            textoCancelar = 'Cancelar',
-            tipo = 'default',
-            contato = null
-        } = options;
-
-        return new Promise((resolve) => {
-            this.resolve = resolve;
-
-            // Criar estrutura do modal
-            const modalBox = document.createElement('div');
-            modalBox.className = `modal-box ${tipo !== 'default' ? tipo : ''}`;
-
-            // Header
-            const header = document.createElement('div');
-            header.className = 'modal-header';
-            header.innerHTML = `
-                <h3>${titulo}</h3>
-                <button class="modal-close" aria-label="Fechar modal">×</button>
-            `;
-
-            // Body
-            const body = document.createElement('div');
-            body.className = 'modal-body';
-            
-            let bodyHTML = `<p>${mensagem}</p>`;
-
-            // Adicionar informações de contato se fornecidas
-            if (contato) {
-                bodyHTML += `
-                    <div class="modal-contato-info">
-                        <h4>📞 Informações de Contato:</h4>
-                        ${contato.email ? `
-                            <div class="modal-contato-item">
-                                <span class="icone">📧</span>
-                                <span><strong>Email:</strong> ${contato.email}</span>
-                            </div>
-                        ` : ''}
-                        ${contato.telefone ? `
-                            <div class="modal-contato-item">
-                                <span class="icone">📱</span>
-                                <span><strong>Telefone:</strong> ${contato.telefone}</span>
-                            </div>
-                        ` : ''}
-                    </div>
-                `;
-            }
-
-            body.innerHTML = bodyHTML;
-
-            // Footer
-            const footer = document.createElement('div');
-            footer.className = 'modal-footer';
-            footer.innerHTML = `
-                <button class="modal-btn modal-btn-cancel">${textoCancelar}</button>
-                <button class="modal-btn modal-btn-primary">${textoConfirmar}</button>
-            `;
-
-            // Montar modal
-            modalBox.appendChild(header);
-            modalBox.appendChild(body);
-            modalBox.appendChild(footer);
-
-            // Limpar container e adicionar novo modal
-            this.container.innerHTML = '';
-            this.container.appendChild(modalBox);
-
-            // Event listeners
-            header.querySelector('.modal-close').onclick = () => this.fechar(false);
-            footer.querySelector('.modal-btn-cancel').onclick = () => this.fechar(false);
-            footer.querySelector('.modal-btn-primary').onclick = () => this.fechar(true);
-
-            // Mostrar modal
-            this.abrir();
-        });
-    }
-
-    /**
-     * Abre um modal de alerta (apenas OK)
-     * @param {Object} options - Opções do modal
-     * @param {string} options.titulo - Título do modal
-     * @param {string} options.mensagem - Mensagem principal
-     * @param {string} options.textoOk - Texto do botão OK
-     * @param {string} options.tipo - Tipo do modal (success, warning, error, info)
-     * @param {string} options.icone - Ícone a ser exibido
-     * @returns {Promise<void>}
-     */
-    alerta(options) {
-        const {
-            titulo = 'Aviso',
-            mensagem = '',
-            textoOk = 'OK',
-            tipo = 'info',
-            icone = null
-        } = options;
-
-        return new Promise((resolve) => {
-            this.resolve = resolve;
-
-            // Criar estrutura do modal
-            const modalBox = document.createElement('div');
-            modalBox.className = `modal-box ${tipo}`;
-
-            // Header
-            const header = document.createElement('div');
-            header.className = 'modal-header';
-            header.innerHTML = `
-                <h3>${titulo}</h3>
-                <button class="modal-close" aria-label="Fechar modal">×</button>
-            `;
-
-            // Body
-            const body = document.createElement('div');
-            body.className = 'modal-body';
-            
-            let bodyHTML = '';
-            
-            if (icone) {
-                bodyHTML += `<div class="modal-icon ${tipo}">${icone}</div>`;
-            }
-            
-            bodyHTML += `<p style="text-align: center;">${mensagem}</p>`;
-            
-            body.innerHTML = bodyHTML;
-
-            // Footer
-            const footer = document.createElement('div');
-            footer.className = 'modal-footer';
-            footer.style.justifyContent = 'center';
-            footer.innerHTML = `
-                <button class="modal-btn modal-btn-primary">${textoOk}</button>
-            `;
-
-            // Montar modal
-            modalBox.appendChild(header);
-            modalBox.appendChild(body);
-            modalBox.appendChild(footer);
-
-            // Limpar container e adicionar novo modal
-            this.container.innerHTML = '';
-            this.container.appendChild(modalBox);
-
-            // Event listeners
-            header.querySelector('.modal-close').onclick = () => this.fechar(true);
-            footer.querySelector('.modal-btn-primary').onclick = () => this.fechar(true);
-
-            // Mostrar modal
-            this.abrir();
-        });
-    }
-
-    abrir() {
-        document.body.classList.add('modal-open');
-        this.backdrop.classList.add('show');
-        this.container.classList.add('show');
-        
-        // Focar no primeiro botão
-        setTimeout(() => {
-            const primeiroBtn = this.container.querySelector('.modal-btn');
-            if (primeiroBtn) primeiroBtn.focus();
-        }, 100);
-    }
-
-    fechar(resultado) {
-        // Adicionar classe de saída
-        this.backdrop.classList.add('hide');
-        this.container.classList.add('hide');
-
-        // Aguardar animação e então remover classes
-        setTimeout(() => {
-            this.backdrop.classList.remove('show', 'hide');
-            this.container.classList.remove('show', 'hide');
-            document.body.classList.remove('modal-open');
-            
-            if (this.resolve) {
-                this.resolve(resultado);
-                this.resolve = null;
-            }
-        }, 300);
-    }
-}
-
-// Instância global do modal
-const modalApanim = new ModalApanim();
-
-// ===== FUNÇÕES AUXILIARES DE USO FÁCIL =====
-
 /**
- * Exibe um modal de confirmação customizado
- * @param {string} titulo - Título do modal
- * @param {string} mensagem - Mensagem a ser exibida
- * @param {Object} contato - Objeto com {email, telefone} (opcional)
- * @returns {Promise<boolean>}
+ * Sistema de modais customizados para o APANIM
+ * Substitui os alerts/confirms nativos por modais estilizados
  */
-function confirmarModal(titulo, mensagem, contato = null) {
-    return modalApanim.confirmar({
-        titulo: titulo,
-        mensagem: mensagem,
-        textoConfirmar: 'Enviar Email',
-        textoCancelar: 'Cancelar',
-        contato: contato
-    });
-}
+
+// ===== GERENCIADOR DE MODAIS =====
+const ModalManager = {
+    // Contador para IDs únicos
+    modalCounter: 0,
+
+    /**
+     * Cria a estrutura HTML do modal
+     */
+    criarModal(config) {
+        const modalId = `modal-${++this.modalCounter}`;
+        
+        const backdrop = document.createElement('div');
+        backdrop.className = 'modal-backdrop';
+        backdrop.id = `backdrop-${modalId}`;
+        
+        const container = document.createElement('div');
+        container.className = 'modal-container';
+        container.id = modalId;
+        
+        // Adiciona classe de tipo se especificado
+        const tipoClass = config.tipo ? ` ${config.tipo}` : '';
+        
+        const modalHTML = `
+            <div class="modal-box${tipoClass}">
+                <div class="modal-header">
+                    <h3>${config.titulo}</h3>
+                    ${config.fecharX !== false ? '<button class="modal-close" aria-label="Fechar">&times;</button>' : ''}
+                </div>
+                <div class="modal-body">
+                    ${config.icone ? `<div class="modal-icon ${config.icone}">${this.getIcone(config.icone)}</div>` : ''}
+                    ${config.mensagem}
+                </div>
+                <div class="modal-footer">
+                    ${this.criarBotoes(config.botoes)}
+                </div>
+            </div>
+        `;
+        
+        container.innerHTML = modalHTML;
+        
+        return { backdrop, container, modalId };
+    },
+
+    /**
+     * Retorna o ícone apropriado
+     */
+    getIcone(tipo) {
+        const icones = {
+            'success': '✅',
+            'warning': '⚠️',
+            'error': '❌',
+            'info': 'ℹ️',
+            'question': '❓'
+        };
+        return icones[tipo] || '';
+    },
+
+    /**
+     * Cria HTML dos botões
+     */
+    criarBotoes(botoes) {
+        if (!botoes || botoes.length === 0) {
+            return '<button class="modal-btn modal-btn-primary" data-action="ok">OK</button>';
+        }
+        
+        return botoes.map(botao => {
+            const classe = botao.classe || 'modal-btn-primary';
+            const acao = botao.acao || 'close';
+            return `<button class="modal-btn ${classe}" data-action="${acao}">${botao.texto}</button>`;
+        }).join('');
+    },
+
+    /**
+     * Exibe o modal
+     */
+    async exibir(config) {
+        return new Promise((resolve) => {
+            const { backdrop, container, modalId } = this.criarModal(config);
+            
+            // Adiciona ao DOM
+            document.body.appendChild(backdrop);
+            document.body.appendChild(container);
+            
+            // Previne scroll do body
+            document.body.classList.add('modal-open');
+            
+            // Aguarda um frame para animação
+            requestAnimationFrame(() => {
+                backdrop.classList.add('show');
+                container.classList.add('show');
+            });
+            
+            // Função para fechar o modal
+            const fecharModal = (resultado) => {
+                backdrop.classList.add('hide');
+                container.classList.add('hide');
+                
+                setTimeout(() => {
+                    backdrop.remove();
+                    container.remove();
+                    document.body.classList.remove('modal-open');
+                    resolve(resultado);
+                }, 300);
+            };
+            
+            // Event listeners para botões
+            const botoes = container.querySelectorAll('.modal-btn');
+            botoes.forEach(botao => {
+                botao.addEventListener('click', () => {
+                    const acao = botao.getAttribute('data-action');
+                    
+                    if (acao === 'confirm' || acao === 'ok') {
+                        fecharModal(true);
+                    } else if (acao === 'cancel') {
+                        fecharModal(false);
+                    } else {
+                        fecharModal(acao);
+                    }
+                });
+            });
+            
+            // Botão X de fechar
+            const btnFechar = container.querySelector('.modal-close');
+            if (btnFechar) {
+                btnFechar.addEventListener('click', () => fecharModal(false));
+            }
+            
+            // Fechar ao clicar no backdrop (se permitido)
+            if (config.fecharBackdrop !== false) {
+                backdrop.addEventListener('click', () => fecharModal(false));
+            }
+            
+            // ESC para fechar
+            const handleEsc = (e) => {
+                if (e.key === 'Escape') {
+                    document.removeEventListener('keydown', handleEsc);
+                    fecharModal(false);
+                }
+            };
+            document.addEventListener('keydown', handleEsc);
+        });
+    }
+};
+
+// ===== FUNÇÕES DE ATALHO =====
 
 /**
  * Exibe um alerta de sucesso
  * @param {string} titulo - Título do modal
- * @param {string} mensagem - Mensagem a ser exibida
- * @returns {Promise<void>}
+ * @param {string} mensagem - Mensagem do modal
  */
-function alertaSucesso(titulo, mensagem) {
-    return modalApanim.alerta({
+async function alertaSucesso(titulo, mensagem) {
+    return await ModalManager.exibir({
         titulo: titulo,
-        mensagem: mensagem,
+        mensagem: `<p>${mensagem}</p>`,
         tipo: 'success',
-        icone: '✅',
-        textoOk: 'Entendi'
-    });
-}
-
-/**
- * Exibe um alerta de erro
- * @param {string} titulo - Título do modal
- * @param {string} mensagem - Mensagem a ser exibida
- * @returns {Promise<void>}
- */
-function alertaErro(titulo, mensagem) {
-    return modalApanim.alerta({
-        titulo: titulo,
-        mensagem: mensagem,
-        tipo: 'error',
-        icone: '❌',
-        textoOk: 'Entendi'
+        icone: 'success',
+        botoes: [
+            { texto: 'OK', classe: 'modal-btn-primary', acao: 'ok' }
+        ]
     });
 }
 
 /**
  * Exibe um alerta de aviso
  * @param {string} titulo - Título do modal
- * @param {string} mensagem - Mensagem a ser exibida
- * @returns {Promise<void>}
+ * @param {string} mensagem - Mensagem do modal
  */
-function alertaAviso(titulo, mensagem) {
-    return modalApanim.alerta({
+async function alertaAviso(titulo, mensagem) {
+    return await ModalManager.exibir({
         titulo: titulo,
-        mensagem: mensagem,
+        mensagem: `<p>${mensagem}</p>`,
         tipo: 'warning',
-        icone: '⚠️',
-        textoOk: 'Entendi'
+        icone: 'warning',
+        botoes: [
+            { texto: 'Entendi', classe: 'modal-btn-primary', acao: 'ok' }
+        ]
     });
 }
 
 /**
- * Exibe um alerta informativo
+ * Exibe um alerta de erro
  * @param {string} titulo - Título do modal
- * @param {string} mensagem - Mensagem a ser exibida
- * @returns {Promise<void>}
+ * @param {string} mensagem - Mensagem do modal
  */
-function alertaInfo(titulo, mensagem) {
-    return modalApanim.alerta({
+async function alertaErro(titulo, mensagem) {
+    return await ModalManager.exibir({
         titulo: titulo,
-        mensagem: mensagem,
-        tipo: 'info',
-        icone: 'ℹ️',
-        textoOk: 'Entendi'
+        mensagem: `<p>${mensagem}</p>`,
+        tipo: 'error',
+        icone: 'error',
+        botoes: [
+            { texto: 'Fechar', classe: 'modal-btn-primary', acao: 'ok' }
+        ]
     });
 }
 
-console.log('✅ Modal customizado APANIM carregado');
+/**
+ * Exibe um alerta de informação
+ * @param {string} titulo - Título do modal
+ * @param {string} mensagem - Mensagem do modal
+ */
+async function alertaInfo(titulo, mensagem) {
+    return await ModalManager.exibir({
+        titulo: titulo,
+        mensagem: `<p>${mensagem}</p>`,
+        tipo: 'info',
+        icone: 'info',
+        botoes: [
+            { texto: 'OK', classe: 'modal-btn-primary', acao: 'ok' }
+        ]
+    });
+}
+
+/**
+ * Exibe um modal de confirmação
+ * @param {string} titulo - Título do modal
+ * @param {string} mensagem - Mensagem do modal
+ * @param {string} icone - Tipo de ícone (opcional)
+ * @returns {Promise<boolean>} - true se confirmado, false se cancelado
+ */
+async function confirmarModal(titulo, mensagem, icone = 'question') {
+    return await ModalManager.exibir({
+        titulo: titulo,
+        mensagem: `<p>${mensagem}</p>`,
+        icone: icone,
+        botoes: [
+            { texto: 'Cancelar', classe: 'modal-btn-cancel', acao: 'cancel' },
+            { texto: 'Confirmar', classe: 'modal-btn-primary', acao: 'confirm' }
+        ],
+        fecharBackdrop: false
+    });
+}
+
+/**
+ * Exibe um modal customizado completo
+ * @param {Object} config - Configuração completa do modal
+ */
+async function modalCustomizado(config) {
+    return await ModalManager.exibir(config);
+}
+
+// ===== ALERTA DE CAMPO OBRIGATÓRIO =====
+/**
+ * Exibe alerta padrão para campo obrigatório
+ * @param {string} mensagem - Mensagem específica do campo
+ */
+async function alertaCampoObrigatorio(mensagem) {
+    return await alertaAviso('⚠️ Campo Obrigatório', mensagem);
+}
+
+// ===== LOG =====
+console.log('✅ Sistema de Modais Customizados APANIM carregado');
+console.log('📦 Funções disponíveis:');
+console.log('   - alertaSucesso(titulo, mensagem)');
+console.log('   - alertaAviso(titulo, mensagem)');
+console.log('   - alertaErro(titulo, mensagem)');
+console.log('   - alertaInfo(titulo, mensagem)');
+console.log('   - confirmarModal(titulo, mensagem, icone)');
+console.log('   - alertaCampoObrigatorio(mensagem)');
+console.log('   - modalCustomizado(config)');
