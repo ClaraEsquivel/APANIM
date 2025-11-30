@@ -2,7 +2,7 @@ import AdocaoAnimal from '../../components/AdocaoAnimal'
 
 function AdocaoAnimalPage() {
     return (
-        <div className='pagina-adocao-animal'>
+        <div className='adocao-animal'>
             <AdocaoAnimal/>
         </div>
     )

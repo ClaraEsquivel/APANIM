@@ -2,7 +2,7 @@ import Menu from '../../components/Menu'
 
 function MenuPage() {
     return (
-        <div className='pagina-menu'>
+        <div className='menu'>
             <Menu/>
         </div>
     )
