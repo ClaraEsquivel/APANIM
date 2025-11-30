@@ -1,0 +1,581 @@
+/* ===== CONTAINER PRINCIPAL ===== */
+.container-principal {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+/* ===== SEÇÃO DE FILTROS ===== */
+.secao-filtros {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    margin-bottom: 3rem;
+    padding: 2rem;
+    border: 1px solid #fce4e4;
+}
+
+.titulo-filtros {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #000000;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.formulario-filtros {
+    width: 100%;
+}
+
+.grid-filtros {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.grupo-filtro {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.label-filtro {
+    font-weight: 500;
+    color: #000000;
+    font-size: 0.95rem;
+    margin-bottom: 0.25rem;
+}
+
+.select-filtro {
+    padding: 0.75rem 1rem;
+    border: 2px solid #fce4e4;
+    border-radius: 8px;
+    background: white;
+    font-size: 1rem;
+    color: #000000;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 0.5rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+    padding-right: 2.5rem;
+}
+
+.select-filtro:focus {
+    outline: none;
+    border-color: #5A0609;
+    box-shadow: 0 0 0 3px rgba(90, 6, 9, 0.1);
+}
+
+.select-filtro:hover {
+    border-color: #5A0609;
+}
+
+.container-botoes {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* ===== BOTÕES ===== */
+.btn {
+    padding: 0.875rem 2rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    user-select: none;
+}
+
+.btn-primario {
+    background: #5A0609;
+    color: white;
+    box-shadow: 0 2px 4px rgba(90, 6, 9, 0.2);
+}
+
+.btn-primario:hover {
+    background: #420406;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(66, 4, 6, 0.4);
+}
+
+.btn-secundario {
+    background: #fce4e4;
+    color: #000000;
+    border: 2px solid #5A0609;
+}
+
+.btn-secundario:hover {
+    background: white;
+    border-color: #420406;
+    color: #420406;
+}
+
+.btn:focus {
+    outline: 3px solid #5A0609;
+    outline-offset: 2px;
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+/* ===== SEÇÃO DE ANIMAIS PARA ADOÇÃO ===== */
+.secao-adocao {
+    margin-top: 2rem;
+}
+
+.cabecalho-resultados {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.titulo-resultados {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #000000;
+}
+
+.contador-resultados {
+    color: #000000;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    background: #fce4e4;
+    border-radius: 20px;
+    border: 1px solid #5A0609;
+}
+
+.grid-animais {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+}
+
+/* ===== CARDS DOS ANIMAIS ===== */
+.card-animal {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 2.2px solid #fce4e4;
+    position: relative;
+}
+
+.card-animal:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px #5A0609;
+    border-color: #fce4e4;
+}
+
+.card-imagem {
+    position: relative;
+    height: 280px;
+    background: #fce4e4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.imagem-animal {
+    max-width: 85%;
+    max-height: 85%;
+    transition: transform 0.3s ease;
+    border-radius: 15px;
+}
+
+.card-animal:hover .imagem-animal {
+    transform: scale(1.05);
+}
+
+.badge-tipo {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: white;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.badge-cachorro {
+    background: rgba(49, 130, 206, 0.9);
+}
+
+.badge-gato {
+    background: rgba(213, 63, 140, 0.9);
+}
+
+/* ===== BADGE DISPONÍVEL PARA ADOÇÃO (COR CARAMELO) ===== */
+.badge-adocao {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: white;
+    background: linear-gradient(135deg, #D2691E 0%, #A0522D 100%);
+    box-shadow: 0 4px 12px rgba(210, 105, 30, 0.4);
+    backdrop-filter: blur(10px);
+    animation: pulse-adocao 2s infinite;
+}
+
+@keyframes pulse-adocao {
+    0%, 100% { 
+        transform: scale(1);
+        box-shadow: 0 4px 12px rgba(210, 105, 30, 0.4);
+    }
+    50% { 
+        transform: scale(1.08);
+        box-shadow: 0 6px 16px rgba(210, 105, 30, 0.6);
+    }
+}
+
+.card-info {
+    padding: 1.5rem;
+}
+
+.nome-animal {
+    margin: 0 0 1rem 0;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #000000;
+}
+
+.detalhes-animal {
+    margin: 0 0 1.5rem 0;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.5rem 0.75rem;
+    align-items: start;
+}
+
+.detalhes-animal dt {
+    font-weight: 600;
+    color: #5A0609;
+    font-size: 0.85rem;
+}
+
+.detalhes-animal dd {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #000000;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.icone-info {
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+}
+
+.sexo[data-sexo="macho"] {
+    color: #3182ce;
+    font-weight: 500;
+}
+
+.sexo[data-sexo="femea"] {
+    color: #d53f8c;
+    font-weight: 500;
+}
+
+/* ===== RESUMO ===== */
+.resumo {
+    background: #fce4e4;
+    border-left: 4px solid #a66666;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+}
+
+.resumo p {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #000000;
+}
+
+.resumo strong {
+    color: #a66666;
+}
+
+/* ===== INFORMAÇÕES DE CONTATO ===== */
+.contato-info {
+    background: #f0f9ff;
+    border-left: 4px solid #3b82f6;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+}
+
+.contato-info p {
+    margin: 0.25rem 0;
+    font-size: 0.9rem;
+    color: #1e3a8a;
+}
+
+.contato-info p:first-child {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #1e40af;
+}
+
+/* ===== BOTÃO QUERO ADOTAR ===== */
+.btn-adotar {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    background: #5A0609;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(90, 6, 9, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-adotar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.6s;
+}
+
+.btn-adotar:hover::before {
+    left: 100%;
+}
+
+.btn-adotar:hover {
+    background: #420406;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(66, 4, 6, 0.4);
+}
+
+.btn-adotar:focus {
+    outline: 3px solid #5A0609;
+    outline-offset: 2px;
+}
+
+.btn-adotar:active {
+    transform: translateY(0);
+}
+
+/* ===== ESTADOS ESPECIAIS ===== */
+.mensagem-vazia {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: #718096;
+    grid-column: 1 / -1;
+}
+
+.mensagem-vazia h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #000000;
+}
+
+.mensagem-vazia p {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem;
+    grid-column: 1 / -1;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #e2e8f0;
+    border-top: 4px solid #667eea;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* ===== ANIMAÇÕES ===== */
+.card-animal {
+    animation: fadeInUp 0.6s ease-out forwards;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.card-animal:nth-child(1) { animation-delay: 0.1s; }
+.card-animal:nth-child(2) { animation-delay: 0.2s; }
+.card-animal:nth-child(3) { animation-delay: 0.3s; }
+.card-animal:nth-child(4) { animation-delay: 0.4s; }
+.card-animal:nth-child(5) { animation-delay: 0.5s; }
+.card-animal:nth-child(6) { animation-delay: 0.6s; }
+.card-animal:nth-child(7) { animation-delay: 0.7s; }
+.card-animal:nth-child(8) { animation-delay: 0.8s; }
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 1200px) {
+    .container-principal {
+        padding: 0.75rem;
+    }
+
+    .secao-filtros {
+        padding: 1rem;
+        border-radius: 12px;
+    }
+
+    .titulo-filtros {
+        font-size: 1.2rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .grid-filtros {
+        gap: 0.75rem;
+    }
+
+    .select-filtro {
+        padding: 0.625rem 0.875rem;
+        font-size: 0.95rem;
+    }
+
+    .card-info {
+        padding: 1.25rem;
+    }
+
+    .nome-animal {
+        font-size: 1.4rem;
+    }
+
+    .btn-adotar {
+        padding: 0.875rem 1.25rem;
+        font-size: 0.95rem;
+    }
+
+    .badge-adocao {
+        font-size: 0.7rem;
+        padding: 0.4rem 0.8rem;
+    }
+
+    .detalhes-animal dt,
+    .detalhes-animal dd {
+        font-size: 0.85rem;
+    }
+
+    .resumo p,
+    .contato-info p {
+        font-size: 0.85rem;
+    }
+
+    .base {
+        flex-direction: column;
+        gap: 2rem;
+        padding: 2rem 1rem;
+        text-align: center;
+    }
+    
+    .links_uteis {
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+    }
+}
+
+/* ===== MELHORIAS DE ACESSIBILIDADE ===== */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ===== ESTADOS DE FOCO MELHORADOS ===== */
+.select-filtro:focus-visible,
+.btn:focus-visible,
+.btn-adotar:focus-visible {
+    outline: 3px solid #5A0609;
+    outline-offset: 2px;
+}
+
+/* ===== HOVER STATES ADICIONAIS ===== */
+.card-animal:hover .nome-animal {
+    color: #5A0609;
+    transition: color 0.3s ease;
+}
+
+.grupo-filtro:hover .label-filtro {
+    color: #2d3748;
+    transition: color 0.3s ease;
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+    .secao-filtros,
+    .btn,
+    .container-botoes,
+    .btn-adotar {
+        display: none;
+    }
+
+    .card-animal {
+        break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid #000;
+        margin-bottom: 1rem;
+    }
+
+    .grid-animais {
+        display: block;
+    }
+
+    .badge-adocao {
+        background: #000;
+        color: #fff;
+    }
+}
