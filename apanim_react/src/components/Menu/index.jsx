@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import MenuUnificado from '../MenuUnificado';
 import '../../components/ScrollTop/scroll-top.js';
-import './style.css';
+import './styles.css';
 import '../../components/MenuUnificado/menu-styles.css';
 import '../../components/MenuUnificado/header-unificado.css';
 import '../../components/MenuUnificado/footer-unificado.css';
@@ -410,32 +410,32 @@ function Menu() {
         <nav className="links_uteis" aria-label="Links úteis">
           <div>
             <span className="titulo">Encontre um novo pet</span><br />
-            <Link to="/adocao-animal"><span>Adote</span></Link><br />
-            <a href="../CompraAnimal/index.jsx"><span>Compre</span></a>
+            <Link to="/adocao-animal"><span>Adote um novo amigo</span></Link><br />
+            <Link to="/compra-animal"> <span>Compre um animal</span></Link>
           </div>
           <div>
             <span className="titulo">Colabore</span><br />
-            <a href="../Parceria/index.jsx"><span>Seja uma empresa parceira</span></a>
+            <Link to="/parceria"> <span>Seja uma empresa parceira</span></Link>
           </div>
           <div>
             <span className="titulo">Divulgue um animal</span><br />
-            <a href="../CadastroAnimalAdocao/index.jsx"><span>Cadastrar animal para adoção</span><br /></a>
-            <a href="../CadastroAnimalVenda/index.jsx"><span>Cadastrar animal para venda</span><br /></a>
-            <a href="../CadastroAnimaisPerdidos/index.jsx"><span>Cadastrar animal perdido</span><br /></a>
+            <Link to="/cadastro-animal-adocao"> <span>Cadastrar animal para adoção</span></Link><br />
+            <Link to="/cadastro-animal-venda"> <span>Cadastrar animal para venda</span></Link><br />
+            <Link to="/cadastro-animal-perdido"> <span>Cadastrar animal perdido</span></Link><br />
           </div>
           <div>
             <span className="titulo">Encontre um animal</span><br />
-            <a href="../AnimaisPerdidos/index.jsx"><span>Animais perdidos</span><br /></a>
+            <Link to="/animais-perdidos"> <span>Animais perdidos</span></Link><br />
           </div>
           <div>
             <span className="titulo">Sobre o APANIM</span><br />
-            <span>APANIM</span>
+            <Link to="/apanim"> <span>APANIM</span></Link><br />
+            <Link to="/servicos"> <span>Serviços</span></Link><br />
           </div>
           <div>
             <span className="titulo">Meu perfil</span><br />
-            <a href="../CadastroInicial/index.jsx"><span>Cadastrar-se</span><br /></a>
-            <a href="../PerfilUsuario/index.jsx"><span>Minha página de usuário</span><br /></a>
-            <a href="../PerfilVendedor/index.jsx"><span>Minha página de vendedor</span><br /></a>
+            <Link to="/cadastro"> <span>Cadastrar-se</span></Link><br />
+            <Link to="/login"> <span>Login</span></Link><br />
           </div>
         </nav>
 

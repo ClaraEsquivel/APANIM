@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import MenuUnificado from '../MenuUnificado';
 import '../../components/ScrollTop/scroll-top.js';
@@ -6,6 +6,7 @@ import './styles.css';
 import '../../components/MenuUnificado/menu-styles.css';
 import '../../components/MenuUnificado/header-unificado.css';
 import '../../components/MenuUnificado/footer-unificado.css';
+import '../../components/ModalCustomizado/modal-customizado.js';
 import PawsImg from '../../assets/images/Paws.svg';
 import LogoImg from '../../assets/images/APANIM_logo.svg';
 import CatImg from '../../assets/images/cat.svg';
@@ -13,9 +14,10 @@ import DogImg from '../../assets/images/dog.svg';
 import InstagramImg from '../../assets/images/instagram.svg';
 import EmailImg from '../../assets/images/email.svg';
 import ForumImg from '../../assets/images/forum.svg';
+import DogSentadoImg from '../../assets/images/dog_sentado.svg';
 
-// ===== COMPONENTE PRINCIPAL DE ADOÇÃO =====
-const AdocaoAnimal = () => {
+// ===== COMPONENTE PRINCIPAL DE COMPRA DE ANIMAIS =====
+const CompraAnimais = () => {
     const [animais, setAnimais] = useState([]);
     const [animaisFiltrados, setAnimaisFiltrados] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -24,65 +26,119 @@ const AdocaoAnimal = () => {
         idade: 'todas',
         sexo: 'todos',
         porte: 'todos',
+        valor: 'todos',
         bairro: 'todos'
     });
-
-    // ===== EFEITO PARA CARREGAR ANIMAIS =====
-    useEffect(() => {
-        carregarAnimaisParaAdocao();
-    }, []);
-
-    useEffect(() => {
-        aplicarFiltros();
-    }, [filtros, animais]);
 
     // ===== FUNÇÕES DE STORAGE =====
     const storageDisponivel = () => {
         return typeof window.storage !== 'undefined' && typeof window.storage.get === 'function';
     };
 
-    const carregarAnimaisParaAdocao = async () => {
+    // ===== FUNÇÕES AUXILIARES =====
+    const calcularCategoriaIdade = useCallback((idadeTexto) => {
+        if (!idadeTexto) return 'todas';
+
+        const idade = idadeTexto.toLowerCase();
+        const match = idade.match(/(\d+)/);
+        if (!match) return 'todas';
+
+        const anos = parseInt(match[1]);
+
+        if (idade.includes('mes') || idade.includes('mês')) {
+            return 'filhote';
+        }
+
+        if (anos <= 1) return 'filhote';
+        if (anos <= 7) return 'adulto';
+        return 'idoso';
+    }, []);
+
+    const calcularFaixaValor = useCallback((valor) => {
+        if (!valor && valor !== 0) return 'todos';
+
+        let valorNumerico;
+
+        if (typeof valor === 'number') {
+            valorNumerico = valor;
+        } else if (typeof valor === 'string') {
+            valorNumerico = parseFloat(valor.replace(/[^\d,.-]/g, '').replace(',', '.'));
+        } else {
+            return 'todos';
+        }
+
+        if (isNaN(valorNumerico)) return 'todos';
+
+        if (valorNumerico <= 500) return 'ate-500';
+        if (valorNumerico <= 1000) return '501-1000';
+        if (valorNumerico <= 2000) return '1001-2000';
+        if (valorNumerico <= 3000) return '2001-3000';
+        return 'acima-3000';
+    }, []);
+
+    const formatarValor = (valor) => {
+        if (!valor && valor !== 0) return 'Valor não informado';
+
+        let valorNumerico;
+
+        if (typeof valor === 'number') {
+            valorNumerico = valor;
+        } else if (typeof valor === 'string') {
+            valorNumerico = parseFloat(valor.replace(/[^\d,.-]/g, '').replace(',', '.'));
+        } else {
+            return 'Valor não informado';
+        }
+
+        if (isNaN(valorNumerico)) return 'Valor não informado';
+
+        return valorNumerico.toLocaleString('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+        });
+    };
+
+    const formatarBairro = (bairro) => {
+        if (!bairro) return 'Não informado';
+
+        return bairro
+            .split('_')
+            .map(palavra => palavra.charAt(0).toUpperCase() + palavra.slice(1))
+            .join(' ');
+    };
+
+    const carregarAnimaisVenda = useCallback(async () => {
         setLoading(true);
         try {
             let animaisCarregados = [];
 
             if (storageDisponivel()) {
                 try {
-                    const resultado = await window.storage.get('animais_adocao', true);
+                    const resultado = await window.storage.get('animais_venda', true);
                     if (resultado && resultado.value) {
                         animaisCarregados = JSON.parse(resultado.value);
                     }
                 } catch (e) {
-                    console.warn('Erro ao ler window.storage (adoção):', e);
+                    console.warn('Erro ao ler window.storage (venda):', e);
                 }
             } else {
                 try {
-                    const dados = localStorage.getItem('animais_adocao');
+                    const dados = localStorage.getItem('animais_venda');
                     if (dados) animaisCarregados = JSON.parse(dados);
                 } catch (e) {
-                    console.warn('Erro ao ler localStorage (adoção):', e);
+                    console.warn('Erro ao ler localStorage (venda):', e);
                 }
             }
 
             setAnimais(animaisCarregados);
             setAnimaisFiltrados(animaisCarregados);
         } catch (error) {
-            console.error('Erro ao carregar animais para adoção:', error);
+            console.error('Erro ao carregar animais para venda:', error);
         } finally {
             setLoading(false);
         }
-    };
+    }, []);
 
-    // ===== FUNÇÕES DE FILTRO =====
-    const handleFiltroChange = (e) => {
-        const { name, value } = e.target;
-        setFiltros(prev => ({
-            ...prev,
-            [name]: value
-        }));
-    };
-
-    const aplicarFiltros = () => {
+    const aplicarFiltros = useCallback(() => {
         let resultado = [...animais];
 
         if (filtros.tipo_animal !== 'todos') {
@@ -103,11 +159,35 @@ const AdocaoAnimal = () => {
             resultado = resultado.filter(animal => animal.porte === filtros.porte);
         }
 
+        if (filtros.valor !== 'todos') {
+            resultado = resultado.filter(animal =>
+                calcularFaixaValor(animal.valor) === filtros.valor
+            );
+        }
+
         if (filtros.bairro !== 'todos') {
             resultado = resultado.filter(animal => animal.localizacao === filtros.bairro);
         }
 
         setAnimaisFiltrados(resultado);
+    }, [animais, filtros, calcularCategoriaIdade, calcularFaixaValor]);
+
+    // ===== EFEITOS =====
+    useEffect(() => {
+        carregarAnimaisVenda();
+    }, [carregarAnimaisVenda]);
+
+    useEffect(() => {
+        aplicarFiltros();
+    }, [aplicarFiltros]);
+
+    // ===== HANDLERS =====
+    const handleFiltroChange = (e) => {
+        const { name, value } = e.target;
+        setFiltros(prev => ({
+            ...prev,
+            [name]: value
+        }));
     };
 
     const limparFiltros = () => {
@@ -116,6 +196,7 @@ const AdocaoAnimal = () => {
             idade: 'todas',
             sexo: 'todos',
             porte: 'todos',
+            valor: 'todos',
             bairro: 'todos'
         });
     };
@@ -125,78 +206,48 @@ const AdocaoAnimal = () => {
         aplicarFiltros();
     };
 
-    // ===== FUNÇÕES AUXILIARES =====
-    const calcularCategoriaIdade = (idadeTexto) => {
-        if (!idadeTexto) return 'todas';
-        const idade = idadeTexto.toLowerCase();
-        const match = idade.match(/(\d+)/);
-        if (!match) return 'todas';
-        const anos = parseInt(match[1]);
-        if (idade.includes('mes') || idade.includes('mês')) return 'filhote';
-        if (anos <= 1) return 'filhote';
-        if (anos <= 7) return 'adulto';
-        return 'idoso';
-    };
-
-    const formatarBairro = (bairro) => {
-        if (!bairro) return 'Não informado';
-        return bairro.split('_').map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(' ');
-    };
-
     const abrirPerfil = (animalId) => {
-        window.location.href = `../PerfilAnimal/index.html?id=${animalId}&tipo=adocao`;
+        window.location.href = `../PerfilAnimal/index.html?id=${animalId}&tipo=venda`;
     };
 
-    const solicitarAdocao = async (animalId, nomeAnimal) => {
+    const demonstrarInteresse = async (animalId, nomeAnimal, e) => {
+        if (e) e.stopPropagation();
+
         try {
             const animal = animais.find(a => a.id === animalId);
+
             if (animal) {
-                await mostrarModalAdocao(nomeAnimal, animal.emailContato, animal.telefoneContato);
+                const valorFormatado = formatarValor(animal.valor);
+                const email = animal.emailContato;
+                const telefone = animal.telefoneContato;
+
+                if (confirm(`Você está interessado em comprar ${nomeAnimal} por ${valorFormatado}?\n\nDeseja abrir seu aplicativo de email?`)) {
+                    const assunto = encodeURIComponent(`Interesse em comprar: ${nomeAnimal}`);
+                    const corpo = encodeURIComponent(`Olá,\n\nTenho interesse em comprar o(a) ${nomeAnimal} anunciado(a) por ${valorFormatado}.\n\nGostaria de mais informações sobre o animal e as condições de compra.\n\nAguardo retorno.`);
+
+                    if (email) {
+                        window.location.href = `mailto:${email}?subject=${assunto}&body=${corpo}`;
+                    } else {
+                        alert(`Email não disponível. Entre em contato pelo telefone: ${telefone}`);
+                    }
+                }
             } else {
                 alert('Erro ao buscar informações do animal. Tente novamente.');
             }
-        } catch (e) {
-            console.error('Erro ao solicitar adoção:', e);
+        } catch (error) {
+            console.error('Erro ao demonstrar interesse:', error);
             alert('Erro ao processar sua solicitação. Tente novamente.');
         }
     };
 
-    const mostrarModalAdocao = async (nomeAnimal, email, telefone) => {
-        const confirmado = window.confirm(
-            `🐾 Adotar ${nomeAnimal}\n\nVocê demonstrou interesse em adotar ${nomeAnimal}.\n\nDeseja abrir seu aplicativo de email para entrar em contato?`
-        );
-
-        if (confirmado) {
-            const assunto = encodeURIComponent('Interesse em adotar: ' + nomeAnimal);
-            const corpo = encodeURIComponent('Olá,\n\nTenho interesse em adotar o(a) ' + nomeAnimal + ' anunciado(a).\n\nGostaria de receber informações sobre procedimentos para adoção e agendar uma visita.\n\nAguardo retorno.');
-
-            if (email) {
-                window.location.href = 'mailto:' + email + '?subject=' + assunto + '&body=' + corpo;
-            } else {
-                alert('Email Indisponível\n\nEmail não disponível. Entre em contato pelo telefone: ' + telefone);
-            }
-        }
-    };
-
-    // ===== COMPONENTE CARD DO ANIMAL =====
+    // ===== COMPONENTE CARD ANIMAL =====
     const CardAnimal = ({ animal }) => {
-        const categoriaIdade = calcularCategoriaIdade(animal.idade);
-        const badgeTipo = animal.especie === 'cachorro' ?
-            <span className="badge-tipo badge-cachorro">🐕 Cachorro</span> :
-            <span className="badge-tipo badge-gato">🐱 Gato</span>;
-        const imagemSrc = animal.imagem || '../../assets/images/dog_sentado.svg';
-        const bairroFormatado = formatarBairro(animal.localizacao);
+        const imagemSrc = animal.imagem || DogSentadoImg;
+        const valorFormatado = formatarValor(animal.valor);
 
         return (
             <article
                 className="card-animal"
-                data-animal-id={animal.id}
-                data-tipo={animal.especie}
-                data-sexo={animal.sexo}
-                data-porte={animal.porte}
-                data-idade={categoriaIdade}
-                data-cor={animal.cor}
-                data-bairro={animal.localizacao}
                 onClick={() => abrirPerfil(animal.id)}
                 style={{ cursor: 'pointer' }}
                 title={`Clique para ver o perfil completo de ${animal.nome}`}
@@ -204,21 +255,24 @@ const AdocaoAnimal = () => {
                 <div className="card-imagem">
                     <img
                         src={imagemSrc}
-                        alt={`${animal.nome} - ${animal.especie} ${animal.raca} para adoção`}
+                        alt={`${animal.nome} - ${animal.especie} ${animal.raca} à venda`}
                         className="imagem-animal"
                         loading="lazy"
-                        width="200"
-                        height="200"
-                        onError={(e) => e.target.src = '../../assets/images/dog_sentado.svg'}
+                        onError={(e) => { e.target.src = DogSentadoImg; }}
                     />
-                    {badgeTipo}
-                    <span className="badge-adocao">Disponível para Adoção</span>
+                    <span className={`badge-tipo badge-${animal.especie}`}>
+                        {animal.especie === 'cachorro' ? '🐕 Cachorro' : '🐱 Gato'}
+                    </span>
+                    <span className="badge-preco">{valorFormatado}</span>
                 </div>
                 <div className="card-info">
                     <h3 className="nome-animal">{animal.nome}</h3>
                     <dl className="detalhes-animal">
-                        <dt>Idade:</dt>
-                        <dd><span className="icone-info">🎂</span> {animal.idade}</dd>
+                        <dt>Espécie:</dt>
+                        <dd><span className="icone-info">🐾</span> {animal.especie === 'cachorro' ? 'Cachorro' : 'Gato'}</dd>
+
+                        <dt>Raça:</dt>
+                        <dd><span className="icone-info">{animal.especie === 'cachorro' ? '🐕' : '🐱'}</span> {animal.raca}</dd>
 
                         <dt>Sexo:</dt>
                         <dd className="sexo" data-sexo={animal.sexo}>
@@ -226,29 +280,33 @@ const AdocaoAnimal = () => {
                             {animal.sexo === 'macho' ? 'Macho' : 'Fêmea'}
                         </dd>
 
+                        <dt>Idade:</dt>
+                        <dd><span className="icone-info">🎂</span> {animal.idade}</dd>
+
                         <dt>Localização:</dt>
-                        <dd><span className="icone-info">📍</span> {bairroFormatado}, Salvador-BA</dd>
+                        <dd><span className="icone-info">📍</span> {formatarBairro(animal.localizacao)}, Salvador-BA</dd>
                     </dl>
+
+                    <div className="preco-destaque">
+                        <p className="valor">{valorFormatado}</p>
+                    </div>
+
                     <button
-                        className="btn-adotar"
+                        className="btn-interessado"
                         type="button"
-                        data-animal-id={animal.id}
-                        aria-label={`Manifestar interesse em adotar ${animal.nome}`}
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            solicitarAdocao(animal.id, animal.nome);
-                        }}
+                        aria-label={`Demonstrar interesse em ${animal.nome}`}
+                        onClick={(e) => demonstrarInteresse(animal.id, animal.nome, e)}
                     >
-                        🐾 Quero Adotar
+                        💰 Tenho Interesse
                     </button>
                 </div>
             </article>
         );
     };
 
-    // ===== RENDER =====
     return (
         <>
+            {/* Header */}
             <header>
                 <div className="topo">
                     <img src={PawsImg} className="patas_topo" alt="Patas" />
@@ -257,19 +315,22 @@ const AdocaoAnimal = () => {
                     <img src={DogImg} className="dog_topo" alt="Cachorro" />
                 </div>
 
+                {/* Menu Unificado */}
                 <nav role="navigation">
                     <MenuUnificado />
                 </nav>
             </header>
 
+            {/* Skip to content para acessibilidade */}
             <a href="#conteudo-principal" className="sr-only">Pular para o conteúdo principal</a>
 
+            {/* Main Content */}
             <main className="container-principal" id="conteudo-principal">
                 {/* Seção de Filtros */}
                 <section className="secao-filtros" aria-labelledby="titulo-filtros">
-                    <h1 id="titulo-filtros" className="titulo-filtros">🐾 Encontre e adote seu novo companheiro</h1>
+                    <h1 id="titulo-filtros" className="titulo-filtros">💰 Encontre e compre seu novo companheiro</h1>
 
-                    <form className="formulario-filtros" id="form-filtros" onSubmit={handleSubmit} role="search" aria-label="Filtros de busca para animais">
+                    <form className="formulario-filtros" onSubmit={handleSubmit} role="search" aria-label="Filtros de busca para animais">
                         <div className="grid-filtros">
                             {/* Filtro Tipo de Animal */}
                             <div className="grupo-filtro">
@@ -278,7 +339,6 @@ const AdocaoAnimal = () => {
                                     id="tipo_animal"
                                     name="tipo_animal"
                                     className="select-filtro"
-                                    aria-describedby="desc-tipo"
                                     value={filtros.tipo_animal}
                                     onChange={handleFiltroChange}
                                 >
@@ -286,7 +346,6 @@ const AdocaoAnimal = () => {
                                     <option value="cachorro">🐕 Cachorro</option>
                                     <option value="gato">🐱 Gato</option>
                                 </select>
-                                <small id="desc-tipo" className="sr-only">Selecione o tipo de animal que deseja adotar</small>
                             </div>
 
                             {/* Filtro Idade */}
@@ -296,7 +355,6 @@ const AdocaoAnimal = () => {
                                     id="idade"
                                     name="idade"
                                     className="select-filtro"
-                                    aria-describedby="desc-idade"
                                     value={filtros.idade}
                                     onChange={handleFiltroChange}
                                 >
@@ -305,7 +363,6 @@ const AdocaoAnimal = () => {
                                     <option value="adulto">🐾 Adulto (1-7 anos)</option>
                                     <option value="idoso">🎂 Idoso (7+ anos)</option>
                                 </select>
-                                <small id="desc-idade" className="sr-only">Selecione a faixa etária preferida</small>
                             </div>
 
                             {/* Filtro Sexo */}
@@ -315,7 +372,6 @@ const AdocaoAnimal = () => {
                                     id="sexo"
                                     name="sexo"
                                     className="select-filtro"
-                                    aria-describedby="desc-sexo"
                                     value={filtros.sexo}
                                     onChange={handleFiltroChange}
                                 >
@@ -323,7 +379,6 @@ const AdocaoAnimal = () => {
                                     <option value="macho">♂ Macho</option>
                                     <option value="femea">♀ Fêmea</option>
                                 </select>
-                                <small id="desc-sexo" className="sr-only">Selecione o sexo do animal</small>
                             </div>
 
                             {/* Filtro Porte */}
@@ -333,7 +388,6 @@ const AdocaoAnimal = () => {
                                     id="porte"
                                     name="porte"
                                     className="select-filtro"
-                                    aria-describedby="desc-porte"
                                     value={filtros.porte}
                                     onChange={handleFiltroChange}
                                 >
@@ -342,7 +396,25 @@ const AdocaoAnimal = () => {
                                     <option value="medio">🐕 Médio</option>
                                     <option value="grande">🐕‍🦮 Grande</option>
                                 </select>
-                                <small id="desc-porte" className="sr-only">Selecione o porte do animal</small>
+                            </div>
+
+                            {/* Filtro Valor */}
+                            <div className="grupo-filtro">
+                                <label htmlFor="valor" className="label-filtro">Faixa de Preço:</label>
+                                <select
+                                    id="valor"
+                                    name="valor"
+                                    className="select-filtro"
+                                    value={filtros.valor}
+                                    onChange={handleFiltroChange}
+                                >
+                                    <option value="todos">Todos os valores</option>
+                                    <option value="ate-500">💰 Até R$ 500</option>
+                                    <option value="501-1000">💰 R$ 501 - R$ 1.000</option>
+                                    <option value="1001-2000">💰 R$ 1.001 - R$ 2.000</option>
+                                    <option value="2001-3000">💰 R$ 2.001 - R$ 3.000</option>
+                                    <option value="acima-3000">💰 Acima de R$ 3.000</option>
+                                </select>
                             </div>
 
                             {/* Filtro Localização */}
@@ -352,74 +424,26 @@ const AdocaoAnimal = () => {
                                     id="bairro"
                                     name="bairro"
                                     className="select-filtro"
-                                    aria-describedby="desc-bairro"
                                     value={filtros.bairro}
                                     onChange={handleFiltroChange}
                                 >
                                     <option value="todos">Todos os bairros</option>
-                                    <option value="acupe">Acupe</option>
-                                    <option value="aeroporto">Aeroporto</option>
-                                    <option value="aguas_claras">Águas Claras</option>
-                                    <option value="alto_da_terezinha">Alto da Terezinha</option>
-                                    <option value="alto_das_pombas">Alto das Pombas</option>
-                                    <option value="alto_do_cabrito">Alto do Cabrito</option>
-                                    <option value="alto_do_coqueirinho">Alto do Coqueirinho</option>
-                                    <option value="amaralina">Amaralina</option>
-                                    <option value="areia_branca">Areia Branca</option>
-                                    <option value="arenoso">Arenoso</option>
-                                    <option value="arraial_do_retiro">Arraial do Retiro</option>
-                                    <option value="bairro_da_paz">Bairro da Paz</option>
-                                    <option value="baixa_de_quintas">Baixa de Quintas</option>
-                                    <option value="barbalho">Barbalho</option>
                                     <option value="barra">Barra</option>
-                                    <option value="barreiras">Barreiras</option>
-                                    <option value="barris">Barris</option>
-                                    <option value="beiru_tancredo_neves">Beiru / Tancredo Neves</option>
-                                    <option value="boa_viagem">Boa Viagem</option>
-                                    <option value="boa_vista_de_brotas">Boa Vista de Brotas</option>
-                                    <option value="boa_vista_de_sao_caetano">Boa Vista de São Caetano</option>
-                                    <option value="boca_da_mata">Boca da Mata</option>
-                                    <option value="boca_do_rio">Boca do Rio</option>
-                                    <option value="bom_jua">Bom Juá</option>
-                                    <option value="bonfim">Bonfim</option>
-                                    <option value="brotas">Brotas</option>
-                                    <option value="cabula">Cabula</option>
-                                    <option value="cabula_vi">Cabula VI</option>
-                                    <option value="caji">Caji</option>
-                                    <option value="calabar">Calabar</option>
-                                    <option value="calabetao">Calabetão</option>
-                                    <option value="calçada">Calçada</option>
-                                    <option value="caminho_das_arvores">Caminho das Árvores</option>
-                                    <option value="campinas_de_piraj">Campinas de Pirajá</option>
-                                    <option value="candeal">Candeal</option>
-                                    <option value="canela">Canela</option>
-                                    <option value="retiro">Retiro</option>
-                                    <option value="ribeira">Ribeira</option>
-                                    <option value="rio_sena">Rio Sena</option>
                                     <option value="rio_vermelho">Rio Vermelho</option>
-                                    <option value="roma">Roma</option>
-                                    <option value="saboeiro">Saboeiro</option>
-                                    <option value="santa_cruz">Santa Cruz</option>
-                                    <option value="santa_luzia">Santa Luzia</option>
-                                    <option value="santa_monica">Santa Mônica</option>
-                                    <option value="santo_agostinho">Santo Agostinho</option>
-                                    <option value="santo_antonio">Santo Antônio</option>
-                                    <option value="sao_caetano">São Caetano</option>
-                                    <option value="sao_cristovao">São Cristóvão</option>
-                                    <option value="sao_goncalo">São Gonçalo</option>
-                                    <option value="vitoria">Vitória</option>
-                                    <option value="vista_alegre">Vista Alegre</option>
+                                    <option value="pituba">Pituba</option>
+                                    <option value="itapua">Itapuã</option>
+                                    <option value="cabula">Cabula</option>
+                                    {/* Adicione mais bairros conforme necessário */}
                                 </select>
-                                <small id="desc-bairro" className="sr-only">Selecione o bairro de preferência em Salvador</small>
                             </div>
                         </div>
 
                         {/* Botões de Ação */}
                         <div className="container-botoes">
-                            <button type="submit" className="btn btn-primario" id="aplicar-filtros">
+                            <button type="submit" className="btn btn-primario">
                                 🔍 Aplicar Filtros
                             </button>
-                            <button type="button" className="btn btn-secundario" id="limpar-filtros" onClick={limparFiltros}>
+                            <button type="button" className="btn btn-secundario" onClick={limparFiltros}>
                                 🔄 Limpar Filtros
                             </button>
                         </div>
@@ -429,8 +453,8 @@ const AdocaoAnimal = () => {
                 {/* Seção de Resultados */}
                 <section className="secao-adocao" aria-labelledby="titulo-resultados">
                     <div className="cabecalho-resultados">
-                        <h2 id="titulo-resultados" className="titulo-resultados">Animais Disponíveis</h2>
-                        <span className="contador-resultados" id="contador-resultados" aria-live="polite">
+                        <h2 id="titulo-resultados" className="titulo-resultados">Animais Disponíveis para Compra</h2>
+                        <span className="contador-resultados" aria-live="polite">
                             {animaisFiltrados.length === 1 ? '1 animal encontrado' : `${animaisFiltrados.length} animais encontrados`}
                         </span>
                     </div>
@@ -442,15 +466,15 @@ const AdocaoAnimal = () => {
                             <p>Carregando animais...</p>
                         </div>
                     ) : animaisFiltrados.length > 0 ? (
-                        <div className="grid-animais" id="grid-animais" role="region" aria-live="polite" aria-label="Resultados da busca">
+                        <div className="grid-animais" role="region" aria-live="polite" aria-label="Resultados da busca">
                             {animaisFiltrados.map(animal => (
                                 <CardAnimal key={animal.id} animal={animal} />
                             ))}
                         </div>
                     ) : (
-                        <div className="mensagem-vazia" id="mensagem-vazia">
+                        <div className="mensagem-vazia">
                             <h3>Nenhum animal encontrado</h3>
-                            <p>Tente ajustar os filtros para encontrar mais opções de adoção.</p>
+                            <p>Tente ajustar os filtros para encontrar mais opções de compra.</p>
                             <button type="button" className="btn btn-primario" onClick={limparFiltros}>
                                 🔄 Limpar Filtros
                             </button>
@@ -505,8 +529,9 @@ const AdocaoAnimal = () => {
 
             {/* Scripts */}
             <script src='../../components/ScrollTop/scroll-top.js'></script>
+            <script src='../../components/ModalCustomizado/modal-customizado.js'></script>
         </>
     );
-}
+};
 
-export default AdocaoAnimal;
+export default CompraAnimais;

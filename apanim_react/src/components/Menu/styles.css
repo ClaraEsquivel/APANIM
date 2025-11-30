@@ -1,0 +1,631 @@
+/* ===== ÁREA DE CONTEÚDO PRINCIPAL ===== */
+.area_principal {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem;
+    background: linear-gradient(135deg, white 0%, #fafafa 100%);
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    border: 1px solid #fce4e4;
+    min-height: 500px;
+    margin-right: 2rem;
+}
+
+.area_principal h1 {
+    font-size: 2.5rem;
+    color: #5A0609;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-weight: 700;
+}
+
+.area_principal p {
+    font-size: 1.2rem;
+    color: #666;
+    text-align: center;
+    max-width: 600px;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+}
+
+.cta-secundario {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.btn-cta {
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, #fce4e4 0%, #f0c2c2 100%);
+    color: #5A0609;
+    border: 2px solid #5A0609;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-family: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-cta:hover {
+    background: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(90, 6, 9, 0.2);
+}
+
+/* Classe para screen readers */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ===== SEÇÃO DE ANIMAIS PARA ADOÇÃO ===== */
+.secao-adocao {
+    margin-top: 2rem;
+}
+
+.cabecalho-resultados {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.titulo-resultados {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #000000;
+}
+
+.contador-resultados {
+    color: #000000;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    background: #fce4e4;
+    border-radius: 20px;
+    border: 1px solid #5A0609;
+}
+
+.grid-animais {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+/* ===== SEÇÃO DE ANIMAIS PARA COMPRA ===== */
+.secao-compra {
+    margin-top: -80px;
+}
+
+.cabecalho-resultados-compra {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.titulo-resultados-compra {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #000000;
+}
+
+.contador-resultados-compra {
+    color: #000000;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    background: #fce4e4;
+    border-radius: 20px;
+    border: 1px solid #5A0609;
+}
+
+/* ===== SEÇÃO DE ANIMAIS PERDIDOS ===== ✅ ADICIONADO */
+.secao-perdidos {
+    margin-top: -80px;
+}
+
+.cabecalho-resultados-perdidos {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.titulo-resultados-perdidos {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #000000;
+}
+
+.contador-resultados-perdidos {
+    color: #000000;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    background: #fee;
+    border-radius: 20px;
+    border: 1px solid #dc2626;
+    animation: pulse-perdido 2s infinite;
+}
+
+@keyframes pulse-perdido {
+    0%, 100% {
+        background: #fee;
+        border-color: #5A0609;
+    }
+    50% {
+        background: #fcc;
+        border-color: #5A0609;
+    }
+}
+
+/* ===== BARRA DE NAVEGAÇÃO DOS BOTÕES ===== */
+.conteudo_principal {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    border: 1px solid #fce4e4;
+    margin-top: -50px;
+    padding: 3.5rem;
+    border-radius: 30px;
+}
+
+.botoes-principais {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* ===== LAYOUT PRINCIPAL ===== */
+.central {
+    background: white;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center; 
+    position: relative;
+    padding: 100px 0; 
+}
+
+.botoes-principais button {
+    padding: 1rem 1.5rem;
+    background: linear-gradient(135deg, #5A0609 0%, #420406 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-family: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(90, 6, 9, 0.3);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    min-width: 200px;
+    white-space: nowrap;
+}
+
+.botoes-principais button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.botoes-principais button:hover::before {
+    left: 100%;
+}
+
+.botoes-principais button:hover {
+    background: linear-gradient(135deg, #420406 0%, #2d0304 100%);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(66, 4, 6, 0.4);
+}
+
+.botoes-principais button:active {
+    transform: translateY(-2px);
+}
+
+.botoes-principais button:focus {
+    outline: 3px solid rgba(90, 6, 9, 0.3);
+    outline-offset: 2px;
+}
+
+/* ===== SIDEBAR DIREITA ===== */
+.lateral_direito {
+    width: 1020px;
+    background: linear-gradient(135deg, #fce4e4 0%, #f8d7d7 100%);
+    border-radius: 30px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid #f0c2c2;
+    max-height: calc(100vh - 300px);
+    overflow-y: auto;
+    margin-bottom: 200px;
+    padding: 30px;
+}
+
+.lateral_direito::-webkit-scrollbar {
+    width: 6px;
+}
+
+.lateral_direito::-webkit-scrollbar-track {
+    background: rgba(240, 194, 194, 0.3);
+    border-radius: 10px;
+}
+
+.lateral_direito::-webkit-scrollbar-thumb {
+    background: rgba(90, 6, 9, 0.4);
+    border-radius: 10px;
+}
+
+.lateral_direito::-webkit-scrollbar-thumb:hover {
+    background: rgba(90, 6, 9, 0.6);
+}
+
+.linha_lateral {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.linha_lateral:last-child {
+    margin-bottom: 0;
+}
+
+/* ===== CARDS DOS ANIMAIS ===== */
+.item_lateral {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem 1.5rem;
+    width: 250px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid #fce4e4;
+    position: relative;
+    overflow: hidden;
+}
+
+.item_lateral::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #5A0609, #420406);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+.item_lateral:hover::before {
+    transform: scaleX(1);
+}
+
+.item_lateral:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+.item_lateral img {
+    width: 120px;
+    height: 100px;
+    object-fit: contain;
+    margin-bottom: 0.75rem;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #e9bebe 0%, #f0f0f0 100%);
+    padding: 0.5rem;
+    transition: transform 0.3s ease;
+}
+
+.item_lateral:hover img {
+    transform: scale(1.1);
+}
+
+.info_lateral {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.info_lateral h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #5A0609;
+    margin-bottom: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.item_lateral:hover .info_lateral h3 {
+    color: #420406;
+}
+
+.info_lateral dd {
+    font-size: 0.8rem;
+    color: #666;
+    margin: 0.1rem 0;
+    font-weight: 500;
+}
+
+.info_lateral dd:first-of-type {
+    color: #5A0609;
+    font-weight: 600;
+}
+
+/* ===== ANIMAÇÕES ===== */
+.item_lateral {
+    animation: fadeInUp 0.6s ease-out forwards;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.item_lateral:nth-child(1) { animation-delay: 0.1s; }
+.item_lateral:nth-child(2) { animation-delay: 0.2s; }
+.item_lateral:nth-child(3) { animation-delay: 0.3s; }
+
+.linha_lateral:nth-child(2) .item_lateral:nth-child(1) { animation-delay: 0.4s; }
+.linha_lateral:nth-child(2) .item_lateral:nth-child(2) { animation-delay: 0.5s; }
+.linha_lateral:nth-child(2) .item_lateral:nth-child(3) { animation-delay: 0.6s; }
+
+.linha_lateral:nth-child(3) .item_lateral:nth-child(1) { animation-delay: 0.7s; }
+.linha_lateral:nth-child(3) .item_lateral:nth-child(2) { animation-delay: 0.8s; }
+.linha_lateral:nth-child(3) .item_lateral:nth-child(3) { animation-delay: 0.9s; }
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 1200px) {
+    .central {
+        flex-direction: column;
+    }
+    
+    .area_principal {
+        margin-right: 0;
+        margin-bottom: 2rem;
+    }
+    
+    .lateral_direito {
+        width: 100%;
+        max-height: none;
+    }
+    
+    .linha_lateral {
+        justify-content: center;
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .central {
+        padding: 0 1rem 1rem 1rem;
+        gap: 1rem;
+    }
+    
+    .conteudo_principal {
+        margin: 1rem;
+        padding: 1rem;
+    }
+    
+    .botoes-principais {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.75rem;
+    }
+    
+    .botoes-principais button {
+        min-width: auto;
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+    
+    .topo {
+        height: 180px;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+    }
+    
+    .topo .patas_topo,
+    .topo .cat_topo,
+    .topo .dog_topo {
+        width: 60px;
+        margin: 0;
+    }
+    
+    #logo_apanim {
+        height: 120px;
+    }
+    
+    .area_principal {
+        padding: 2rem 1rem;
+        min-height: 300px;
+    }
+    
+    .area_principal h1 {
+        font-size: 2rem;
+    }
+    
+    .area_principal p {
+        font-size: 1rem;
+    }
+    
+    .linha_lateral {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    .item_lateral {
+        width: 200px;
+        padding: 1.25rem;
+    }
+    
+    .base {
+        flex-direction: column;
+        gap: 2rem;
+        padding: 2rem 1rem;
+        text-align: center;
+    }
+    
+    .links_uteis {
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+    }
+
+    /* Ajustes dos contadores em mobile */
+    .contador-resultados,
+    .contador-resultados-compra,
+    .contador-resultados-perdidos {
+        font-size: 0.85rem;
+        padding: 0.4rem 0.8rem;
+    }
+
+    .titulo-resultados,
+    .titulo-resultados-compra,
+    .titulo-resultados-perdidos {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .central {
+        padding: 0 0.5rem 0.5rem 0.5rem;
+    }
+    
+    .conteudo_principal {
+        margin: 0.5rem;
+        padding: 0.75rem;
+    }
+    
+    .botoes-principais button {
+        padding: 0.875rem 1rem;
+        font-size: 0.95rem;
+    }
+    
+    .area_principal {
+        padding: 1.5rem 0.75rem;
+    }
+    
+    .area_principal h1 {
+        font-size: 1.6rem;
+    }
+    
+    .lateral_direito {
+        padding: 1rem;
+    }
+    
+    .item_lateral {
+        width: 150px;
+        padding: 1rem;
+    }
+    
+    .item_lateral img {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .topo {
+        height: 150px;
+    }
+    
+    #logo_apanim {
+        height: 100px;
+    }
+
+    /* Ajustes extras para contadores em telas muito pequenas */
+    .contador-resultados,
+    .contador-resultados-compra,
+    .contador-resultados-perdidos {
+        font-size: 0.75rem;
+        padding: 0.3rem 0.6rem;
+    }
+
+    .titulo-resultados,
+    .titulo-resultados-compra,
+    .titulo-resultados-perdidos {
+        font-size: 1.3rem;
+    }
+
+    .cabecalho-resultados,
+    .cabecalho-resultados-compra,
+    .cabecalho-resultados-perdidos {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+}
+
+/* ===== MELHORIAS DE ACESSIBILIDADE ===== */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ===== ESTADOS DE FOCO MELHORADOS ===== */
+.botoes-principais button:focus-visible,
+#menu_sanduiche:focus-visible,
+.links_uteis span:focus-visible {
+    outline: 3px solid #5A0609;
+    outline-offset: 2px;
+}
+
+.item_lateral:focus-visible {
+    outline: 3px solid #5A0609;
+    outline-offset: 2px;
+}
+
+/* ===== HOVER STATES ADICIONAIS ===== */
+.conteudo_principal:hover {
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.08);
+    transition: box-shadow 0.3s ease;
+}
+
+.lateral_direito:hover {
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    transition: box-shadow 0.3s ease;
+}
