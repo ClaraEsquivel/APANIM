@@ -25,18 +25,18 @@ public class AnimalPerdidoCadastroDTO extends AnimalCadastroDTO {
     }
 
     public AnimalPerdidoCadastroDTO(Long id, @NotBlank(message = "O nome é obrigatório.") String nome,
-            @NotNull(message = "A idade em meses é obrigatória.") @PositiveOrZero(message = "A idade deve ser 0 ou maior.") Integer idadeEmMeses,
+            @PositiveOrZero(message = "A idade deve ser 0 ou maior.") Integer idadeEmMeses,
             @NotBlank(message = "A raça é obrigatório.") String raca,
             @NotBlank(message = "O porte é obrigatório.") String porte,
             @NotNull(message = "O sexo é obrigatório.") SexoAnimal sexoAnimal,
             @NotBlank(message = "A espécie é obrigatório.") String especie, String condicaoEspecial,
-            @NotBlank(message = "O bairro é obrigatório.") String bairro, @NotBlank String cor,
+            @NotBlank(message = "A localização é obrigatória.") String localizacao, @NotBlank String cor,
             @NotNull boolean vacinado, @NotNull boolean vermifugado, @NotNull boolean castrado,
-            @Size(max = 100, message = "O resumo não pode exceder 100 caracteres.") String resumo,
-            @URL @NotBlank String fotoUrl, @NotNull Long usuarioId,
-            @NotNull(message = "A data é obrigatória") LocalDate data, List<String> vacinas) {
-        super(id, nome, idadeEmMeses, raca, porte, sexoAnimal, especie, condicaoEspecial, bairro, cor, vacinado,
-                vermifugado, castrado, resumo, fotoUrl, usuarioId);
+            @Size(max = 100, message = "O resumo não pode exceder 100 caracteres.") String resumo, @URL String fotoUrl,
+            @URL String videoUrl, @NotNull Long usuarioId, @NotNull(message = "A data é obrigatória") LocalDate data,
+            List<String> vacinas) {
+        super(id, nome, idadeEmMeses, raca, porte, sexoAnimal, especie, condicaoEspecial, localizacao, cor, vacinado,
+                vermifugado, castrado, resumo, fotoUrl, videoUrl, usuarioId);
         this.data = data;
         this.vacinas = vacinas;
     }

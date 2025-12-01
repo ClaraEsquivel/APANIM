@@ -49,7 +49,7 @@ public class AnimalAdocaoService {
         animalAdocao.setSexoAnimal(dto.getSexoAnimal());
         animalAdocao.setEspecie(dto.getEspecie());
         animalAdocao.setCondicaoEspecial(dto.getCondicaoEspecial());
-        animalAdocao.setBairro(dto.getBairro());
+        animalAdocao.setLocalizacao(dto.getLocalizacao());
         animalAdocao.setCor(dto.getCor());
         animalAdocao.setVacinado(dto.isVacinado());
         if (Boolean.TRUE.equals(dto.isVacinado())) {
@@ -68,6 +68,7 @@ public class AnimalAdocaoService {
         animalAdocao.setCastrado(dto.isCastrado());
         animalAdocao.setResumo(dto.getResumo());
         animalAdocao.setFotoUrl(dto.getFotoUrl());
+        animalAdocao.setVideoUrl(dto.getVideoUrl());
 
         animalAdocao.setUsuario(dono);
 
@@ -92,13 +93,14 @@ public class AnimalAdocaoService {
             animalAdocao.getSexoAnimal(),
             animalAdocao.getEspecie(),
             animalAdocao.getCondicaoEspecial(),
-            animalAdocao.getBairro(),
+            animalAdocao.getLocalizacao(),
             animalAdocao.getCor(),
             animalAdocao.getVacinado(),
             animalAdocao.getVermifugado(),
             animalAdocao.getCastrado(),
             animalAdocao.getResumo(),
             animalAdocao.getFotoUrl(),
+            animalAdocao.getVideoUrl(),
             animalAdocao.getUsuario().getId(),
             animalAdocao.getVacinas(),
             animalAdocao.getUsuario().getEmail(),
@@ -132,7 +134,7 @@ public class AnimalAdocaoService {
         animalAdocao.setSexoAnimal(dto.getSexoAnimal());
         animalAdocao.setEspecie(dto.getEspecie());
         animalAdocao.setCondicaoEspecial(dto.getCondicaoEspecial());
-        animalAdocao.setBairro(dto.getBairro());
+        animalAdocao.setLocalizacao(dto.getLocalizacao());
         animalAdocao.setCor(dto.getCor());
         animalAdocao.setVacinado(dto.isVacinado());
         if (Boolean.TRUE.equals(dto.isVacinado())) {
@@ -151,6 +153,7 @@ public class AnimalAdocaoService {
         animalAdocao.setCastrado(dto.isCastrado());
         animalAdocao.setResumo(dto.getResumo());
         animalAdocao.setFotoUrl(dto.getFotoUrl());
+        animalAdocao.setVideoUrl(dto.getVideoUrl());
 
         return animalAdocaoRepository.save(animalAdocao);
     }

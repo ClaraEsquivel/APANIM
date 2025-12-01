@@ -1,35 +1,29 @@
 package com.example.apanim.controller;
 
-import com.example.apanim.DTO.PlanoCadastroDTO;
-import com.example.apanim.DTO.PlanoResponseDTO;
-import com.example.apanim.model.Plano;
-import com.example.apanim.service.PlanoService;
-import jakarta.validation.Valid;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.apanim.model.Plano;
+import com.example.apanim.repository.PlanoRepository;
+
 @RestController
-@RequestMapping("/planos")
+@RequestMapping("/api/planos")
 public class PlanoController {
 
-    private final PlanoService planoService;
+    private final PlanoRepository planoRepository;
 
-    public PlanoController(PlanoService planoService) {
-        this.planoService = planoService;
+    public PlanoController(PlanoRepository planoRepository) {
+        this.planoRepository = planoRepository;
     }
 
     @GetMapping
-    public ResponseEntity<List<PlanoResponseDTO>> listarPlanos() {
-        List<PlanoResponseDTO> planos = planoService.listarPlanosDisponiveis();
+    public ResponseEntity<List<Plano>> listarPlanos() {
+        // Busca todos os planos (que foram inseridos pelo Seeder)
+        List<Plano> planos = planoRepository.findAll();
         return ResponseEntity.ok(planos);
-    }
-
-    @PostMapping
-    public ResponseEntity<PlanoResponseDTO> criarPlano(@Valid @RequestBody PlanoCadastroDTO dto) {
-        Plano planoCriado = planoService.criarPlano(dto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(new PlanoResponseDTO(planoCriado));
     }
 }

@@ -16,14 +16,13 @@ public class Plano {
     private Long id;
 
     @Column(nullable = false, unique = true)
-    private String nome; // Ex: "Plano Profissional" ou "Anúncio Premium"
+    private String nome;
 
     @Column(nullable = false)
-    private BigDecimal preco; // Ex: 199.99 ou 29.90
+    private BigDecimal preco; 
 
-    private String descricao; // Ex: "todos benefícios + destaque permanente"
+    private String descricao; 
 
-    // Este é o ID que o Mercado Pago ou Stripe usa para identificar este plano
     private String gatewayPlanId; 
 
     public Plano() {

@@ -21,8 +21,7 @@ public class AnimalCompraResponseDTO {
     private SexoAnimal sexoAnimal;
     private String especie;
     private String condicaoEspecial;
-    private String logradouro;
-    private String bairro;
+    private String localizacao;
     private String cor;
     private Boolean vacinado;
     private List<String> vacinas;
@@ -33,6 +32,7 @@ public class AnimalCompraResponseDTO {
     private Boolean pedigree;
     private BigDecimal valorDoAnimal;
     private String fotoUrl;
+    private String videoUrl;
     private String emailVendedor;
     private List<String> telefoneVendedor;
     
@@ -40,7 +40,7 @@ public class AnimalCompraResponseDTO {
     }
 
     public AnimalCompraResponseDTO(Long id, String nome, FaixaEtariaAnimal faixaEtariaAnimal, String raca, String porte,
-            SexoAnimal sexoAnimal, String especie, String condicaoEspecial, String logradouro, String bairro,
+            SexoAnimal sexoAnimal, String especie, String condicaoEspecial, String localizacao,
             String cor, Boolean vacinado, List<String> vacinas, Boolean vermifugado, Boolean castrado, String resumo,
             Long vendedorId, Boolean pedigree, BigDecimal valorDoAnimal, String fotoUrl, String emailVendedor,
             List<String> telefoneVendedor) {
@@ -52,8 +52,7 @@ public class AnimalCompraResponseDTO {
         this.sexoAnimal = sexoAnimal;
         this.especie = especie;
         this.condicaoEspecial = condicaoEspecial;
-        this.logradouro = logradouro;
-        this.bairro = bairro;
+        this.localizacao = localizacao;
         this.cor = cor;
         this.vacinado = vacinado;
         this.vacinas = vacinas;

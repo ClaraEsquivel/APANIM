@@ -29,8 +29,7 @@ public class AnimalCompra {
 
     private String especie;
     private String condicaoEspecial;
-    private String logradouro;
-    private String bairro;
+    private String localizacao;
     private String cor;
     private Boolean vacinado;
     private Boolean vermifugado;
@@ -56,14 +55,17 @@ public class AnimalCompra {
 
     @Column(length = 1024)
     private String fotoUrl;
+    
+    @Column(length = 1024)
+    private String videoUrl;
 
     public AnimalCompra() {
     }
-
+    
     public AnimalCompra(Long id, String nome, FaixaEtariaAnimal faixaEtariaAnimal, String raca, String porte,
-            SexoAnimal sexoAnimal, String especie, String condicaoEspecial, String logradouro, String bairro,
+            SexoAnimal sexoAnimal, String especie, String condicaoEspecial, String localizacao,
             String cor, Boolean vacinado, Boolean vermifugado, Boolean castrado, String resumo, List<String> vacinas,
-            VendedorModel vendedor, Boolean pedigree, BigDecimal valorDoAnimal, String fotoUrl) {
+            VendedorModel vendedor, Boolean pedigree, BigDecimal valorDoAnimal, String fotoUrl, String videoUrl) {
         this.id = id;
         this.nome = nome;
         this.faixaEtariaAnimal = faixaEtariaAnimal;
@@ -72,8 +74,7 @@ public class AnimalCompra {
         this.sexoAnimal = sexoAnimal;
         this.especie = especie;
         this.condicaoEspecial = condicaoEspecial;
-        this.logradouro = logradouro;
-        this.bairro = bairro;
+        this.localizacao = localizacao;
         this.cor = cor;
         this.vacinado = vacinado;
         this.vermifugado = vermifugado;
@@ -84,6 +85,7 @@ public class AnimalCompra {
         this.pedigree = pedigree;
         this.valorDoAnimal = valorDoAnimal;
         this.fotoUrl = fotoUrl;
+        this.videoUrl = videoUrl;
     }
 
     // Getters
@@ -119,12 +121,8 @@ public class AnimalCompra {
         return condicaoEspecial;
     }
 
-    public String getLogradouro() {
-        return logradouro;
-    }
-
-    public String getBairro() {
-        return bairro;
+    public String getLocalizacao() {
+        return localizacao;
     }
 
     public String getCor() {
@@ -167,6 +165,10 @@ public class AnimalCompra {
         return fotoUrl;
     }
 
+    public String getVideoUrl() {
+        return videoUrl;
+    }
+
     // Setters
     public void setId(Long id) {
         this.id = id;
@@ -200,12 +202,8 @@ public class AnimalCompra {
         this.condicaoEspecial = condicaoEspecial;
     }
 
-    public void setLogradouro(String logradouro) {
-        this.logradouro = logradouro;
-    }
-
-    public void setBairro(String bairro) {
-        this.bairro = bairro;
+    public void setLocalizacao(String localizacao) {
+        this.localizacao = localizacao;
     }
 
     public void setCor(String cor) {

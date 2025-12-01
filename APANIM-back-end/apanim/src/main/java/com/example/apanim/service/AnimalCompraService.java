@@ -49,8 +49,7 @@ public class AnimalCompraService {
         animalCompra.setSexoAnimal(dto.getSexoAnimal());
         animalCompra.setEspecie(dto.getEspecie());
         animalCompra.setCondicaoEspecial(dto.getCondicaoEspecial());
-        animalCompra.setLogradouro(dto.getLogradouro());
-        animalCompra.setBairro(dto.getBairro());
+        animalCompra.setLocalizacao(dto.getLocalizacao());
         animalCompra.setCor(dto.getCor());
         animalCompra.setVacinado(dto.getVacinado());
 
@@ -73,6 +72,7 @@ public class AnimalCompraService {
         animalCompra.setPedigree(dto.getPedigree());
         animalCompra.setValorDoAnimal(dto.getValorDoAnimal());
         animalCompra.setFotoUrl(dto.getFotoUrl());
+        animalCompra.setVideoUrl(dto.getVideoUrl());
 
         return animalCompraRepository.save(animalCompra);
     }
@@ -95,8 +95,7 @@ public class AnimalCompraService {
             animalCompra.getSexoAnimal(),
             animalCompra.getEspecie(),
             animalCompra.getCondicaoEspecial(),
-            animalCompra.getLogradouro(),
-            animalCompra.getBairro(),
+            animalCompra.getLocalizacao(),
             animalCompra.getCor(),
             animalCompra.getVacinado(),
             animalCompra.getVacinas(),
@@ -107,6 +106,7 @@ public class AnimalCompraService {
             animalCompra.getPedigree(),
             animalCompra.getValorDoAnimal(),
             animalCompra.getFotoUrl(),
+            animalCompra.getVideoUrl(),
             animalCompra.getVendedor().getEmail(),
             animalCompra.getVendedor().getTelefones()
         );
@@ -145,8 +145,7 @@ public class AnimalCompraService {
         animalCompra.setSexoAnimal(dto.getSexoAnimal());
         animalCompra.setEspecie(dto.getEspecie());
         animalCompra.setCondicaoEspecial(dto.getCondicaoEspecial());
-        animalCompra.setLogradouro(dto.getLogradouro());
-        animalCompra.setBairro(dto.getBairro());
+        animalCompra.setLocalizacao(dto.getLocalizacao());
         animalCompra.setCor(dto.getCor());
         animalCompra.setVacinado(dto.getVacinado());
 
@@ -168,6 +167,7 @@ public class AnimalCompraService {
         animalCompra.setPedigree(dto.getPedigree());
         animalCompra.setValorDoAnimal(dto.getValorDoAnimal());
         animalCompra.setFotoUrl(dto.getFotoUrl());
+        animalCompra.setVideoUrl(dto.getVideoUrl());
 
         return animalCompraRepository.save(animalCompra);
     }

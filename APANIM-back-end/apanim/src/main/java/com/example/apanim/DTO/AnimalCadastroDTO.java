@@ -2,7 +2,6 @@ package com.example.apanim.DTO;
 
 import org.hibernate.validator.constraints.URL;
 
-import com.example.apanim.Enum.FaixaEtariaAnimal;
 import com.example.apanim.Enum.SexoAnimal;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -20,7 +19,6 @@ public abstract class AnimalCadastroDTO {
     @NotBlank(message = "O nome é obrigatório.")
     private String nome;
 
-    @NotNull(message = "A idade em meses é obrigatória.")
     @PositiveOrZero(message = "A idade deve ser 0 ou maior.")
     private Integer idadeEmMeses;
 
@@ -38,8 +36,8 @@ public abstract class AnimalCadastroDTO {
 
     private String condicaoEspecial;
 
-    @NotBlank(message = "O bairro é obrigatório.")
-    private String bairro;
+    @NotBlank(message = "A localização é obrigatória.")
+    private String localizacao;
 
     @NotBlank
     private String cor;
@@ -57,25 +55,27 @@ public abstract class AnimalCadastroDTO {
     private String resumo;
 
     @URL
-    @NotBlank
     private String fotoUrl;
+
+    @URL
+    private String videoUrl;
 
     @NotNull 
     private Long usuarioId;
 
     public AnimalCadastroDTO() {
     }
-
+    
     public AnimalCadastroDTO(Long id, @NotBlank(message = "O nome é obrigatório.") String nome,
-            @NotNull(message = "A idade em meses é obrigatória.") @PositiveOrZero(message = "A idade deve ser 0 ou maior.") Integer idadeEmMeses,
+            @PositiveOrZero(message = "A idade deve ser 0 ou maior.") Integer idadeEmMeses,
             @NotBlank(message = "A raça é obrigatório.") String raca,
             @NotBlank(message = "O porte é obrigatório.") String porte,
             @NotNull(message = "O sexo é obrigatório.") SexoAnimal sexoAnimal,
             @NotBlank(message = "A espécie é obrigatório.") String especie, String condicaoEspecial,
-            @NotBlank(message = "O bairro é obrigatório.") String bairro, @NotBlank String cor,
+            @NotBlank(message = "A localização é obrigatória.") String localizacao, @NotBlank String cor,
             @NotNull boolean vacinado, @NotNull boolean vermifugado, @NotNull boolean castrado,
-            @Size(max = 100, message = "O resumo não pode exceder 100 caracteres.") String resumo,
-            @URL @NotBlank String fotoUrl, @NotNull Long usuarioId) {
+            @Size(max = 100, message = "O resumo não pode exceder 100 caracteres.") String resumo, @URL String fotoUrl,
+            @URL String videoUrl, @NotNull Long usuarioId) {
         this.id = id;
         this.nome = nome;
         this.idadeEmMeses = idadeEmMeses;
@@ -84,13 +84,14 @@ public abstract class AnimalCadastroDTO {
         this.sexoAnimal = sexoAnimal;
         this.especie = especie;
         this.condicaoEspecial = condicaoEspecial;
-        this.bairro = bairro;
+        this.localizacao = localizacao;
         this.cor = cor;
         this.vacinado = vacinado;
         this.vermifugado = vermifugado;
         this.castrado = castrado;
         this.resumo = resumo;
         this.fotoUrl = fotoUrl;
+        this.videoUrl = videoUrl;
         this.usuarioId = usuarioId;
     }
 
@@ -103,13 +104,14 @@ public abstract class AnimalCadastroDTO {
     public SexoAnimal getSexoAnimal() { return sexoAnimal; }
     public String getEspecie() { return especie; }
     public String getCondicaoEspecial() { return condicaoEspecial; }
-    public String getBairro() { return bairro; }
+    public String getLocalizacao() { return localizacao; }
     public String getCor() { return cor; }
     public boolean isVacinado() { return vacinado; }
     public boolean isVermifugado() { return vermifugado; }
     public boolean isCastrado() { return castrado; }
     public String getResumo() { return resumo; }
     public String getFotoUrl() { return fotoUrl; }
+    public String getVideoUrl() { return videoUrl; }
     public Long getUsuarioId() { return usuarioId; }
 
     // Setters
@@ -121,12 +123,13 @@ public abstract class AnimalCadastroDTO {
     public void setSexoAnimal(SexoAnimal sexoAnimal) { this.sexoAnimal = sexoAnimal; }
     public void setEspecie(String especie) { this.especie = especie; }
     public void setCondicaoEspecial(String condicaoEspecial) { this.condicaoEspecial = condicaoEspecial; }
-    public void setBairro(String bairro) { this.bairro = bairro; }
+    public void setLocalizacao(String localizacao) { this.localizacao = localizacao; }
     public void setCor(String cor) { this.cor = cor; }
     public void setVacinado(boolean vacinado) { this.vacinado = vacinado; }
     public void setVermifugado(boolean vermifugado) { this.vermifugado = vermifugado; }
     public void setCastrado(boolean castrado) { this.castrado = castrado; }
     public void setResumo(String resumo) { this.resumo = resumo; }
     public void setFotoUrl(String fotoUrl) { this.fotoUrl = fotoUrl; }
+    public void setVideoUrl(String videoUrl) { this.videoUrl = videoUrl; }
     public void setUsuarioId(Long usuarioId) { this.usuarioId = usuarioId; }
 }

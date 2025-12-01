@@ -28,7 +28,7 @@ public abstract class AnimalModel {
 
     private String especie;
     private String condicaoEspecial;
-    private String bairro;
+    private String localizacao;
     private String cor;
     private Boolean vacinado;
     private Boolean vermifugado;
@@ -39,6 +39,9 @@ public abstract class AnimalModel {
 
     @Column(length = 1024)
     private String fotoUrl;
+    
+    @Column(length = 1024)
+    private String videoUrl;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "usuario_id", nullable = false)
@@ -48,8 +51,9 @@ public abstract class AnimalModel {
     }
 
     public AnimalModel(Long id, String nome, FaixaEtariaAnimal faixaEtariaAnimal, String raca, String porte,
-            SexoAnimal sexoAnimal, String especie, String condicaoEspecial, String bairro, String cor, Boolean vacinado,
-            Boolean vermifugado, Boolean castrado, String resumo, String fotoUrl, UsuarioModel usuario) {
+            SexoAnimal sexoAnimal, String especie, String condicaoEspecial, String localizacao, String cor,
+            Boolean vacinado, Boolean vermifugado, Boolean castrado, String resumo, String fotoUrl, String videoUrl,
+            UsuarioModel usuario) {
         this.id = id;
         this.nome = nome;
         this.faixaEtariaAnimal = faixaEtariaAnimal;
@@ -58,15 +62,18 @@ public abstract class AnimalModel {
         this.sexoAnimal = sexoAnimal;
         this.especie = especie;
         this.condicaoEspecial = condicaoEspecial;
-        this.bairro = bairro;
+        this.localizacao = localizacao;
         this.cor = cor;
         this.vacinado = vacinado;
         this.vermifugado = vermifugado;
         this.castrado = castrado;
         this.resumo = resumo;
         this.fotoUrl = fotoUrl;
+        this.videoUrl = videoUrl;
         this.usuario = usuario;
     }
+
+
 
     // Getters
     public Long getId() {
@@ -101,8 +108,8 @@ public abstract class AnimalModel {
         return condicaoEspecial;
     }
 
-    public String getBairro() {
-        return bairro;
+    public String getLocalizacao() {
+        return localizacao;
     }
 
     public String getCor() {
@@ -127,6 +134,10 @@ public abstract class AnimalModel {
 
     public String getFotoUrl() {
         return fotoUrl;
+    }
+
+    public String getVideoUrl() {
+        return videoUrl;
     }
 
     public UsuarioModel getUsuario() {
@@ -166,8 +177,8 @@ public abstract class AnimalModel {
         this.condicaoEspecial = condicaoEspecial;
     }
 
-    public void setBairro(String bairro) {
-        this.bairro = bairro;
+    public void setLocalizacao(String localizacao) {
+        this.localizacao = localizacao;
     }
 
     public void setCor(String cor) {
@@ -192,6 +203,10 @@ public abstract class AnimalModel {
 
     public void setFotoUrl(String fotoUrl) {
         this.fotoUrl = fotoUrl;
+    }
+
+    public void setVideoUrl(String videoUrl) {
+        this.videoUrl = videoUrl;
     }
 
     public void setUsuario(UsuarioModel usuario) {

@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.hibernate.validator.constraints.URL;
 
-import com.example.apanim.Enum.FaixaEtariaAnimal;
 import com.example.apanim.Enum.SexoAnimal;
 
 import jakarta.persistence.Column;
@@ -13,8 +12,6 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
-import lombok.Getter;
-import lombok.Setter;
 
 public class AnimalCompraCadastroDTO {
     
@@ -41,10 +38,8 @@ public class AnimalCompraCadastroDTO {
 
     private String condicaoEspecial;
 
-    private String logradouro;
-
-    @NotBlank(message = "O bairro é obrigatório.")
-    private String bairro;
+    @NotBlank(message = "A localização é obrigatória.")
+    private String localizacao;
 
     @NotBlank
     private String cor;
@@ -75,6 +70,9 @@ public class AnimalCompraCadastroDTO {
     @NotBlank
     private String fotoUrl;
 
+    @URL
+    private String videoUrl;
+
     public AnimalCompraCadastroDTO() {
     }
 
@@ -83,11 +81,12 @@ public class AnimalCompraCadastroDTO {
             @NotBlank(message = "A raça é obrigatória.") String raca,
             @NotBlank(message = "O porte é obrigatório.") String porte,
             @NotNull(message = "O sexo é obrigatório.") SexoAnimal sexoAnimal,
-            @NotBlank(message = "A espécie é obrigatória.") String especie, String condicaoEspecial, String logradouro,
-            @NotBlank(message = "O bairro é obrigatório.") String bairro, @NotBlank String cor,
+            @NotBlank(message = "A espécie é obrigatória.") String especie, String condicaoEspecial,
+            @NotBlank(message = "A localização é obrigatória.") String localizacao, @NotBlank String cor,
             @NotNull Boolean vacinado, List<String> vacinas, @NotNull Boolean vermifugado, @NotNull Boolean castrado,
             @Size(max = 100, message = "O resumo não pode exceder 100 caracteres.") String resumo,
-            @NotNull Long vendedorId) {
+            @NotNull Long vendedorId, Boolean pedigree, BigDecimal valorDoAnimal, @URL @NotBlank String fotoUrl,
+            @URL String videoUrl) {
         this.id = id;
         this.nome = nome;
         this.idadeEmMeses = idadeEmMeses;
@@ -96,8 +95,7 @@ public class AnimalCompraCadastroDTO {
         this.sexoAnimal = sexoAnimal;
         this.especie = especie;
         this.condicaoEspecial = condicaoEspecial;
-        this.logradouro = logradouro;
-        this.bairro = bairro;
+        this.localizacao = localizacao;
         this.cor = cor;
         this.vacinado = vacinado;
         this.vacinas = vacinas;
@@ -105,6 +103,10 @@ public class AnimalCompraCadastroDTO {
         this.castrado = castrado;
         this.resumo = resumo;
         this.vendedorId = vendedorId;
+        this.pedigree = pedigree;
+        this.valorDoAnimal = valorDoAnimal;
+        this.fotoUrl = fotoUrl;
+        this.videoUrl = videoUrl;
     }
 
     // Getters
@@ -140,12 +142,8 @@ public class AnimalCompraCadastroDTO {
         return condicaoEspecial;
     }
 
-    public String getLogradouro() {
-        return logradouro;
-    }
-
-    public String getBairro() {
-        return bairro;
+    public String getLocalizacao() {
+        return localizacao;
     }
 
     public String getCor() {
@@ -187,6 +185,10 @@ public class AnimalCompraCadastroDTO {
     public String getFotoUrl() {
         return fotoUrl;
     }
+    
+    public String getVideoUrl() {
+        return videoUrl;
+    }
 
     // Setters
     public void setId(Long id) {
@@ -221,12 +223,8 @@ public class AnimalCompraCadastroDTO {
         this.condicaoEspecial = condicaoEspecial;
     }
 
-    public void setLogradouro(String logradouro) {
-        this.logradouro = logradouro;
-    }
-
-    public void setBairro(String bairro) {
-        this.bairro = bairro;
+    public void setLocalizacao(String localizacao) {
+        this.localizacao = localizacao;
     }
 
     public void setCor(String cor) {
@@ -267,5 +265,9 @@ public class AnimalCompraCadastroDTO {
 
     public void setFotoUrl(String fotoUrl) {
         this.fotoUrl = fotoUrl;
+    }
+    
+    public void setVideoUrl(String videoUrl) {
+        this.videoUrl = videoUrl;
     }
 }
