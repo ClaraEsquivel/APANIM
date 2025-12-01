@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
-import MenuUnificado from '../MenuUnificado';
-import '../../components/ScrollTop/scroll-top.js';
+import { Link } from 'react-router-dom';
+import MenuUnificado from '../../assets/MenuUnificado';
+import '../../assets/ScrollTop/scroll-top.js';
 import './styles.css';
-import '../../components/MenuUnificado/menu-styles.css';
-import '../../components/MenuUnificado/header-unificado.css';
-import '../../components/MenuUnificado/footer-unificado.css';
+import '../../assets/MenuUnificado/menu-styles.css';
+import '../../assets/css/header-unificado.css';
+import '../../assets/css/footer-unificado.css';
 import PawsImg from '../../assets/images/Paws.svg';
 import LogoImg from '../../assets/images/APANIM_logo.svg';
 import DogSentadoImg from '../../assets/images/dog_sentado.svg';
@@ -13,7 +14,6 @@ import DogImg from '../../assets/images/dog.svg';
 import InstagramImg from '../../assets/images/instagram.svg';
 import EmailImg from '../../assets/images/email.svg';
 import ForumImg from '../../assets/images/forum.svg';
-import { Link } from 'react-router-dom';
 
 
 function Menu() {
@@ -145,7 +145,7 @@ function Menu() {
     };
 
     carregarTodos();
-  });
+  }, []); // Array vazio = executa apenas uma vez na montagem
 
   // Componente de Card de Adoção
   const CardAdocao = ({ animal }) => {
@@ -185,33 +185,34 @@ function Menu() {
     const valor = formatarValor(animal.valor);
 
     return (
-      <article
-        className="item_lateral"
-        style={{ cursor: 'pointer' }}
-        role="button"
-        tabIndex={0}
-        onClick={() => window.location.href = '../CompraAnimal/index.html'}
-      >
-        <img
-          src={DogSentadoImg}
-          alt={`Foto de ${animal.nome}`}
-        />
-        <div className="info_lateral">
-          <h3>{animal.nome}</h3>
-          <dl>
-            <dt className="sr-only">Idade:</dt>
-            <dd>{animal.idade}</dd>
-            <dt className="sr-only">Sexo:</dt>
-            <dd>{capitalize(animal.sexo)}</dd>
-            <dt className="sr-only">Raça:</dt>
-            <dd>{animal.raca}</dd>
-            <dt className="sr-only">Localização:</dt>
-            <dd>{localizacao}</dd>
-            <dt className="sr-only">Valor:</dt>
-            <dd style={{ color: '#5A0609', fontWeight: 'bold' }}>{valor}</dd>
-          </dl>
-        </div>
-      </article>
+      <Link to="/compra-animal" style={{ textDecoration: 'none', color: 'inherit' }}>
+        <article
+          className="item_lateral"
+          style={{ cursor: 'pointer' }}
+          role="button"
+          tabIndex={0}
+        >
+          <img
+            src={DogSentadoImg}
+            alt={`Foto de ${animal.nome}`}
+          />
+          <div className="info_lateral">
+            <h3>{animal.nome}</h3>
+            <dl>
+              <dt className="sr-only">Idade:</dt>
+              <dd>{animal.idade}</dd>
+              <dt className="sr-only">Sexo:</dt>
+              <dd>{capitalize(animal.sexo)}</dd>
+              <dt className="sr-only">Raça:</dt>
+              <dd>{animal.raca}</dd>
+              <dt className="sr-only">Localização:</dt>
+              <dd>{localizacao}</dd>
+              <dt className="sr-only">Valor:</dt>
+              <dd style={{ color: '#5A0609', fontWeight: 'bold' }}>{valor}</dd>
+            </dl>
+          </div>
+        </article>
+      </Link>
     );
   };
 
@@ -223,36 +224,37 @@ function Menu() {
       : 'Não informado';
 
     return (
-      <article
-        className="item_lateral"
-        style={{ cursor: 'pointer' }}
-        role="button"
-        tabIndex={0}
-        onClick={() => window.location.href = '../AnimaisPerdidos/index.html'}
-      >
-        <img
-          src={DogSentadoImg}
-          alt={`Foto de ${animal.nome || 'Animal'}`}
-        />
-        <div className="info_lateral">
-          <h3>{animal.nome || 'Sem nome'}</h3>
-          <dl>
-            <dt className="sr-only">Espécie:</dt>
-            <dd>{capitalize(animal.especie)}</dd>
-            <dt className="sr-only">Cor:</dt>
-            <dd>{capitalize(animal.cor)}</dd>
-            <dt className="sr-only">Localização:</dt>
-            <dd>{localizacao}</dd>
-            <dt className="sr-only">Data perdido:</dt>
-            <dd style={{ color: '#dc2626', fontWeight: 'bold' }}>🚨 {dataPerdido}</dd>
-          </dl>
-        </div>
-      </article>
+      <Link to="/animais-perdidos" style={{ textDecoration: 'none', color: 'inherit' }}>
+        <article
+          className="item_lateral"
+          style={{ cursor: 'pointer' }}
+          role="button"
+          tabIndex={0}
+        >
+          <img
+            src={DogSentadoImg}
+            alt={`Foto de ${animal.nome || 'Animal'}`}
+          />
+          <div className="info_lateral">
+            <h3>{animal.nome || 'Sem nome'}</h3>
+            <dl>
+              <dt className="sr-only">Espécie:</dt>
+              <dd>{capitalize(animal.especie)}</dd>
+              <dt className="sr-only">Cor:</dt>
+              <dd>{capitalize(animal.cor)}</dd>
+              <dt className="sr-only">Localização:</dt>
+              <dd>{localizacao}</dd>
+              <dt className="sr-only">Data perdido:</dt>
+              <dd style={{ color: '#dc2626', fontWeight: 'bold' }}>🚨 {dataPerdido}</dd>
+            </dl>
+          </div>
+        </article>
+      </Link>
     );
   };
 
-  // Renderizar linha de animais
-  const renderizarLinha = (animais, indiceInicial) => {
+  // Renderizar linhas de animais para adoção
+  const renderizarLinhaAdocao = (animais, indiceInicial) => {
     const animaisDaLinha = animais.slice(indiceInicial, indiceInicial + 3);
 
     return (
@@ -262,7 +264,41 @@ function Menu() {
         aria-label={`Linha ${Math.floor(indiceInicial / 3) + 1} de animais`}
       >
         {animaisDaLinha.map((animal, idx) => (
-          <CardComponent key={idx} animal={animal} />
+          <CardAdocao key={idx} animal={animal} />
+        ))}
+      </section>
+    );
+  };
+
+  // Renderizar linhas de animais para compra
+  const renderizarLinhaCompra = (animais, indiceInicial) => {
+    const animaisDaLinha = animais.slice(indiceInicial, indiceInicial + 3);
+
+    return (
+      <section
+        key={indiceInicial}
+        className="linha_lateral"
+        aria-label={`Linha ${Math.floor(indiceInicial / 3) + 1} de animais`}
+      >
+        {animaisDaLinha.map((animal, idx) => (
+          <CardCompra key={idx} animal={animal} />
+        ))}
+      </section>
+    );
+  };
+
+  // Renderizar linhas de animais perdidos
+  const renderizarLinhaPerdido = (animais, indiceInicial) => {
+    const animaisDaLinha = animais.slice(indiceInicial, indiceInicial + 3);
+
+    return (
+      <section
+        key={indiceInicial}
+        className="linha_lateral"
+        aria-label={`Linha ${Math.floor(indiceInicial / 3) + 1} de animais`}
+      >
+        {animaisDaLinha.map((animal, idx) => (
+          <CardPerdido key={idx} animal={animal} />
         ))}
       </section>
     );
@@ -289,11 +325,11 @@ function Menu() {
 
           <div className="botoes-principais" role="group" aria-label="Principais serviços disponíveis">
 
-            <a href="../CompraAnimal/index.jsx">
+            <Link to="/compra-animal">
               <button type="button" id="quero_comprar" aria-describedby="desc-comprar">
                 Quero Comprar um Animal
               </button>
-            </a>
+            </Link>
 
             <Link to="/adocao-animal">
               <button type="button" id="quero_adotar" aria-describedby="desc-adotar">
@@ -301,17 +337,17 @@ function Menu() {
               </button>
             </Link>
 
-            <a href="../AnimaisPerdidos/index.jsx">
+            <Link to="/animais-perdidos">
               <button type="button" id="divulgar_animal_perdido" aria-describedby="desc-perdido">
                 Divulgação de Animais Perdidos
               </button>
-            </a>
+            </Link>
 
-            <a href="../Serviços/index.jsx">
+            <Link to="/servicos">
               <button type="button" id="servicos" aria-describedby="desc-servicos">
                 Nossos Serviços
               </button>
-            </a>
+            </Link>
 
           </div>
 
@@ -343,7 +379,7 @@ function Menu() {
           ) : (
             <>
               {[...Array(Math.ceil(animaisAdocao.length / 3))].map((_, i) =>
-                renderizarLinha(animaisAdocao, i * 3, CardAdocao)
+                renderizarLinhaAdocao(animaisAdocao, i * 3)
               )}
             </>
           )}
@@ -368,7 +404,7 @@ function Menu() {
           ) : (
             <>
               {[...Array(Math.ceil(animaisCompra.length / 3))].map((_, i) =>
-                renderizarLinha(animaisCompra, i * 3, CardCompra)
+                renderizarLinhaCompra(animaisCompra, i * 3)
               )}
             </>
           )}
@@ -393,7 +429,7 @@ function Menu() {
           ) : (
             <>
               {[...Array(Math.ceil(animaisPerdidos.length / 3))].map((_, i) =>
-                renderizarLinha(animaisPerdidos, i * 3, CardPerdido)
+                renderizarLinhaPerdido(animaisPerdidos, i * 3)
               )}
             </>
           )}
