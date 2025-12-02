@@ -13,11 +13,14 @@ import ServicosPage from './pages/ServicosPage'
 import ParceriaPage from './pages/ParceriaPage'
 import PlanosAssinaturaPage from './pages/PlanosAssinaturaPage'
 
+// Páginas de Cadastro - AGORA ATIVAS
+import CadastroAnimalAdocaoPage from './pages/CadastroAnimalAdocaoPage'
+import CadastroAnimalVendaPage from './pages/CadastroAnimalVendaPage'
+import CadastroAnimaisPerdidosPage from './pages/CadastroAnimaisPerdidosPage'
+
+// Páginas ainda comentadas (descomente quando estiverem prontas)
 // import CadastroPage from './pages/CadastroPage'
 // import LoginPage from './pages/LoginPage'
-// import CadastroAnimalAdocaoPage from './pages/CadastroAnimalAdocaoPage'
-// import CadastroAnimalVendaPage from './pages/CadastroAnimalVendaPage'
-// import CadastroAnimalPerdidoPage from './pages/CadastroAnimalPerdidoPage'
 // import PerfilUsuarioPage from './pages/PerfilUsuarioPage'
 // import PerfilVendedorPage from './pages/PerfilVendedorPage'
 
@@ -33,10 +36,10 @@ createRoot(document.getElementById('root')).render(
         <Route path="/compra-animal" element={<CompraAnimalPage />} />
         <Route path="/animais-perdidos" element={<AnimaisPerdidosPage />} />
         
-        {/* Páginas de Cadastro de Animais */}
-        {/* <Route path="/cadastro-animal-adocao" element={<CadastroAnimalAdocaoPage />} /> */}
-        {/* <Route path="/cadastro-animal-venda" element={<CadastroAnimalVendaPage />} /> */}
-        {/* <Route path="/cadastro-animal-perdido" element={<CadastroAnimalPerdidoPage />} /> */}
+        {/* Páginas de Cadastro de Animais - AGORA ATIVAS */}
+        <Route path="/cadastro-animal-adocao" element={<CadastroAnimalAdocaoPage />} />
+        <Route path="/cadastro-animal-venda" element={<CadastroAnimalVendaPage />} />
+        <Route path="/cadastro-animal-perdido" element={<CadastroAnimaisPerdidosPage />} />
         
         {/* Páginas Institucionais */}
         <Route path="/apanim" element={<APANIMPage />} />
@@ -44,7 +47,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="/servicos" element={<ServicosPage />} />
         <Route path="/planos-assinatura" element={<PlanosAssinaturaPage />} />
         
-        {/* Páginas de Usuário */}
+        {/* Páginas de Usuário - ainda comentadas */}
         {/* <Route path="/cadastro" element={<CadastroPage />} /> */}
         {/* <Route path="/login" element={<LoginPage />} /> */}
         {/* <Route path="/perfil-usuario" element={<PerfilUsuarioPage />} /> */}
