@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil de Vendedor - APANIM</title>
+    <meta name="description" content="Gerencie sua loja e vendas de animais no APANIM">
+    <meta name="keywords" content="vendedor, lojista, criador, animais, pets">
+    <meta name="author" content="APANIM">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Perfil de Vendedor - APANIM">
+    <meta property="og:description" content="Gerencie sua loja no APANIM">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+    <!-- CSS Unificado -->
+    <link rel="stylesheet" href="../../assets/css/header-unificado.css">
+    <link rel="stylesheet" href="../../assets/css/menu-styles.css">
+    <link rel="stylesheet" href="../../assets/css/footer-unificado.css"> 
+    
+    <!-- CSS do Perfil de Vendedor -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Preload de fontes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="topo">
+            <img src="../../assets/images/Paws.svg" class="patas_topo" alt="Patas">
+            <img src="../../assets/images/APANIM_logo.svg" id="logo_apanim" alt="Logo APANIM">
+            <img src="../../assets/images/cat.svg" class="cat_topo" alt="Gato">
+            <img src="../../assets/images/dog.svg" class="dog_topo" alt="Cachorro">
+        </div>
+
+        <nav role="navigation">
+            <!-- Perfil do vendedor no header -->
+            <div id="vendor-profile-header" class="user-profile-header" style="display: none;">
+                <img src="../../assets/images/perfil.svg" alt="Logo da empresa" class="user-avatar-small">
+                <div class="user-info-small">
+                    <span class="user-name-small">Nome da Empresa</span>
+                    <span class="user-status vendor-badge">🏪 Vendedor</span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Conteúdo Central -->
+    <div class="central">
+        <!-- Patas decorativas animadas -->
+        <div class="patas1 pata-animate">
+            <img src="../../assets/images/pata.svg" alt="pata" />
+        </div>
+        <div class="patas2 pata-animate">
+            <img src="../../assets/images/pata.svg" alt="pata" />
+        </div>
+        <div class="patas3 pata-animate">
+            <img src="../../assets/images/pata.svg" alt="pata" />
+        </div>
+        <div class="patas4 pata-animate">
+            <img src="../../assets/images/pata.svg" alt="pata" />
+        </div>
+        <div class="patas5 pata-animate">
+            <img src="../../assets/images/pata.svg" alt="pata" />
+        </div>
+        <div class="patas6 pata-animate">
+            <img src="../../assets/images/pata.svg" alt="pata" />
+        </div>
+
+        <div class="profile-container">
+            <!-- Header do Perfil -->
+            <div class="profile-header">
+                <div class="profile-cover">
+                    <button class="edit-cover-btn" title="Alterar capa da loja">📷</button>
+                    <!-- Status de verificação -->
+                    <div class="verification-badge" id="verification-badge">
+                        <span class="badge-icon">✓</span>
+                        <span class="badge-text">Verificado</span>
+                    </div>
+                </div>
+                
+                <div class="profile-main-info">
+                    <div class="profile-avatar-container">
+                        <img src="../../assets/images/perfil.svg" alt="Logo da empresa" class="profile-avatar" id="profile-avatar">
+                        <button class="edit-avatar-btn" title="Alterar logo">📷</button>
+                    </div>
+                    
+                    <div class="profile-user-data">
+                        <h1 class="profile-name" id="profile-name">Pet Shop Exemplo</h1>
+                        <p class="profile-company-info">
+                            <span id="profile-razao-social">Razão Social Ltda</span> • 
+                            <span id="profile-cnpj">CNPJ: 00.000.000/0000-00</span>
+                        </p>
+                        <div class="profile-badges">
+                            <span class="badge badge-vendor">
+                                🏪 Vendedor Registrado
+                            </span>
+                            <span class="badge badge-rating">
+                                ⭐ <span id="rating-value">4.8</span>
+                            </span>
+                            <span class="badge badge-sales">
+                                📦 <span id="total-sales">0</span> Vendas
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-actions">
+                        <button class="btn btn-primary" onclick="editProfile()">
+                            <span>✏️</span>
+                            <span>Editar Perfil</span>
+                        </button>
+                        <button class="btn btn-success" onclick="addAnimal()">
+                            <span>➕</span>
+                            <span>Novo Animal</span>
+                        </button>
+                        <button class="btn btn-secondary" onclick="logout()">
+                            <span>🚪</span>
+                            <span>Sair</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navegação de Abas -->
+            <div class="profile-tabs">
+                <button class="tab-btn active" data-tab="dashboard">
+                    <span>📊</span>
+                    <span>Dashboard</span>
+                </button>
+                <button class="tab-btn" data-tab="animais">
+                    <span>🐾</span>
+                    <span>Meus Animais</span>
+                </button>
+                <button class="tab-btn" data-tab="vendas">
+                    <span>💰</span>
+                    <span>Vendas</span>
+                </button>
+                <button class="tab-btn" data-tab="loja">
+                    <span>🏪</span>
+                    <span>Sobre a Loja</span>
+                </button>
+                <button class="tab-btn" data-tab="configuracoes">
+                    <span>⚙️</span>
+                    <span>Configurações</span>
+                </button>
+            </div>
+
+            <!-- Conteúdo das Abas -->
+            <div class="profile-content">
+                
+                <!-- ABA: DASHBOARD -->
+                <div class="tab-content active" data-tab="dashboard">
+                    <!-- Estatísticas Principais -->
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">📦</div>
+                            <div class="stat-info">
+                                <h3 id="stat-vendas-mes">0</h3>
+                                <p>Vendas este mês</p>
+                            </div>
+                            <div class="stat-trend positive">
+                                <span>↗</span>
+                                <span>+12%</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon">💰</div>
+                            <div class="stat-info">
+                                <h3 id="stat-faturamento">R$ 0,00</h3>
+                                <p>Faturamento</p>
+                            </div>
+                            <div class="stat-trend positive">
+                                <span>↗</span>
+                                <span>+8%</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon">🐾</div>
+                            <div class="stat-info">
+                                <h3 id="stat-animais-ativos">0</h3>
+                                <p>Animais ativos</p>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon">👥</div>
+                            <div class="stat-info">
+                                <h3 id="stat-visualizacoes">0</h3>
+                                <p>Visualizações</p>
+                            </div>
+                            <div class="stat-trend positive">
+                                <span>↗</span>
+                                <span>+15%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gráfico e Vendas Recentes -->
+                    <div class="content-grid">
+                        <!-- Gráfico de Vendas -->
+                        <div class="card chart-card">
+                            <div class="card-header">
+                                <h2>Vendas dos Últimos 7 Dias</h2>
+                                <select class="period-selector">
+                                    <option>Últimos 7 dias</option>
+                                    <option>Últimos 30 dias</option>
+                                    <option>Últimos 3 meses</option>
+                                </select>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-placeholder">
+                                    <div class="bar" style="height: 40%">
+                                        <span class="bar-label">Dom</span>
+                                    </div>
+                                    <div class="bar" style="height: 60%">
+                                        <span class="bar-label">Seg</span>
+                                    </div>
+                                    <div class="bar" style="height: 80%">
+                                        <span class="bar-label">Ter</span>
+                                    </div>
+                                    <div class="bar" style="height: 50%">
+                                        <span class="bar-label">Qua</span>
+                                    </div>
+                                    <div class="bar" style="height: 70%">
+                                        <span class="bar-label">Qui</span>
+                                    </div>
+                                    <div class="bar" style="height: 90%">
+                                        <span class="bar-label">Sex</span>
+                                    </div>
+                                    <div class="bar" style="height: 65%">
+                                        <span class="bar-label">Sáb</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Atividades Recentes -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h2>Atividades Recentes</h2>
+                            </div>
+                            <div class="card-body">
+                                <div class="activity-list" id="activity-list">
+                                    <div class="activity-item">
+                                        <div class="activity-icon success">✓</div>
+                                        <div class="activity-info">
+                                            <p class="activity-title">Venda realizada</p>
+                                            <p class="activity-description">Golden Retriever vendido</p>
+                                            <p class="activity-time">Há 2 horas</p>
+                                        </div>
+                                    </div>
+                                    <div class="activity-item">
+                                        <div class="activity-icon info">👁️</div>
+                                        <div class="activity-info">
+                                            <p class="activity-title">Novo interessado</p>
+                                            <p class="activity-description">5 visualizações em Labrador</p>
+                                            <p class="activity-time">Há 4 horas</p>
+                                        </div>
+                                    </div>
+                                    <div class="activity-item">
+                                        <div class="activity-icon warning">📝</div>
+                                        <div class="activity-info">
+                                            <p class="activity-title">Animal atualizado</p>
+                                            <p class="activity-description">Beagle - preço alterado</p>
+                                            <p class="activity-time">Ontem</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ABA: MEUS ANIMAIS -->
+                <div class="tab-content" data-tab="animais">
+                    <div class="animals-header">
+                        <h2>Animais Cadastrados</h2>
+                        <button class="btn btn-primary" onclick="addAnimal()">
+                            <span>➕</span>
+                            <span>Adicionar Animal</span>
+                        </button>
+                    </div>
+
+                    <div class="filters-bar">
+                        <input type="search" placeholder="🔍 Buscar animais..." class="search-input">
+                        <select class="filter-select">
+                            <option value="">Todos os status</option>
+                            <option value="ativo">Ativos</option>
+                            <option value="vendido">Vendidos</option>
+                            <option value="reservado">Reservados</option>
+                        </select>
+                        <select class="filter-select">
+                            <option value="">Todas as espécies</option>
+                            <option value="cachorro">Cachorros</option>
+                            <option value="gato">Gatos</option>
+                            <option value="outros">Outros</option>
+                        </select>
+                    </div>
+
+                    <div class="animals-grid" id="animals-grid">
+                        <!-- Card de Animal de Exemplo -->
+                        <div class="animal-card">
+                            <div class="animal-image">
+                                <img src="../../assets/images/perfil.svg" alt="Animal">
+                                <span class="animal-status status-active">Ativo</span>
+                            </div>
+                            <div class="animal-info">
+                                <h3>Golden Retriever</h3>
+                                <p class="animal-details">
+                                    <span>🐕 Cachorro</span>
+                                    <span>• 3 meses</span>
+                                    <span>• Macho</span>
+                                </p>
+                                <p class="animal-price">R$ 2.500,00</p>
+                                <div class="animal-stats">
+                                    <span>👁️ 45 visualizações</span>
+                                    <span>❤️ 12 favoritos</span>
+                                </div>
+                            </div>
+                            <div class="animal-actions">
+                                <button class="btn-icon" title="Editar">✏️</button>
+                                <button class="btn-icon" title="Compartilhar">📤</button>
+                                <button class="btn-icon danger" title="Excluir">🗑️</button>
+                            </div>
+                        </div>
+
+                        <!-- Mensagem quando não há animais -->
+                        <div class="empty-state" style="display: none;">
+                            <div class="empty-icon">🐾</div>
+                            <h3>Nenhum animal cadastrado</h3>
+                            <p>Comece adicionando seu primeiro animal!</p>
+                            <button class="btn btn-primary" onclick="addAnimal()">
+                                <span>➕</span>
+                                <span>Adicionar Primeiro Animal</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ABA: VENDAS -->
+                <div class="tab-content" data-tab="vendas">
+                    <div class="sales-header">
+                        <h2>Histórico de Vendas</h2>
+                        <div class="sales-summary">
+                            <div class="summary-item">
+                                <span class="summary-label">Total de Vendas:</span>
+                                <span class="summary-value" id="total-sales-value">R$ 0,00</span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="summary-label">Este Mês:</span>
+                                <span class="summary-value" id="month-sales-value">R$ 0,00</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sales-filters">
+                        <select class="filter-select">
+                            <option>Todos os períodos</option>
+                            <option>Este mês</option>
+                            <option>Últimos 3 meses</option>
+                            <option>Este ano</option>
+                        </select>
+                        <select class="filter-select">
+                            <option>Todos os status</option>
+                            <option>Concluído</option>
+                            <option>Pendente</option>
+                            <option>Cancelado</option>
+                        </select>
+                    </div>
+
+                    <div class="sales-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Data</th>
+                                    <th>Animal</th>
+                                    <th>Comprador</th>
+                                    <th>Valor</th>
+                                    <th>Status</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="sales-tbody">
+                                <tr>
+                                    <td>23/11/2024</td>
+                                    <td>Golden Retriever</td>
+                                    <td>João Silva</td>
+                                    <td>R$ 2.500,00</td>
+                                    <td><span class="status-badge success">Concluído</span></td>
+                                    <td>
+                                        <button class="btn-icon-small" title="Ver detalhes">👁️</button>
+                                        <button class="btn-icon-small" title="Imprimir">🖨️</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- ABA: SOBRE A LOJA -->
+                <div class="tab-content" data-tab="loja">
+                    <div class="content-grid">
+                        <!-- Informações da Empresa -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h2>Informações da Empresa</h2>
+                                <button class="btn-icon" onclick="editCompanyInfo()">✏️</button>
+                            </div>
+                            <div class="card-body">
+                                <div class="info-item">
+                                    <span class="info-label">Razão Social:</span>
+                                    <span class="info-value" id="company-razao">-</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Nome Fantasia:</span>
+                                    <span class="info-value" id="company-fantasia">-</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">CNPJ:</span>
+                                    <span class="info-value" id="company-cnpj">-</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Inscrição Estadual:</span>
+                                    <span class="info-value" id="company-ie">-</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Telefone Comercial:</span>
+                                    <span class="info-value" id="company-phone">-</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">E-mail Comercial:</span>
+                                    <span class="info-value" id="company-email">-</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Descrição da Loja -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h2>Descrição da Loja</h2>
+                                <button class="btn-icon" onclick="editDescription()">✏️</button>
+                            </div>
+                            <div class="card-body">
+                                <textarea id="loja-descricao" class="bio-textarea" placeholder="Conte aos compradores sobre sua loja, experiência e diferenciais..." maxlength="1000" disabled></textarea>
+                                <div class="char-count">
+                                    <span id="desc-char-current">0</span>/<span>1000</span> caracteres
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Endereço -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h2>Endereço Comercial</h2>
+                            </div>
+                            <div class="card-body">
+                                <div class="info-item">
+                                    <span class="info-label">CEP:</span>
+                                    <span class="info-value" id="address-cep">-</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Endereço:</span>
+                                    <span class="info-value" id="address-full">-</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Cidade/UF:</span>
+                                    <span class="info-value" id="address-city">-</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Documentação -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h2>Documentação</h2>
+                            </div>
+                            <div class="card-body">
+                                <div class="document-item">
+                                    <span class="doc-icon">📄</span>
+                                    <div class="doc-info">
+                                        <p class="doc-name">Licença/Registro</p>
+                                        <p class="doc-status verified">✓ Verificado</p>
+                                    </div>
+                                </div>
+                                <div class="document-item">
+                                    <span class="doc-icon">📄</span>
+                                    <div class="doc-info">
+                                        <p class="doc-name">Alvará de Funcionamento</p>
+                                        <p class="doc-status verified">✓ Verificado</p>
+                                    </div>
+                                </div>
+                                <div class="document-item">
+                                    <span class="doc-icon">📄</span>
+                                    <div class="doc-info">
+                                        <p class="doc-name">Comprovante de Endereço</p>
+                                        <p class="doc-status verified">✓ Verificado</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ABA: CONFIGURAÇÕES -->
+                <div class="tab-content" data-tab="configuracoes">
+                    <div class="settings-grid">
+                        <!-- Configurações de Loja -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h2>Configurações da Loja</h2>
+                            </div>
+                            <div class="card-body">
+                                <div class="setting-item">
+                                    <div class="setting-info">
+                                        <h4>Loja Ativa</h4>
+                                        <p>Permite que compradores vejam seus anúncios</p>
+                                    </div>
+                                    <label class="switch">
+                                        <input type="checkbox" id="loja-ativa" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                                <div class="setting-item">
+                                    <div class="setting-info">
+                                        <h4>Aceitar Reservas</h4>
+                                        <p>Permitir que clientes reservem animais</p>
+                                    </div>
+                                    <label class="switch">
+                                        <input type="checkbox" id="aceitar-reservas" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                                <div class="setting-item">
+                                    <div class="setting-info">
+                                        <h4>Mostrar Telefone no Perfil</h4>
+                                        <p>Exibir telefone comercial publicamente</p>
+                                    </div>
+                                    <label class="switch">
+                                        <input type="checkbox" id="show-phone" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Notificações -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h2>Notificações</h2>
+                            </div>
+                            <div class="card-body">
+                                <div class="setting-item">
+                                    <div class="setting-info">
+                                        <h4>Novas Mensagens</h4>
+                                        <p>Notificar quando receber mensagens</p>
+                                    </div>
+                                    <label class="switch">
+                                        <input type="checkbox" id="notif-messages" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                                <div class="setting-item">
+                                    <div class="setting-info">
+                                        <h4>Novos Interessados</h4>
+                                        <p>Notificar sobre interesse em animais</p>
+                                    </div>
+                                    <label class="switch">
+                                        <input type="checkbox" id="notif-interest" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                                <div class="setting-item">
+                                    <div class="setting-info">
+                                        <h4>Relatórios Semanais</h4>
+                                        <p>Receber resumo de vendas por email</p>
+                                    </div>
+                                    <label class="switch">
+                                        <input type="checkbox" id="notif-reports" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Segurança e Conta -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h2>Segurança e Conta</h2>
+                            </div>
+                            <div class="card-body">
+                                <button class="btn btn-secondary btn-block" onclick="changePassword()">
+                                    <span>🔒</span>
+                                    <span>Alterar Senha</span>
+                                </button>
+                                <button class="btn btn-secondary btn-block" onclick="updateDocuments()">
+                                    <span>📄</span>
+                                    <span>Atualizar Documentos</span>
+                                </button>
+                                <button class="btn btn-secondary btn-block" onclick="downloadData()">
+                                    <span>📥</span>
+                                    <span>Baixar Dados da Loja</span>
+                                </button>
+                                <button class="btn btn-danger btn-block" onclick="closeStore()">
+                                    <span>🗑️</span>
+                                    <span>Encerrar Loja</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Plano -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h2>Plano Atual</h2>
+                            </div>
+                            <div class="card-body">
+                                <div class="current-plan" id="current-plan">
+                                    <div class="plan-badge">Plano Básico</div>
+                                    <p class="plan-description">
+                                        ✓ Até 10 animais cadastrados<br>
+                                        ✓ Suporte por email<br>
+                                        ✓ Relatórios básicos
+                                    </p>
+                                    <button class="btn btn-primary btn-block" onclick="upgradePlan()">
+                                        <span>⭐</span>
+                                        <span>Fazer Upgrade</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="base">
+        <div class="redes_sociais">
+            <a href="#" aria-label="Instagram">
+                <img src="../../assets/images/instagram.svg" alt="Siga-nos no Instagram"/>
+            </a>
+            <a href="mailto:contato@apanim.com" aria-label="Email">
+                <img src="../../assets/images/email.svg" alt="Entre em contato por email"/>
+            </a>
+        </div>
+
+        <nav class="links_uteis" aria-label="Links úteis">
+            <div>
+                <span class="titulo">Encontre um novo pet</span><br>
+                <a href="../AdocaoAnimal/index.html"><span>Adote</span><br></a>
+                <a href="../CompraAnimal/index.html"><span>Compre</span></a>
+            </div>
+            <div>
+                <span class="titulo">Colabore</span><br>
+                <a href="../Parceria/index.html"><span>Seja uma empresa parceira</span></a>
+            </div>
+            <div>
+                <span class="titulo">Divulgue um animal</span><br>
+                <a href="../CadastroAnimalAdocao/index.html"><span>Cadastrar animal para adoção</span><br></a>
+                <a href="../CadastroAnimalVenda/index.html"><span>Cadastrar animal para venda</span><br></a>
+                <a href="../CadastroAnimaisPerdidos/index.html"><span>Cadastrar animal perdido</span><br></a>
+            </div>
+            <div>
+                <span class="titulo">Encontre um animal</span><br>
+                <a href="../AnimaisPerdidos/index.html"><span>Animais perdidos</span><br></a>
+            </div>
+            <div>
+                <span class="titulo">Sobre o APANIM</span><br>
+                <span>APANIM</span>
+            </div>
+            <div>
+                <span class="titulo">Meu perfil</span><br>
+                <a href="../CadastroInicial/index.html"><span>Cadastrar-se</span><br></a>
+                <a href="../PerfilUsuario/index.html"><span>Minha página de usuário</span><br></a>
+                <a href="../PerfilVendedor/index.html"><span>Minha página de vendedor</span><br></a>
+            </div>
+        </nav>
+
+        <div class="forum">
+            <a href="#" aria-label="Fórum">
+                <img src="../../assets/images/forum.svg" alt="Acesse nosso fórum"/>
+            </a>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../../assets/js/scroll-top.js"></script>
+    <script src="../../assets/js/menu-unificado.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

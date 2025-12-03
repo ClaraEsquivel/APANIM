@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autenticando... - APANIM</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #fce4e4 0%, #f8d7d7 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .callback-container {
+            text-align: center;
+            padding: 3rem;
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(90, 6, 9, 0.15);
+            max-width: 450px;
+            width: 90%;
+        }
+
+        .logo {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            animation: bounce 1s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        h1 {
+            color: #5A0609;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        p {
+            color: #666;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #5A0609;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1.5rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #f0f0f0;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-top: 1.5rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #5A0609, #420406);
+            border-radius: 3px;
+            animation: progress 2s ease-in-out;
+        }
+
+        @keyframes progress {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        .error-container {
+            display: none;
+            padding: 1.5rem;
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 12px;
+            margin-top: 1.5rem;
+        }
+
+        .error-container.show {
+            display: block;
+        }
+
+        .error-title {
+            color: #856404;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .error-message {
+            color: #856404;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .retry-btn {
+            margin-top: 1.5rem;
+            padding: 0.75rem 2rem;
+            background: #5A0609;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .retry-btn:hover {
+            background: #420406;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(90, 6, 9, 0.3);
+        }
+
+        /* Animação de sucesso */
+        .success-check {
+            display: none;
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .success-check.show {
+            display: block;
+            animation: scaleIn 0.5s ease-out;
+        }
+
+        @keyframes scaleIn {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .checkmark {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: block;
+            stroke-width: 3;
+            stroke: #4CAF50;
+            stroke-miterlimit: 10;
+            box-shadow: inset 0 0 0 #4CAF50;
+            animation: fillGreen 0.4s ease-in-out 0.4s forwards, scale 0.3s ease-in-out 0.9s both;
+        }
+
+        .checkmark-circle {
+            stroke-dasharray: 166;
+            stroke-dashoffset: 166;
+            stroke-width: 3;
+            stroke-miterlimit: 10;
+            stroke: #4CAF50;
+            fill: none;
+            animation: strokeCircle 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+        }
+
+        .checkmark-check {
+            transform-origin: 50% 50%;
+            stroke-dasharray: 48;
+            stroke-dashoffset: 48;
+            animation: strokeCheck 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+        }
+
+        @keyframes strokeCircle {
+            100% {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes strokeCheck {
+            100% {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes fillGreen {
+            100% {
+                box-shadow: inset 0 0 0 40px #4CAF50;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="callback-container">
+        <div class="logo">🐾</div>
+        
+        <div class="spinner"></div>
+        
+        <h1 id="status-title">Autenticando...</h1>
+        <p id="status-message">Aguarde enquanto processamos seu login</p>
+        
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+
+        <!-- Ícone de sucesso (oculto inicialmente) -->
+        <svg class="success-check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+            <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
+            <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+        </svg>
+
+        <!-- Container de erro (oculto inicialmente) -->
+        <div class="error-container" id="error-container">
+            <div class="error-title">⚠️ Erro na Autenticação</div>
+            <p class="error-message" id="error-message"></p>
+            <button class="retry-btn" onclick="retryAuth()">Tentar Novamente</button>
+        </div>
+    </div>
+
+    <script>
+        // Obtém parâmetros da URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const code = urlParams.get('code');
+        const state = urlParams.get('state');
+        const error = urlParams.get('error');
+        const errorDescription = urlParams.get('error_description');
+
+        // Elementos do DOM
+        const statusTitle = document.getElementById('status-title');
+        const statusMessage = document.getElementById('status-message');
+        const errorContainer = document.getElementById('error-container');
+        const errorMessage = document.getElementById('error-message');
+        const spinner = document.querySelector('.spinner');
+        const successCheck = document.querySelector('.success-check');
+
+        // Função para mostrar erro
+        function showError(message) {
+            spinner.style.display = 'none';
+            statusTitle.textContent = 'Erro na Autenticação';
+            statusMessage.textContent = '';
+            errorMessage.textContent = message;
+            errorContainer.classList.add('show');
+            
+            console.error('❌ Erro no callback:', message);
+        }
+
+        // Função para mostrar sucesso
+        function showSuccess() {
+            spinner.style.display = 'none';
+            successCheck.classList.add('show');
+            statusTitle.textContent = 'Autenticado com Sucesso! ✓';
+            statusMessage.textContent = 'Redirecionando...';
+            
+            console.log('✅ Autenticação bem-sucedida');
+        }
+
+        // Função para tentar novamente
+        function retryAuth() {
+            if (window.opener) {
+                window.close();
+            } else {
+                window.location.href = '../CadastroInicial/index.html';
+            }
+        }
+
+        // Processa o callback
+        function processCallback() {
+            // Verifica se há erro
+            if (error) {
+                const errorMsg = errorDescription || 
+                               'Erro desconhecido ao autenticar com o Google';
+                showError(errorMsg);
+                
+                // Notifica a janela pai sobre o erro
+                if (window.opener) {
+                    setTimeout(() => {
+                        window.opener.postMessage({ error: errorMsg }, window.location.origin);
+                    }, 1000);
+                }
+                return;
+            }
+
+            // Verifica se há código de autorização
+            if (!code || !state) {
+                showError('Parâmetros de autenticação inválidos');
+                return;
+            }
+
+            // Mostra sucesso
+            showSuccess();
+
+            // Envia mensagem para a janela pai
+            if (window.opener) {
+                console.log('📤 Enviando código para janela pai...');
+                
+                setTimeout(() => {
+                    window.opener.postMessage(
+                        { code, state },
+                        window.location.origin
+                    );
+                    
+                    // Fecha a janela após 1 segundo
+                    setTimeout(() => {
+                        window.close();
+                    }, 1000);
+                }, 500);
+            } else {
+                // Se não houver janela pai, redireciona
+                setTimeout(() => {
+                    window.location.href = '../CadastroInicial/index.html?code=' + 
+                                         encodeURIComponent(code) + 
+                                         '&state=' + encodeURIComponent(state);
+                }, 1500);
+            }
+        }
+
+        // Executa ao carregar
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('🔐 Processando callback do OAuth...');
+            
+            // Aguarda 500ms para dar sensação de processamento
+            setTimeout(processCallback, 500);
+        });
+
+        // Previne fechamento acidental
+        window.addEventListener('beforeunload', (e) => {
+            if (!error && code) {
+                e.preventDefault();
+                e.returnValue = '';
+            }
+        });
+    </script>
+</body>
+</html>
