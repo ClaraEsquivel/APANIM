@@ -402,7 +402,7 @@ const CadastroAnimalPerdido = () => {
 
                 {/* Container do formulário */}
                 <div className="container">
-                    <h2>🚨 Cadastro de Animal Perdido</h2>
+                    <h2>Cadastro de Animal Perdido</h2>
 
                     <form onSubmit={handleSubmit}>
                         {/* Nome do Animal */}
@@ -550,7 +550,7 @@ const CadastroAnimalPerdido = () => {
                             <div id="vacinas-grupo">
                                 <label className="form-label">Quais vacinas o animal possui?</label>
                                 <div className="form-check-group">
-                                    {['V8', 'V10', 'Antirrábica', 'Gripe (Bronquite)', 'Giardia', 'Leishmaniose'].map((vacina) => (
+                                    {['V8 (Óctupla)', 'V10 (Décupla)', 'Antirrábica', 'Tríplice Felina', 'Leucemia Felina'].map((vacina) => (
                                         <div key={vacina} className="form-check">
                                             <input 
                                                 className="form-check-input" 
@@ -953,7 +953,7 @@ const CadastroAnimalPerdido = () => {
                         </div>
 
                         <button type="submit" className="botao_cadastrar">
-                            🚨 Cadastrar Animal Perdido
+                             Cadastrar Animal Perdido
                         </button>
                     </form>
 
