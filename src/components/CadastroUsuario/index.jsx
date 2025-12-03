@@ -326,7 +326,7 @@ const CadastroUsuario = () => {
                         <div className="logo-circle">
                             <img src={PerfilImg} alt="perfil" />
                         </div>
-                        <h1 className="welcome-title">Cadastro Usuário</h1>
+                        <h1 className="welcome-title">Cadastro de Usuário</h1>
                         <p className="welcome-subtitle">Junte-se a nós para ajudar os animais</p>
                     </div>
 
@@ -852,5 +852,6 @@ const CadastroUsuario = () => {
         </>
     );
 };
+
 
 export default CadastroUsuario;
