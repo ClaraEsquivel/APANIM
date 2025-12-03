@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useModal } from '../ModalCustomizado';
 import MenuUnificado from '../MenuUnificado';
@@ -140,5 +139,6 @@ const CadastroInicial = () => {
         </>
     );
 };
+
 
 export default CadastroInicial;
