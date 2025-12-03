@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import MenuUnificado from '../MenuUnificado';
 import ScrollTop from '../ScrollTop';
 import './styles.css';
@@ -127,28 +127,34 @@ const PlanosAssinatura = () => {
         };
     }, []);
 
+    const navigate = useNavigate();
+
     // ===== FUNÇÕES =====
     const selecionarPlano = (plano) => {
         const planos = {
             'basico': {
                 nome: 'Plano Básico',
                 preco: 'R$ 99/mês',
-                descricao: 'Ideal para quem está começando'
+                descricao: 'Ideal para quem está começando',
+                badge: 'BÁSICO'
             },
             'profissional': {
                 nome: 'Plano Profissional',
                 preco: 'R$ 199/mês',
-                descricao: 'Para vendedores ativos'
+                descricao: 'Para vendedores ativos',
+                badge: 'PROFISSIONAL'
             },
             'premium': {
                 nome: 'Plano Premium',
                 preco: 'R$ 349/mês',
-                descricao: 'Para profissionais sérios'
+                descricao: 'Para profissionais sérios',
+                badge: 'PREMIUM'
             }
         };
         
-        const planoSelecionado = planos[plano];
-        alert(`Você selecionou: ${planoSelecionado.nome}\nValor: ${planoSelecionado.preco}\n\nEm breve você será redirecionado para o checkout!`);
+        navigate('/formas-pagamento', { 
+            state: { plano: planos[plano] } 
+        });
     };
 
     const comprarBoost = (periodo) => {
