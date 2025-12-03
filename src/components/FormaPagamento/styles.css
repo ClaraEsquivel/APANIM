@@ -36,7 +36,7 @@ body::-webkit-scrollbar-thumb:hover {
 .hero-payment {
     background: linear-gradient(135deg, #5A0609 0%, #420406 100%);
     color: white;
-    padding: 10rem 5%;
+    padding: 9rem 5%;
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -815,4 +815,5 @@ body::-webkit-scrollbar-thumb:hover {
     .success-card h2 {
         font-size: 1.8rem;
     }
+
 }
