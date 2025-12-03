@@ -3,8 +3,6 @@ package com.example.apanim.DTO;
 import java.util.List;
 
 import org.hibernate.validator.constraints.URL;
-
-import com.example.apanim.Enum.FaixaEtariaAnimal;
 import com.example.apanim.Enum.SexoAnimal;
 
 import jakarta.validation.constraints.NotBlank;

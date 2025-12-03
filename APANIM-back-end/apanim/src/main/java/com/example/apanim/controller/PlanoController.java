@@ -11,7 +11,7 @@ import com.example.apanim.model.Plano;
 import com.example.apanim.repository.PlanoRepository;
 
 @RestController
-@RequestMapping("/api/planos")
+@RequestMapping("/planos")
 public class PlanoController {
 
     private final PlanoRepository planoRepository;

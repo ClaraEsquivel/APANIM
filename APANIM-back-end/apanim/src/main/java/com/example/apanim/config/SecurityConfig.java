@@ -2,7 +2,6 @@ package com.example.apanim.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -41,6 +40,8 @@ public class SecurityConfig {
                 .requestMatchers("/vendedor/**").permitAll()
                 .requestMatchers("/assinaturas/**").permitAll() // Permite criar e gerenciar assinaturas
                 .requestMatchers("/planos/**").permitAll() // Permite criar e gerenciar assinaturas
+                .requestMatchers("/boosts/**").permitAll() // Permite criar e gerenciar assinaturas
+
 
                 // CRÍTICO: Permite o Webhook do Gateway de Pagamento
                 .requestMatchers("/webhook/**").permitAll()

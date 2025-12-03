@@ -42,7 +42,7 @@ public class AnimalCompraResponseDTO {
     public AnimalCompraResponseDTO(Long id, String nome, FaixaEtariaAnimal faixaEtariaAnimal, String raca, String porte,
             SexoAnimal sexoAnimal, String especie, String condicaoEspecial, String localizacao,
             String cor, Boolean vacinado, List<String> vacinas, Boolean vermifugado, Boolean castrado, String resumo,
-            Long vendedorId, Boolean pedigree, BigDecimal valorDoAnimal, String fotoUrl, String emailVendedor,
+            Long vendedorId, Boolean pedigree, BigDecimal valorDoAnimal, String fotoUrl, String videoUrl, String emailVendedor,
             List<String> telefoneVendedor) {
         this.id = id;
         this.nome = nome;
@@ -63,6 +63,7 @@ public class AnimalCompraResponseDTO {
         this.pedigree = pedigree;
         this.valorDoAnimal = valorDoAnimal;
         this.fotoUrl = fotoUrl;
+        this.videoUrl = videoUrl;
         this.emailVendedor = emailVendedor;
         this.telefoneVendedor = telefoneVendedor;
     }

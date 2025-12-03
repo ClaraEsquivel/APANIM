@@ -245,4 +245,8 @@ public class AnimalCompra {
     public void setFotoUrl(String fotoUrl) {
         this.fotoUrl = fotoUrl;
     }
+
+    public void setVideoUrl(String videoUrl) {
+        this.videoUrl = videoUrl;
+    }
 }

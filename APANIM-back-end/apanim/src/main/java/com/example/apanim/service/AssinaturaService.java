@@ -112,4 +112,9 @@ public class AssinaturaService {
 
         return a.getStatus();
     }
+
+    public void inativarAssinatura(Long idDaAssinatura, String status) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'inativarAssinatura'");
+    }
 }
