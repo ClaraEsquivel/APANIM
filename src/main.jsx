@@ -12,19 +12,15 @@ import CompraAnimalPage from './pages/CompraAnimalPage'
 import ServicosPage from './pages/ServicosPage'
 import ParceriaPage from './pages/ParceriaPage'
 import PlanosAssinaturaPage from './pages/PlanosAssinaturaPage'
-import FormaPagamentoPage from './pages/FormaPagamentoPage'
-import PerfilAnimal from './components/PerfilAnimal'
-
-// Páginas de Cadastro - AGORA ATIVAS
 import CadastroAnimalAdocaoPage from './pages/CadastroAnimalAdocaoPage'
 import CadastroAnimalVendaPage from './pages/CadastroAnimalVendaPage'
 import CadastroAnimaisPerdidosPage from './pages/CadastroAnimaisPerdidosPage'
-
-// Páginas ainda comentadas (descomente quando estiverem prontas)
-// import CadastroPage from './pages/CadastroPage'
-// import LoginPage from './pages/LoginPage'
-// import PerfilUsuarioPage from './pages/PerfilUsuarioPage'
-// import PerfilVendedorPage from './pages/PerfilVendedorPage'
+import LoginPage from './pages/LoginPage'
+import CadastroInicialPage from './pages/CadastroInicialPage'
+import CadastroUsuarioPage from './pages/CadastroUsuarioPage'
+import CadastroVendedorPage from './pages/CadastroVendedorPage'
+import PerfilUsuarioPage from './pages/PerfilUsuarioPage'
+import PerfilVendedorPage from './pages/PerfilVendedorPage'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -37,7 +33,6 @@ createRoot(document.getElementById('root')).render(
         <Route path="/adocao-animal" element={<AdocaoAnimalPage />} />
         <Route path="/compra-animal" element={<CompraAnimalPage />} />
         <Route path="/animais-perdidos" element={<AnimaisPerdidosPage />} />
-        <Route path="/perfil-animal" element={<PerfilAnimal />} />
         
         {/* Páginas de Cadastro de Animais - AGORA ATIVAS */}
         <Route path="/cadastro-animal-adocao" element={<CadastroAnimalAdocaoPage />} />
@@ -49,13 +44,14 @@ createRoot(document.getElementById('root')).render(
         <Route path="/parceria" element={<ParceriaPage />} />
         <Route path="/servicos" element={<ServicosPage />} />
         <Route path="/planos-assinatura" element={<PlanosAssinaturaPage />} />
-        <Route path="/formas-pagamento" element={<FormaPagamentoPage />} />
         
-        {/* Páginas de Usuário - ainda comentadas */}
-        {/* <Route path="/cadastro" element={<CadastroPage />} /> */}
-        {/* <Route path="/login" element={<LoginPage />} /> */}
-        {/* <Route path="/perfil-usuario" element={<PerfilUsuarioPage />} /> */}
-        {/* <Route path="/perfil-vendedor" element={<PerfilVendedorPage />} /> */}
+        {/* Páginas de Usuário */}
+        <Route path="/cadastro" element={<CadastroInicialPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/cadastro-usuario" element={<CadastroUsuarioPage />} />
+        <Route path="/cadastro-vendedor" element={<CadastroVendedorPage />} />
+        <Route path="/perfil-usuario" element={<PerfilUsuarioPage />} />
+        <Route path="/perfil-vendedor" element={<PerfilVendedorPage />} />
         
         {/* Rota 404 - Página não encontrada */}
         <Route path="*" element={<MenuPage />} />
