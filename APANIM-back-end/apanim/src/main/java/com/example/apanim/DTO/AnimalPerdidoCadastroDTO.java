@@ -24,6 +24,7 @@ public class AnimalPerdidoCadastroDTO extends AnimalCadastroDTO {
     public AnimalPerdidoCadastroDTO() {
     }
 
+    
     public AnimalPerdidoCadastroDTO(Long id, @NotBlank(message = "O nome é obrigatório.") String nome,
             @PositiveOrZero(message = "A idade deve ser 0 ou maior.") Integer idadeEmMeses,
             @NotBlank(message = "A raça é obrigatório.") String raca,
@@ -40,6 +41,7 @@ public class AnimalPerdidoCadastroDTO extends AnimalCadastroDTO {
         this.data = data;
         this.vacinas = vacinas;
     }
+
 
     public LocalDate getData() {
         return data;

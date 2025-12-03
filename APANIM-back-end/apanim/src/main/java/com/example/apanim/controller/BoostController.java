@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/boosts") // Endpoint REST padrão
+@RequestMapping("/boosts") 
 public class BoostController {
 
     private final BoostService boostService;
@@ -22,12 +22,10 @@ public class BoostController {
     public ResponseEntity<List<BoostResponseDTO>> listarTodos() {
         List<BoostResponseDTO> lista = boostService.listarBoostsDisponiveis();
 
-        // Se a lista estiver vazia, retorna 204 No Content
         if (lista.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
 
-        // Retorna 200 OK com a lista de boosts
         return ResponseEntity.ok(lista);
     }
 }

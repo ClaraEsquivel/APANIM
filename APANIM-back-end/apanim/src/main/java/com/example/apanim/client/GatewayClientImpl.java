@@ -13,7 +13,7 @@ public class GatewayClientImpl implements GatewayClient {
         // Lógica simulada: 90% de chance de aprovar
         boolean approved = Math.random() < 0.9;
         PagamentoResponse response = new PagamentoResponse();
-        response.setStatus(approved ? "APROVADO" : "REPROVADO");
+        response.setStatusPagamento(approved ? "APROVADO" : "REPROVADO");
         response.setTransactionId("TRX-" + System.currentTimeMillis());
         return response;
     }

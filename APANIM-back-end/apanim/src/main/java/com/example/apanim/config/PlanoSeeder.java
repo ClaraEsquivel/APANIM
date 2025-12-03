@@ -22,19 +22,16 @@ public class PlanoSeeder implements CommandLineRunner {
     }
 
     private void seedPlanos() {
-        // Defina os dados dos planos em um formato limpo
         PlanoData basico = new PlanoData("Plano Básico", new BigDecimal("99.00"), "Ideal para quem está começando", "basic_gateway_id");
         PlanoData profissional = new PlanoData("Plano Profissional", new BigDecimal("199.00"), "Para vendedores ativos", "pro_gateway_id");
         PlanoData premium = new PlanoData("Plano Premium", new BigDecimal("349.00"), "Para profissionais sérios", "premium_gateway_id");
 
-        // Tente inserir cada plano
         inserirSeNaoExiste(basico);
         inserirSeNaoExiste(profissional);
         inserirSeNaoExiste(premium);
     }
 
     private void inserirSeNaoExiste(PlanoData data) {
-        // Verifica se o plano já existe pelo nome
         if (planoRepository.findByNome(data.nome()).isEmpty()) {
             Plano novoPlano = new Plano(
                 data.nome(),
@@ -47,6 +44,5 @@ public class PlanoSeeder implements CommandLineRunner {
         }
     }
     
-    // Classe record interna para organizar os dados
     private record PlanoData(String nome, BigDecimal preco, String descricao, String gatewayPlanId) {}
 }

@@ -6,9 +6,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class PagamentoResponse {
-    private String status; // APROVADO, NEGADO
-    private String transactionId; // ID no Gateway
-    // ... outros campos
+    private String statusPagamento; 
+    private String transactionId; 
 
     public void setTransactionId(String string) {
         throw new UnsupportedOperationException("Not supported yet.");

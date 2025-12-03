@@ -21,14 +21,8 @@ public class BoostDataInitializer {
     @Bean
     public CommandLineRunner initBoosts() {
         return args -> {
-            // Verifica se já existem boosts no banco de dados para evitar duplicidade
             if (boostRepository.count() == 0) {
                 System.out.println("Inicializando Pacotes de Boosts...");
-
-                // Dados extraídos do seu código JavaScript:
-                // '7dias': { duracao: '7 dias', preco: 'R$ 29,90' }
-                // '15dias': { duracao: '15 dias', preco: 'R$ 49,90' }
-                // '30dias': { duracao: '30 dias', preco: 'R$ 79,90' }
 
                 Boost boost7d = new Boost(
                         "Boost de 7 Dias",

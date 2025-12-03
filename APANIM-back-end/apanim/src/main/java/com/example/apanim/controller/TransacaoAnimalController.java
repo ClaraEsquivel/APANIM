@@ -10,8 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
-
 @RestController
 @RequestMapping("/pagamento")
 public class TransacaoAnimalController {
@@ -22,16 +20,14 @@ public class TransacaoAnimalController {
         this.transacaoAnimalService = transacaoAnimalService;
     }
 
-    // Endpoint para pagamento com Cartão de Crédito
     @PostMapping("/{animalId}/cartao")
     public ResponseEntity<PagamentoResponse> pagarComCartao(
             @PathVariable Long animalId,
-            @RequestParam Long usuarioId, // Quem está comprando
+            @RequestParam Long usuarioId, 
             @Valid @RequestBody PagamentoRequest request) {
 
         PagamentoResponse response = transacaoAnimalService.processarPagamentoCartao(animalId, usuarioId, request);
 
-        // O status HTTP reflete o resultado do pagamento
         if ("APROVADO".equals(response.getStatus())) {
             return ResponseEntity.ok(response);
         } else {
@@ -39,7 +35,6 @@ public class TransacaoAnimalController {
         }
     }
 
-    // Endpoint para gerar Boleto
     @PostMapping("/{animalId}/boleto")
     public ResponseEntity<BoletoResponse> gerarBoleto(
             @PathVariable Long animalId,
@@ -49,7 +44,6 @@ public class TransacaoAnimalController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
     
-    // Endpoint para gerar Pix
     @PostMapping("/{animalId}/pix")
     public ResponseEntity<PixResponse> gerarPix(
             @PathVariable Long animalId,

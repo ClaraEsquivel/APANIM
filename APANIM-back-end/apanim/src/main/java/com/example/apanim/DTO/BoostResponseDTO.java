@@ -14,7 +14,6 @@ public class BoostResponseDTO {
     private BigDecimal preco;
     private String descricao;
 
-    // Construtor vazio (necessário para Jackson/deserialização em alguns casos)
     public BoostResponseDTO() {
     }
 

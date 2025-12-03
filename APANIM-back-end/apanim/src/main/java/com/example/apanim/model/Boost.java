@@ -19,14 +19,13 @@ public class Boost {
     private String nome;
 
     @Column(nullable = false)
-    private Integer duracaoDias; // Novo campo para armazenar a duração em dias
+    private Integer duracaoDias; 
 
     @Column(nullable = false)
     private BigDecimal preco; 
 
     private String descricao; 
 
-    // Opcional: ID do produto no gateway de pagamento
     private String gatewayProductId; 
 
     public Boost() {
@@ -39,7 +38,5 @@ public class Boost {
         this.descricao = descricao;
         this.gatewayProductId = gatewayProductId;
     }
-
-    // Você pode remover getters e setters se estiver usando Lombok (@Getter/@Setter)
 
 }

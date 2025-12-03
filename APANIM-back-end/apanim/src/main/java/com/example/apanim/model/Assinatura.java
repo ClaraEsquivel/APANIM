@@ -16,25 +16,20 @@ public class Assinatura {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // A ligação com o usuário que fez a assinatura
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "usuario_id", nullable = false)
     private UsuarioModel usuario;
 
-    // A ligação com o plano que foi assinado
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "plano_id", nullable = false)
     private Plano plano;
 
-    // O status da assinatura (ATIVA, PENDENTE, CANCELADA)
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private StatusAssinatura status;
 
-    // A data em que a assinatura expira (útil para planos mensais)
     private LocalDate dataDeExpiracao;
 
-    // O ID da assinatura lá no Gateway de Pagamento (Mercado Pago, Stripe)
     @Column(unique = true)
     private String gatewaySubscriptionId;
 

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/webhook")
 public class WebhookController {
 
-    // Injeção via construtor (mais seguro que @Autowired no campo)
     private final AssinaturaService assinaturaService;
 
     public WebhookController(AssinaturaService assinaturaService) {

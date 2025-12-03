@@ -27,26 +27,21 @@ public class TransacaoAnimal {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // A ligação com o usuário que está comprando
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "usuario_id", nullable = false)
     private UsuarioModel usuario; 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "animal_id", nullable = false) // Ligação com o animal vendido
+    @JoinColumn(name = "animal_id", nullable = false) 
     private AnimalCompra animal;
     
-    // O valor total da venda
     @Column(nullable = false)
     private BigDecimal valorTotal; 
 
-    // O status do pagamento desta transação (ex: PENDENTE, APROVADO, REPROVADO)
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private StatusPagamento status; // Você precisará criar o Enum StatusPagamento
+    private StatusPagamento status; 
 
-    // O ID da transação no Gateway (para Pix e Boleto)
     @Column(unique = true)
     private String gatewayTransactionId; 
-
 }

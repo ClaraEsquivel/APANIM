@@ -10,14 +10,13 @@ import lombok.Setter;
 @Getter
 @Setter
 public class PagamentoRequest {
-    @NotBlank // Exemplo de token, nunca o número do cartão
+    @NotBlank 
     private String paymentToken; 
 
     @NotNull
     private BigDecimal amount;
 
     @NotNull
-    private Long orderId; // Para ligar a cobrança à sua entidade Order
+    private Long transacaoId; 
     
-    // Dados do pagador (CPF, email, etc.)
 }

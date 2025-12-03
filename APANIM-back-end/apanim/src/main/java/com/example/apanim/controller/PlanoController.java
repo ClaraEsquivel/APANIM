@@ -22,7 +22,6 @@ public class PlanoController {
 
     @GetMapping
     public ResponseEntity<List<Plano>> listarPlanos() {
-        // Busca todos os planos (que foram inseridos pelo Seeder)
         List<Plano> planos = planoRepository.findAll();
         return ResponseEntity.ok(planos);
     }

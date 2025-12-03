@@ -2,7 +2,6 @@ package com.example.apanim.model;
 
 import java.util.List;
 
-import com.example.apanim.Enum.Sexo;
 import jakarta.persistence.*;
 
 @Entity
@@ -15,9 +14,6 @@ public class VendedorModel {
 
     @Column(nullable = false)
     private String nome;
-
-    @Enumerated(EnumType.STRING)
-    private Sexo sexo;
 
     @Column(unique = true)
     private String cpf;
@@ -48,11 +44,10 @@ public class VendedorModel {
     public VendedorModel() {
     }
 
-    public VendedorModel(Long id, String nome, Sexo sexo, String cpf, String cnpj, Integer idade,
-            List<String> telefones, String email, String senha, String cep, String logradouro, String bairro) {
+    public VendedorModel(Long id, String nome, String cpf, String cnpj, Integer idade, List<String> telefones,
+            String email, String senha, String cep, String logradouro, String bairro) {
         this.id = id;
         this.nome = nome;
-        this.sexo = sexo;
         this.cpf = cpf;
         this.cnpj = cnpj;
         this.idade = idade;
@@ -71,10 +66,6 @@ public class VendedorModel {
 
     public String getNome() {
         return nome;
-    }
-
-    public Sexo getSexo() {
-        return sexo;
     }
 
     public String getCpf() {
@@ -120,10 +111,6 @@ public class VendedorModel {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public void setSexo(Sexo sexo) {
-        this.sexo = sexo;
     }
 
     public void setCpf(String cpf) {

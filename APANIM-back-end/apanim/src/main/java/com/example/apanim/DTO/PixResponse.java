@@ -7,9 +7,9 @@ import lombok.Setter;
 @Setter
 public class PixResponse {
     private String status;
-    private String qrCodeBase64; // Imagem do QR Code (opcional)
-    private String qrCodeText; // Texto do QR Code
-    private String copiaECola; // Payload
+    private String qrCodeBase64; 
+    private String qrCodeText; 
+    private String copiaECola; 
     private String transactionId;
 
     public void setStatus(String pendente) {
