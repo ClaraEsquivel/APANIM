@@ -45,11 +45,11 @@ const CadastroInicial = () => {
             {/* Conteúdo Central */}
             <div className="central">
                 {/* Patas decorativas */}
-                {[...Array(24)].map((_, i) => (
+                {/* {[...Array(6)].map((_, i) => (
                     <div key={i} className={`patas${i + 1} pata-animate`}>
                         <img src={PataImg} alt="pata" />
                     </div>
-                ))}
+                ))} */}
 
                 {/* Container principal */}
                 <div className="container">

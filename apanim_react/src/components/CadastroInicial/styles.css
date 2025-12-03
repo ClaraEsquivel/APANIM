@@ -3,68 +3,12 @@
 
 .central {
     position: relative;
-    min-height: calc(100vh - 200px);
+    min-height: 150vh;
     padding: 2rem 1rem;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-
-/* ============= PATAS DECORATIVAS ============= */
-
-/* [class^="patas"] {
-    position: absolute;
-    opacity: 0.3;
-    transition: all 0.3s ease;
-    pointer-events: none;
-}
-
-[class^="patas"] img {
-    width: 60px;
-    height: 60px;
-    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.1));
-} */
-
-/* Posições das patas - Lado Esquerdo */
-/* .patas1 { left: 5%; top: 10%; animation: float 3s ease-in-out infinite; }
-.patas2 { left: 3%; top: 25%; animation: float 4s ease-in-out infinite 0.5s; }
-.patas3 { left: 8%; top: 40%; animation: float 3.5s ease-in-out infinite 1s; }
-.patas4 { left: 2%; top: 55%; animation: float 4.5s ease-in-out infinite 1.5s; }
-.patas5 { left: 6%; top: 70%; animation: float 3s ease-in-out infinite 2s; }
-.patas6 { left: 4%; top: 85%; animation: float 4s ease-in-out infinite 2.5s; } */
-
-/* Posições das patas - Lado Direito */
-/* .patas7 { right: 5%; top: 10%; animation: float 3.5s ease-in-out infinite; }
-.patas8 { right: 3%; top: 25%; animation: float 4s ease-in-out infinite 0.5s; }
-.patas9 { right: 8%; top: 40%; animation: float 3s ease-in-out infinite 1s; }
-.patas10 { right: 2%; top: 55%; animation: float 4.5s ease-in-out infinite 1.5s; }
-.patas11 { right: 6%; top: 70%; animation: float 3.5s ease-in-out infinite 2s; }
-.patas12 { right: 4%; top: 85%; animation: float 4s ease-in-out infinite 2.5s; } */
-
-/* Mais patas para preencher o espaço */
-/* .patas13 { left: 12%; top: 15%; animation: float 3s ease-in-out infinite 3s; }
-.patas14 { left: 10%; top: 32%; animation: float 4s ease-in-out infinite 3.5s; }
-.patas15 { left: 14%; top: 48%; animation: float 3.5s ease-in-out infinite 4s; }
-.patas16 { left: 9%; top: 63%; animation: float 4.5s ease-in-out infinite 4.5s; } */
-
-/* .patas17 { right: 12%; top: 18%; animation: float 3s ease-in-out infinite 3s; }
-.patas18 { right: 10%; top: 35%; animation: float 4s ease-in-out infinite 3.5s; }
-.patas19 { right: 14%; top: 50%; animation: float 3.5s ease-in-out infinite 4s; }
-.patas20 { right: 9%; top: 65%; animation: float 4.5s ease-in-out infinite 4.5s; } */
-
-/* .patas21 { left: 15%; top: 78%; animation: float 3s ease-in-out infinite 5s; }
-.patas22 { right: 15%; top: 80%; animation: float 4s ease-in-out infinite 5.5s; }
-.patas23 { left: 7%; top: 92%; animation: float 3.5s ease-in-out infinite 6s; }
-.patas24 { right: 7%; top: 94%; animation: float 4s ease-in-out infinite 6.5s; } */
-
-/* @keyframes float {
-    0%, 100% {
-        transform: translateY(0px);
-    }
-    50% {
-        transform: translateY(-20px);
-    }
-} */
 
 /* ============= CONTAINER PRINCIPAL ============= */
 
@@ -79,6 +23,8 @@
     position: relative;
     z-index: 1;
     animation: slideUp 0.6s ease-out;
+    margin-top: 200px;
+    margin-bottom: 200px;
 }
 
 @keyframes slideUp {
@@ -152,7 +98,7 @@
     background: linear-gradient(135deg, #5A0609 0%, #420406 100%);
     color: white;
     border: none;
-    padding: 1.5rem 2rem;
+    padding: 1rem 2rem;
     border-radius: 20px;
     font-size: 1.1rem;
     font-weight: 600;
