@@ -1,18 +1,20 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import MenuUnificado from '../MenuUnificado';
-import '../../components/ScrollTop/scroll-top.js';
+import ScrollTop from '../ScrollTop';
 import './styles.css';
-import '../../components/MenuUnificado/menu-styles.css';
-import '../../components/MenuUnificado/header-unificado.css';
-import '../../components/MenuUnificado/footer-unificado.css';
+import '../Layout/header-unificado.css';
+import '../Layout/footer-unificado.css';
+import '../MenuUnificado/menu-styles.css';
 import PawsImg from '../../assets/images/Paws.svg';
 import LogoImg from '../../assets/images/APANIM_logo.svg';
 import CatImg from '../../assets/images/cat.svg';
 import DogImg from '../../assets/images/dog.svg';
+import PataImg from '../../assets/images/pata.svg';
 import InstagramImg from '../../assets/images/instagram.svg';
 import EmailImg from '../../assets/images/email.svg';
 import ForumImg from '../../assets/images/forum.svg';
+import DogAndCatImg from '../../assets/images/dog_and_cat.svg';
 
 // ===== COMPONENTE PRINCIPAL DE SERVIÇOS =====
 const Servicos = () => {
@@ -126,6 +128,8 @@ Atenciosamente,`);
                     <MenuUnificado />
                 </nav>
             </header>
+
+            <ScrollTop />
 
             {/* Hero Section */}
             <section className="hero">

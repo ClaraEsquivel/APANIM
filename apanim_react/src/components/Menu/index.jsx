@@ -1,21 +1,20 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import MenuUnificado from '../../assets/MenuUnificado';
-import '../../assets/ScrollTop/scroll-top.js';
+import MenuUnificado from '../MenuUnificado';
+import ScrollTop from '../ScrollTop';
 import './styles.css';
-import '../../assets/MenuUnificado/menu-styles.css';
-import '../../assets/css/header-unificado.css';
-import '../../assets/css/footer-unificado.css';
+import '../Layout/header-unificado.css';
+import '../Layout/footer-unificado.css';
+import '../MenuUnificado/menu-styles.css';
 import PawsImg from '../../assets/images/Paws.svg';
 import LogoImg from '../../assets/images/APANIM_logo.svg';
-import DogSentadoImg from '../../assets/images/dog_sentado.svg';
 import CatImg from '../../assets/images/cat.svg';
 import DogImg from '../../assets/images/dog.svg';
+import PataImg from '../../assets/images/pata.svg';
 import InstagramImg from '../../assets/images/instagram.svg';
 import EmailImg from '../../assets/images/email.svg';
 import ForumImg from '../../assets/images/forum.svg';
-
-
+import DogAndCatImg from '../../assets/images/dog_and_cat.svg';
 function Menu() {
   const [animaisAdocao, setAnimaisAdocao] = useState([]);
   const [animaisCompra, setAnimaisCompra] = useState([]);
@@ -319,6 +318,8 @@ function Menu() {
         </nav>
       </header>
 
+      <ScrollTop />
+
       <main className="central">
         <section className="conteudo_principal" aria-labelledby="titulo-principal">
           <h1 id="titulo-principal" className="sr-only">Serviços principais do APANIM</h1>
@@ -479,9 +480,6 @@ function Menu() {
           <img src={ForumImg} alt="Acesse nosso fórum" />
         </div>
       </footer>
-
-      {/* Scripts */}
-      <script src='../../components/ScrollTop/scroll-top.js'></script>
 
     </>
   );

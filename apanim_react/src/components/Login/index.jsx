@@ -1,18 +1,21 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+// import { useModal } from '../ModalCustomizado';
+import MenuUnificado from '../MenuUnificado';
+import ScrollTop from '../ScrollTop';
 import './styles.css';
-import '../../assets/css/header-unificado.css';
-import '../../assets/css/footer-unificado.css';
+import '../Layout/header-unificado.css';
+import '../Layout/footer-unificado.css';
+import '../MenuUnificado/menu-styles.css';
 import PawsImg from '../../assets/images/Paws.svg';
 import LogoImg from '../../assets/images/APANIM_logo.svg';
 import CatImg from '../../assets/images/cat.svg';
 import DogImg from '../../assets/images/dog.svg';
-import PerfilImg from '../../assets/images/perfil.svg';
 import PataImg from '../../assets/images/pata.svg';
 import InstagramImg from '../../assets/images/instagram.svg';
 import EmailImg from '../../assets/images/email.svg';
 import ForumImg from '../../assets/images/forum.svg';
-import MenuUnificado from '../../assets/MenuUnificado';
+// import DogAndCatImg from '../../assets/images/dog_and_cat.svg';
 
 function Login() {
   const navigate = useNavigate();
@@ -289,6 +292,8 @@ function Login() {
           <MenuUnificado/>
         </nav>
       </header>
+
+      <ScrollTop />
 
       {/* Conteúdo Central */}
       <div className="central">
