@@ -12,6 +12,7 @@ import CompraAnimalPage from './pages/CompraAnimalPage'
 import ServicosPage from './pages/ServicosPage'
 import ParceriaPage from './pages/ParceriaPage'
 import PlanosAssinaturaPage from './pages/PlanosAssinaturaPage'
+import FormaPagamentoPage from './pages/FormaPagamentoPage'
 import PerfilAnimal from './components/PerfilAnimal'
 
 // Páginas de Cadastro - AGORA ATIVAS
@@ -48,6 +49,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="/parceria" element={<ParceriaPage />} />
         <Route path="/servicos" element={<ServicosPage />} />
         <Route path="/planos-assinatura" element={<PlanosAssinaturaPage />} />
+        <Route path="/formas-pagamento" element={<FormaPagamentoPage />} />
         
         {/* Páginas de Usuário - ainda comentadas */}
         {/* <Route path="/cadastro" element={<CadastroPage />} /> */}
