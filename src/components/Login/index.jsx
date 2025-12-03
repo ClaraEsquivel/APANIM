@@ -1,12 +1,12 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-// import { useModal } from '../ModalCustomizado';
 import MenuUnificado from '../MenuUnificado';
 import ScrollTop from '../ScrollTop';
 import './styles.css';
 import '../Layout/header-unificado.css';
 import '../Layout/footer-unificado.css';
 import '../MenuUnificado/menu-styles.css';
+import PerfilImg from '../../assets/images/User.svg';
 import PawsImg from '../../assets/images/Paws.svg';
 import LogoImg from '../../assets/images/APANIM_logo.svg';
 import CatImg from '../../assets/images/cat.svg';
@@ -15,11 +15,10 @@ import PataImg from '../../assets/images/pata.svg';
 import InstagramImg from '../../assets/images/instagram.svg';
 import EmailImg from '../../assets/images/email.svg';
 import ForumImg from '../../assets/images/forum.svg';
-// import DogAndCatImg from '../../assets/images/dog_and_cat.svg';
 
 function Login() {
   const navigate = useNavigate();
-  
+
   // Estados do formulário
   const [formData, setFormData] = useState({
     email: '',
@@ -119,7 +118,7 @@ function Login() {
   const showToast = (message, type = 'info') => {
     const toastContainer = document.createElement('div');
     toastContainer.className = `toast toast-${type}`;
-    
+
     const icons = {
       success: '✓',
       error: '✕',
@@ -155,7 +154,7 @@ function Login() {
         id: Date.now().toString(),
         name: 'Usuário Demo',
         email: 'usuario.demo@gmail.com',
-        picture: PerfilImg,
+        picture: '🐾', // Emoji como placeholder
         provider: 'google'
       };
 
@@ -164,7 +163,7 @@ function Login() {
       localStorage.setItem('apanim_logged_in', 'true');
 
       showToast('Login com Google realizado com sucesso! 🎉', 'success');
-      
+
       setTimeout(() => {
         navigate('/perfil-usuario');
       }, 1500);
@@ -200,7 +199,7 @@ function Login() {
       // Salva no localStorage
       localStorage.setItem('apanim_user', JSON.stringify(user));
       localStorage.setItem('apanim_logged_in', 'true');
-      
+
       if (formData.rememberMe) {
         localStorage.setItem('apanim_remember_me', 'true');
       }
@@ -239,17 +238,18 @@ function Login() {
     }, 2000);
   };
 
+  // ============= LIMPAR LOGIN (ÚTIL PARA DEBUG) =============
+  const clearLogin = () => {
+    localStorage.removeItem('apanim_user');
+    localStorage.removeItem('apanim_logged_in');
+    localStorage.removeItem('apanim_remember_me');
+    showToast('Cache de login limpo!', 'info');
+  };
+
   // ============= EFEITOS =============
   useEffect(() => {
-    // Verifica se já está logado
-    const isLoggedIn = localStorage.getItem('apanim_logged_in');
-    if (isLoggedIn === 'true') {
-      showToast('Você já está logado!', 'info');
-      setTimeout(() => {
-        navigate('/perfil-usuario');
-      }, 1500);
-      return;
-    }
+    // REMOVIDO: Verificação de login automático
+    // Agora sempre mostra a tela de login
 
     // Animações de entrada
     if (containerRef.current) {
@@ -275,7 +275,7 @@ function Login() {
 
     document.addEventListener('keydown', handleEsc);
     return () => document.removeEventListener('keydown', handleEsc);
-  }, [showForgotPasswordModal, navigate]);
+  }, [showForgotPasswordModal]);
 
   return (
     <>
@@ -289,7 +289,7 @@ function Login() {
         </div>
 
         <nav role="navigation">
-          <MenuUnificado/>
+          <MenuUnificado />
         </nav>
       </header>
 
@@ -305,8 +305,8 @@ function Login() {
         ))}
 
         {/* Container principal */}
-        <div 
-          ref={containerRef} 
+        <div
+          ref={containerRef}
           className="container"
           style={{ opacity: 0, transform: 'translateY(30px)', transition: 'all 0.5s ease' }}
         >
@@ -320,17 +320,17 @@ function Login() {
 
           {/* Seção de login com Google */}
           <div className="login-google">
-            <button 
-              className="google-btn" 
+            <button
+              className="google-btn"
               onClick={handleGoogleLogin}
               disabled={isLoading}
               type="button"
             >
               <svg className="google-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 533.5 544.3">
-                <path fill="#5a0609" d="M533.5 278.4c0-18.5-1.5-36.3-4.4-53.6H272v101.5h146.5c-6.3 34-25.2 62.8-53.8 82l87 67c50.8-46.9 81.8-116 81.8-196z"/>
-                <path fill="#5a0609" d="M272 544.3c72.6 0 133.6-24 178-65.2l-87-67c-24.1 16.2-55 25.8-91 25.8-69.8 0-129-47.1-150.1-110.5l-89.6 69.2C69.9 483 163.1 544.3 272 544.3z"/>
-                <path fill="#5a0609" d="M121.9 326.4c-11.6-34.8-11.6-72.5 0-107.3L32.3 149.9c-41.3 81.8-41.3 179.4 0 261.2l89.6-69.2z"/>
-                <path fill="#5a0609" d="M272 107.7c39.5 0 75 13.6 103 40.3l77.3-77.3C405 24 344 0 272 0 163.1 0 69.9 61.3 32.3 149.9l89.6 69.2C143 154.8 202.2 107.7 272 107.7z"/>
+                <path fill="#5a0609" d="M533.5 278.4c0-18.5-1.5-36.3-4.4-53.6H272v101.5h146.5c-6.3 34-25.2 62.8-53.8 82l87 67c50.8-46.9 81.8-116 81.8-196z" />
+                <path fill="#5a0609" d="M272 544.3c72.6 0 133.6-24 178-65.2l-87-67c-24.1 16.2-55 25.8-91 25.8-69.8 0-129-47.1-150.1-110.5l-89.6 69.2C69.9 483 163.1 544.3 272 544.3z" />
+                <path fill="#5a0609" d="M121.9 326.4c-11.6-34.8-11.6-72.5 0-107.3L32.3 149.9c-41.3 81.8-41.3 179.4 0 261.2l89.6-69.2z" />
+                <path fill="#5a0609" d="M272 107.7c39.5 0 75 13.6 103 40.3l77.3-77.3C405 24 344 0 272 0 163.1 0 69.9 61.3 32.3 149.9l89.6 69.2C143 154.8 202.2 107.7 272 107.7z" />
               </svg>
               <span>Entrar com Google</span>
             </button>
@@ -344,7 +344,7 @@ function Login() {
           <form onSubmit={handleSubmit} className="login-form">
             <div className={`form-group ${errors.email ? 'error' : ''}`}>
               <label htmlFor="email">
-                <span className="label-icon">📧</span>
+                <span className="label-icon"></span>
                 Email
               </label>
               <input
@@ -366,7 +366,7 @@ function Login() {
 
             <div className={`form-group ${errors.password ? 'error' : ''}`}>
               <label htmlFor="password">
-                <span className="label-icon">🔒</span>
+                <span className="label-icon"></span>
                 Senha
               </label>
               <div className="password-input-wrapper">
@@ -389,7 +389,7 @@ function Login() {
                   aria-label={showPassword ? 'Esconder senha' : 'Mostrar senha'}
                 >
                   <span className="eye-icon">
-                    {showPassword ? '🙈' : '👁️'}
+                    {showPassword ? '🔓' : '🔒'}
                   </span>
                 </button>
               </div>
@@ -421,15 +421,15 @@ function Login() {
               </button>
             </div>
 
-            <button 
-              type="submit" 
+            <button
+              type="submit"
               className={`btn-login ${isLoading ? 'loading' : ''}`}
               disabled={isLoading}
             >
               <span className="btn-text">
                 {isLoading ? 'Entrando...' : 'Entrar'}
               </span>
-              <span className="btn-icon">→</span>
+              <span className="btn-icon"></span>
             </button>
           </form>
 
@@ -439,6 +439,24 @@ function Login() {
               Ainda não tem uma conta?{' '}
               <Link to="/cadastro">Cadastre-se aqui</Link>
             </p>
+          </div>
+
+          {/* Botão de debug (REMOVER EM PRODUÇÃO) */}
+          <div style={{ marginTop: '20px', textAlign: 'center' }}>
+            <button
+              onClick={clearLogin}
+              style={{
+                padding: '8px 16px',
+                background: '#ff6b6b',
+                color: 'white',
+                border: 'none',
+                borderRadius: '4px',
+                cursor: 'pointer',
+                fontSize: '12px'
+              }}
+            >
+              🔧 Limpar Cache (Debug)
+            </button>
           </div>
 
           {/* Informações de segurança */}
@@ -451,7 +469,7 @@ function Login() {
 
       {/* Modal de Esqueci a Senha */}
       {showForgotPasswordModal && (
-        <div 
+        <div
           className="modal show"
           onClick={(e) => {
             if (e.target.className === 'modal show') {
