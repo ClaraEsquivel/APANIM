@@ -429,7 +429,7 @@ function Login() {
               <span className="btn-text">
                 {isLoading ? 'Entrando...' : 'Entrar'}
               </span>
-              <span className="btn-icon">→</span>
+              <span className="btn-icon"></span>
             </button>
           </form>
 
