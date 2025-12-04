@@ -648,9 +648,6 @@ const CompraAnimais = () => {
                         <div className="mensagem-vazia">
                             <h3>Nenhum animal encontrado</h3>
                             <p>Tente ajustar os filtros para encontrar mais opções de compra.</p>
-                            <button type="button" className="btn btn-primario" onClick={limparFiltros}>
-                                🔄 Limpar Filtros
-                            </button>
                         </div>
                     )}
                 </section>
@@ -706,5 +703,6 @@ const CompraAnimais = () => {
         </>
     );
 };
+
 
 export default CompraAnimais;
