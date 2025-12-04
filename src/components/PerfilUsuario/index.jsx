@@ -169,14 +169,20 @@ const PerfilUsuario = () => {
                                         <span className="badge badge-comprador">🛒 Comprador</span>
                                     )}
 
-                                    <div className="profile-actions">
-                                        <button className="btn-secondary" onClick={handleLogout}>
-                                            <span>Sair</span>
-                                        </button>
-                                    </div>
                                     
                                 </div>
                             </div> 
+                        </div>
+
+                        <div className="profile-actions">
+                            <Link to="/cadastro-animal-adocao">
+                                <button className="btn btn-success">
+                                    <span>Novo Animal</span>
+                                </button>
+                            </Link>
+                            <button className="btn btn-secondary" onClick={handleLogout}>
+                                <span>Sair</span>
+                            </button>
                         </div>
                     </div>
 
