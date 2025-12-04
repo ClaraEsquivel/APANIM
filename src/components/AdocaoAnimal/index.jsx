@@ -576,9 +576,6 @@ const AdocaoAnimal = () => {
                         <div className="mensagem-vazia" id="mensagem-vazia">
                             <h3>Nenhum animal encontrado</h3>
                             <p>Tente ajustar os filtros para encontrar mais opções de adoção.</p>
-                            <button type="button" className="btn btn-primario" onClick={limparFiltros}>
-                                🔄 Limpar Filtros
-                            </button>
                         </div>
                     )}
                 </section>
@@ -633,5 +630,6 @@ const AdocaoAnimal = () => {
         </>
     );
 }
+
 
 export default AdocaoAnimal;
