@@ -1,0 +1,800 @@
+/* ============= PADRÃO EM TODOS OS STYLES ============ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    position: relative;
+    font-family: 'Libre Baskerville', Georgia, serif;
+}
+
+/* Barra de Rolagem lateral */
+body::-webkit-scrollbar {
+    width: 10px;
+}
+
+body::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+body::-webkit-scrollbar-thumb {
+    background: #5A0609;
+    border-radius: 5px;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background: #420406;
+}
+
+/* ============================================================ */
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(135deg, #5A0609 0%, #420406 100%);
+    color: white;
+    padding: 5rem 5%;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    background: url(../../assets/images/patas_1.svg) no-repeat center center;
+    background-size: contain;
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    opacity: 0.8;
+    top: 1.5rem;
+    right: 1rem;
+    animation: float 6s ease-in-out infinite;
+}
+
+.hero::after {
+    content: '';
+    background: url(../../assets/images/patas_2.svg) no-repeat center center;
+    background-size: contain;
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    opacity: 0.8;
+    bottom: 1rem;
+    left: 1rem;
+    animation: float 8s ease-in-out infinite reverse;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(5deg); }
+}
+
+.hero-content {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero p {
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+    opacity: 0.95;
+}
+
+/* Container Principal */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 4rem 5%;
+}
+
+section {
+    margin-bottom: 5rem;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    color: #5A0609;
+    text-align: center;
+    margin-bottom: 1rem;
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(90deg, #5A0609, #420406);
+    border-radius: 2px;
+}
+
+.section-subtitle {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 3rem;
+}
+
+/* Benefícios Gerais */
+.beneficios-gerais {
+    margin-bottom: 5rem;
+}
+
+.beneficios-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.beneficio-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 2px solid #fce4e4;
+    transition: all 0.3s ease;
+}
+
+.beneficio-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 30px rgba(90, 6, 9, 0.15);
+}
+
+.beneficio-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.beneficio-card h3 {
+    color: #5A0609;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+
+.beneficio-card p {
+    color: #666;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* Planos Mensais */
+.planos-section {
+    scroll-margin-top: 100px;
+}
+
+.planos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
+    margin-top: 3rem;
+}
+
+.plano-card {
+    background: white;
+    border-radius: 24px;
+    padding: 2.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border: 2px solid #fce4e4;
+    position: relative;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.plano-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 40px rgba(90, 6, 9, 0.2);
+}
+
+.plano-destaque {
+    border: 3px solid #5A0609;
+    background: linear-gradient(180deg, #fff 0%, #fef8f8 100%);
+}
+
+.plano-badge {
+    position: absolute;
+    top: 2.3px !important; /* movido mais pra cima */
+    right: 8px !important; /* movido mais pra direita */
+    left: auto;
+    transform: none;
+    background: linear-gradient(135deg, #5A0609, #420406);
+    color: white;
+    padding: 0.35rem 0.9rem;
+    border-radius: 16px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(90, 6, 9, 0.25);
+    z-index: 2;
+}
+
+.plano-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.plano-nome {
+    font-size: 1.8rem;
+    color: #5A0609;
+    margin-bottom: 1rem;
+}
+
+.plano-preco {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 0.3rem;
+    margin-bottom: 1rem;
+}
+
+.preco-valor {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #5A0609;
+}
+
+.preco-periodo {
+    font-size: 1.2rem;
+    color: #666;
+}
+
+.plano-descricao {
+    color: #888;
+    font-size: 1rem;
+}
+
+.plano-beneficios {
+    flex: 1;
+    margin-bottom: 2rem;
+}
+
+.beneficios-lista {
+    list-style: none;
+    padding: 0;
+}
+
+.beneficios-lista li {
+    padding: 0.8rem 0;
+    color: #555;
+    font-size: 1rem;
+    line-height: 1.6;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.beneficios-lista li:last-child {
+    border-bottom: none;
+}
+
+.btn-plano {
+    width: 100%;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, #5A0609, #420406);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Libre Baskerville', Georgia, serif;
+}
+
+.btn-plano:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(90, 6, 9, 0.4);
+}
+
+.btn-plano-destaque {
+    background: linear-gradient(135deg, #420406, #5A0609);
+    box-shadow: 0 4px 20px rgba(90, 6, 9, 0.3);
+}
+
+/* Anúncios em Destaque (Boost) */
+.boost-section {
+    background: linear-gradient(135deg, #fef8f8, #fce4e4);
+    padding: 4rem;
+    border-radius: 24px;
+}
+
+.boost-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.boost-card {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    border: 2px solid #fce4e4;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.boost-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 30px rgba(90, 6, 9, 0.15);
+}
+
+.boost-recomendado {
+    border: 2px solid #5A0609;
+}
+
+.boost-badge {
+    position: absolute;
+    top: -12px;
+    right: 20px;
+    background: #5A0609;
+    color: white;
+    padding: 0.4rem 1rem;
+    border-radius: 15px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.boost-duracao {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #5A0609;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.boost-preco {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.boost-preco .preco-valor {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #5A0609;
+}
+
+.boost-beneficios {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 2rem;
+}
+
+.boost-beneficios li {
+    padding: 0.7rem 0;
+    color: #555;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.boost-beneficios li:last-child {
+    border-bottom: none;
+}
+
+.btn-boost {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    background: linear-gradient(135deg, #5A0609, #420406);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Libre Baskerville', Georgia, serif;
+}
+
+.btn-boost:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(90, 6, 9, 0.3);
+}
+
+.btn-boost-recomendado {
+    background: linear-gradient(135deg, #420406, #5A0609);
+}
+
+/* Serviços Gratuitos */
+.servicos-gratuitos {
+    background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+    padding: 4rem;
+    border-radius: 24px;
+}
+
+.gratuitos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+}
+
+.gratuito-item {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.gratuito-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.gratuito-icon {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 0.8rem;
+}
+
+.gratuito-item p {
+    color: #333;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+/* Tabela de Comparação */
+.comparacao-section {
+    margin-top: 5rem;
+}
+
+.comparacao-table-wrapper {
+    overflow-x: auto;
+    margin-top: 3rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.comparacao-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+.comparacao-table thead {
+    background: linear-gradient(135deg, #5A0609, #420406);
+    color: white;
+}
+
+.comparacao-table th {
+    padding: 1.5rem;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.comparacao-table td {
+    padding: 1.2rem;
+    text-align: center;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 1rem;
+}
+
+.feature-column {
+    text-align: left !important;
+    font-weight: 600;
+    color: #5A0609;
+}
+
+.destaque-column {
+    background: #fef8f8 !important;
+}
+
+.comparacao-table tbody tr:hover {
+    background: #fafafa;
+}
+
+.comparacao-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* FAQ Section */
+.faq-section {
+    max-width: 900px;
+    margin: 5rem auto;
+}
+
+.faq-container {
+    margin-top: 3rem;
+}
+
+.faq-item {
+    background: white;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+.faq-question {
+    width: 100%;
+    padding: 1.5rem;
+    background: white;
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #5A0609;
+    text-align: left;
+    transition: all 0.3s ease;
+    font-family: 'Libre Baskerville', Georgia, serif;
+}
+
+.faq-question:hover {
+    background: #fef8f8;
+}
+
+.faq-icon {
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: #5A0609;
+    transition: transform 0.3s ease;
+}
+
+.faq-item.active .faq-icon {
+    transform: rotate(45deg);
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    background: #fef8f8;
+}
+
+.faq-item.active .faq-answer {
+    max-height: 500px;
+    padding: 1.5rem;
+}
+
+.faq-answer p {
+    color: #555;
+    font-size: 1rem;
+    line-height: 1.7;
+    margin: 0;
+}
+
+/* CTA Section */
+.cta-section {
+    background: linear-gradient(135deg, #5A0609 0%, #420406 100%);
+    color: white;
+    padding: 4rem 5%;
+    border-radius: 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-section::before {
+    content: '❤️';
+    position: absolute;
+    font-size: 20rem;
+    opacity: 0.05;
+    top: -5rem;
+    right: -5rem;
+}
+
+.cta-content {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.cta-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.cta-section p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    opacity: 0.95;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+}
+
+.btn-cta-primary,
+.btn-cta-secondary {
+    padding: 1.25rem 3rem;
+    border-radius: 12px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    font-family: 'Libre Baskerville', Georgia, serif;
+}
+
+.btn-cta-primary {
+    background: white;
+    color: #5A0609;
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.3);
+}
+
+.btn-cta-primary:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 8px 30px rgba(255, 255, 255, 0.4);
+}
+
+.btn-cta-secondary {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+}
+
+.btn-cta-secondary:hover {
+    background: white;
+    color: #5A0609;
+    transform: translateY(-4px);
+}
+
+.email-info {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+}
+
+.email-info p {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.email-address {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #fce4e4;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .planos-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+    
+    .comparacao-table {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero p {
+        font-size: 1.1rem;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .section-subtitle {
+        font-size: 1rem;
+    }
+
+    .container {
+        padding: 2rem 5%;
+    }
+
+    .beneficios-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .planos-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .boost-section,
+    .servicos-gratuitos {
+        padding: 2.5rem 1.5rem;
+    }
+
+    .boost-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .gratuitos-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .comparacao-table th,
+    .comparacao-table td {
+        padding: 0.8rem;
+        font-size: 0.85rem;
+    }
+
+    .cta-section h2 {
+        font-size: 2rem;
+    }
+
+    .cta-buttons {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .btn-cta-primary,
+    .btn-cta-secondary {
+        width: 100%;
+        padding: 1rem 2rem;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        padding: 3rem 5%;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .container {
+        padding: 1.5rem 4%;
+    }
+
+    .section-title {
+        font-size: 1.75rem;
+    }
+
+    .plano-card {
+        padding: 2rem 1.5rem;
+    }
+
+    .preco-valor {
+        font-size: 2.5rem;
+    }
+
+    .gratuitos-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .faq-question {
+        font-size: 1rem;
+        padding: 1.2rem;
+    }
+
+    .email-address {
+        font-size: 1.1rem;
+    }
+}
