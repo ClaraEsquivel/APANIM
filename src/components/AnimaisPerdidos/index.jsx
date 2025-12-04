@@ -612,9 +612,6 @@ const AnimaisPerdidos = () => {
                         <div className="mensagem-vazia">
                             <h3>Nenhum animal encontrado</h3>
                             <p>Tente ajustar os filtros para ver mais animais perdidos.</p>
-                            <button type="button" className="btn btn-primario" onClick={limparFiltros}>
-                                🔄 Limpar Filtros
-                            </button>
                         </div>
                     )}
                 </section>
@@ -670,5 +667,6 @@ const AnimaisPerdidos = () => {
         </>
     );
 };
+
 
 export default AnimaisPerdidos;
