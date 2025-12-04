@@ -65,14 +65,12 @@ const CadastroInicial = () => {
                     <div className="botoes-container">
                         <Link to="/cadastro-usuario">
                             <button id="botao_usuario" className="btn-cadastro">
-                                <span className="btn-icon"></span>
                                 <span className="btn-text">Cadastrar como Usuário</span>
                                 <span className="btn-description">Adote e ajude animais</span>
                             </button>
                         </Link>
                         <Link to="/cadastro-vendedor">
                             <button id="botao_vendedor" className="btn-cadastro">
-                                <span className="btn-icon"></span>
                                 <span className="btn-text">Cadastrar como Vendedor</span>
                                 <span className="btn-description">Venda de forma responsável</span>
                             </button>
