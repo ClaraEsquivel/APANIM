@@ -140,7 +140,6 @@ const PerfilVendedor = () => {
                     {/* Header do Perfil */}
                     <div className="profile-header">
                         <div className="profile-cover">
-                            <button className="edit-cover-btn" title="Alterar capa da loja">📷</button>
                             {/* Status de verificação */}
                             <div className={`verification-badge ${vendedorData.status === 'ativo' ? 'verified' : 'pending'}`}>
                                 <span className="badge-icon">
@@ -155,7 +154,6 @@ const PerfilVendedor = () => {
                         <div className="profile-main-info">
                             <div className="profile-avatar-container">
                                 <img src={PerfilImg} alt="Logo da empresa" className="profile-avatar" />
-                                <button className="edit-avatar-btn" title="Alterar logo">📷</button>
                             </div>
                             
                             <div className="profile-user-data">
@@ -174,25 +172,22 @@ const PerfilVendedor = () => {
                                     <span className="badge badge-sales">
                                         📦 0 Vendas
                                     </span>
+
+                                    <div className="profile-actions">
+                                        <Link to="/cadastro-animal-venda">
+                                            <button className="btn-success">
+                                                <span>Cadastratar Novo Animal</span>
+                                            </button>
+                                        </Link>
+                                        <button className="btn-secondary" onClick={handleLogout}>
+                                            <span>Sair</span>
+                                        </button>
+                                    </div>
+                                    
                                 </div>
                             </div>
                             
-                            <div className="profile-actions">
-                                <button className="btn btn-primary">
-                                    <span>✏️</span>
-                                    <span>Editar Perfil</span>
-                                </button>
-                                <Link to="/cadastro-animal-venda">
-                                    <button className="btn btn-success">
-                                        <span>➕</span>
-                                        <span>Novo Animal</span>
-                                    </button>
-                                </Link>
-                                <button className="btn btn-secondary" onClick={handleLogout}>
-                                    <span>🚪</span>
-                                    <span>Sair</span>
-                                </button>
-                            </div>
+
                         </div>
                     </div>
 
@@ -333,12 +328,6 @@ const PerfilVendedor = () => {
                             <div className="tab-content active">
                                 <div className="animais-header">
                                     <h2>Meus Animais à Venda</h2>
-                                    <Link to="/cadastro-animal-venda">
-                                        <button className="btn btn-primary">
-                                            <span>➕</span>
-                                            <span>Cadastrar Animal</span>
-                                        </button>
-                                    </Link>
                                 </div>
 
                                 <div className="animais-filters">

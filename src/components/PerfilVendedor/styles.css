@@ -279,23 +279,35 @@ body::-webkit-scrollbar-thumb:hover {
 
 .profile-actions {
     display: flex;
-    gap: 1rem;
-    padding-top: 70px;
+    gap: 15px;
+    margin-top: 20px;
+    flex-wrap: wrap;
 }
 
-/* ============= BOTÕES ============= */
-.btn {
+.profile-actions a {
+    text-decoration: none;
+}
+
+.profile-actions button {
     padding: 12px 24px;
     border: none;
-    border-radius: 50px;
-    font-size: 0.95rem;
+    border-radius: 6px;
+    font-size: 16px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-family: inherit;
+    display: inline-block;
+}
+
+.btn-success {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.btn-success:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .btn-primary {
@@ -310,13 +322,14 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 .btn-secondary {
-    background: #e0e0e0;
-    color: #333;
+    background-color: #757575;
+    color: white;
 }
 
 .btn-secondary:hover {
-    background: #d0d0d0;
+    background-color: #616161;
     transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .btn-danger {
