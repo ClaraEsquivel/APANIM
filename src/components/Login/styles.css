@@ -153,7 +153,7 @@
 }
 
 /* ============= BOTÃO GOOGLE ============= */
-.login-google {
+/* .login-google {
     margin-bottom: 1.5rem;
 }
 
@@ -216,7 +216,7 @@
 .google-btn span {
     position: relative;
     z-index: 1;
-}
+} */
 
 /* ============= DIVIDER ============= */
 .divider {
@@ -443,7 +443,7 @@
 /* ============= BOTÃO DE LOGIN ============= */
 .btn-login {
     width: 30%;
-    padding: 5px;
+    padding: 3px;
     border: none;
     border-radius: 10px;
     background: linear-gradient(135deg, #5A0609 0%, #420406 100%);
@@ -532,7 +532,6 @@
     text-align: center;
     margin-top: 2rem;
     padding-top: 2rem;
-    border-top: 1px solid #5A0609;
 }
 
 .signup-link p {
@@ -772,4 +771,94 @@
     .modal-content {
         padding: 2rem 1.5rem;
     }
+}
+
+/* ========================================
+   SELETOR DE TIPO DE LOGIN (NOVO)
+======================================== */
+
+.login-type-selector {
+  display: flex;
+  gap: 12px;
+  margin: 25px 0;
+  background: #f5f5f5;
+  padding: 6px;
+  border-radius: 12px;
+}
+
+.type-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 20px;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.type-btn:hover {
+  background: rgba(90, 6, 9, 0.05);
+  color: #5A0609;
+}
+
+.type-btn.active {
+  background: linear-gradient(135deg, #5A0609 0%, #420406 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(90, 6, 9, 0.3);
+}
+
+.type-icon {
+  font-size: 1.4rem;
+}
+
+/* Responsivo */
+@media (max-width: 480px) {
+  .login-type-selector {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .type-btn {
+    padding: 12px 16px;
+  }
+}
+
+/* ========================================
+   INFO BOX (ATUALIZADO)
+======================================== */
+
+.info-box {
+  display: flex;
+  gap: 12px;
+  padding: 16px;
+  background: #e3f2fd;
+  border: 1px solid #90caf9;
+  border-radius: 8px;
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: #1565c0;
+}
+
+.info-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.info-box p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.info-box small {
+  display: block;
+  margin-top: 8px;
+  font-size: 0.85rem;
+  color: #1976d2;
 }
