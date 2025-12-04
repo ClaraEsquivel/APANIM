@@ -6,6 +6,9 @@ import java.util.List;
 import org.hibernate.validator.constraints.URL;
 
 import com.example.apanim.Enum.SexoAnimal;
+import com.example.apanim.Enum.StatusCastracao;
+import com.example.apanim.Enum.StatusVacinacao;
+import com.example.apanim.Enum.StatusVermifugacao;
 
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
@@ -45,15 +48,15 @@ public class AnimalCompraCadastroDTO {
     private String cor;
 
     @NotNull
-    private Boolean vacinado;
+    private StatusVacinacao statusVacinacao;
     
     private List<String> vacinas;
 
     @NotNull
-    private Boolean vermifugado;
-    
+    private StatusVermifugacao statusVermifugacao;
+
     @NotNull
-    private Boolean castrado;
+    private StatusCastracao statusCastracao;
 
     @Size(max = 100, message = "O resumo não pode exceder 100 caracteres.")
     private String resumo;
@@ -83,7 +86,7 @@ public class AnimalCompraCadastroDTO {
             @NotNull(message = "O sexo é obrigatório.") SexoAnimal sexoAnimal,
             @NotBlank(message = "A espécie é obrigatória.") String especie, String condicaoEspecial,
             @NotBlank(message = "A localização é obrigatória.") String localizacao, @NotBlank String cor,
-            @NotNull Boolean vacinado, List<String> vacinas, @NotNull Boolean vermifugado, @NotNull Boolean castrado,
+            @NotNull StatusVacinacao statusVacinacao, List<String> vacinas, @NotNull StatusVermifugacao statusVermifugacao, @NotNull StatusCastracao statusCastracao,
             @Size(max = 100, message = "O resumo não pode exceder 100 caracteres.") String resumo,
             @NotNull Long vendedorId, Boolean pedigree, BigDecimal valorDoAnimal, @URL @NotBlank String fotoUrl,
             @URL String videoUrl) {
@@ -97,10 +100,10 @@ public class AnimalCompraCadastroDTO {
         this.condicaoEspecial = condicaoEspecial;
         this.localizacao = localizacao;
         this.cor = cor;
-        this.vacinado = vacinado;
+        this.statusVacinacao = statusVacinacao;
         this.vacinas = vacinas;
-        this.vermifugado = vermifugado;
-        this.castrado = castrado;
+        this.statusVermifugacao = statusVermifugacao;
+        this.statusCastracao = statusCastracao;
         this.resumo = resumo;
         this.vendedorId = vendedorId;
         this.pedigree = pedigree;
@@ -150,20 +153,20 @@ public class AnimalCompraCadastroDTO {
         return cor;
     }
 
-    public Boolean getVacinado() {
-        return vacinado;
+    public StatusVacinacao getStatusVacinacao() { 
+        return statusVacinacao; 
     }
 
     public List<String> getVacinas() {
         return vacinas;
     }
 
-    public Boolean getVermifugado() {
-        return vermifugado;
+    public StatusVermifugacao getStatusVermifugacao() {
+         return statusVermifugacao; 
     }
 
-    public Boolean getCastrado() {
-        return castrado;
+    public StatusCastracao getStatusCastracao() {
+         return statusCastracao; 
     }
 
     public String getResumo() {
@@ -231,22 +234,22 @@ public class AnimalCompraCadastroDTO {
         this.cor = cor;
     }
 
-    public void setVacinado(Boolean vacinado) {
-        this.vacinado = vacinado;
+    public void setStatusVacinacao(StatusVacinacao statusVacinacao) {
+        this.statusVacinacao = statusVacinacao; 
     }
 
     public void setVacinas(List<String> vacinas) {
         this.vacinas = vacinas;
     }
 
-    public void setVermifugado(Boolean vermifugado) {
-        this.vermifugado = vermifugado;
+    public void setStatusVermifugacao(StatusVermifugacao  statusVermifugacao) {
+        this. statusVermifugacao =  statusVermifugacao; 
     }
-
-    public void setCastrado(Boolean castrado) {
-        this.castrado = castrado;
+    
+    public void setStatusCastracao(StatusCastracao statusCastracao) { 
+        this.statusCastracao = statusCastracao; 
     }
-
+    
     public void setResumo(String resumo) {
         this.resumo = resumo;
     }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.example.apanim.DTO.AnimalPerdidoCadastroDTO;
 import com.example.apanim.DTO.AnimalPerdidoResponseDTO;
 import com.example.apanim.Enum.FaixaEtariaAnimal;
+import com.example.apanim.Enum.StatusVacinacao;
 import com.example.apanim.model.AnimalPerdido;
 import com.example.apanim.model.UsuarioModel;
 import com.example.apanim.repository.AnimalPerdidoRepository;
@@ -20,6 +21,7 @@ import lombok.Getter;
 @Getter
 @Service
 public class AnimalPerdidoService {
+
     private final AnimalPerdidoRepository animalPerdidoRepository;
     private final UsuarioRepository usuarioRepository;
 
@@ -28,7 +30,6 @@ public class AnimalPerdidoService {
         this.usuarioRepository = usuarioRepository;
     }
 
-    // Método de Salvar: Sem alteração significativa, apenas formatação.
     @Transactional
     public AnimalPerdido salvarAnimalPerdido(AnimalPerdidoCadastroDTO dto, Long usuarioId) {
         animalPerdidoRepository.findByNomeAndUsuarioId(dto.getNome(), usuarioId)
@@ -42,9 +43,7 @@ public class AnimalPerdidoService {
         AnimalPerdido animalPerdido = new AnimalPerdido();
         animalPerdido.setNome(dto.getNome());
         int idadeDoAnimal = dto.getIdadeEmMeses();
-        // Assume-se que FaixaEtariaAnimal.fromIdadeMeses() está corretamente implementado.
-        FaixaEtariaAnimal faixaCorreta = FaixaEtariaAnimal.fromIdadeMeses(idadeDoAnimal); 
-        animalPerdido.setFaixaEtariaAnimal(faixaCorreta);
+        animalPerdido.setFaixaEtariaAnimal(FaixaEtariaAnimal.fromIdadeMeses(idadeDoAnimal));
         animalPerdido.setRaca(dto.getRaca());
         animalPerdido.setPorte(dto.getPorte());
         animalPerdido.setSexoAnimal(dto.getSexoAnimal());
@@ -52,34 +51,33 @@ public class AnimalPerdidoService {
         animalPerdido.setCondicaoEspecial(dto.getCondicaoEspecial());
         animalPerdido.setLocalizacao(dto.getLocalizacao());
         animalPerdido.setCor(dto.getCor());
-        animalPerdido.setVacinado(dto.isVacinado());
-        
-        if (Boolean.TRUE.equals(dto.isVacinado())) {
+
+        // --- Correção: Usando Enums e removendo booleanos antigos ---
+        animalPerdido.setStatusVacinacao(dto.getStatusVacinacao());
+        animalPerdido.setStatusVermifugacao(dto.getStatusVermifugacao());
+        animalPerdido.setStatusCastracao(dto.getStatusCastracao());
+
+        // --- Correção: Lógica de Vacinas baseada no Enum (Usando &&) ---
+        // IMPORTANTE: Verifique se o nome no seu Enum é NAO_VACINADO ou apenas NAO. Ajuste conforme necessário.
+        if (dto.getStatusVacinacao() != StatusVacinacao.NAO_SEI && dto.getStatusVacinacao() != StatusVacinacao.NAO) {
             
             if (dto.getVacinas() == null || dto.getVacinas().isEmpty()) {
-                throw new IllegalArgumentException("Se o animal é vacinado, a lista de vacinas não pode ser vazia.");
+                throw new IllegalArgumentException("Se o status indica vacinação, a lista de vacinas não pode ser vazia.");
             }
-
             animalPerdido.setVacinas(dto.getVacinas());
-
         } else {
-            // Garante que o campo de vacinas não seja nulo, se não estiver vacinado.
             animalPerdido.setVacinas(new ArrayList<>()); 
         }
         
-        animalPerdido.setVermifugado(dto.isVermifugado());
-        animalPerdido.setCastrado(dto.isCastrado());
         animalPerdido.setResumo(dto.getResumo());
         animalPerdido.setFotoUrl(dto.getFotoUrl());
         animalPerdido.setVideoUrl(dto.getVideoUrl());
-        animalPerdido.setData(dto.getData());
+        animalPerdido.setData(dto.getData()); // Campo específico de Animal Perdido
 
         animalPerdido.setUsuario(dono);
 
         return animalPerdidoRepository.save(animalPerdido);
     }
-
-    // ... (listarAnimaisPerdidos e toDTO permanecem inalterados) ...
 
     public List<AnimalPerdidoResponseDTO> listarAnimaisPerdidos() {
         return animalPerdidoRepository
@@ -101,9 +99,9 @@ public class AnimalPerdidoService {
             animalPerdido.getCondicaoEspecial(),
             animalPerdido.getLocalizacao(),
             animalPerdido.getCor(),
-            animalPerdido.getVacinado(),
-            animalPerdido.getVermifugado(),
-            animalPerdido.getCastrado(),
+            animalPerdido.getStatusVacinacao(),
+            animalPerdido.getStatusVermifugacao(),
+            animalPerdido.getStatusCastracao(),
             animalPerdido.getResumo(),
             animalPerdido.getFotoUrl(),
             animalPerdido.getVideoUrl(),
@@ -132,8 +130,7 @@ public class AnimalPerdidoService {
 
         animalPerdido.setNome(dto.getNome());
         int idadeDoAnimal = dto.getIdadeEmMeses();
-        FaixaEtariaAnimal faixaCorreta = FaixaEtariaAnimal.fromIdadeMeses(idadeDoAnimal);
-        animalPerdido.setFaixaEtariaAnimal(faixaCorreta);
+        animalPerdido.setFaixaEtariaAnimal(FaixaEtariaAnimal.fromIdadeMeses(idadeDoAnimal));
         animalPerdido.setRaca(dto.getRaca());
         animalPerdido.setPorte(dto.getPorte());
         animalPerdido.setSexoAnimal(dto.getSexoAnimal());
@@ -141,22 +138,23 @@ public class AnimalPerdidoService {
         animalPerdido.setCondicaoEspecial(dto.getCondicaoEspecial());
         animalPerdido.setLocalizacao(dto.getLocalizacao());
         animalPerdido.setCor(dto.getCor());
-        animalPerdido.setVacinado(dto.isVacinado());
+
+        // --- Correção: Atualização com Enums ---
+        animalPerdido.setStatusVacinacao(dto.getStatusVacinacao());
+        animalPerdido.setStatusVermifugacao(dto.getStatusVermifugacao());
+        animalPerdido.setStatusCastracao(dto.getStatusCastracao());
         
-        if (Boolean.TRUE.equals(dto.isVacinado())) {
+        // --- Correção: Lógica de Vacinas na Atualização ---
+        if (dto.getStatusVacinacao() != StatusVacinacao.NAO_SEI && dto.getStatusVacinacao() != StatusVacinacao.NAO) {
             
             if (dto.getVacinas() == null || dto.getVacinas().isEmpty()) {
-                throw new IllegalArgumentException("Se o animal é vacinado, a lista de vacinas não pode ser vazia.");
+                throw new IllegalArgumentException("Se o status indica vacinação, a lista de vacinas não pode ser vazia.");
             }
-
             animalPerdido.setVacinas(dto.getVacinas());
-
         } else {
             animalPerdido.setVacinas(new ArrayList<>()); 
         }
         
-        animalPerdido.setVermifugado(dto.isVermifugado());
-        animalPerdido.setCastrado(dto.isCastrado());
         animalPerdido.setResumo(dto.getResumo());
         animalPerdido.setFotoUrl(dto.getFotoUrl());
         animalPerdido.setVideoUrl(dto.getVideoUrl());
@@ -171,5 +169,4 @@ public class AnimalPerdidoService {
         
         animalPerdidoRepository.delete(animalPerdido);
     }
-    
 }

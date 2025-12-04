@@ -2,6 +2,9 @@ package com.example.apanim.DTO;
 
 import com.example.apanim.Enum.FaixaEtariaAnimal;
 import com.example.apanim.Enum.SexoAnimal;
+import com.example.apanim.Enum.StatusVacinacao;
+import com.example.apanim.Enum.StatusCastracao;
+import com.example.apanim.Enum.StatusVermifugacao;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,9 +21,9 @@ public abstract class AnimalResponseDTO {
     private String condicaoEspecial;
     private String localizacao;
     private String cor;
-    private boolean vacinado;
-    private boolean vermifugado;
-    private boolean castrado;
+    private StatusVacinacao statusVacinacao;
+    private StatusVermifugacao statusVermifugacao;
+    private StatusCastracao statusCastracao;
     private String resumo;
     private String fotoUrl;
     private String videoUrl;
@@ -31,8 +34,8 @@ public abstract class AnimalResponseDTO {
 
     public AnimalResponseDTO(Long id, String nome, FaixaEtariaAnimal faixaEtariaAnimal, String raca, String porte,
             SexoAnimal sexoAnimal, String especie, String condicaoEspecial, String localizacao, String cor,
-            boolean vacinado, boolean vermifugado, boolean castrado, String resumo, String fotoUrl, String videoUrl,
-            Long usuarioId) {
+            StatusVacinacao statusVacinacao, StatusVermifugacao statusVermifugacao, StatusCastracao statusCastracao, String resumo, 
+            String fotoUrl, String videoUrl, Long usuarioId) {
         this.id = id;
         this.nome = nome;
         this.faixaEtariaAnimal = faixaEtariaAnimal;
@@ -43,14 +46,12 @@ public abstract class AnimalResponseDTO {
         this.condicaoEspecial = condicaoEspecial;
         this.localizacao = localizacao;
         this.cor = cor;
-        this.vacinado = vacinado;
-        this.vermifugado = vermifugado;
-        this.castrado = castrado;
+        this.statusVacinacao = statusVacinacao;
+        this.statusVermifugacao = statusVermifugacao;
+        this.statusCastracao = statusCastracao;
         this.resumo = resumo;
         this.fotoUrl = fotoUrl;
         this.videoUrl = videoUrl;
         this.usuarioId = usuarioId;
     }
-
-   
 }

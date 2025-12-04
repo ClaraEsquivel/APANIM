@@ -3,6 +3,9 @@ package com.example.apanim.DTO;
 import org.hibernate.validator.constraints.URL;
 
 import com.example.apanim.Enum.SexoAnimal;
+import com.example.apanim.Enum.StatusVacinacao;
+import com.example.apanim.Enum.StatusVermifugacao;
+import com.example.apanim.Enum.StatusCastracao;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
@@ -43,13 +46,13 @@ public abstract class AnimalCadastroDTO {
     private String cor;
 
     @NotNull
-    private boolean vacinado;
+    private StatusVacinacao statusVacinacao;
 
     @NotNull
-    private boolean vermifugado;
+    private StatusVermifugacao statusVermifugacao;
 
     @NotNull
-    private boolean castrado;
+    private StatusCastracao statusCastracao;
     
     @Size(max = 100, message = "O resumo não pode exceder 100 caracteres.")
     private String resumo;
@@ -73,7 +76,7 @@ public abstract class AnimalCadastroDTO {
             @NotNull(message = "O sexo é obrigatório.") SexoAnimal sexoAnimal,
             @NotBlank(message = "A espécie é obrigatório.") String especie, String condicaoEspecial,
             @NotBlank(message = "A localização é obrigatória.") String localizacao, @NotBlank String cor,
-            @NotNull boolean vacinado, @NotNull boolean vermifugado, @NotNull boolean castrado,
+            @NotNull StatusVacinacao statusVacinacao, @NotNull StatusVermifugacao statusVermifugacao, @NotNull StatusCastracao statusCastracao,
             @Size(max = 100, message = "O resumo não pode exceder 100 caracteres.") String resumo, @URL String fotoUrl,
             @URL String videoUrl, @NotNull Long usuarioId) {
         this.id = id;
@@ -86,14 +89,15 @@ public abstract class AnimalCadastroDTO {
         this.condicaoEspecial = condicaoEspecial;
         this.localizacao = localizacao;
         this.cor = cor;
-        this.vacinado = vacinado;
-        this.vermifugado = vermifugado;
-        this.castrado = castrado;
+        this.statusVacinacao = statusVacinacao;
+        this.statusVermifugacao = statusVermifugacao;
+        this.statusCastracao = statusCastracao;
         this.resumo = resumo;
         this.fotoUrl = fotoUrl;
         this.videoUrl = videoUrl;
         this.usuarioId = usuarioId;
     }
+
 
     // Getters
     public Long getId() { return id; }
@@ -106,9 +110,9 @@ public abstract class AnimalCadastroDTO {
     public String getCondicaoEspecial() { return condicaoEspecial; }
     public String getLocalizacao() { return localizacao; }
     public String getCor() { return cor; }
-    public boolean isVacinado() { return vacinado; }
-    public boolean isVermifugado() { return vermifugado; }
-    public boolean isCastrado() { return castrado; }
+    public StatusVacinacao getStatusVacinacao() { return statusVacinacao; }
+    public StatusVermifugacao getStatusVermifugacao() { return statusVermifugacao; }
+    public StatusCastracao getStatusCastracao() { return statusCastracao; }
     public String getResumo() { return resumo; }
     public String getFotoUrl() { return fotoUrl; }
     public String getVideoUrl() { return videoUrl; }
@@ -125,9 +129,9 @@ public abstract class AnimalCadastroDTO {
     public void setCondicaoEspecial(String condicaoEspecial) { this.condicaoEspecial = condicaoEspecial; }
     public void setLocalizacao(String localizacao) { this.localizacao = localizacao; }
     public void setCor(String cor) { this.cor = cor; }
-    public void setVacinado(boolean vacinado) { this.vacinado = vacinado; }
-    public void setVermifugado(boolean vermifugado) { this.vermifugado = vermifugado; }
-    public void setCastrado(boolean castrado) { this.castrado = castrado; }
+    public void setStatusVacinacao(StatusVacinacao statusVacinacao) { this.statusVacinacao = statusVacinacao; }
+    public void setStatusVermifugacao(StatusVermifugacao  statusVermifugacao) { this. statusVermifugacao =  statusVermifugacao; }
+    public void setStatusCastracao(StatusCastracao statusCastracao) { this.statusCastracao = statusCastracao; }
     public void setResumo(String resumo) { this.resumo = resumo; }
     public void setFotoUrl(String fotoUrl) { this.fotoUrl = fotoUrl; }
     public void setVideoUrl(String videoUrl) { this.videoUrl = videoUrl; }

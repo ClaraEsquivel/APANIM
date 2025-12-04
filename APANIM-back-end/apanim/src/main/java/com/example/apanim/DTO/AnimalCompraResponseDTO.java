@@ -5,6 +5,9 @@ import java.util.List;
 
 import com.example.apanim.Enum.FaixaEtariaAnimal;
 import com.example.apanim.Enum.SexoAnimal;
+import com.example.apanim.Enum.StatusCastracao;
+import com.example.apanim.Enum.StatusVacinacao;
+import com.example.apanim.Enum.StatusVermifugacao;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -23,10 +26,10 @@ public class AnimalCompraResponseDTO {
     private String condicaoEspecial;
     private String localizacao;
     private String cor;
-    private Boolean vacinado;
+    private StatusVacinacao statusVacinacao;
     private List<String> vacinas;
-    private Boolean vermifugado;
-    private Boolean castrado;
+    private StatusVermifugacao statusVermifugacao;
+    private StatusCastracao statusCastracao;
     private String resumo;
     private Long vendedorId;
     private Boolean pedigree;
@@ -41,7 +44,7 @@ public class AnimalCompraResponseDTO {
 
     public AnimalCompraResponseDTO(Long id, String nome, FaixaEtariaAnimal faixaEtariaAnimal, String raca, String porte,
             SexoAnimal sexoAnimal, String especie, String condicaoEspecial, String localizacao,
-            String cor, Boolean vacinado, List<String> vacinas, Boolean vermifugado, Boolean castrado, String resumo,
+            String cor, StatusVacinacao statusVacinacao, List<String> vacinas, StatusVermifugacao statusVermifugacao, StatusCastracao statusCastracao, String resumo,
             Long vendedorId, Boolean pedigree, BigDecimal valorDoAnimal, String fotoUrl, String videoUrl, String emailVendedor,
             List<String> telefoneVendedor) {
         this.id = id;
@@ -54,10 +57,10 @@ public class AnimalCompraResponseDTO {
         this.condicaoEspecial = condicaoEspecial;
         this.localizacao = localizacao;
         this.cor = cor;
-        this.vacinado = vacinado;
+        this.statusVacinacao = statusVacinacao;
         this.vacinas = vacinas;
-        this.vermifugado = vermifugado;
-        this.castrado = castrado;
+        this.statusVermifugacao = statusVermifugacao;
+        this.statusCastracao = statusCastracao;
         this.resumo = resumo;
         this.vendedorId = vendedorId;
         this.pedigree = pedigree;

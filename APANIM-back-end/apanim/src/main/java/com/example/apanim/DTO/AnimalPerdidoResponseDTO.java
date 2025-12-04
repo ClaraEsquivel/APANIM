@@ -5,6 +5,9 @@ import java.util.List;
 
 import com.example.apanim.Enum.FaixaEtariaAnimal;
 import com.example.apanim.Enum.SexoAnimal;
+import com.example.apanim.Enum.StatusVacinacao;
+import com.example.apanim.Enum.StatusCastracao;
+import com.example.apanim.Enum.StatusVermifugacao;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -18,7 +21,11 @@ public class AnimalPerdidoResponseDTO extends AnimalResponseDTO {
     private String emailUsuario;
     private List<String> telefoneUsuario;
     
-public AnimalPerdidoResponseDTO(
+    public AnimalPerdidoResponseDTO(){
+        
+    }
+
+    public AnimalPerdidoResponseDTO(
             Long id, 
             String nome, 
             FaixaEtariaAnimal faixaEtariaAnimal, 
@@ -29,9 +36,9 @@ public AnimalPerdidoResponseDTO(
             String condicaoEspecial, 
             String localizacao, 
             String cor, 
-            Boolean vacinado, 
-            Boolean vermifugado, 
-            Boolean castrado, 
+            StatusVacinacao statusVacinacao, 
+            StatusVermifugacao statusVermifugacao, 
+            StatusCastracao statusCastracao, 
             String resumo, 
             String fotoUrl, 
             String videoUrl, 
@@ -42,13 +49,14 @@ public AnimalPerdidoResponseDTO(
             List<String> telefoneUsuario) {
         
         super(id, nome, faixaEtariaAnimal, raca, porte, sexoAnimal, especie, 
-              condicaoEspecial, localizacao, cor, vacinado, vermifugado, 
-              castrado, resumo, fotoUrl, videoUrl, usuarioId);
+              condicaoEspecial, localizacao, cor, statusVacinacao, statusVermifugacao, 
+              statusCastracao, resumo, fotoUrl, videoUrl, usuarioId);
         
         this.data = data;
         this.vacinas = vacinas;
         this.emailUsuario = emailUsuario;
         this.telefoneUsuario = telefoneUsuario;
     }
+
 
 }

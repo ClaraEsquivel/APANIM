@@ -2,12 +2,20 @@ package com.example.apanim.model;
 
 import com.example.apanim.Enum.FaixaEtariaAnimal;
 import com.example.apanim.Enum.SexoAnimal;
+import com.example.apanim.Enum.StatusCastracao;
+import com.example.apanim.Enum.StatusVacinacao;
+import com.example.apanim.Enum.StatusVermifugacao;
+
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 
+@Getter
+@Setter
 @Entity
 @Table(name = "tab_animais_compra")
 public class AnimalCompra {
@@ -31,9 +39,18 @@ public class AnimalCompra {
     private String condicaoEspecial;
     private String localizacao;
     private String cor;
-    private Boolean vacinado;
-    private Boolean vermifugado;
-    private Boolean castrado;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status_vacinacao")
+    private StatusVacinacao statusVacinacao;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status_vermifugacao")
+    private StatusVermifugacao statusVermifugacao;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status_castracao")
+    private StatusCastracao statusCastracao;
 
     @Column(length = 100)
     private String resumo;
@@ -64,7 +81,7 @@ public class AnimalCompra {
     
     public AnimalCompra(Long id, String nome, FaixaEtariaAnimal faixaEtariaAnimal, String raca, String porte,
             SexoAnimal sexoAnimal, String especie, String condicaoEspecial, String localizacao,
-            String cor, Boolean vacinado, Boolean vermifugado, Boolean castrado, String resumo, List<String> vacinas,
+            String cor, StatusVacinacao statusVacinacao,  StatusVermifugacao statusVermifugacao, StatusCastracao statusCastracao, String resumo, List<String> vacinas,
             VendedorModel vendedor, Boolean pedigree, BigDecimal valorDoAnimal, String fotoUrl, String videoUrl) {
         this.id = id;
         this.nome = nome;
@@ -76,9 +93,9 @@ public class AnimalCompra {
         this.condicaoEspecial = condicaoEspecial;
         this.localizacao = localizacao;
         this.cor = cor;
-        this.vacinado = vacinado;
-        this.vermifugado = vermifugado;
-        this.castrado = castrado;
+        this.statusVacinacao = statusVacinacao;
+        this.statusVermifugacao = statusVermifugacao;
+        this.statusCastracao = statusCastracao;
         this.resumo = resumo;
         this.vacinas = vacinas;
         this.vendedor = vendedor;
@@ -88,165 +105,4 @@ public class AnimalCompra {
         this.videoUrl = videoUrl;
     }
 
-    // Getters
-    public Long getId() {
-        return id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public FaixaEtariaAnimal getFaixaEtariaAnimal() {
-        return faixaEtariaAnimal;
-    }
-
-    public String getRaca() {
-        return raca;
-    }
-
-    public String getPorte() {
-        return porte;
-    }
-
-    public SexoAnimal getSexoAnimal() {
-        return sexoAnimal;
-    }
-
-    public String getEspecie() {
-        return especie;
-    }
-
-    public String getCondicaoEspecial() {
-        return condicaoEspecial;
-    }
-
-    public String getLocalizacao() {
-        return localizacao;
-    }
-
-    public String getCor() {
-        return cor;
-    }
-
-    public Boolean getVacinado() {
-        return vacinado;
-    }
-
-    public Boolean getVermifugado() {
-        return vermifugado;
-    }
-
-    public Boolean getCastrado() {
-        return castrado;
-    }
-
-    public String getResumo() {
-        return resumo;
-    }
-
-    public List<String> getVacinas() {
-        return vacinas;
-    }
-
-    public VendedorModel getVendedor() {
-        return vendedor;
-    }
-
-    public Boolean getPedigree() {
-        return pedigree;
-    }
-
-    public BigDecimal getValorDoAnimal() {
-        return valorDoAnimal;
-    }
-
-    public String getFotoUrl() {
-        return fotoUrl;
-    }
-
-    public String getVideoUrl() {
-        return videoUrl;
-    }
-
-    // Setters
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public void setFaixaEtariaAnimal(FaixaEtariaAnimal faixaEtariaAnimal) {
-        this.faixaEtariaAnimal = faixaEtariaAnimal;
-    }
-
-    public void setRaca(String raca) {
-        this.raca = raca;
-    }
-
-    public void setPorte(String porte) {
-        this.porte = porte;
-    }
-
-    public void setSexoAnimal(SexoAnimal sexoAnimal) {
-        this.sexoAnimal = sexoAnimal;
-    }
-
-    public void setEspecie(String especie) {
-        this.especie = especie;
-    }
-
-    public void setCondicaoEspecial(String condicaoEspecial) {
-        this.condicaoEspecial = condicaoEspecial;
-    }
-
-    public void setLocalizacao(String localizacao) {
-        this.localizacao = localizacao;
-    }
-
-    public void setCor(String cor) {
-        this.cor = cor;
-    }
-
-    public void setVacinado(Boolean vacinado) {
-        this.vacinado = vacinado;
-    }
-
-    public void setVermifugado(Boolean vermifugado) {
-        this.vermifugado = vermifugado;
-    }
-
-    public void setCastrado(Boolean castrado) {
-        this.castrado = castrado;
-    }
-
-    public void setResumo(String resumo) {
-        this.resumo = resumo;
-    }
-
-    public void setVacinas(List<String> vacinas) {
-        this.vacinas = vacinas;
-    }
-
-    public void setVendedor(VendedorModel vendedor) {
-        this.vendedor = vendedor;
-    }
-
-    public void setPedigree(Boolean pedigree) {
-        this.pedigree = pedigree;
-    }
-
-    public void setValorDoAnimal(BigDecimal valorDoAnimal) {
-        this.valorDoAnimal = valorDoAnimal;
-    }
-
-    public void setFotoUrl(String fotoUrl) {
-        this.fotoUrl = fotoUrl;
-    }
-
-    public void setVideoUrl(String videoUrl) {
-        this.videoUrl = videoUrl;
-    }
 }

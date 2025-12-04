@@ -3,6 +3,7 @@ package com.example.apanim.service;
 import com.example.apanim.DTO.AnimalAdocaoCadastroDTO;
 import com.example.apanim.DTO.AnimalAdocaoResponseDTO;
 import com.example.apanim.Enum.FaixaEtariaAnimal;
+import com.example.apanim.Enum.StatusVacinacao;
 import com.example.apanim.model.AnimalAdocao;
 import com.example.apanim.model.UsuarioModel;
 import com.example.apanim.repository.AnimalAdocaoRepository;
@@ -17,6 +18,7 @@ import java.util.List;
 
 @Service
 public class AnimalAdocaoService {
+
     private final AnimalAdocaoRepository animalAdocaoRepository;
     private final UsuarioRepository usuarioRepository;
 
@@ -25,10 +27,10 @@ public class AnimalAdocaoService {
         this.usuarioRepository = usuarioRepository;
     }
 
-    @SuppressWarnings("null")
+    @Transactional
     public AnimalAdocao salvarAnimalAdocao(AnimalAdocaoCadastroDTO dto, Long usuarioId) {
         animalAdocaoRepository.findByNomeAndUsuarioId(dto.getNome(), usuarioId)
-            .ifPresent(u ->{
+            .ifPresent(u -> {
                 throw new IllegalArgumentException("Você já cadastrou um animal com este nome.");
             });
 
@@ -36,12 +38,11 @@ public class AnimalAdocaoService {
                 .orElseThrow(() -> new IllegalArgumentException("Usuário não encontrado."));
         
         AnimalAdocao animalAdocao = new AnimalAdocao();
+        
+        // Dados básicos
         animalAdocao.setNome(dto.getNome());
         int idadeDoAnimal = dto.getIdadeEmMeses();
-        
-        FaixaEtariaAnimal faixaCorreta = FaixaEtariaAnimal.fromIdadeMeses(idadeDoAnimal);
-        
-        animalAdocao.setFaixaEtariaAnimal(faixaCorreta);
+        animalAdocao.setFaixaEtariaAnimal(FaixaEtariaAnimal.fromIdadeMeses(idadeDoAnimal));
         animalAdocao.setRaca(dto.getRaca());
         animalAdocao.setPorte(dto.getPorte());
         animalAdocao.setSexoAnimal(dto.getSexoAnimal());
@@ -49,25 +50,26 @@ public class AnimalAdocaoService {
         animalAdocao.setCondicaoEspecial(dto.getCondicaoEspecial());
         animalAdocao.setLocalizacao(dto.getLocalizacao());
         animalAdocao.setCor(dto.getCor());
-        animalAdocao.setVacinado(dto.isVacinado());
-        if (Boolean.TRUE.equals(dto.isVacinado())) {
+
+        // --- Alteração: Usando Enums de Status ---
+        animalAdocao.setStatusVacinacao(dto.getStatusVacinacao());
+        animalAdocao.setStatusVermifugacao(dto.getStatusVermifugacao());
+        animalAdocao.setStatusCastracao(dto.getStatusCastracao());
+
+        if (dto.getStatusVacinacao() != StatusVacinacao.NAO_SEI && dto.getStatusVacinacao() != StatusVacinacao.NAO) { 
             
             if (dto.getVacinas() == null || dto.getVacinas().isEmpty()) {
-                throw new IllegalArgumentException("Se o animal é vacinado, a lista de vacinas não pode ser vazia.");
+                throw new IllegalArgumentException("Se o status de vacinação indica que o animal foi vacinado, a lista de vacinas não pode ser vazia.");
             }
-
             animalAdocao.setVacinas(dto.getVacinas());
 
         } else {
-        
             animalAdocao.setVacinas(new ArrayList<>()); 
         }
-        animalAdocao.setVermifugado(dto.isVermifugado());
-        animalAdocao.setCastrado(dto.isCastrado());
+
         animalAdocao.setResumo(dto.getResumo());
         animalAdocao.setFotoUrl(dto.getFotoUrl());
         animalAdocao.setVideoUrl(dto.getVideoUrl());
-
         animalAdocao.setUsuario(dono);
 
         return animalAdocaoRepository.save(animalAdocao);
@@ -82,6 +84,7 @@ public class AnimalAdocaoService {
     }
 
     public AnimalAdocaoResponseDTO toDTO(AnimalAdocao animalAdocao) {
+        // --- Alteração: Passando os Enums para o construtor atualizado do DTO ---
         return new AnimalAdocaoResponseDTO(
             animalAdocao.getId(),
             animalAdocao.getNome(),
@@ -93,9 +96,9 @@ public class AnimalAdocaoService {
             animalAdocao.getCondicaoEspecial(),
             animalAdocao.getLocalizacao(),
             animalAdocao.getCor(),
-            animalAdocao.getVacinado(),
-            animalAdocao.getVermifugado(),
-            animalAdocao.getCastrado(),
+            animalAdocao.getStatusVacinacao(),     // Enum
+            animalAdocao.getStatusVermifugacao(),  // Enum
+            animalAdocao.getStatusCastracao(),     // Enum
             animalAdocao.getResumo(),
             animalAdocao.getFotoUrl(),
             animalAdocao.getVideoUrl(),
@@ -107,24 +110,20 @@ public class AnimalAdocaoService {
     }
 
     @Transactional
-    @SuppressWarnings("null")
     public AnimalAdocao atualizar(Long id, AnimalAdocaoCadastroDTO dto) {
         AnimalAdocao animalAdocao = animalAdocaoRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Animal não encontrado."));
 
         if (!animalAdocao.getNome().equals(dto.getNome())) {
-        animalAdocaoRepository.findByNomeAndUsuarioId(dto.getNome(), dto.getUsuarioId())
-            .ifPresent(u -> {
-                throw new IllegalArgumentException("Você já cadastrou um animal com este novo nome.");
-            });
+            animalAdocaoRepository.findByNomeAndUsuarioId(dto.getNome(), dto.getUsuarioId())
+                .ifPresent(u -> {
+                    throw new IllegalArgumentException("Você já cadastrou um animal com este novo nome.");
+                });
         }
 
+        // Atualização dos dados
         animalAdocao.setNome(dto.getNome());
-        int idadeDoAnimal = dto.getIdadeEmMeses();
-        
-        FaixaEtariaAnimal faixaCorreta = FaixaEtariaAnimal.fromIdadeMeses(idadeDoAnimal);
-        
-        animalAdocao.setFaixaEtariaAnimal(faixaCorreta);
+        animalAdocao.setFaixaEtariaAnimal(FaixaEtariaAnimal.fromIdadeMeses(dto.getIdadeEmMeses()));
         animalAdocao.setRaca(dto.getRaca());
         animalAdocao.setPorte(dto.getPorte());
         animalAdocao.setSexoAnimal(dto.getSexoAnimal());
@@ -132,21 +131,24 @@ public class AnimalAdocaoService {
         animalAdocao.setCondicaoEspecial(dto.getCondicaoEspecial());
         animalAdocao.setLocalizacao(dto.getLocalizacao());
         animalAdocao.setCor(dto.getCor());
-        animalAdocao.setVacinado(dto.isVacinado());
-        if (Boolean.TRUE.equals(dto.isVacinado())) {
+
+        // --- Alteração: Atualizando Status com Enums ---
+        animalAdocao.setStatusVacinacao(dto.getStatusVacinacao());
+        animalAdocao.setStatusVermifugacao(dto.getStatusVermifugacao());
+        animalAdocao.setStatusCastracao(dto.getStatusCastracao());
+
+        // Lógica de Vacinas na Atualização
+        if (dto.getStatusVacinacao() != StatusVacinacao.NAO_SEI && dto.getStatusVacinacao() != StatusVacinacao.NAO) {
             
             if (dto.getVacinas() == null || dto.getVacinas().isEmpty()) {
                 throw new IllegalArgumentException("Se o animal é vacinado, a lista de vacinas não pode ser vazia.");
             }
-
             animalAdocao.setVacinas(dto.getVacinas());
 
         } else {
-        
             animalAdocao.setVacinas(new ArrayList<>()); 
         }
-        animalAdocao.setVermifugado(dto.isVermifugado());
-        animalAdocao.setCastrado(dto.isCastrado());
+
         animalAdocao.setResumo(dto.getResumo());
         animalAdocao.setFotoUrl(dto.getFotoUrl());
         animalAdocao.setVideoUrl(dto.getVideoUrl());
@@ -154,14 +156,12 @@ public class AnimalAdocaoService {
         return animalAdocaoRepository.save(animalAdocao);
     }
 
-    @SuppressWarnings("null")
+    @Transactional
     public void excluir(Long id) {
-        AnimalAdocao animalAdocao = animalAdocaoRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Animal não encontrado."));
-        
-        if (animalAdocao != null) {
-            animalAdocaoRepository.delete(animalAdocao);
+        if (animalAdocaoRepository.existsById(id)) {
+            animalAdocaoRepository.deleteById(id);
+        } else {
+            throw new IllegalArgumentException("Animal não encontrado.");
         }
     }
-
 }

@@ -5,6 +5,9 @@ import java.util.List;
 
 import com.example.apanim.Enum.FaixaEtariaAnimal;
 import com.example.apanim.Enum.SexoAnimal;
+import com.example.apanim.Enum.StatusCastracao;
+import com.example.apanim.Enum.StatusVacinacao;
+import com.example.apanim.Enum.StatusVermifugacao;
 
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
@@ -30,10 +33,11 @@ public class AnimalPerdido extends AnimalModel {
 
     public AnimalPerdido(Long id, String nome, FaixaEtariaAnimal faixaEtariaAnimal, String raca, String porte,
             SexoAnimal sexoAnimal, String especie, String condicaoEspecial, String localizacao, String cor,
-            Boolean vacinado, Boolean vermifugado, Boolean castrado, String resumo, String fotoUrl, String videoUrl,
-            UsuarioModel usuario, LocalDate data, List<String> vacinas) {
-        super(id, nome, faixaEtariaAnimal, raca, porte, sexoAnimal, especie, condicaoEspecial, localizacao, cor,
-                vacinado, vermifugado, castrado, resumo, fotoUrl, videoUrl, usuario);
+            String resumo, String fotoUrl, String videoUrl, UsuarioModel usuario, LocalDate data, 
+            List<String> vacinas, StatusVacinacao statusVacinacao, StatusCastracao statusCastracao, 
+            StatusVermifugacao statusVermifugacao) {
+        super(id, nome, faixaEtariaAnimal, raca, porte, sexoAnimal, especie, condicaoEspecial, localizacao, cor, statusVacinacao, statusCastracao, statusVermifugacao, 
+                resumo, fotoUrl, videoUrl, usuario);
         this.data = data;
         this.vacinas = vacinas;
     }
