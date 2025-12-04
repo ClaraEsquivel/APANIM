@@ -148,13 +148,11 @@ const PerfilUsuario = () => {
                     {/* Header do Perfil */}
                     <div className="profile-header">
                         <div className="profile-cover">
-                            <button className="edit-cover-btn" title="Alterar capa">📷</button>
                         </div>
                         
                         <div className="profile-main-info">
                             <div className="profile-avatar-container">
                                 <img src={PerfilImg} alt="Foto de perfil" className="profile-avatar" />
-                                <button className="edit-avatar-btn" title="Alterar foto">📷</button>
                             </div>
                             
                             <div className="profile-user-data">
@@ -170,19 +168,15 @@ const PerfilUsuario = () => {
                                     {userData.objetivos?.includes('comprar') && (
                                         <span className="badge badge-comprador">🛒 Comprador</span>
                                     )}
+
+                                    <div className="profile-actions">
+                                        <button className="btn-secondary" onClick={handleLogout}>
+                                            <span>Sair</span>
+                                        </button>
+                                    </div>
+                                    
                                 </div>
-                            </div>
-                            
-                            <div className="profile-actions">
-                                <button className="btn btn-primary">
-                                    <span>✏️</span>
-                                    <span>Editar Perfil</span>
-                                </button>
-                                <button className="btn btn-secondary" onClick={handleLogout}>
-                                    <span>🚪</span>
-                                    <span>Sair</span>
-                                </button>
-                            </div>
+                            </div> 
                         </div>
                     </div>
 
@@ -202,13 +196,13 @@ const PerfilUsuario = () => {
                             <span>🐾</span>
                             <span>Meus Animais</span>
                         </button>
-                        <button 
+                        {/* <button 
                             className={`tab-btn ${activeTab === 'planos' ? 'active' : ''}`}
                             onClick={() => setActiveTab('planos')}
                         >
                             <span>⭐</span>
                             <span>Planos</span>
-                        </button>
+                        </button> */}
                         <button 
                             className={`tab-btn ${activeTab === 'configuracoes' ? 'active' : ''}`}
                             onClick={() => setActiveTab('configuracoes')}
@@ -329,12 +323,11 @@ const PerfilUsuario = () => {
                             <div className="tab-content active">
                                 <div className="animais-header">
                                     <h2>Meus Animais</h2>
-                                    <Link to="/cadastro-animal-adocao">
+                                    {/* <Link to="/cadastro-animal-adocao">
                                         <button className="btn btn-primary">
-                                            <span>➕</span>
-                                            <span>Cadastrar Animal</span>
+                                            <span>➕ Cadastrar Animal</span>
                                         </button>
-                                    </Link>
+                                    </Link> */}
                                 </div>
 
                                 <div className="animais-filters">
@@ -369,147 +362,12 @@ const PerfilUsuario = () => {
                                     <div className="empty-state">
                                         <div className="empty-icon">🐾</div>
                                         <h3>Nenhum animal cadastrado</h3>
-                                        <p>Cadastre seu primeiro animal para adoção ou compra</p>
+                                        <p>Cadastre seu primeiro animal para adoção</p>
                                         <Link to="/cadastro-animal-adocao">
                                             <button className="btn btn-primary">
                                                 Cadastrar Agora
                                             </button>
                                         </Link>
-                                    </div>
-                                </div>
-                            </div>
-                        )}
-
-                        {/* ABA: PLANOS */}
-                        {activeTab === 'planos' && (
-                            <div className="tab-content active">
-                                <div className="planos-header">
-                                    <h2>Escolha o Melhor Plano para Você</h2>
-                                    <p>Desbloqueie recursos exclusivos e ajude ainda mais os animais</p>
-                                </div>
-
-                                <div className="current-plan-banner">
-                                    <div className="banner-icon">⭐</div>
-                                    <div className="banner-content">
-                                        <h3>Seu Plano Atual: <span>Gratuito</span></h3>
-                                        <p>Aproveite todos os recursos do seu plano atual</p>
-                                    </div>
-                                </div>
-
-                                <div className="planos-grid">
-                                    {/* Plano Gratuito */}
-                                    <div className="plano-card">
-                                        <div className="plano-badge">Atual</div>
-                                        <div className="plano-icon">🐾</div>
-                                        <h3 className="plano-nome">Gratuito</h3>
-                                        <div className="plano-preco">
-                                            <span className="preco">R$ 0</span>
-                                            <span className="periodo">/mês</span>
-                                        </div>
-                                        <ul className="plano-features">
-                                            <li>✓ Cadastro de até 3 animais</li>
-                                            <li>✓ Busca básica de animais</li>
-                                            <li>✓ Chat com adotantes</li>
-                                            <li>✓ Perfil público</li>
-                                            <li>✗ Destaque nos resultados</li>
-                                            <li>✗ Análise de compatibilidade</li>
-                                            <li>✗ Suporte prioritário</li>
-                                        </ul>
-                                        <button className="btn btn-secondary" disabled>Plano Atual</button>
-                                    </div>
-
-                                    {/* Plano Amigo */}
-                                    <div className="plano-card">
-                                        <div className="plano-icon">🐶</div>
-                                        <h3 className="plano-nome">Amigo</h3>
-                                        <div className="plano-preco">
-                                            <span className="preco">R$ 19,90</span>
-                                            <span className="periodo">/mês</span>
-                                        </div>
-                                        <ul className="plano-features">
-                                            <li>✓ Cadastro de até 10 animais</li>
-                                            <li>✓ Busca avançada</li>
-                                            <li>✓ Chat ilimitado</li>
-                                            <li>✓ Perfil destacado</li>
-                                            <li>✓ Destaque moderado</li>
-                                            <li>✓ Relatórios mensais</li>
-                                            <li>✗ Suporte prioritário</li>
-                                        </ul>
-                                        <button className="btn btn-primary" onClick={() => handleSelectPlan('Amigo')}>
-                                            Assinar Agora
-                                        </button>
-                                    </div>
-
-                                    {/* Plano Protetor (Destaque) */}
-                                    <div className="plano-card plano-destaque">
-                                        <div className="plano-badge popular">Mais Popular</div>
-                                        <div className="plano-icon">❤️</div>
-                                        <h3 className="plano-nome">Protetor</h3>
-                                        <div className="plano-preco">
-                                            <span className="preco">R$ 39,90</span>
-                                            <span className="periodo">/mês</span>
-                                        </div>
-                                        <ul className="plano-features">
-                                            <li>✓ Cadastro ilimitado</li>
-                                            <li>✓ Busca premium</li>
-                                            <li>✓ Chat prioritário</li>
-                                            <li>✓ Perfil premium</li>
-                                            <li>✓ Máximo destaque</li>
-                                            <li>✓ Análise de compatibilidade IA</li>
-                                            <li>✓ Suporte prioritário 24/7</li>
-                                        </ul>
-                                        <button className="btn btn-primary" onClick={() => handleSelectPlan('Protetor')}>
-                                            Assinar Agora
-                                        </button>
-                                    </div>
-
-                                    {/* Plano ONG */}
-                                    <div className="plano-card">
-                                        <div className="plano-icon">🏢</div>
-                                        <h3 className="plano-nome">ONG/Instituição</h3>
-                                        <div className="plano-preco">
-                                            <span className="preco">R$ 99,90</span>
-                                            <span className="periodo">/mês</span>
-                                        </div>
-                                        <ul className="plano-features">
-                                            <li>✓ Tudo do plano Protetor</li>
-                                            <li>✓ Múltiplos usuários</li>
-                                            <li>✓ Dashboard administrativo</li>
-                                            <li>✓ Relatórios avançados</li>
-                                            <li>✓ Página institucional</li>
-                                            <li>✓ API de integração</li>
-                                            <li>✓ Gestor de conta dedicado</li>
-                                        </ul>
-                                        <button className="btn btn-primary" onClick={() => handleSelectPlan('ONG')}>
-                                            Assinar Agora
-                                        </button>
-                                    </div>
-                                </div>
-
-                                {/* Benefícios Gerais */}
-                                <div className="beneficios-section">
-                                    <h3>Por que assinar um plano premium?</h3>
-                                    <div className="beneficios-grid">
-                                        <div className="beneficio-item">
-                                            <span className="beneficio-icon">🚀</span>
-                                            <h4>Mais Visibilidade</h4>
-                                            <p>Seus animais aparecem em destaque nas buscas</p>
-                                        </div>
-                                        <div className="beneficio-item">
-                                            <span className="beneficio-icon">🤖</span>
-                                            <h4>IA Integrada</h4>
-                                            <p>Análise de compatibilidade entre adotante e pet</p>
-                                        </div>
-                                        <div className="beneficio-item">
-                                            <span className="beneficio-icon">📊</span>
-                                            <h4>Relatórios</h4>
-                                            <p>Acompanhe estatísticas e performance</p>
-                                        </div>
-                                        <div className="beneficio-item">
-                                            <span className="beneficio-icon">💬</span>
-                                            <h4>Suporte Premium</h4>
-                                            <p>Atendimento prioritário quando precisar</p>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
