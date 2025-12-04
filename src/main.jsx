@@ -3,6 +3,11 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './index.css'
 
+// Limpar dados antigos do localStorage
+localStorage.removeItem('animais_adocao');
+localStorage.removeItem('animais_venda');
+localStorage.removeItem('animais_perdidos');
+
 // Importação das páginas
 import MenuPage from './pages/MenuPage'
 import AdocaoAnimalPage from './pages/AdocaoAnimalPage'
@@ -21,12 +26,14 @@ import CadastroUsuarioPage from './pages/CadastroUsuarioPage'
 import CadastroVendedorPage from './pages/CadastroVendedorPage'
 import PerfilUsuarioPage from './pages/PerfilUsuarioPage'
 import PerfilVendedorPage from './pages/PerfilVendedorPage'
+import FormaPagamentoPage from './pages/FormaPagamentoPage'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
       <Routes>
         {/* Página Inicial */}
+        <Route path="/" element={<MenuPage />} />
         <Route path="/menu" element={<MenuPage />} />
         
         {/* Páginas de Animais */}
@@ -44,6 +51,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="/parceria" element={<ParceriaPage />} />
         <Route path="/servicos" element={<ServicosPage />} />
         <Route path="/planos-assinatura" element={<PlanosAssinaturaPage />} />
+        <Route path="/forma-pagamento" element={<FormaPagamentoPage />} />
         
         {/* Páginas de Usuário */}
         <Route path="/cadastro" element={<CadastroInicialPage />} />
