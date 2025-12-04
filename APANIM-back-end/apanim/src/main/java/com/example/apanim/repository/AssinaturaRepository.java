@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @Repository
 public interface AssinaturaRepository extends JpaRepository<Assinatura, Long> {
-    Optional<Assinatura> findByUsuarioId(Long usuarioId);
-    Optional<Assinatura> findByUsuarioIdAndStatus(Long usuarioId, StatusAssinatura status);
+    Optional<Assinatura> findByVendedorId(Long usuarioId);
+    Optional<Assinatura> findByVendedorIdAndStatus(Long usuarioId, StatusAssinatura status);
     List<Assinatura> findByStatusAndDataDeExpiracaoBefore(StatusAssinatura status, LocalDate hoje);
 }

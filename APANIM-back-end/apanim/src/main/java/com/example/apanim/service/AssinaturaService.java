@@ -3,10 +3,10 @@ package com.example.apanim.service;
 import com.example.apanim.Enum.StatusAssinatura;
 import com.example.apanim.model.Assinatura;
 import com.example.apanim.model.Plano;
-import com.example.apanim.model.UsuarioModel;
+import com.example.apanim.model.VendedorModel;
 import com.example.apanim.repository.AssinaturaRepository;
 import com.example.apanim.repository.PlanoRepository;
-import com.example.apanim.repository.UsuarioRepository;
+import com.example.apanim.repository.VendedorRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -17,30 +17,30 @@ import java.util.Optional;
 public class AssinaturaService {
 
     private final AssinaturaRepository assinaturaRepository;
-    private final UsuarioRepository usuarioRepository;
+    private final VendedorRepository vendedorRepository;
     private final PlanoRepository planoRepository;
     private final PagamentoService pagamentoService; // Adicionado para cancelamento
 
     public AssinaturaService(AssinaturaRepository assinaturaRepository,
-                             UsuarioRepository usuarioRepository,
+                             VendedorRepository vendedorRepository,
                              PlanoRepository planoRepository,
                              PagamentoService pagamentoService) { // Adicionado
         this.assinaturaRepository = assinaturaRepository;
-        this.usuarioRepository = usuarioRepository;
+        this.vendedorRepository = vendedorRepository;
         this.planoRepository = planoRepository;
         this.pagamentoService = pagamentoService; // Adicionado
     }
 
     @Transactional
-    public Assinatura criarAssinatura(Long usuarioId, Long planoId) {
-        UsuarioModel usuario = usuarioRepository.findById(usuarioId)
+    public Assinatura criarAssinatura(Long vendedorId, Long planoId) {
+        VendedorModel vendedor = vendedorRepository.findById(vendedorId)
                 .orElseThrow(() -> new IllegalArgumentException("Usuário não encontrado."));
 
         Plano plano = planoRepository.findById(planoId)
                 .orElseThrow(() -> new IllegalArgumentException("Plano não encontrado."));
 
         Optional<Assinatura> assinaturaAtiva = 
-            assinaturaRepository.findByUsuarioIdAndStatus(usuarioId, StatusAssinatura.ATIVA);
+            assinaturaRepository.findByVendedorIdAndStatus(vendedorId, StatusAssinatura.ATIVA);
         
         if (assinaturaAtiva.isPresent()) {
             throw new IllegalStateException("Usuário já possui uma assinatura ativa.");
@@ -50,7 +50,7 @@ public class AssinaturaService {
         // Por enquanto, vamos criar uma nova
         
         Assinatura novaAssinatura = new Assinatura();
-        novaAssinatura.setUsuario(usuario);
+        novaAssinatura.setVendedor(vendedor);
         novaAssinatura.setPlano(plano);
         novaAssinatura.setStatus(StatusAssinatura.PENDENTE);
 
@@ -92,8 +92,8 @@ public class AssinaturaService {
         return assinaturaRepository.save(assinatura);
     }
 
-    public StatusAssinatura getStatusAssinatura(Long usuarioId) {
-        Optional<Assinatura> assinatura = assinaturaRepository.findByUsuarioId(usuarioId);
+    public StatusAssinatura getStatusAssinatura(Long vendedorId) {
+        Optional<Assinatura> assinatura = assinaturaRepository.findByVendedorId(vendedorId);
 
         if (assinatura.isEmpty()) {
             return null; 

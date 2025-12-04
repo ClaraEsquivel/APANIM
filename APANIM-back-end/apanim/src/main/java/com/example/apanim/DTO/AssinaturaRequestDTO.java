@@ -8,17 +8,17 @@ import lombok.Setter;
 @Setter
 public class AssinaturaRequestDTO {
     @NotNull
-    private Long usuarioId; 
+    private Long vendedorId; 
     
     @NotNull
     private Long planoId;
 
-    public Long getUsuarioId() {
-        return usuarioId;
+    public Long getVendedorId() {
+        return vendedorId;
     }
 
-    public void setUsuarioId(Long usuarioId) {
-        this.usuarioId = usuarioId;
+    public void setVendedorId(Long vendedorId) {
+        this.vendedorId = vendedorId;
     }
 
     public Long getPlanoId() {

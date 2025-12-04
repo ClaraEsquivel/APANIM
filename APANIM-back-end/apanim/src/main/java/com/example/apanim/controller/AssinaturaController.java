@@ -27,7 +27,7 @@ public class AssinaturaController {
 
     @PostMapping
     public ResponseEntity<Map<String, Object>> criarAssinatura(@Valid @RequestBody AssinaturaRequestDTO dto) {
-        Assinatura novaAssinatura = assinaturaService.criarAssinatura(dto.getUsuarioId(), dto.getPlanoId());
+        Assinatura novaAssinatura = assinaturaService.criarAssinatura(dto.getVendedorId(), dto.getPlanoId());
 
         String linkDePagamento = pagamentoService.criarLinkDePagamento(novaAssinatura);
 
@@ -38,9 +38,9 @@ public class AssinaturaController {
         ));
     }
 
-    @GetMapping("/status/{usuarioId}")
-    public ResponseEntity<Map<String, StatusAssinatura>> getStatus(@PathVariable Long usuarioId) {
-        StatusAssinatura status = assinaturaService.getStatusAssinatura(usuarioId);
+    @GetMapping("/status/{vendedorId}")
+    public ResponseEntity<Map<String, StatusAssinatura>> getStatus(@PathVariable Long vendedorId) {
+        StatusAssinatura status = assinaturaService.getStatusAssinatura(vendedorId);
         return ResponseEntity.ok(Map.of("status", status));
     }
 

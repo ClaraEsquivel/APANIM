@@ -17,8 +17,8 @@ public class Assinatura {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "usuario_id", nullable = false)
-    private UsuarioModel usuario;
+    @JoinColumn(name = "vendedor_id", nullable = false)
+    private VendedorModel vendedor;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "plano_id", nullable = false)
@@ -36,9 +36,9 @@ public class Assinatura {
     public Assinatura() {
     }
 
-    public Assinatura(UsuarioModel usuario, Plano plano, StatusAssinatura status, LocalDate dataDeExpiracao,
+    public Assinatura(VendedorModel vendedor, Plano plano, StatusAssinatura status, LocalDate dataDeExpiracao,
             String gatewaySubscriptionId) {
-        this.usuario = usuario;
+        this.vendedor = vendedor;
         this.plano = plano;
         this.status = status;
         this.dataDeExpiracao = dataDeExpiracao;
@@ -50,8 +50,8 @@ public class Assinatura {
         return id;
     }
 
-    public UsuarioModel getUsuario() {
-        return usuario;
+    public VendedorModel getVendedor() {
+        return vendedor;
     }
 
     public Plano getPlano() {
@@ -71,8 +71,8 @@ public class Assinatura {
     }
 
     // Setters
-    public void setUsuario(UsuarioModel usuario) {
-        this.usuario = usuario;
+    public void setVendedor(VendedorModel vendedor) {
+        this.vendedor = vendedor;
     }
 
     public void setPlano(Plano plano) {

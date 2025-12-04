@@ -13,13 +13,13 @@ public class AssinaturaResponseDTO {
     private StatusAssinatura status;
     private LocalDate dataDeExpiracao;
     private PlanoResponseDTO plano;
-    private Long usuarioId;
+    private Long vendedorId;
 
     public AssinaturaResponseDTO(Assinatura assinatura) {
         this.id = assinatura.getId();
         this.status = assinatura.getStatus();
         this.dataDeExpiracao = assinatura.getDataDeExpiracao();
         this.plano = new PlanoResponseDTO(assinatura.getPlano());
-        this.usuarioId = assinatura.getUsuario().getId();
+        this.vendedorId = assinatura.getVendedor().getId();
     }
 }
