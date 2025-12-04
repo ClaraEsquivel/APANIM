@@ -32,7 +32,7 @@ const PerfilVendedor = () => {
     // Carregar dados do vendedor
     useEffect(() => {
         const vendedorLogado = sessionStorage.getItem('vendedorLogado');
-        
+
         if (!vendedorLogado) {
             alertaErro('Não autenticado', 'Faça login para acessar o perfil');
             navigate('/login');
@@ -55,8 +55,8 @@ const PerfilVendedor = () => {
     const formatarData = (dataISO) => {
         if (!dataISO) return 'Janeiro 2025';
         const data = new Date(dataISO);
-        const meses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 
-                       'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+        const meses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+            'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
         return `${meses[data.getMonth()]} ${data.getFullYear()}`;
     };
 
@@ -69,7 +69,7 @@ const PerfilVendedor = () => {
     const handleSaveDescricao = () => {
         setDescricaoLoja(tempDescricao);
         setIsEditingBio(false);
-        
+
         // Atualizar no localStorage
         const vendedores = JSON.parse(localStorage.getItem('vendedores') || '[]');
         const index = vendedores.findIndex(v => v.id === vendedorData.id);
@@ -94,11 +94,11 @@ const PerfilVendedor = () => {
 
     if (!vendedorData) {
         return (
-            <div style={{ 
-                display: 'flex', 
-                justifyContent: 'center', 
-                alignItems: 'center', 
-                minHeight: '100vh' 
+            <div style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                minHeight: '100vh'
             }}>
                 <p>Carregando...</p>
             </div>
@@ -150,16 +150,16 @@ const PerfilVendedor = () => {
                                 </span>
                             </div>
                         </div>
-                        
+
                         <div className="profile-main-info">
                             <div className="profile-avatar-container">
                                 <img src={PerfilImg} alt="Logo da empresa" className="profile-avatar" />
                             </div>
-                            
+
                             <div className="profile-user-data">
                                 <h1 className="profile-name">{vendedorData.nomeFantasia}</h1>
                                 <p className="profile-company-info">
-                                    <span>{vendedorData.razaoSocial}</span> • 
+                                    <span>{vendedorData.razaoSocial}</span> •
                                     <span>CNPJ: {vendedorData.cnpj}</span>
                                 </p>
                                 <div className="profile-badges">
@@ -172,56 +172,53 @@ const PerfilVendedor = () => {
                                     <span className="badge badge-sales">
                                         📦 0 Vendas
                                     </span>
-
-                                    <div className="profile-actions">
-                                        <Link to="/cadastro-animal-venda">
-                                            <button className="btn-success">
-                                                <span>Cadastratar Novo Animal</span>
-                                            </button>
-                                        </Link>
-                                        <button className="btn-secondary" onClick={handleLogout}>
-                                            <span>Sair</span>
-                                        </button>
-                                    </div>
-                                    
                                 </div>
                             </div>
-                            
-
+                        </div>
+                        
+                        <div className="profile-actions">
+                            <Link to="/cadastro-animal-venda">
+                                <button className="btn btn-success">
+                                    <span>Novo Animal</span>
+                                </button>
+                            </Link>
+                            <button className="btn btn-secondary" onClick={handleLogout}>
+                                <span>Sair</span>
+                            </button>
                         </div>
                     </div>
 
                     {/* Navegação de Abas */}
                     <div className="profile-tabs">
-                        <button 
+                        <button
                             className={`tab-btn ${activeTab === 'dashboard' ? 'active' : ''}`}
                             onClick={() => setActiveTab('dashboard')}
                         >
                             <span>📊</span>
                             <span>Dashboard</span>
                         </button>
-                        <button 
+                        <button
                             className={`tab-btn ${activeTab === 'animais' ? 'active' : ''}`}
                             onClick={() => setActiveTab('animais')}
                         >
                             <span>🐾</span>
                             <span>Meus Animais</span>
                         </button>
-                        <button 
+                        <button
                             className={`tab-btn ${activeTab === 'vendas' ? 'active' : ''}`}
                             onClick={() => setActiveTab('vendas')}
                         >
                             <span>💰</span>
                             <span>Vendas</span>
                         </button>
-                        <button 
+                        <button
                             className={`tab-btn ${activeTab === 'loja' ? 'active' : ''}`}
                             onClick={() => setActiveTab('loja')}
                         >
                             <span>🏪</span>
                             <span>Sobre a Loja</span>
                         </button>
-                        <button 
+                        <button
                             className={`tab-btn ${activeTab === 'configuracoes' ? 'active' : ''}`}
                             onClick={() => setActiveTab('configuracoes')}
                         >
@@ -232,7 +229,7 @@ const PerfilVendedor = () => {
 
                     {/* Conteúdo das Abas */}
                     <div className="profile-content">
-                        
+
                         {/* ABA: DASHBOARD */}
                         {activeTab === 'dashboard' && (
                             <div className="tab-content active">
@@ -331,25 +328,25 @@ const PerfilVendedor = () => {
                                 </div>
 
                                 <div className="animais-filters">
-                                    <button 
+                                    <button
                                         className={`filter-btn ${filterAnimais === 'todos' ? 'active' : ''}`}
                                         onClick={() => setFilterAnimais('todos')}
                                     >
                                         Todos
                                     </button>
-                                    <button 
+                                    <button
                                         className={`filter-btn ${filterAnimais === 'ativos' ? 'active' : ''}`}
                                         onClick={() => setFilterAnimais('ativos')}
                                     >
                                         Ativos
                                     </button>
-                                    <button 
+                                    <button
                                         className={`filter-btn ${filterAnimais === 'vendidos' ? 'active' : ''}`}
                                         onClick={() => setFilterAnimais('vendidos')}
                                     >
                                         Vendidos
                                     </button>
-                                    <button 
+                                    <button
                                         className={`filter-btn ${filterAnimais === 'pausados' ? 'active' : ''}`}
                                         onClick={() => setFilterAnimais('pausados')}
                                     >
@@ -412,8 +409,8 @@ const PerfilVendedor = () => {
                                             )}
                                         </div>
                                         <div className="card-body">
-                                            <textarea 
-                                                className="bio-textarea" 
+                                            <textarea
+                                                className="bio-textarea"
                                                 placeholder="Conte sobre sua loja, especialidades, histórico e diferenciais..."
                                                 maxLength="1000"
                                                 value={isEditingBio ? tempDescricao : descricaoLoja}
